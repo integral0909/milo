@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
   root 'home#index'
-  post '/accounts', to: 'application#accounts'
+  post '/accounts', to: 'plaidapi#add_account'
 
 end
