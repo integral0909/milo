@@ -15,6 +15,9 @@ class PlaidapiController < ApplicationController
     #4 Initialize a Plaid user
     @plaid_user = Argyle.plaid_client.set_user(exchange_token_response.access_token, ['connect'])
 
+    # Upgrade this user, attaching it to Auth as well (makes a request to /upgrade).
+    @auth_user = @plaid_user.upgrade(:auth)
+
     @user = User.find(current_user.id)
     Transaction.create_accounts(@plaid_user.accounts, public_token, @user.id)
     Transaction.create_transactions(@plaid_user.transactions)
