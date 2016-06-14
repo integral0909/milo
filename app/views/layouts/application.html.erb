@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+  <!-- <script type="text/javascript">
+    // Hide / Show Sign Up Forms
+    $(function() {
+      $(".email-show").click(function() {
+        $(".social-signup").hide();
+        $(".email-signup").show();
+      });
+      $(".social-show").click(function() {
+        $(".email-signup").hide();
+        $(".social-signup").show();
+      });
+    });
+    // Sidebar Equal Height to Page Content
+    $(function() {
+      $(".sidebar").css("height", $(".page-content").height() + 80);
+    });
+  </script> -->
+
+</head>
+<body>
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
+  <%= yield %>
+
+</body>
+</html>

@@ -1,5 +1,7 @@
 class PlaidapiController < ApplicationController
 
+  before_action :authenticate_user!
+
   def add_account
     #1 generate a public token for the user
     public_token = params[:public_token]
@@ -15,7 +17,7 @@ class PlaidapiController < ApplicationController
 
     #5 pass data for parsing
     create_accounts(@plaid_user.accounts)
-    # create_transactions(@plaid_user.transactions) <<<UNCOMMENT ONCE TRANSACTIONS MODEL IS BUILT>>>
+    create_transactions(@plaid_user.transactions) <<<UNCOMMENT ONCE TRANSACTIONS MODEL IS BUILT>>>
   end
 
   private
@@ -26,7 +28,6 @@ class PlaidapiController < ApplicationController
   def create_accounts(plaid_user_accounts)
     plaid_user_accounts.each do |acct|
       account = Account.find_by(plaid_acct_id: acct.id)
-      binding.pry
       if account
         account.update(
           account_name: acct.meta["name"],
@@ -57,31 +58,66 @@ class PlaidapiController < ApplicationController
   end
 
   def create_transactions(plaid_user_transactions)
+    plaid_user_transactions.each do |transaction|
+      newtrans = Transaction.find_by(plaid_trans_id: transaction.id)
+      loc_keys = transaction.location.keys
 
+      vendor_address = transaction.location["address"]
+      vendor_city = transaction.location["city"]
+      vendor_state = transaction.location["state"]
+      vendor_zip = transaction.location["zip"]
+
+      if !transaction.location["coordinates"].nil?
+        vendor_lat = transaction.location["coordinates"]["lat"]
+        vendor_lon = transaction.location["coordinates"]["lon"]
+      else
+        vendor_lat = nil
+        vendor_lon = nil
+      end
+
+      if newtrans
+        newtrans.update(
+          plaid_trans_id: transaction.id,
+          account_id: transaction.account,
+          amount: transaction.amount,
+          trans_name: transaction.name,
+          plaid_cat_id: transaction.category_id.to_i,
+          plaid_cat_type: transaction.type["primary"],
+          date: transaction.date.to_date,
+
+          vendor_address: vendor_address,
+          vendor_city: vendor_city,
+          vendor_state: vendor_state,
+          vendor_zip: vendor_zip,
+          vendor_lat: vendor_lat,
+          vendor_lon: vendor_lon,
+
+          pending: transaction.pending,
+          pending_transaction: transaction.pending_transaction,
+          name_score: transaction.score["name"]
+        )
+      else
+        Transaction.create(
+          plaid_trans_id: transaction.id,
+          account_id: transaction.account,
+          amount: transaction.amount,
+          trans_name: transaction.name,
+          plaid_cat_id: transaction.category_id.to_i,
+          plaid_cat_type: transaction.type["primary"],
+          date: transaction.date.to_date,
+
+          vendor_address: vendor_address,
+          vendor_city: vendor_city,
+          vendor_state: vendor_state,
+          vendor_zip: vendor_zip,
+          vendor_lat: vendor_lat,
+          vendor_lon: vendor_lon,
+
+          pending: transaction.pending,
+          pending_transaction: transaction.pending_transaction,
+          name_score: transaction.score["name"]
+        )
+      end
+    end
   end
-
 end
-
-    # # Transform each account object to a simple hash
-    # transformed_accounts = @plaid_user.accounts.map do |account|
-    #   {
-    #     balance: {
-    #       available: account.available_balance,
-    #       current: account.current_balance
-    #       },
-    #       meta: account.meta,
-    #       type: account.type
-    #     }
-    #   end
-
-    # # transformed_transactions = @plaid_user.transactions.map do |transaction|
-
-    # # end
-
-    # render :json => @plaid_user
-    # # Return the account data as a JSON response
-    # # content_type :json
-    # # { accounts: transformed_accounts }.to_json
-
-# Retrieve information about the user's accounts -- Not clear on what this does
-    # user.get('connect')

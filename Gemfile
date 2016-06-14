@@ -30,6 +30,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# User Accounts with Devise
+gem 'devise'
+
 # Argyle for Plaid API
 gem 'argyle'
 
