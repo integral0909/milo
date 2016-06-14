@@ -1,0 +1,31 @@
+/*
+* Oink
+* Copyright Oink 2016
+* oinkbank.co
+*/
+
+
+// Clear
+%clear:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+// Screensize Visibility
+#desktop {
+  display: block;
+  visibility: visible;
+  @include breakpoint(l-three) {
+    display: none;
+    visibility: hidden;
+  }
+}
+#mobile {
+  display: none;
+  visibility: hidden;
+  @include breakpoint(l-three) {
+    display: block;
+    visibility: visible;
+  }
+}

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-  devise_for :users
   root 'home#index'
+
+  devise_for :users
   post '/accounts', to: 'plaidapi#add_account'
 
 end

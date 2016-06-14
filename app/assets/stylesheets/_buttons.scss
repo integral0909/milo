@@ -1,0 +1,36 @@
+/*
+* Oink
+* Copyright Oink 2016
+* oinkbank.co
+*/
+
+.button {
+  background: inherit;
+  border: 2px solid #999;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #999;
+  display: block;
+  font-size: 1.125em;
+  font-weight: 600;
+  height: 50px;
+  line-height: 46px;
+  padding: 0 24px;
+  text-align: center;
+  text-transform: uppercase;
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+  &.-full {
+    padding: 0;
+    width: 100%;
+  }
+  &.-green {
+    border: 2px solid #1ABD7D;
+    color: #1ABD7D;
+    &:hover {
+      background: #1ABD7D;
+      color: #FFF;
+    }
+  }
+}
