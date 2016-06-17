@@ -1,29 +1,100 @@
-<h1>We Are Milo</h1>
-<p>Coming soon...</p>
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="milo-card progress">
+          <div class="mc-title">
+            Savings Progress
+            <span><em>$19,482</em> / $46,000</span>
+          </div>
+          <div class="progress-bar">
+            <div class="current-progress"></div>
+            <div class="bar one"></div>
+            <div class="bar two"></div>
+            <div class="bar three"></div>
+            <div class="bar four"></div>
+            <div class="bar five"></div>
+            <div class="bar six"></div>
+            <div class="bar seven"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="milo-card account-value">
+          <div class="mc-title">
+            Account Value
+            <span>Last 30 Days <i class="fa fa-chevron-down"></i></span>
+          </div>
+          <div class="av-total">$6,482.15<span>+$21.83</span></div>
+          - chart -
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="milo-card history">
+          <div class="mc-title">History</div>
+          <ul class="recent-transactions">
+            <li>$16.22<span><strong>Deposit</strong>AUG 24, 2016</span></li>
+            <li>$37.49<span><strong>Deposit</strong>AUG 17, 2016</span></li>
+            <li>$12.85<span><strong>Deposit</strong>AUG 10, 2016</span></li>
+          </ul>
+          <a href="/history.html">View History</a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="milo-card quick-save">
+          <div class="mc-title">Quick Save</div>
+          <div class="amount">+$20.00</div>
+          <button class="button -full -green">Save</button>
+        </div>
+      </div>
+    </div>
 
-<%= plaid_link(name:@user.email, action:'accounts', data: {longtail: true}) %>
+    <h1>We Are Milo</h1>
+    <p>Coming soon...</p>
 
+    <%= plaid_link(name:@user.email, action:'accounts', data: {longtail: true}) %>
 
+    <h1>Accounts: </h1>
+    <% @user.accounts.each do |acct| %>
+      <h3><%= acct.account_name %></h1>
+      <p>Type: <%= acct.acct_subtype %></p>
+      <p>Balance: $<%=acct.current_balance %></p>
+    <% end %>
 
-<h1>Accounts: </h1>
-<% @user.accounts.each do |acct| %>
-  <h3><%= acct.account_name %></h1>
-  <p>Type: <%= acct.acct_subtype %></p>
-  <p>Balance: $<%=acct.current_balance %></p>
-<% end %>
+    <h1>Transactions: </h1>
+    <table>
+      <tr>
+        <th>Vendor</th>
+        <th>Amount</th>
+        <th>Account</th>
+      </tr>
+    <% @user.transactions.each do |t| %>
+      <tr>
+        <td><%= t.trans_name %></td>
+        <td>$<%= t.amount %></td>
+        <td><%= t.account.account_name %></td>
+      </tr>
+    <% end %>
+    </table>
 
-<h1>Transactions: </h1>
-<table>
-  <tr>
-    <th>Vendor</th>
-    <th>Amount</th>
-    <th>Account</th>
-  </tr>
-<% @user.transactions.each do |t| %>
-  <tr>
-    <td><%= t.trans_name %></td>
-    <td>$<%= t.amount %></td>
-    <td><%= t.account.account_name %></td>
-  </tr>
-<% end %>
-</table>
+  </div>
+</div>
+<div class="sidebar">
+  <div class="pending-roundups">
+    <div class="pr-title">Pending Round-Ups</div>
+    <ul class="pr-list">
+      <li>+$0.76<span><strong>$3.24</strong> Jo To Go</span></li>
+      <li>+$0.21<span><strong>$6.79</strong> Big Taxi</span></li>
+      <li>+$0.08<span><strong>$44.92</strong> Lucky Joe's Pizza</span></li>
+      <li>+$0.63<span><strong>$119.37</strong> Express</span></li>
+      <li>+$0.15<span><strong>$12.85</strong> Rosati's</span></li>
+      <li>+$0.17<span><strong>$36.83</strong> Kwik Trip</span></li>
+      <li>+$0.89<span><strong>$2.11</strong> CTA</span></li>
+      <li>+$0.43<span><strong>$17.57</strong> Wendy's</span></li>
+    </ul>
+  </div>
+</div>

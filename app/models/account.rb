@@ -5,5 +5,6 @@ class Account < ActiveRecord::Base
   has_many :transactions
   belongs_to :user
   belongs_to :public_token
+  belongs_to :checking
 
 end

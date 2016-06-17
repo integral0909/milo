@@ -9,7 +9,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
-  <!-- <script type="text/javascript">
+  <script type="text/javascript">
     // Hide / Show Sign Up Forms
     $(function() {
       $(".email-show").click(function() {
@@ -25,15 +25,13 @@
     $(function() {
       $(".sidebar").css("height", $(".page-content").height() + 80);
     });
-  </script> -->
+  </script>
 
 </head>
-<body>
-
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-
-  <%= yield %>
-
-</body>
+<!-- current_page?(root_path) || -->
+<% if (params["controller"] == "registrations") || current_page?(new_user_session_path) %>
+  <%= render :partial => 'layouts/signup' %>
+<% else %>
+  <%= render :partial => 'layouts/app' %>
+<% end %>
 </html>

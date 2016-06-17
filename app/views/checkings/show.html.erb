@@ -1,0 +1,17 @@
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+<p id="notice"><%= notice %></p>
+
+        <p><%= @checking.user_id %><br>
+          <%= @checking.plaid_acct_id %></p>
+
+<%= link_to 'Edit', edit_checking_path(@checking) %> |
+<%= link_to 'Back', checkings_path %>
+
+      </div>
+    </div>
+  </div>
+</div>

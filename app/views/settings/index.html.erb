@@ -1,0 +1,25 @@
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+        <h1>Settings</h1>
+
+        <% if @checking.present? %>
+          <div class="milo-card">
+            <div class="mc-title">
+              <%= @account.name %>
+              <span><%= @account.account_number %></span>
+            </div>
+            <%= link_to 'Destroy', @checking, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+        <% else %>
+          <p>Oops! Looks like you need to connect a checking account to gather your round-ups from. <%= link_to 'Connect Checking', new_checking_path %>
+        <% end %>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
