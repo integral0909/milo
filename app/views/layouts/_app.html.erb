@@ -11,13 +11,13 @@
       <span>Chicago, IL</span>
     </div>
     <nav>
-      <a class="active" href="/"><i class="fa fa-home"></i> Overview</a>
+      <!-- <a class="active" href="/"><i class="fa fa-home"></i> Overview</a>
       <a href="#"><i class="fa fa-circle-o"></i> Round-Ups <span>8</span></a>
       <a href="#"><i class="fa fa-exchange"></i> Transfer</a>
-      <a href="#"><i class="fa fa-clock-o"></i> History</a>
+      <a href="#"><i class="fa fa-clock-o"></i> History</a> -->
       <a href="/settings"><i class="fa fa-gear"></i> Settings</a>
     </nav>
-    <a class="sign-out" href="#">Sign Out</a>
+    <%= link_to('Sign Out', destroy_user_session_path, :method => :delete, class: "sign-out") %>
   </header>
 
   <%= yield %>

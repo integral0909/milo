@@ -1,0 +1,36 @@
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+        <%= link_to "Update All Accounts", {controller: "plaidapi", action: "update_accounts"}, method: "patch" %>
+
+        <h1>Accounts: </h1>
+        <% @user.accounts.each do |acct| %>
+          <h3><%= acct.account_name %></h1>
+          <p>Type: <%= acct.acct_subtype %></p>
+          <p>Balance: $<%=acct.current_balance %></p>
+        <% end %>
+
+        <h1>Transactions: </h1>
+        <table>
+          <tr>
+            <th>Vendor</th>
+            <th>Amount</th>
+            <th>Account</th>
+            <th>Roundup</th>
+          </tr>
+        <% @user.transactions.each do |t| %>
+          <tr>
+            <td><%= t.trans_name %></td>
+            <td>$<%= t.amount %></td>
+            <td><%= t.account.account_name %></td>
+            <td><%= t.roundup %></td>
+          </tr>
+        <% end %>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>

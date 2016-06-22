@@ -1,0 +1,30 @@
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+        <table class="table table-striped">
+          <thead class="thead-inverse">
+            <tr>
+              <th>Date</th>
+              <th>Transaction</th>
+              <th>Amount</th>
+              <!-- <th>Category</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <% @transactions.each do |t| %>
+            <tr>
+              <td><%= t.date %></td>
+              <td><%= t.trans_name %></td>
+              <td><%= number_to_currency(t.amount) %></td>
+              <!-- <td><= t.category.nil? ? "N/A" : t.category.name %></td> -->
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>

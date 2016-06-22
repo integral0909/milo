@@ -1,6 +1,6 @@
 <div class="page-content">
   <div class="container">
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-md-12">
         <div class="milo-card progress">
           <div class="mc-title">
@@ -19,8 +19,8 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
+    </div> -->
+    <!-- <div class="row">
       <div class="col-md-12">
         <div class="milo-card account-value">
           <div class="mc-title">
@@ -31,8 +31,8 @@
           - chart -
         </div>
       </div>
-    </div>
-    <div class="row">
+    </div> -->
+    <!-- <div class="row">
       <div class="col-md-6">
         <div class="milo-card history">
           <div class="mc-title">History</div>
@@ -51,40 +51,19 @@
           <button class="button -full -green">Save</button>
         </div>
       </div>
+    </div> -->
+
+    <div class="row">
+      <div class="col-md-12">
+        <a href="/users/<%= current_user.id %>/accounts">Add Accounts</a><br>
+        <a href="/users/<%= current_user.id %>">View User</a>
+      </div>
     </div>
-
-    <h1>We Are Milo</h1>
-    <p>Coming soon...</p>
-
-    <%= plaid_link(name:@user.email, action:'accounts', data: {longtail: true}) %>
-
-    <h1>Accounts: </h1>
-    <% @user.accounts.each do |acct| %>
-      <h3><%= acct.account_name %></h1>
-      <p>Type: <%= acct.acct_subtype %></p>
-      <p>Balance: $<%=acct.current_balance %></p>
-    <% end %>
-
-    <h1>Transactions: </h1>
-    <table>
-      <tr>
-        <th>Vendor</th>
-        <th>Amount</th>
-        <th>Account</th>
-      </tr>
-    <% @user.transactions.each do |t| %>
-      <tr>
-        <td><%= t.trans_name %></td>
-        <td>$<%= t.amount %></td>
-        <td><%= t.account.account_name %></td>
-      </tr>
-    <% end %>
-    </table>
 
   </div>
 </div>
 <div class="sidebar">
-  <div class="pending-roundups">
+  <!-- <div class="pending-roundups">
     <div class="pr-title">Pending Round-Ups</div>
     <ul class="pr-list">
       <li>+$0.76<span><strong>$3.24</strong> Jo To Go</span></li>
@@ -96,5 +75,5 @@
       <li>+$0.89<span><strong>$2.11</strong> CTA</span></li>
       <li>+$0.43<span><strong>$17.57</strong> Wendy's</span></li>
     </ul>
-  </div>
+  </div> -->
 </div>

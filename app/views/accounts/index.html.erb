@@ -1,0 +1,14 @@
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+        <h3>See all your accounts in one place </h3><br>
+        <h4>Search for your bank, credit cards or investments:</h4>
+        <br><br>
+        <%= plaid_link(name:@user.email, action:'add_account', data: {longtail: true})%>
+
+      </div>
+    </div>
+  </div>
+</div>

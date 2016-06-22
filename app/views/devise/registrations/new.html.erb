@@ -1,29 +1,41 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+<div class="row">
+  <div class="col-md-5 col-md-offset-2">
+    <div class="signup">
+      <h1><span>Sign Up</span> Make Change Happen</h1>
+      <!-- <div class="social-signup">
+        <a href="{{ "/phone.html" | prepend: site.baseurl }}" class="btn-social -facebook"><i class="fa fa-facebook"></i> Sign up with Facebook</a>
+        <a href="{{ "/phone.html" | prepend: site.baseurl }}" class="btn-social -twitter"><i class="fa fa-twitter"></i> Sign up with Twitter</a>
+        <a href="{{ "/phone.html" | prepend: site.baseurl }}" class="btn-social -google"><i class="fa fa-google"></i> Sign up with Google</a>
+        <p><strong>OR,</strong> sign up using your <a class="email-show" href="#">email</a> address.</p>
+      </div> -->
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "email-signup") do |f| %>
+        <%= devise_error_messages! %>
+        <fieldset class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, autofocus: true, class: "form-control" %>
+        </fieldset>
+        <fieldset class="form-group">
+          <%= f.label :password %>
+          <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+          <small class="text-muted">Minimum 8 characters.</small>
+        </fieldset>
+        <fieldset class="form-group">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+        </fieldset>
+        <button type="submit" class="button -full -green">Sign Up</button>
+        <!-- <button type="submit" class="button -green">Sign Up</button> -->
+        <!-- <a href="{{ "/phone.html" | prepend: site.baseurl }}" class="button -full -green">Sign Up</a>
+        <p><strong>OR,</strong> sign up using your preferred <a class="social-show" href="#">social</a> network.</p> -->
+      <% end %>
+    </div>
+    <p class="disclaimer">By continuing, I agree to Milo's <a href="#">ACH Authorization</a>, <a href="#">E-Sign Consent</a>, <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>.</p>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+  <div class="col-md-5">
+    <ul class="signup-steps">
+      <li class="active"><span></span> Basic Info</li>
+      <!-- <li><span></span> Mobile Number</li>
+      <li><span></span> Checking Account</li> -->
+    </ul>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
