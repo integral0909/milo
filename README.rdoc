@@ -22,15 +22,3 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
-
-
-check back on commits:
-- created categories model and table with ltree, and categories seeds
-- Added D3 functionality
-- added PlaidCategory model and associated to Lemmen Category model
-- fixed nil categories and automatic cat association
-- Error messages on login/signup done
