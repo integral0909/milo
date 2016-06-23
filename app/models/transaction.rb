@@ -143,6 +143,7 @@ class Transaction < ActiveRecord::Base
     end
   end
 
+  # TODO :: fix update transactions function
   # def self.update_transactions(user_transactions, user_id)
   #   byebug
   #   user_transactions.each do |transaction|
@@ -183,7 +184,16 @@ class Transaction < ActiveRecord::Base
   end
 
   def roundup
-    self.roundup = self.new_amount - self.amount
+    if self.new_amount > 0.00
+      subtract = self.new_amount - self.amount
+      if subtract == 0
+        self.roundup = 1.00
+      else
+        self.roundup = subtract.round(2)
+      end
+    else
+      self.roundup = 0.00
+    end
   end
 
 end

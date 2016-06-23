@@ -13,12 +13,15 @@ class PlaidapiController < ApplicationController
     #4 Initialize a Plaid user
     @plaid_user = Argyle.plaid_client.set_user(exchange_token_response.access_token, ['connect'])
 
+    #6 Upgrade user to utilizing Plaid Auth
+    #auth_user = @plaid_user.upgrade(:auth)
+
     #5 pass data for parsing
     @user = User.find(current_user.id)
 
     Transaction.create_accounts(@plaid_user.accounts, public_token, @user.id)
     Transaction.create_transactions(@plaid_user.transactions)
-    redirect_to @user
+    redirect_to root_path #@user
   end
 
   def update_accounts
@@ -31,7 +34,7 @@ class PlaidapiController < ApplicationController
         #Transaction.update_transactions(user_obj.transactions, @user)
       end
     end
-    redirect_to @user
+    redirect_to root_path #@user
   end
 
   private

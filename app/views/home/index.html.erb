@@ -1,5 +1,35 @@
 <div class="page-content">
   <div class="container">
+    <div class="row">
+      <% if @accounts.present? %>
+        <% if @checking == nil %>
+          <div class="col-md-12">
+            <div class="milo-card">
+              <div class="mc-title">Confirm Checking Account</div>
+              <p>Now that we have connected with your account/s we need to confirm the checking account that you would like to use with Milo.</p>
+              <a href="/checkings/new" class="button -green">Confirm</a>
+            </div>
+          </div>
+        <% else %>
+          <p>Thanks for setting up your checking account! That is it for now, we will notify you when we roll out new updates shortly.</p>
+          <div class="col-md-12">
+            <div class="milo-card">
+              <div class="mc-title">* For Testing</div>
+              <a href="/users/<%= current_user.id %>/accounts">Add Accounts</a><br>
+              <a href="/users/<%= current_user.id %>">View User</a>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="col-md-12">
+          <div class="milo-card">
+            <div class="mc-title">Welcome to Milo!</div>
+            <p><strong>Milo</strong> is a roundup based app that will help you build savings for college! It looks like you haven't connected an account to track and transfer your roundups from. Click the link below to connect your account.</p>
+            <a href="/users/<%= current_user.id %>/accounts" class="button -green">Connect</a>
+          </div>
+        </div>
+      <% end %>
+    </div>
     <!-- <div class="row">
       <div class="col-md-12">
         <div class="milo-card progress">
@@ -53,27 +83,19 @@
       </div>
     </div> -->
 
-    <div class="row">
-      <div class="col-md-12">
-        <a href="/users/<%= current_user.id %>/accounts">Add Accounts</a><br>
-        <a href="/users/<%= current_user.id %>">View User</a>
-      </div>
-    </div>
-
   </div>
 </div>
 <div class="sidebar">
-  <!-- <div class="pending-roundups">
+  <div class="pending-roundups">
     <div class="pr-title">Pending Round-Ups</div>
-    <ul class="pr-list">
-      <li>+$0.76<span><strong>$3.24</strong> Jo To Go</span></li>
-      <li>+$0.21<span><strong>$6.79</strong> Big Taxi</span></li>
-      <li>+$0.08<span><strong>$44.92</strong> Lucky Joe's Pizza</span></li>
-      <li>+$0.63<span><strong>$119.37</strong> Express</span></li>
-      <li>+$0.15<span><strong>$12.85</strong> Rosati's</span></li>
-      <li>+$0.17<span><strong>$36.83</strong> Kwik Trip</span></li>
-      <li>+$0.89<span><strong>$2.11</strong> CTA</span></li>
-      <li>+$0.43<span><strong>$17.57</strong> Wendy's</span></li>
-    </ul>
-  </div> -->
+    <% if @transactions.present? %>
+      <ul class="pr-list">
+        <% @transactions.each do |t| %>
+          <li>+ $<%= t.roundup %><span><strong>$<%= t.amount %></strong> <%= t.trans_name %></span></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <small>No current roundups available.<small>
+    <% end %>
+  </div>
 </div>
