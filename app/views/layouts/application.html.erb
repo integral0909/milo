@@ -29,9 +29,13 @@
 
 </head>
 <!-- current_page?(root_path) || -->
-<% if current_page?(new_user_registration_path) || current_page?(new_user_session_path) %>
-  <%= render :partial => 'layouts/signup' %>
-<% else %>
+<% if user_signed_in? %>
   <%= render :partial => 'layouts/app' %>
+<% else %>
+  <% if current_page?(new_user_registration_path) || current_page?(new_user_session_path) %>
+    <%= render :partial => 'layouts/signup' %>
+  <% else %>
+    <%= render :partial => 'layouts/market' %>
+  <% end %>
 <% end %>
 </html>

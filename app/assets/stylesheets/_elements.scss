@@ -1,7 +1,7 @@
 /*
-* Oink
-* Copyright Oink 2016
-* oinkbank.co
+* Milo
+* Copyright Milo 2016
+* milosavings.com
 */
 
 
@@ -9,9 +9,21 @@ body {
   color: #96A3A8;
   font-family: Futura;
   font-size: 16px;
+  font-size: 1em;
   opacity: 1;
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #2D323E;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 24px;
+}
+
+h3 {
+  font-size: 1.8em;
 }
 
 a {

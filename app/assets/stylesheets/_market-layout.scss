@@ -1,0 +1,37 @@
+/*
+* Milo
+* Copyright Milo 2016
+* milosavings.com
+*/
+
+
+body.milo-market {
+  background: #F5F5F5;
+}
+
+a.market-logo {
+  color: #2D323E;
+  display: block;
+  font-size: 2.625em;
+  font-weight: 700;
+  margin: 32px auto;
+  text-align: center;
+  @include breakpoint(l-one) {
+    margin: 20px auto;
+  }
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+}
+
+.landing-page {
+  background: #FFF;
+  box-sizing: border-box;
+  margin: 0 0 40px;
+  padding: 40px 40px 32px;
+  text-align: center;
+  width: 100%;
+  p {
+    text-align: left;
+  }
+}
