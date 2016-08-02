@@ -9,29 +9,53 @@ body.milo-market {
   background: #F5F5F5;
 }
 
-a.market-logo {
-  color: #2D323E;
-  display: block;
-  font-size: 2.625em;
-  font-weight: 700;
-  margin: 32px auto;
-  text-align: center;
-  @include breakpoint(l-one) {
-    margin: 20px auto;
-  }
-  &:hover, &:focus {
-    text-decoration: none;
-  }
+.container-fluid {
+  padding-right: 4rem;
+  padding-left: 4rem;
 }
 
-.landing-page {
-  background: #FFF;
+.hm-navbar {
+  background: inherit;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   box-sizing: border-box;
-  margin: 0 0 40px;
-  padding: 40px 40px 32px;
-  text-align: center;
+  height: 80px;
+  padding: 20px 16px;
   width: 100%;
-  p {
-    text-align: left;
+  @extend %clear;
+
+  a.logo-market {
+    color: #FFF;
+    float: left;
+    font-size: 2em;
+    font-weight: 700;
+    line-height: 40px;
+    margin: 0 48px 0 0;
+    text-decoration: none;
+  }
+
+  nav.hm-nav {
+    float: left;
+    @extend %clear;
+
+    &.hm-nav-right {
+      float: right;
+
+      a {
+        margin: 8px 0 8px 32px;
+      }
+    }
+
+    a {
+      color: #FFF;
+      display: block;
+      float: left;
+      line-height: 24px;
+      margin: 8px 32px 8px 0;
+      text-decoration: none;
+
+      &:hover, &:focus {
+        color: #4A90E2;
+      }
+    }
   }
 }

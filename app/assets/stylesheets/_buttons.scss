@@ -12,19 +12,29 @@
   color: #999;
   display: block;
   font-size: 1.125em;
-  font-weight: 600;
+  font-weight: 700;
   height: 50px;
   line-height: 46px;
   padding: 0 24px;
   text-align: center;
-  text-transform: uppercase;
+
   &:hover, &:focus {
     text-decoration: none;
   }
+
   &.-full {
     padding: 0;
     width: 100%;
   }
+
+  &.-large {
+    font-size: 1.5em;
+    line-height: 76px;
+    height: 80px;
+    padding: 0 40px;
+    text-transform: initial;
+  }
+
   &.-green {
     border: 2px solid #1ABD7D;
     color: #1ABD7D;
@@ -34,6 +44,7 @@
     }
   }
 }
+
 a.button {
   display: inline-block;
 }

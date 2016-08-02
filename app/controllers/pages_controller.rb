@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  layout "market"
 
   def show
     if valid_page?
