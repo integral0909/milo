@@ -48,6 +48,9 @@ gem 'json'
 gem 'httparty'
 gem 'hashie'
 
+# admin console for easily viewing data
+gem 'rails_admin'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
