@@ -6,7 +6,9 @@
 
 
 body.milo-market {
-  background: #F5F5F5;
+  background: #FFF;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .container-fluid {
@@ -14,6 +16,7 @@ body.milo-market {
   padding-left: 4rem;
 }
 
+// Header Navigation
 .hm-navbar {
   background: inherit;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
@@ -57,5 +60,13 @@ body.milo-market {
         color: #4A90E2;
       }
     }
+  }
+}
+
+// Sections
+section {
+
+  p {
+    font-size: 1.5em;
   }
 }
