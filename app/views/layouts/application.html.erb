@@ -34,8 +34,6 @@
 <% else %>
   <% if current_page?(new_user_registration_path) || current_page?(new_user_session_path) %>
     <%= render :partial => 'layouts/signup' %>
-  <% else %>
-    <%= render :partial => 'layouts/market' %>
   <% end %>
 <% end %>
 </html>
