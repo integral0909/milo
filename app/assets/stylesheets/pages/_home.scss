@@ -9,6 +9,14 @@ header.head-market {
   background-image: radial-gradient(circle farthest-side at bottom right, #4C3E70, #352D52);
   position: relative;
   min-height: 640px;
+
+  @include breakpoint(l-three) {
+    min-height: 88vh;
+  }
+
+  @include breakpoint(l-one) {
+    min-height: 92vh;
+  }
 }
 
 .milo-pattern {
@@ -25,6 +33,10 @@ section.hero.-home {
   padding: 96px 0 160px;
   text-align: center;
 
+  @include breakpoint(l-three) {
+    padding: 48px 0 64px;
+  }
+
   h1 {
     color: #FFF;
   }
@@ -33,6 +45,11 @@ section.hero.-home {
     color: #FFF;
     font-size: 1.5em;
     margin: 0 0 48px;
+
+    @include breakpoint(l-three) {
+      font-size: 1.25em;
+      margin: 0 0 32px;
+    }
   }
 }
 
@@ -41,21 +58,50 @@ section.section-roundups, section.section-progress {
   padding: 64px 0 80px;
   position: relative;
 
+  @include breakpoint(l-three) {
+    min-height: 0;
+    padding: 48px 0;
+  }
+
   img.round-ups-image, img.progress-image {
     height: auto;
     left: -160px;
     position: absolute;
     top: -80px;
     width: 700px;
+
+    @include breakpoint(l-three) {
+      display: block;
+      left: initial;
+      margin: 0 auto -54px;
+      position: relative;
+      top: -88px;
+      width: 88%;
+    }
   }
 
   img.progress-image {
     left: initial;
     right: -160px;
+
+    @include breakpoint(l-three) {
+      right: initial;
+    }
   }
 
   p {
     margin: 0 0 40px;
+
+    @include breakpoint(l-three) {
+      margin: 0 0 32px;
+    }
+  }
+}
+
+section.section-progress {
+
+  @include breakpoint(l-three) {
+    padding: 48px 0 0;
   }
 }
 
@@ -63,6 +109,10 @@ section.section-goals {
   background-image: radial-gradient(circle farthest-side at bottom right, #4C3E70, #352D52);
   padding: 80px 0 120px;
   text-align: center;
+
+  @include breakpoint(l-three) {
+    padding: 48px 0 80px;
+  }
 
   h2 {
     color: #FFF;
@@ -78,8 +128,21 @@ section.section-goals {
       vertical-align: middle;
       width: 80px;
 
+      @include breakpoint(l-three) {
+        margin: 0 24px 0 0;
+        width: 48px;
+
+        &.gi-car {
+          margin: 0;
+        }
+      }
+
       &.gi-large {
         width: 104px;
+
+        @include breakpoint(l-three) {
+          width: 80px;
+        }
       }
     }
   }
@@ -87,6 +150,10 @@ section.section-goals {
   p {
     color: #FFF;
     margin: 0 0 64px;
+
+    @include breakpoint(l-three) {
+      margin: 0 0 32px;
+    }
   }
 }
 
@@ -94,7 +161,34 @@ section.section-manage {
   padding: 120px 0 0;
   text-align: center;
 
+  @include breakpoint(l-three) {
+    padding: 0;
+  }
+
   p {
     margin: 0 0 80px;
+
+    @include breakpoint(l-three) {
+      margin: 0 0 40px;
+    }
+  }
+}
+
+section.section-get-started {
+  background-image: radial-gradient(circle farthest-side at bottom right, #4C3E70, #352D52);
+  padding: 80px 0 120px;
+  text-align: center;
+
+  @include breakpoint(l-three) {
+    padding: 48px 0 64px;
+  }
+
+  h3 {
+    color: #FFF;
+  }
+
+  p {
+    color: #FFF;
+    margin: 0 0 40px;
   }
 }

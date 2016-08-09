@@ -70,13 +70,13 @@
       <div class="col-md-12">
         <h2>Set Goals</h2>
         <div class="goal-icons">
-          <%= image_tag("icon-goal-health.svg", alt: "Save for a Medical Emergency") %>
-          <%= image_tag("icon-goal-vacation.svg", alt: "Save for a Vacation") %>
+          <%= image_tag("icon-goal-health.svg", alt: "Save for a Medical Emergency", id: "desktop") %>
+          <%= image_tag("icon-goal-vacation.svg", alt: "Save for a Vacation", id: "desktop") %>
           <%= image_tag("icon-goal-house.svg", alt: "Save for a House") %>
           <%= image_tag("icon-goal-college.svg", alt: "Save for a College Education", class: "gi-large") %>
-          <%= image_tag("icon-goal-car.svg", alt: "Save for a Car") %>
-          <%= image_tag("icon-goal-wedding.svg", alt: "Save for a Wedding") %>
-          <%= image_tag("icon-goal-business.svg", alt: "Save for a New Business") %>
+          <%= image_tag("icon-goal-car.svg", alt: "Save for a Car", class: "gi-car") %>
+          <%= image_tag("icon-goal-wedding.svg", alt: "Save for a Wedding", id: "desktop") %>
+          <%= image_tag("icon-goal-business.svg", alt: "Save for a New Business", id: "desktop") %>
         </div>
         <p>Save for a new car, that much-needed vacation or your child’s education!</p>
         <a href="/users/sign_up" class="button -large -green">Start Saving</a>
@@ -86,17 +86,18 @@
 </section>
 
 <section class="section-progress">
+  <%= image_tag("img-track-progress.svg", alt: "Milo Round Ups", class: "progress-image", id: "mobile") %>
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-6">
         <h2>Track Progress</h2>
         <p>Quickly and easily setup your Milo account and the financial goals you are striving to achieve.  </p>
         <p>Track your progress along the way and be notified of important steps to help you stay on pace to reaching your goals.</p>
-        <a href="/users/sign_up" class="button -large -green">Start Saving</a>
+        <a href="/users/sign_up" id="desktop" class="button -large -green">Start Saving</a>
       </div>
     </div>
   </div>
-  <%= image_tag("img-track-progress.svg", alt: "Milo Round Ups", class: "progress-image") %>
+  <%= image_tag("img-track-progress.svg", alt: "Milo Round Ups", class: "progress-image", id: "desktop") %>
 </section>
 
 <section class="section-manage">
@@ -110,6 +111,18 @@
     <div class="row">
       <div class="col-md-12">
         <%= image_tag("img-manage-dashboard.png", alt: "Milo Dashboard") %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-get-started">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h3>Get Started</h3>
+        <p>The Milo dashboard allows you to easily deposit, withdraw and manage your transaction history. Also use the Milo dashboard to set and track important financial goals for you and your family.</p>
+        <a href="/users/sign_up" class="button -large -green">Join the Waitlist</a>
       </div>
     </div>
   </div>

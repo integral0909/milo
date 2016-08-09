@@ -33,6 +33,12 @@
     height: 80px;
     padding: 0 40px;
     text-transform: initial;
+
+    @include breakpoint(l-three) {
+      font-size: 1.25em;
+      height: 56px;
+      line-height: 52px;
+    }
   }
 
   &.-green {
