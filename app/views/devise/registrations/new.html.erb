@@ -23,6 +23,8 @@
           <%= f.label :password_confirmation %><br />
           <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
         </fieldset>
+        <!-- hidden input which will add the refferal code from the url to the user -->
+        <%= f.hidden_field :referral_code, value: "#{session[:referral]}"  %>
         <button type="submit" class="button -full -green">Sign Up</button>
         <!-- <button type="submit" class="button -green">Sign Up</button> -->
         <!-- <a href="{{ "/phone.html" | prepend: site.baseurl }}" class="button -full -green">Sign Up</a>
