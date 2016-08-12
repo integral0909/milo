@@ -48,6 +48,9 @@ gem 'json'
 gem 'httparty'
 gem 'hashie'
 
+# to send pretty urls
+gem 'bitly', '~> 0.10.4'
+
 # admin console for easily viewing data
 gem 'rails_admin'
 

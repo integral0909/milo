@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
-
+  BASE_URL = "http://milosavings.com/users/sign_up?referral_code="
   before_action :authenticate_user!
   before_action :set_user
+  before_action :get_referral_rank, only: :index
 
   def index
     # Find all accounts associated with the user
@@ -12,9 +13,26 @@ class HomeController < ApplicationController
     if @checking
       @transactions = @user.transactions.where(account_id: @checking.plaid_acct_id)
     end
+    @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
   end
 
   private
+
+  def get_referral_rank
+    # @referral_rank = 1
+    all_referrals = User.all.pluck("referral_code")
+    # convert all referrals to hash with user id as the key and the referrals count as the value
+    @referrals = all_referrals.each_with_object(Hash.new(0)) { |code,counts| counts[code] += 1 if !code.blank? }
+    @referrals = Hash[@referrals.sort_by(&:last).reverse]
+    p @referrals
+    # find the current rank of the current user by refer
+    @referral_rank = @referrals.keys.index(@user.id.to_s) + 1
+    # show the amount of referrals the user has
+    @referral_count = @referrals[@user.id.to_s]
+
+
+
+  end
 
   def set_user
     @user = User.find(current_user.id)
