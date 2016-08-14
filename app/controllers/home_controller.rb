@@ -24,7 +24,6 @@ class HomeController < ApplicationController
     # convert all referrals to hash with user id as the key and the referrals count as the value
     @referrals = all_referrals.each_with_object(Hash.new(0)) { |code,counts| counts[code] += 1 if !code.blank? }
     @referrals = Hash[@referrals.sort_by(&:last).reverse]
-    p @referrals
     # find the current rank of the current user by refer
     @referral_rank = @referrals.keys.index(@user.id.to_s) + 1
     # show the amount of referrals the user has
