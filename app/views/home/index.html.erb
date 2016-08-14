@@ -107,8 +107,8 @@
         <h3>Thank you for joining the waitlist!</h3>
         <p>As we continue to work on releasing the beta to more users we ask if you could please spread the word about Milo on your favorite social networks. Thank you so much and we are excited to share an update with you shortly!</p>
 
-        <h4>Current Standing: <%= @referral_rank %></h4>
-        <h4>Referral Count: <%= @referral_count %></h4>
+        <% if @referral_rank %><h4>Current Standing: <%= @referral_rank %></h4><% end %>
+        <% if @referral_count %><h4>Referral Count: <%= @referral_count %></h4><% end %>
         <div>
           Get in the game and pass on the referral link below to climb the leaderboard!
           <br
