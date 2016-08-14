@@ -21,6 +21,10 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 24px;
 }
 
+h5, h6 {
+  margin: 0 0 8px;
+}
+
 h1 {
   font-size: 4em; // 64px
 
@@ -67,6 +71,11 @@ h6 {
   @include breakpoint(l-one) {
     font-size: 1.125em;
   }
+}
+
+p {
+  font-size: 1em;
+  margin: 0 0 24px;
 }
 
 a {
