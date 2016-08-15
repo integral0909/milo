@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  BASE_URL = "http://milosavings.com/users/sign_up?referral_code="
+  BASE_URL = "http://milosavings.com/users/sign_up?referral="
   before_action :authenticate_user!
   before_action :set_user
   before_action :get_referral_rank, only: :index
