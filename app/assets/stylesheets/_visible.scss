@@ -16,14 +16,27 @@
 #desktop {
   display: block;
   visibility: visible;
+
   @include breakpoint(l-three) {
     display: none;
     visibility: hidden;
   }
 }
+
+#desktop_inline {
+  display: inline-block;
+  visibility: visible;
+
+  @include breakpoint(l-three) {
+    display: none;
+    visibility: hidden;
+  }
+}
+
 #mobile {
   display: none;
   visibility: hidden;
+  
   @include breakpoint(l-three) {
     display: block;
     visibility: visible;
