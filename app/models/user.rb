@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :public_tokens
   has_many :accounts
-  has_many :transactions, through: :accounts
-  has_one :checking
+  has_many :transactions
+  has_one  :checking
 
 end

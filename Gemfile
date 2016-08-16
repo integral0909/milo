@@ -26,6 +26,7 @@ gem 'bootstrap', '~> 4.0.0.alpha3'
 
 # SEO
 gem 'meta-tags'
+gem 'social-share-button'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -47,6 +48,9 @@ gem 'pry-rails'
 gem 'json'
 gem 'httparty'
 gem 'hashie'
+
+# to send pretty urls
+gem 'bitly', '~> 0.10.4'
 
 # admin console for easily viewing data
 gem 'rails_admin'

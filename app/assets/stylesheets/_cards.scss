@@ -18,7 +18,7 @@
   .mc-title {
     border-bottom: 1px solid #DDE1E2;
     box-sizing: border-box;
-    color: #63677C;
+    color: #4C3E70;
     font-size: 1.5em;
     height: 36px;
     line-height: 1;
@@ -177,7 +177,7 @@
         }
         &:hover {
           background: #FAFAFA;
-          color: #63677C;
+          color: #4C3E70;
         }
       }
     }
@@ -282,6 +282,40 @@
           text-align: right;
         }
       }
+    }
+  }
+}
+
+// Growth Hack
+.milo-card.growth-hack {
+  padding: 40px;
+  text-align: center;
+
+  @include breakpoint(l-three) {
+    padding: 20px 16px;
+  }
+
+  h4 {
+    margin: 0 0 16px;
+  }
+
+  p {
+    @include breakpoint(l-three) {
+      font-size: 1em;
+      margin: 0 0 16px;
+    }
+  }
+
+  .gh-link {
+    background: #F1F3F6;
+    border-radius: 4px;
+    font-size: 1.5em;
+    font-weight: 700;
+    margin: 0 0 24px;
+    padding: 16px 24px;
+
+    @include breakpoint(l-three) {
+      font-size: 1em;
     }
   }
 }

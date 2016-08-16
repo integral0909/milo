@@ -54,3 +54,58 @@
 a.button {
   display: inline-block;
 }
+
+
+// Social Buttons
+a.ssb {
+  background: #DDD;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #FFF;
+  display: block;
+  font-size: 1.4em;
+  height: 56px;
+  line-height: 56px;
+  margin: 0 0 12px;
+  padding: 0 24px;
+  text-align: left;
+  width: 100%;
+
+  @include breakpoint(l-three) {
+    margin: 0 0 8px;
+  }
+
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+
+  .fa {
+    display: inline-block;
+    margin: 0 16px 0 0;
+  }
+
+  &.ssb-twitter {
+    background: #00ACED;
+
+    &:hover {
+      background: #018FBD;
+    }
+  }
+
+  &.ssb-facebook {
+    background: #3B5998;
+
+    &:hover {
+      background: #334B79;
+    }
+  }
+
+  &.ssb-linkedin {
+    background: #007BB6;
+    margin: 0;
+
+    &:hover {
+      background: #00648E;
+    }
+  }
+}
