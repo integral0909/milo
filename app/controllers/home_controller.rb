@@ -26,9 +26,10 @@ class HomeController < ApplicationController
     # use a sort + reverse to have the most referrals be at the front of the hash.
     @referrals = Hash[@referrals.sort_by(&:last).reverse]
     # find the current rank of the current user by refer. Convert to use just keys so we can find the index of the user
-    @referral_rank = @referrals.keys.index(@user.id.to_s) + 1 if @referrals.keys.index(@user.id.to_s)
-    # show the amount of referrals the user has based on their user id as the hash field
-    @referral_count = @referrals[@user.id.to_s] if @referrals[@user.id.to_s]
+    # If the user has no referrals, set the rank as last AKA the total count of Users
+    @referral_rank = @referrals.keys.index(@user.id.to_s) ? @referrals.keys.index(@user.id.to_s) + 1 : User.all.count
+    # show the amount of referrals the user has based on their user id as the hash field or 0 if none present
+    @referral_count = @referrals[@user.id.to_s] ? @referrals[@user.id.to_s] : 0
 
 
 
