@@ -9,9 +9,18 @@
 .pending-roundups {
   margin: 0 0 24px;
   .pr-title {
-    color: #63677C;
+    color: #4C3E70;
     margin: 0 0 8px;
     padding: 0 16px;
+  }
+  .pr-growth-hack {
+    font-size: 1.5em;
+    margin: 0 0 16px;
+    padding: 0 16px;
+
+    strong {
+      color: #4C3E70;
+    }
   }
   small {
     display: block;
