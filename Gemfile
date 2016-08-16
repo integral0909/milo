@@ -49,6 +49,9 @@ gem 'json'
 gem 'httparty'
 gem 'hashie'
 
+# Slack Hooks
+gem 'slack-notifier'
+
 # to send pretty urls
 gem 'bitly', '~> 0.10.4'
 
