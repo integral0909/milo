@@ -10,9 +10,11 @@ class RegistrationsController < Devise::RegistrationsController
         # set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
         # Slack Notification for Sign Up
-        notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", channel: '#signups', username: 'Milo'
-        user_count = User.all.count
-        notifier.ping "#{current_user.email} just signed up! Milo currently has #{user_count} users!"
+        if Rails.env == "production"
+          notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", channel: '#signups', username: 'Milo', icon_emoji: ':moneybag:'
+          user_count = User.all.count
+          notifier.ping "#{current_user.email} just signed up! Milo currently has #{user_count} users!"
+        end
         # Response After Sign Up
         respond_with resource, location: after_sign_up_path_for(resource)
       else
