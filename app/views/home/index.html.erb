@@ -120,6 +120,24 @@
           </div>
         </div>
       </div>
+      <div id="mobile" class="row">
+        <% if @referral_rank %>
+          <div class="col-md-6">
+            <div class="milo-card">
+              <div class="mc-title">Waitlist Position</div>
+              <p><strong><%= @referral_rank %></strong> out of <%= User.count %></p>
+            </div>
+          </div>
+        <% end %>
+        <% if @referral_count %>
+          <div class="col-md-6">
+            <div class="milo-card">
+              <div class="mc-title">Total Referrals</div>
+              <p><strong><%= @referral_count %></strong> referrals</p>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="sidebar">

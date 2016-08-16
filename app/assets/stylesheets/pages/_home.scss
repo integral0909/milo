@@ -10,6 +10,10 @@ header.head-market {
   position: relative;
   min-height: 640px;
 
+  &.-legal {
+    min-height: 400px;
+  }
+
   @include breakpoint(l-three) {
     min-height: 88vh;
   }

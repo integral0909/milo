@@ -6,6 +6,30 @@
 
 
 // Legals
+section.hero.-legal {
+  padding: 64px 0 0;
+  text-align: center;
+
+  @include breakpoint(l-three) {
+    padding: 48px 0 64px;
+  }
+
+  h1 {
+    color: #FFF;
+  }
+
+  p {
+    color: #FFF;
+    font-size: 1.25em;
+    margin: 0 0 48px;
+
+    @include breakpoint(l-three) {
+      font-size: 1.25em;
+      margin: 0 0 32px;
+    }
+  }
+}
+
 .legal-container {
   padding: 80px 0;
 }

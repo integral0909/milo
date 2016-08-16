@@ -291,8 +291,19 @@
   padding: 40px;
   text-align: center;
 
+  @include breakpoint(l-three) {
+    padding: 20px 16px;
+  }
+
   h4 {
     margin: 0 0 16px;
+  }
+
+  p {
+    @include breakpoint(l-three) {
+      font-size: 1em;
+      margin: 0 0 16px;
+    }
   }
 
   .gh-link {
@@ -302,5 +313,9 @@
     font-weight: 700;
     margin: 0 0 24px;
     padding: 16px 24px;
+
+    @include breakpoint(l-three) {
+      font-size: 1em;
+    }
   }
 }
