@@ -2,6 +2,7 @@
   <div class="col-md-5 col-md-offset-2">
     <div class="signup">
       <h1><span>Log In</span> Make Change Happen</h1>
+      <%= render "../views/layouts/messages" %>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "email-signup") do |f| %>
         <fieldset class="form-group">
           <%= f.label :email %>
