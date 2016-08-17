@@ -7,7 +7,7 @@ class Contact < MailForm::Base
   def headers
     {
       :subject => "Milo Contact Form",
-      :to => "justin.seidl@milosavings.com", # TODO :: change email recipient
+      :to => "support@milosavings.com", # TODO :: change email recipient
       :from => %("#{name}" <#{email}>)
     }
   end
