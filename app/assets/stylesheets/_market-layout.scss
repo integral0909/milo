@@ -107,14 +107,6 @@ footer {
     padding: 16px 0;
   }
 
-  &.lateral-menu-is-open {
-    -webkit-transform: translateX(-260px);
-    -moz-transform: translateX(-260px);
-    -ms-transform: translateX(-260px);
-    -o-transform: translateX(-260px);
-    transform: translateX(-260px);
-  }
-
   ul {
     list-style: none;
     margin: 0;
@@ -241,14 +233,6 @@ footer {
     height: auto;
     padding: 16px 0;
     text-align: center;
-  }
-
-  &.lateral-menu-is-open {
-    -webkit-transform: translateX(-260px);
-    -moz-transform: translateX(-260px);
-    -ms-transform: translateX(-260px);
-    -o-transform: translateX(-260px);
-    transform: translateX(-260px);
   }
 
   .copyright {
