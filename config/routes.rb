@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   root 'pages#show', page: 'home'
 
   resources :checkings
+  resources :contacts, only: [:new, :create]
 
   # Pages for Marketing Site
   get '/*page' => 'pages#show'

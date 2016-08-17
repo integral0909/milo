@@ -1,0 +1,75 @@
+<% set_meta_tags :site => 'Contact • Milo',
+  :canonical => 'http://milosavings.com/contacts/new',
+  :author => 'Milo',
+  :copyright => '&copy; 2016 Milo',
+  :description => "-",
+  :keywords => ['Milo', 'Milo Savings', 'contact', 'contact us', 'email', 'savings account', 'financials'],
+  :reverse => true,
+  :og => {
+    :title          => 'Contact • Milo',
+    :type           => 'website',
+    :url            => request.original_url,
+    :image          => asset_url('social-banner-milo.png'),
+    :description    => "-",
+    :site_name      => 'Milo',
+  },
+  :twitter => {
+    :card           => 'summary',
+    :site           => '@milosavings',
+    :title          => 'Contact • Milo',
+    :description    => "-",
+    :creator        => '@milosavings',
+    :image          => asset_url('social-banner-milo.png'),
+  }
+%>
+
+<header class="head-market -legal">
+  <div class="milo-pattern">
+    <div class="container-fluid">
+      <div class="hm-navbar">
+        <a href="/" class="logo-market">Milo</a>
+        <nav class="hm-nav hm-nav-left">
+          <!-- <a href="#">About</a>
+          <a href="#">Blog</a> -->
+        </nav>
+        <nav class="hm-nav hm-nav-right">
+          <a href="/users/sign_up">Join</a>
+          <a href="/users/sign_in">Log In</a>
+        </nav>
+      </div>
+      <section class="hero -legal">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <h1>Get in Touch</h1>
+            <p>Have questions or concerns? Please use the form below to contact our team and we can help answer them.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</header>
+
+<section class="contact">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <%= form_for @contact do |f| %>
+          <fieldset class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, required: true, placeholder: "Name", class: "form-control" %>
+          </fieldset>
+          <fieldset class="form-group">
+            <%= f.label :email %>
+            <%= f.email_field :email, required: true, placeholder: "Email address", class: "form-control" %>
+          </fieldset>
+          <fieldset class="form-group">
+            <%= f.label :message %>
+            <%= f.text_area :message, required: true, placeholder: "Type something...", class: "form-control" %>
+          </fieldset>
+          <%= f.hidden_field :nickname, hint: "Leave this field blank" %>
+          <%= f.submit 'Send Message', class: "button -green" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

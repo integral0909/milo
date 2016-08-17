@@ -49,6 +49,9 @@ gem 'json'
 gem 'httparty'
 gem 'hashie'
 
+# Mail Form
+gem 'mail_form'
+
 # Slack Hooks
 gem 'slack-notifier'
 
