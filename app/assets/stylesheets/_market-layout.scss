@@ -61,7 +61,7 @@ body.milo-market {
       margin: 8px 32px 8px 0;
       text-decoration: none;
 
-      &:hover, &:focus {
+      &:hover, &:focus, &.active {
         color: #4A90E2;
       }
     }
@@ -72,6 +72,18 @@ body.milo-market {
 section {
 
   @include breakpoint(l-three) {
+    text-align: center;
+  }
+
+  &.feature {
+    padding: 120px 0;
+
+    @include breakpoint(l-one) {
+      padding: 32px 0;
+    }
+  }
+
+  &.-center {
     text-align: center;
   }
 
@@ -125,7 +137,7 @@ footer {
         width: 100%;
       }
 
-      a {
+      span {
         color: #292242;
         display: block;
         font-size: 1.25em;
@@ -181,7 +193,7 @@ footer {
           padding: 4px 16px;
         }
 
-        &:hover, &:focus {
+        &:hover, &:focus, &.active {
           color: #4A90E2;
           text-decoration: none;
         }
@@ -195,6 +207,10 @@ footer {
       display: block;
       font-size: 1.25em;
       margin: 0 0 24px;
+
+      @include breakpoint(l-one) {
+        margin: 24px 0 8px;
+      }
     }
 
     p strong {
@@ -204,6 +220,10 @@ footer {
     img {
       display: inline-block;
       max-width: 140px;
+
+      @include breakpoint(l-one) {
+        max-width: 136px;
+      }
 
       &.badge-app-store {
         margin: 0 12px 0 0;
@@ -239,6 +259,10 @@ footer {
     color: #8B999F;
     float: left;
     line-height: 40px;
+
+    @include breakpoint(l-one) {
+      font-size: 0.875em;
+    }
   }
 
   nav.social-footer-nav {

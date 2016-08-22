@@ -4,26 +4,26 @@
       <div class="col-md-8">
         <nav>
           <ul>
-            <li class="menu-item-has-children"><a href="#">Company</a>
+            <li class="menu-item-has-children"><span>Company</span>
               <ul class="sub-menu">
-              	<li><a href="/">Home</a></li>
-              	<!-- <li><a href="#">Features</a></li>
-                <li><a href="#">Blog</a></li>-->
-                <li><a href="/contacts/new">Contact</a></li>
+              	<li><a href="/" class="<%= active_page_class?('/')%>">Home</a></li>
+              	<li><a href="/how-it-works" class="<%= active_page_class?('/how-it-works')%>">How It Works</a></li>
+                <!--<li><a href="#">Blog</a></li>-->
+                <li><a href="/contacts/new" class="<%= active_page_class?('/contacts/new')%>">Contact</a></li>
               </ul>
             </li>
-            <li class="menu-item-has-children"><a href="#">About</a>
+            <li class="menu-item-has-children"><span>About</span>
               <ul class="sub-menu">
-              	<!-- <li><a href="/about">About Us</a></li>
-              	<li><a href="#">Press</a></li>
+              	<li><a href="/about" class="<%= active_page_class?('/about')%>">About Us</a></li>
+              	<!-- <li><a href="#">Press</a></li>
                 <li><a href="#">Questions</a></li>
                 <li><a href="#">Support</a></li> -->
               </ul>
             </li>
-            <li class="menu-item-has-children"><a href="#">Legal</a>
+            <li class="menu-item-has-children"><span>Legal</span>
               <ul class="sub-menu">
-              	<li><a href="/terms">Terms of Service</a></li>
-              	<li><a href="/privacy">Privacy Policy</a></li>
+              	<li><a href="/terms" class="<%= active_page_class?('/terms')%>">Terms of Service</a></li>
+              	<li><a href="/privacy" class="<%= active_page_class?('/privacy')%>">Privacy Policy</a></li>
                 <!-- <li><a href="#">ACH Authorizations</a></li>
                 <li><a href="#">Fees</a></li> -->
               </ul>

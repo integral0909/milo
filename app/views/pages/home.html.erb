@@ -27,17 +27,7 @@
 <header class="head-market">
   <div class="milo-pattern">
     <div class="container-fluid">
-      <div class="hm-navbar">
-        <a href="/" class="logo-market">Milo</a>
-        <nav class="hm-nav hm-nav-left">
-          <!-- <a href="#">About</a>
-          <a href="#">Blog</a> -->
-        </nav>
-        <nav class="hm-nav hm-nav-right">
-          <a href="/users/sign_up">Join</a>
-          <a href="/users/sign_in">Log In</a>
-        </nav>
-      </div>
+      <%= render :partial => 'layouts/market_navbar' %>
       <section class="hero -home">
         <div class="row">
           <div class="col-md-8 col-md-offset-2">
@@ -58,7 +48,7 @@
       <div class="col-md-6 col-md-offset-6">
         <h2>What are round ups?</h2>
         <p>A round up is a calculated amount to round the value of a transaction to the next highest dollar. For example if you purchase a coffee for $3.45, Milo rounds up the transaction to $4.00 and deposits the extra $0.55 into a savings account. Round ups allow you to quickly start saving without the need to alter your budget!</p>
-        <a href="/users/sign_up" class="button -large -green">Start Saving</a>
+        <a href="/how-it-works" class="button -large -green">How It Works</a>
       </div>
     </div>
   </div>
@@ -93,7 +83,7 @@
         <h2>Track Progress</h2>
         <p>Quickly and easily setup your Milo account and the financial goals you are striving to achieve.  </p>
         <p>Track your progress along the way and be notified of important steps to help you stay on pace to reaching your goals.</p>
-        <a href="/users/sign_up" id="desktop" class="button -large -green">Start Saving</a>
+        <a href="/users/sign_up" id="desktop_inline" class="button -large -green">Start Saving</a>
       </div>
     </div>
   </div>

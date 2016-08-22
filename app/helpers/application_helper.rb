@@ -1,4 +1,15 @@
 module ApplicationHelper
+
+  def active_control_class?(controller)
+    return 'active' if (params["controller"] == controller)
+    ''
+  end
+
+  def active_page_class?(test_path)
+    return 'active' if request.path == test_path
+    ''
+  end
+
   def bootstrap_class_for(flash_type)
     case flash_type
       when "success"
