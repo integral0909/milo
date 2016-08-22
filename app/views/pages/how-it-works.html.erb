@@ -1,0 +1,92 @@
+<% set_meta_tags :site => 'How It Works • Milo',
+  :canonical => 'http://milosavings.com/how-it-works',
+  :author => 'Milo',
+  :copyright => '&copy; 2016 Milo',
+  :description => "Milo works by totaling round ups from daily transactions and saving them in a Milo savings account.",
+  :keywords => ['Milo', 'Milo Savings', 'round', 'round up', 'transaction', 'transfer', 'savings', 'how it works', 'works', 'features'],
+  :reverse => true,
+  :og => {
+    :title          => 'How It Works • Milo',
+    :type           => 'website',
+    :url            => request.original_url,
+    :image          => asset_url('social-banner-milo.png'),
+    :description    => "Milo works by totaling round ups from daily transactions and saving them in a Milo savings account.",
+    :site_name      => 'Milo',
+  },
+  :twitter => {
+    :card           => 'summary',
+    :site           => '@milosavings',
+    :title          => 'How It Works • Milo',
+    :description    => "Milo works by totaling round ups from daily transactions and saving them in a Milo savings account.",
+    :creator        => '@milosavings',
+    :image          => asset_url('social-banner-milo.png'),
+  }
+%>
+
+<header class="head-market -works">
+  <div class="milo-pattern">
+    <div class="container-fluid">
+      <%= render :partial => 'layouts/market_navbar' %>
+      <section class="hero -legal">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <h1>How It Works</h1>
+            <p>Make change happen with Milo by rounding up daily transactions and saving them towards important financial goals.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</header>
+
+<section class="feature -center">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h2>What are Round Ups?</h2>
+        <p>A round up is when Milo takes a transaction from your account and adds change to total the transaction to the nearest dollar. Each round up is transferred to your Milo savings account to help you make change happen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="timeline">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="timeline-title">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <h3>How Milo Works</h3>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-wrapper">
+          <div class="tw-item">
+            <div class="tw-point"></div><div class="tw-bar"></div><div class="tw-dash"></div>
+            <h6>Connect Your Bank Account</h6>
+            <p>After signing up start by connecting your primary checking account with Milo. This allows us to round up daily transactions.</p>
+          </div>
+          <div class="tw-item -right">
+            <div class="tw-point"></div><div class="tw-bar"></div><div class="tw-dash"></div>
+            <h6>Round Up Transactions</h6>
+            <p>Milo securely tracks your daily transactions and rounds up each transaction to the nearest dollar.</p>
+          </div>
+          <div class="tw-item">
+            <div class="tw-point"></div><div class="tw-bar"></div><div class="tw-dash"></div>
+            <h6>Weekly Transfer</h6>
+            <p>At the end of each week Milo totals up your round ups. Then we transfer that amount safely via an ACH transfer to your Milo savings account.</p>
+          </div>
+          <div class="tw-item -right">
+            <div class="tw-point"></div><div class="tw-dash"></div>
+            <h6>Track Your Progress</h6>
+            <p>Set your financial goals with Milo and we will automatically help you build towards those goals. Track your daily transactions, goal progress and spending habits.</p>
+          </div>
+        </div>
+        <div class="timeline-actions">
+          <a href="/users/sign_up" class="button -green -large">Join the Waitlist</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
