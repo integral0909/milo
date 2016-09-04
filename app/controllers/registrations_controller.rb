@@ -15,6 +15,8 @@ class RegistrationsController < Devise::RegistrationsController
             user_count = User.all.count
             notifier.ping "#{current_user.email} just signed up! Milo currently has #{user_count} users!"
           end
+          # send welcome email
+          
           # Response After Sign Up
           respond_with resource, location: after_sign_up_path_for(resource)
         else
