@@ -8,13 +8,7 @@ class User < ActiveRecord::Base
   has_many :accounts
   has_many :transactions
   has_one  :checking
-  after_create :send_admin_mail
-
-
-  def send_admin_mail
-    UserMailer.send_new_user_message(self).deliver
-  end
-
+  
   validate :email_is_unique, on: :create
 
   private

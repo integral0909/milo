@@ -4,14 +4,20 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Welcome to example.com, <%= @user.name %></h1>
+    <h1>Welcome to Milo, <%= @user.name %></h1>
     <p>
-      You have successfully signed up to example.com,
-      your username is: <%= @user.login %>.<br>
+      You have successfully signed up to milosavings.com,
+      your username is: <%= @user.email %>.<br>
     </p>
     <p>
-      To login to the site, just follow this link: <%= @url %>.
+      Start saving by logging in and connecting any spending account. It's that easy! Just follow this link: <%= @url %> to get started.
     </p>
-    <p>Thanks for joining and have a great day!</p>
+    <p>
+      Help your friends and family start saving by sharing your referral link <%= @referral_link %>.
+    </p>
+    <p>Happy Savings!</p>
+    <p>
+      - The Milo Team
+    </p>
   </body>
 </html>
