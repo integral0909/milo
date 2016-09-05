@@ -9,7 +9,9 @@ class ApplicationController < ActionController::Base
   private
 # pull the referral id from the params if the user is signing up from a referral url
   def capture_referal
-    session[:referral] = params[:referral] if params[:referral]
+    if !session[:referral]
+      session[:referral] = params[:referral] if params[:referral]
+    end
   end
 
 end

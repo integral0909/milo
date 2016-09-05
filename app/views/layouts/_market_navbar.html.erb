@@ -5,7 +5,7 @@
     <a href="/about" class="<%= active_page_class?('/about')%>">About</a>
   </nav>
   <nav class="hm-nav hm-nav-right">
-    <a href="/users/sign_up">Join</a>
+    <%= link_to "Join", new_user_registration_path %>
     <a href="/users/sign_in">Log In</a>
   </nav>
 </div>
