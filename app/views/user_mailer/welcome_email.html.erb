@@ -1,23 +1,132 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-    <h1>Welcome to Milo, <%= @user.name %></h1>
-    <p>
-      You have successfully signed up to milosavings.com,
-      your username is: <%= @user.email %>.<br>
-    </p>
-    <p>
-      Start saving by logging in and connecting any spending account. It's that easy! Just follow this link: <%= @url %> to get started.
-    </p>
-    <p>
-      Help your friends and family start saving by sharing your referral link <%= @referral_link %>.
-    </p>
-    <p>Happy Savings!</p>
-    <p>
-      - The Milo Team
-    </p>
-  </body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
+	<head>
+		<meta name="viewport" content="width=device-width"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>Welcome to Milo Savings!</title>
+	</head>
+	<body bgcolor="#FAFAFA" style="background-color: #FAFAFA; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; height: 100%; width: 100% !important; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; margin: 0; padding: 0;">
+		<style type="text/css">
+			body {
+				background-color: #FAFAFA;
+			}
+			a.button:hover {
+				background: #292242;
+				color: #FFFFFF;
+			}
+			a.button.-white:hover {
+				background: #FFFFFF;
+				color: #292242 !important;
+			}
+			@media only screen and (max-width: 600px) {
+				a[class="btn"] {
+					background-image: none !important;
+					display: block !important;
+					margin-bottom: 10px !important;
+					margin-right: 0 !important;
+				}
+				div[class="column"] {
+					float: none !important;
+					width: auto !important;
+				}
+				table.social div[class="column"] {
+					width: auto !important;
+				}
+			}
+
+		</style>
+
+		<table class="head-wrap" bgcolor="#FAFAFA" style="background-color: #FAFAFA; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; width: 100%; margin: 0; padding: 0;">
+			<tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
+				<td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"></td>
+				<td class="header container" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; clear: both !important; display: block !important; max-width: 600px !important; margin: 0 auto; padding: 0;">
+					<div class="content" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; display: block; max-width: 600px; margin: 0 auto; padding: 24px;">
+						<table style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; width: 100%; margin: 0; padding: 0;">
+							<tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
+								<td align="center" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"><h4 style="font-family: Helvetica, Arial, 'Lucida Grande', sans-serif; color: #292242; font-weight: 900; line-height: 1.2; font-size: 32px; text-align: center; margin: 0; padding: 0;" align="center">Milo</h4></td>
+							</tr>
+						</table>
+					</div>
+				</td>
+				<td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"></td>
+			</tr>
+		</table>
+		<table class="body-wrap" bgcolor="#FAFAFA" style="background-color: #FAFAFA; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; width: 100%; margin: 0; padding: 0;">
+			<tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
+				<td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"></td>
+				<td class="container" bgcolor="#292242" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; clear: both !important; display: block !important; max-width: 600px !important; margin: 0 auto; padding: 0;">
+					<div class="content hero-content" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; display: block; max-width: 600px; margin: 0 auto; padding: 64px 40px 40px;">
+						<table style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; width: 100%; margin: 0; padding: 0;">
+							<tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
+								<td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
+									<h3 style="font-family: Helvetica, Arial, 'Lucida Grande', sans-serif; color: #FFFFFF; font-weight: 900; line-height: 1.2; font-size: 32px; text-align: center; margin: 0 0 32px; padding: 0;" align="center"><%= @user.name %></h3>
+									<h4 style="font-family: Helvetica, Arial, 'Lucida Grande', sans-serif; color: #FFFFFF; font-weight: 900; line-height: 1.2; font-size: 24px; text-align: center; margin: 0 0 24px; padding: 0;" align="center">Welcome to Milo!</h4>
+									<p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; color: #8B999F; font-weight: normal; font-size: 14px; line-height: 1.6; text-align: center; margin: 0 0 24px; padding: 0;" align="center">Start saving by logging in and securely connecting your checking account. Milo will automatically calculate and transfer your roundups. It's that easy!</p>
+									<a
+										href="https://milosavings.com/users/sign_in"
+										class="button -white"
+										style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; color: #FFFFFF; text-decoration: none; border-radius: 4px; box-sizing: border-box; display: block; font-size: 20px; font-weight: 900; height: 56px; line-height: 50px; width: 200px; margin: 0 auto; text-align:center; border: 2px solid #ffffff;">Get Started</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+				<td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"></td>
+			</tr>
+			<tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
+				<td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"></td>
+				<td class="container" bgcolor="#FFFFFF" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; clear: both !important; display: block !important; max-width: 600px !important; margin: 0 auto; padding: 0;">
+					<div class="content features-content" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; display: block; max-width: 600px; margin: 0 auto; padding: 24px;">
+						<table style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; width: 100%; margin: 0; padding: 0;">
+							<tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
+								<td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
+									<h4 style="font-family: Helvetica, Arial, 'Lucida Grande', sans-serif; color: #292242; font-weight: 900; line-height: 1.2; font-size: 24px; text-align: center; margin: 0 0 24px; padding: 0;" align="center">Still on the waitlist?</h4>
+									<p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; color: #8B999F; font-weight: normal; font-size: 14px; line-height: 1.6; text-align: center; margin: 0 0 24px; padding: 0;" align="center">Refer your friends and family to start saving with Milo. The more people that sign up using your link below the faster you will move up in line to be granted early access.</p>
+                  <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; color: #8B999F; font-weight: normal; font-size: 14px; line-height: 1.6; text-align: center; padding: 8px 16px 8px 16px; background-color: #F1F3F6; border-radius: 4px; width: 180px; margin: 0 auto 24px; font-weight: 900;" align="center"><%= @referral_link %></p>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+				<td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"></td>
+			</tr>
+		</table>
+		<table class="footer-wrap" bgcolor="#FAFAFA" style="background-color: #FAFAFA; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; clear: both !important; width: 100%; margin: 0; padding: 0;">
+			<tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
+				<td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"></td>
+				<td class="container" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; clear: both !important; display: block !important; max-width: 600px !important; margin: 0 auto; padding: 0;">
+					<div class="content footer-content" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; display: block; max-width: 600px; margin: 0 auto; padding: 24px;">
+						<table style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; width: 100%; margin: 0; padding: 0;">
+							<tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
+								<td align="center" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
+									<p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; color: #8B999F; font-weight: normal; font-size: 14px; line-height: 1.6; margin: 0; padding: 0;">
+										<a href="https://milosavings.com/settings" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; color: #4A90E2; text-decoration: none; margin: 0; padding: 0;">
+											<unsubscribe style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">Unsubscribe</unsubscribe>
+										</a>
+										&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href="https://milosavings.com/terms" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; color: #4A90E2; text-decoration: none; margin: 0; padding: 0;">Terms</a>
+										&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href="https://milosavings.com/privacy" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; color: #4A90E2; text-decoration: none; margin: 0; padding: 0;">Privacy</a>
+										&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href="https://milosavings.com/users/sign_in" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; color: #4A90E2; text-decoration: none; margin: 0; padding: 0;">Log In</a>
+									</p>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="mailing-address" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
+						<table style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; width: 100%; margin: 0; padding: 0;">
+							<tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
+								<td align="center" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
+									<h4 style="font-family: Helvetica, Arial, 'Lucida Grande', sans-serif; color: #292242; font-weight: 900; line-height: 1.2; font-size: 32px; text-align: center; margin: 0 0 8px; padding: 0;" align="center">Milo</h4>
+									<p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; color: #8B999F; font-weight: normal; font-size: 14px; line-height: 1.6; margin: 0 0 24px; padding: 0;">217 Oneida St.<br style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"/>Delafield, WI  53018</p>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+				<td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"></td>
+			</tr>
+		</table>
+	</body>
 </html>
