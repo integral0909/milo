@@ -4,7 +4,7 @@
   <div class="page-content">
     <div class="container">
       <div class="row">
-        <% if @accounts.present? %>
+        <% if @accounts.present? || (@transactions && !@transactions.empty?) %>
           <% if @checking == nil %>
             <div class="col-md-12">
               <div class="milo-card">
