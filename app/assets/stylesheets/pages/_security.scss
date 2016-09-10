@@ -11,6 +11,10 @@ section.hero.-security {
   padding: 80px 0 0;
   text-align: center;
 
+  @include breakpoint(l-one) {
+    padding: 48px 0 0;
+  }
+
   span {
     color: #FFF;
     display: block;
@@ -29,6 +33,14 @@ section.hero.-security {
   .secure-highlights {
     padding: 120px 0;
 
+    @include breakpoint(l-three) {
+      padding: 64px 0;
+    }
+
+    @include breakpoint(l-one) {
+      padding: 40px 0;
+    }
+
     .secure-highlight {
       padding: 0 8%;
 
@@ -40,6 +52,99 @@ section.hero.-security {
         color: #BBC5C7;
         font-size: 1em;
       }
+    }
+  }
+}
+
+.feature-circle {
+  background: #BBC5C7;
+  border-radius: 160px;
+  height: 320px;
+  margin: 0 auto;
+  text-align: center;
+  width: 320px;
+
+  @include breakpoint(l-six) {
+    height: 240px;
+    width: 240px;
+  }
+
+  @include breakpoint(l-three) {
+    margin: 0 auto 24px;
+  }
+
+  img {
+    max-width: 160px;
+
+    @include breakpoint(l-six) {
+      max-width: 120px;
+    }
+  }
+
+  &.-blue {
+    background: #4A90E2;
+    padding: 72px 0 0;
+
+    @include breakpoint(l-six) {
+      padding: 54px 0 0;
+    }
+  }
+
+  &.-green {
+    background: #1ABD7D;
+    padding: 102px 0 0;
+
+    @include breakpoint(l-six) {
+      padding: 76px 0 0;
+    }
+  }
+
+  &.-red {
+    background: #FF5455;
+    padding: 80px 0 0;
+
+    img {
+      max-height: 160px;
+    }
+
+    @include breakpoint(l-six) {
+      padding: 60px 0 0;
+
+      img {
+        max-height: 120px;
+      }
+    }
+  }
+}
+
+section.fine-print {
+  padding: 80px 0 160px;
+
+  @include breakpoint(l-three) {
+    padding: 40px 0 80px;
+  }
+
+  @include breakpoint(l-one) {
+    padding: 24px 0 48px;
+  }
+
+  p {
+    margin: 0 0 48px;
+
+    @include breakpoint(l-three) {
+      margin: 0 0 32px;
+    }
+
+    @include breakpoint(l-one) {
+      margin: 0 0 16px;
+    }
+  }
+
+  a:last-child {
+    margin: 0 0 0 20px;
+
+    @include breakpoint(l-one) {
+      margin: 8px 0 0 0;
     }
   }
 }

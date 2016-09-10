@@ -54,6 +54,11 @@ section.hero.-home {
       font-size: 1.25em;
       margin: 0 0 32px;
     }
+
+    @include breakpoint(l-one) {
+      font-size: 1.125em;
+      margin: 0 0 16px;
+    }
   }
 }
 
@@ -99,13 +104,10 @@ section.section-roundups, section.section-progress {
     @include breakpoint(l-three) {
       margin: 0 0 32px;
     }
-  }
-}
 
-section.section-progress {
-
-  @include breakpoint(l-three) {
-    padding: 48px 0 0;
+    @include breakpoint(l-one) {
+      margin: 0 0 16px;
+    }
   }
 }
 
@@ -158,6 +160,10 @@ section.section-goals {
     @include breakpoint(l-three) {
       margin: 0 0 32px;
     }
+
+    @include breakpoint(l-one) {
+      margin: 0 0 16px;
+    }
   }
 }
 
@@ -174,6 +180,10 @@ section.section-manage {
 
     @include breakpoint(l-three) {
       margin: 0 0 40px;
+    }
+
+    @include breakpoint(l-one) {
+      margin: 0 0 24px;
     }
   }
 }
@@ -194,6 +204,14 @@ section.section-get-started, section.section-security {
   p {
     color: #FFF;
     margin: 0 0 40px;
+
+    @include breakpoint(l-three) {
+      margin: 0 0 32px;
+    }
+
+    @include breakpoint(l-one) {
+      margin: 0 0 16px;
+    }
   }
 }
 
@@ -201,9 +219,23 @@ section.section-security {
   padding: 160px 0 120px;
   text-align: left;
 
+  @include breakpoint(l-three) {
+    padding: 48px 0 64px;
+  }
+
+  @include breakpoint(l-one) {
+    padding: 48px 0 32px;
+    text-align: center;
+  }
+
   img {
     display: block;
     margin: 64px auto 0;
     max-width: 200px;
+
+    @include breakpoint(l-three) {
+      margin: 0 auto 24px;
+      max-width: 120px;
+    }
   }
 }

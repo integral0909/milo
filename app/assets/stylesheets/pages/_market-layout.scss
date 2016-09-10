@@ -34,8 +34,8 @@ body.milo-market {
   a.logo-market {
     color: #FFF;
     float: left;
+    font-family: 'Futura Bold';
     font-size: 2em;
-    font-weight: 700;
     line-height: 40px;
     margin: 0 48px 0 0;
     text-decoration: none;
@@ -78,6 +78,10 @@ section {
   &.feature {
     padding: 120px 0;
 
+    @include breakpoint(l-three) {
+      padding: 64px 0;
+    }
+
     @include breakpoint(l-one) {
       padding: 32px 0;
     }
@@ -93,6 +97,19 @@ section {
     @include breakpoint(l-three) {
       font-size: 1.25em;
       margin: 0 0 32px;
+    }
+
+    @include breakpoint(l-one) {
+      font-size: 1.125em;
+      margin: 0 0 16px;
+    }
+  }
+
+  &.-purple {
+    background-image: radial-gradient(circle farthest-side at bottom right, #4C3E70, #352D52);
+
+    h2, p {
+      color: #FFF;
     }
   }
 }
