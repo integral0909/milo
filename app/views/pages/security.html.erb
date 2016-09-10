@@ -1,0 +1,64 @@
+<% set_meta_tags :site => 'Security • Milo',
+  :canonical => 'http://milosavings.com/privacy',
+  :author => 'Milo',
+  :copyright => '&copy; 2016 Milo',
+  :description => "-",
+  :keywords => ['Milo', 'Milo Savings', 'security', 'ssl', 'encryption', 'two-factor', 'authentication', 'savings'],
+  :reverse => true,
+  :og => {
+    :title          => 'Security • Milo',
+    :type           => 'website',
+    :url            => request.original_url,
+    :image          => asset_url('social-banner-milo.png'),
+    :description    => "-",
+    :site_name      => 'Milo',
+  },
+  :twitter => {
+    :card           => 'summary',
+    :site           => '@milosavings',
+    :title          => 'Security • Milo',
+    :description    => "-",
+    :creator        => '@milosavings',
+    :image          => asset_url('social-banner-milo.png'),
+  }
+%>
+
+
+<header class="head-market -security">
+  <div class="milo-pattern">
+    <div class="container-fluid">
+      <%= render :partial => 'layouts/market_navbar' %>
+      <section class="hero -security">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <span>Security</span>
+            <h1>Our Top Priority</h1>
+            <p>Milo wants to help you make change happen in the safest manor possible. Milo is always developing cutting edge processes to prevent unauthorized account access and protect your data.</p>
+          </div>
+        </div>
+        <div class="secure-highlights">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="secure-highlight">
+                <h6>FDIC Insured Accounts</h6>
+                <p>Milo savings accounts are insured by the FDIC up to $250,000.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="secure-highlight">
+                <h6>SSL Encryption</h6>
+                <p>Our website and apps are properly secured with 128-bit encryption.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="secure-highlight">
+                <h6>Account Safety</h6>
+                <p>Two-factor authentication confirms access to authorized users only.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</header>

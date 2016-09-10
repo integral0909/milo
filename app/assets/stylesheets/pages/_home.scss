@@ -28,7 +28,7 @@ header.head-market {
   background-repeat: repeat;
   bottom: 0;
   left: 0;
-  position: absolute;
+  position: relative;
   right: 0;
   top: 0;
 }
@@ -180,24 +180,30 @@ section.section-manage {
 
 section.section-get-started, section.section-security {
   background-image: radial-gradient(circle farthest-side at bottom right, #4C3E70, #352D52);
-  padding: 160px 0 120px;
+  padding: 80px 0 120px;
+  text-align: center;
 
   @include breakpoint(l-three) {
     padding: 48px 0 64px;
   }
 
-  img {
-    display: block;
-    margin: 64px auto 0;
-    max-width: 200px;
-  }
-
-  h2 {
+  h2, h3 {
     color: #FFF;
   }
 
   p {
     color: #FFF;
     margin: 0 0 40px;
+  }
+}
+
+section.section-security {
+  padding: 160px 0 120px;
+  text-align: left;
+
+  img {
+    display: block;
+    margin: 64px auto 0;
+    max-width: 200px;
   }
 }

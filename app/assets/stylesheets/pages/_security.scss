@@ -6,3 +6,40 @@
 
 
 // Security
+section.hero.-security {
+  min-height: auto;
+  padding: 80px 0 0;
+  text-align: center;
+
+  span {
+    color: #FFF;
+    display: block;
+    font-size: 1em;
+    margin: 0 0 8px;
+  }
+
+  h1 {
+    color: #FFF;
+  }
+
+  p {
+    color: #FFF;
+  }
+
+  .secure-highlights {
+    padding: 120px 0;
+
+    .secure-highlight {
+      padding: 0 8%;
+
+      h6 {
+        color: #FFF;
+      }
+
+      p {
+        color: #BBC5C7;
+        font-size: 1em;
+      }
+    }
+  }
+}
