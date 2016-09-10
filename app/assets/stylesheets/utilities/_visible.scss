@@ -1,7 +1,7 @@
 /*
-* Oink
-* Copyright Oink 2016
-* oinkbank.co
+* Milo
+* Copyright Milo 2016
+* milosavings.com
 */
 
 
@@ -36,7 +36,7 @@
 #mobile {
   display: none;
   visibility: hidden;
-  
+
   @include breakpoint(l-three) {
     display: block;
     visibility: visible;

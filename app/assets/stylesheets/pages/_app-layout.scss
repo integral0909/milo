@@ -24,8 +24,8 @@ body.milo-app {
     a.logo {
       color: #FFF;
       display: block;
+      font-family: 'Futura Bold';
       font-size: 2em;
-      font-weight: 700;
       margin: 16px 0 32px;
       text-align: center;
       @include breakpoint(l-three) {

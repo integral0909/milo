@@ -1,9 +1,11 @@
 /*
-* Oink
-* Copyright Oink 2016
-* oinkbank.co
+* Milo
+* Copyright Milo 2016
+* milosavings.com
 */
 
+
+// Buttons
 .button {
   background: inherit;
   border: 2px solid #999;
@@ -11,12 +13,16 @@
   box-sizing: border-box;
   color: #999;
   display: block;
+  font-family: 'Futura Bold';
   font-size: 1.125em;
-  font-weight: 700;
   height: 50px;
   line-height: 46px;
   padding: 0 24px;
   text-align: center;
+
+  @include breakpoint(l-one) {
+    width: 100%;
+  }
 
   &:hover, &:focus {
     text-decoration: none;
@@ -39,6 +45,12 @@
       height: 56px;
       line-height: 52px;
     }
+
+    @include breakpoint(l-one) {
+      font-size: 1.125em;
+      height: 50px;
+      line-height: 46px;
+    }
   }
 
   &.-green {
@@ -46,6 +58,15 @@
     color: #1ABD7D;
     &:hover {
       background: #1ABD7D;
+      color: #FFF;
+    }
+  }
+
+  &.-purple {
+    border: 2px solid #292242;
+    color: #292242;
+    &:hover {
+      background: #292242;
       color: #FFF;
     }
   }
