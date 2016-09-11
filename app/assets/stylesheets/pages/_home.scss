@@ -11,7 +11,7 @@ header.head-market {
   min-height: 640px;
 
   &.-legal {
-    min-height: 400px;
+    min-height: auto;
   }
 
   @include breakpoint(l-three) {
@@ -24,8 +24,10 @@ header.head-market {
 }
 
 .milo-pattern {
-  //background-image: url('/assets/milo-pattern.png');
-  background-repeat: repeat;
+  background-image: url('/assets/bg-milo-pattern.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   bottom: 0;
   left: 0;
   position: relative;
@@ -113,12 +115,8 @@ section.section-roundups, section.section-progress {
 
 section.section-goals {
   background-image: radial-gradient(circle farthest-side at bottom right, #4C3E70, #352D52);
-  padding: 80px 0 120px;
+  padding: 0;
   text-align: center;
-
-  @include breakpoint(l-three) {
-    padding: 48px 0 80px;
-  }
 
   h2 {
     color: #FFF;
@@ -190,12 +188,8 @@ section.section-manage {
 
 section.section-get-started, section.section-security {
   background-image: radial-gradient(circle farthest-side at bottom right, #4C3E70, #352D52);
-  padding: 80px 0 120px;
+  padding: 0;
   text-align: center;
-
-  @include breakpoint(l-three) {
-    padding: 48px 0 64px;
-  }
 
   h2, h3 {
     color: #FFF;
@@ -216,15 +210,9 @@ section.section-get-started, section.section-security {
 }
 
 section.section-security {
-  padding: 160px 0 120px;
   text-align: left;
 
-  @include breakpoint(l-three) {
-    padding: 48px 0 64px;
-  }
-
   @include breakpoint(l-one) {
-    padding: 48px 0 32px;
     text-align: center;
   }
 
