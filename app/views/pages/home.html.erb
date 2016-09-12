@@ -55,21 +55,23 @@
 </section>
 
 <section class="section-goals">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <h2>Set Goals</h2>
-        <div class="goal-icons">
-          <%= image_tag("icon-goal-health.svg", alt: "Save for a Medical Emergency", id: "desktop_inline") %>
-          <%= image_tag("icon-goal-vacation.svg", alt: "Save for a Vacation", id: "desktop_inline") %>
-          <%= image_tag("icon-goal-house.svg", alt: "Save for a House") %>
-          <%= image_tag("icon-goal-college.svg", alt: "Save for a College Education", class: "gi-large") %>
-          <%= image_tag("icon-goal-car.svg", alt: "Save for a Car", class: "gi-car") %>
-          <%= image_tag("icon-goal-wedding.svg", alt: "Save for a Wedding", id: "desktop_inline") %>
-          <%= image_tag("icon-goal-business.svg", alt: "Save for a New Business", id: "desktop_inline") %>
+  <div class="milo-pattern">
+    <div class="container-fluid -padding-120">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Set Goals</h2>
+          <div class="goal-icons">
+            <%= image_tag("icon-goal-health.svg", alt: "Save for a Medical Emergency", id: "desktop_inline") %>
+            <%= image_tag("icon-goal-vacation.svg", alt: "Save for a Vacation", id: "desktop_inline") %>
+            <%= image_tag("icon-goal-house.svg", alt: "Save for a House") %>
+            <%= image_tag("icon-goal-college.svg", alt: "Save for a College Education", class: "gi-large") %>
+            <%= image_tag("icon-goal-car.svg", alt: "Save for a Car", class: "gi-car") %>
+            <%= image_tag("icon-goal-wedding.svg", alt: "Save for a Wedding", id: "desktop_inline") %>
+            <%= image_tag("icon-goal-business.svg", alt: "Save for a New Business", id: "desktop_inline") %>
+          </div>
+          <p>Save for a new car, that much-needed vacation or your child’s education!</p>
+          <a href="/users/sign_up" class="button -large -green">Start Saving</a>
         </div>
-        <p>Save for a new car, that much-needed vacation or your child’s education!</p>
-        <a href="/users/sign_up" class="button -large -green">Start Saving</a>
       </div>
     </div>
   </div>
@@ -90,29 +92,19 @@
   <%= image_tag("img-track-progress.svg", alt: "Milo Round Ups", class: "progress-image", id: "desktop") %>
 </section>
 
-<section class="section-manage">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <h2>Manage</h2>
-        <p>The Milo dashboard allows you to easily deposit, withdraw and manage your transaction history. Also use the Milo dashboard to set and track important financial goals for you and your family.</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <%= image_tag("img-manage-dashboard.png", alt: "Milo Dashboard") %>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section-get-started">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <h3>Get Started</h3>
-        <p>The Milo dashboard allows you to easily deposit, withdraw and manage your transaction history. Also use the Milo dashboard to set and track important financial goals for you and your family.</p>
-        <a href="/users/sign_up" class="button -large -green">Join the Waitlist</a>
+<section class="section-security">
+  <div class="milo-pattern">
+    <div class="container-fluid -padding-120">
+      <div class="row">
+        <div class="col-md-4">
+          <%= image_tag("icon-security-fingerprint.svg", alt: "Milo Security") %>
+        </div>
+        <div class="col-md-8">
+          <h2>High Security Standards</h2>
+          <p>Milo’s number one priority is keeping your accounts and data associated with those acocunts secure. We protect data with 128-bit encryption and never store data on your devices.</p>
+          <p>Milo savings accounts are insured by the Federal Deposit Insurance Corporation (FDIC) which insures account funds up to $250,000. Additional information is available at <a href="http://www.fdic.gov" target="_blank">www.fdic.gov</a>.</p>
+          <a href="/security" class="button -large -green">Learn More</a>
+        </div>
       </div>
     </div>
   </div>

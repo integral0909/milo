@@ -1,0 +1,132 @@
+/*
+* Milo
+* Copyright Milo 2016
+* milosavings.com
+*/
+
+
+// Buttons
+.button {
+  background: inherit;
+  border: 2px solid #999;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #999;
+  display: block;
+  font-family: 'Futura Bold';
+  font-size: 1.125em;
+  height: 50px;
+  line-height: 46px;
+  padding: 0 24px;
+  text-align: center;
+
+  @include breakpoint(l-one) {
+    width: 100%;
+  }
+
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+
+  &.-full {
+    padding: 0;
+    width: 100%;
+  }
+
+  &.-large {
+    font-size: 1.5em;
+    line-height: 76px;
+    height: 80px;
+    padding: 0 40px;
+    text-transform: initial;
+
+    @include breakpoint(l-three) {
+      font-size: 1.25em;
+      height: 56px;
+      line-height: 52px;
+    }
+
+    @include breakpoint(l-one) {
+      font-size: 1.125em;
+      height: 50px;
+      line-height: 46px;
+    }
+  }
+
+  &.-green {
+    border: 2px solid #1ABD7D;
+    color: #1ABD7D;
+    &:hover {
+      background: #1ABD7D;
+      color: #FFF;
+    }
+  }
+
+  &.-purple {
+    border: 2px solid #292242;
+    color: #292242;
+    &:hover {
+      background: #292242;
+      color: #FFF;
+    }
+  }
+}
+
+a.button {
+  display: inline-block;
+}
+
+
+// Social Buttons
+a.ssb {
+  background: #DDD;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #FFF;
+  display: block;
+  font-size: 1.4em;
+  height: 56px;
+  line-height: 56px;
+  margin: 0 0 12px;
+  padding: 0 24px;
+  text-align: left;
+  width: 100%;
+
+  @include breakpoint(l-three) {
+    margin: 0 0 8px;
+  }
+
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+
+  .fa {
+    display: inline-block;
+    margin: 0 16px 0 0;
+  }
+
+  &.ssb-twitter {
+    background: #00ACED;
+
+    &:hover {
+      background: #018FBD;
+    }
+  }
+
+  &.ssb-facebook {
+    background: #3B5998;
+
+    &:hover {
+      background: #334B79;
+    }
+  }
+
+  &.ssb-linkedin {
+    background: #007BB6;
+    margin: 0;
+
+    &:hover {
+      background: #00648E;
+    }
+  }
+}

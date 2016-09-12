@@ -1,0 +1,55 @@
+/*
+* Milo
+* Copyright Milo 2016
+* milosavings.com
+*/
+
+
+// Fonts
+@font-face {
+  font-family: 'Futura Light';
+  src: asset-url('futura-light-webfont.woff2') format('woff2'),
+       asset-url('futura-light-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Futura Light Italic';
+  src: asset-url('futura-light-italic-webfont.woff2') format('woff2'),
+       asset-url('futura-light-italic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Futura Book';
+  src: asset-url('futura-book-webfont.woff2') format('woff2'),
+       asset-url('futura-book-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Futura Book Italic';
+  src: asset-url('futura-book-italic-webfont.woff2') format('woff2'),
+       asset-url('futura-book-italic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Futura Bold';
+  src: asset-url('futura-bold-webfont.woff2') format('woff2'),
+       asset-url('futura-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Futura Bold Italic';
+  src: asset-url('fututa-bold-italic-webfont.woff2') format('woff2'),
+       asset-url('fututa-bold-italic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

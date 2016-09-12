@@ -10,27 +10,28 @@
 
 // Utilities
 @import
-  "fonts",
-  "breakpoints",
-  "elements",
-  "visible";
+  "utilities/fonts",
+  "utilities/breakpoints",
+  "utilities/elements",
+  "utilities/visible";
 
 // Elements
 @import
-  "buttons",
-  "cards",
-  "forms",
-  "roundups";
+  "elements/buttons",
+  "elements/cards",
+  "elements/forms",
+  "elements/roundups";
 
 // Pages
 @import
-  "app-layout",
-  "market-layout",
-  "signup-layout",
+  "pages/app-layout",
+  "pages/market-layout",
+  "pages/signup-layout",
   "pages/about",
   "pages/contact",
   "pages/home",
   "pages/legals",
+  "pages/security",
   "pages/works";
 
 // Externals

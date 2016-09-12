@@ -1,0 +1,88 @@
+/*
+* Milo
+* Copyright Milo 2016
+* milosavings.com
+*/
+
+
+body {
+  color: #8B999F;
+  font-family: 'Futura Light';
+  font-size: 16px;
+  font-size: 1em;
+  opacity: 1;
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #292242;
+  line-height: 1.2;
+  margin: 0 0 24px;
+}
+
+h5, h6 {
+  margin: 0 0 8px;
+}
+
+h1 {
+  font-size: 4em; // 64px
+
+  @include breakpoint(l-one) {
+    font-size: 2.5em;
+  }
+}
+
+h2 {
+  font-size: 3.5em; // 56px
+
+  @include breakpoint(l-one) {
+    font-size: 2.25em;
+  }
+}
+
+h3 {
+  font-size: 3em; // 48px
+
+  @include breakpoint(l-one) {
+    font-size: 2em;
+  }
+}
+
+h4 {
+  font-size: 2.5em; // 40px
+
+  @include breakpoint(l-one) {
+    font-size: 1.5em;
+  }
+}
+
+h5 {
+  font-size: 2em; // 32px
+
+  @include breakpoint(l-one) {
+    font-size: 1.25em;
+  }
+}
+
+h6 {
+  font-size: 1.5em; // 24px
+
+  @include breakpoint(l-one) {
+    font-size: 1.125em;
+  }
+}
+
+p {
+  font-size: 1.25em;
+  margin: 0 0 24px;
+}
+
+a {
+  color: #4A90E2;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
