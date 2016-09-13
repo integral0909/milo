@@ -61,14 +61,13 @@ body.milo-app {
       h5 {
         color: #FFF;
         font-size: 1.5em;
-        font-weight: normal;
         line-height: 1.4;
         margin: 0;
       }
       span {
         color: #6FB7E9;
+        font-family: 'Futura Bold';
         font-size: 0.9em;
-        font-weight: 600;
         text-transform: uppercase;
       }
     }
@@ -88,7 +87,7 @@ body.milo-app {
         margin: 0 0 16px 0;
         &:hover, &.active {
           color: #FFF;
-          font-weight: 600;
+          font-family: 'Futura Bold';
           text-decoration: none;
           i.fa {
             color: #FFF;
@@ -105,8 +104,8 @@ body.milo-app {
           color: #F7F9FA;
           display: block;
           float: right;
+          font-family: 'Futura Bold';
           font-size: 0.75em;
-          font-weight: 600;
           height: 20px;
           line-height: 20px;
           text-align: center;
@@ -141,8 +140,8 @@ body.milo-app {
       background: #352D52;
       bottom: 0;
       color: #FFF;
+      font-family: 'Futura Bold';
       font-size: 0.9em;
-      font-weight: 700;
       height: 50px;
       left: 0;
       line-height: 50px;
