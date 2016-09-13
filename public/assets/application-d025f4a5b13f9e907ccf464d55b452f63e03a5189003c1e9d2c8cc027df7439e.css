@@ -7998,30 +7998,29 @@ body.milo-app header .milo-user .mu-img img {
 body.milo-app header .milo-user h5 {
   color: #FFF;
   font-size: 1.5em;
-  font-weight: normal;
   line-height: 1.4;
   margin: 0;
 }
-/* line 68, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 67, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header .milo-user span {
   color: #6FB7E9;
+  font-family: 'Futura Bold';
   font-size: 0.9em;
-  font-weight: 600;
   text-transform: uppercase;
 }
-/* line 75, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 74, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header nav {
   padding: 0 20px;
 }
 @media (max-width: 767px) {
-  /* line 75, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  /* line 74, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app header nav {
     display: none;
     padding: 0;
     visibility: hidden;
   }
 }
-/* line 83, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 82, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header nav a {
   color: #FAFAFA;
   display: block;
@@ -8029,45 +8028,45 @@ body.milo-app header nav a {
   line-height: 1;
   margin: 0 0 16px 0;
 }
-/* line 89, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 88, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header nav a:hover, body.milo-app header nav a.active {
   color: #FFF;
-  font-weight: 600;
+  font-family: 'Futura Bold';
   text-decoration: none;
 }
-/* line 93, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 92, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header nav a:hover i.fa, body.milo-app header nav a.active i.fa {
   color: #FFF;
 }
-/* line 97, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 96, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header nav a i.fa {
   color: #A2BCD5;
   font-size: 1em;
   margin: 0 12px 0 0;
 }
-/* line 102, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 101, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header nav a span {
   background: #3E445C;
   border-radius: 4px;
   color: #F7F9FA;
   display: block;
   float: right;
+  font-family: 'Futura Bold';
   font-size: 0.75em;
-  font-weight: 600;
   height: 20px;
   line-height: 20px;
   text-align: center;
   width: 30px;
 }
 @media (max-width: 767px) {
-  /* line 102, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  /* line 101, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app header nav a span {
     display: none;
     visibility: hidden;
   }
 }
 @media (max-width: 767px) {
-  /* line 83, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  /* line 82, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app header nav a {
     color: rgba(255, 255, 255, 0.6);
     float: left;
@@ -8078,25 +8077,25 @@ body.milo-app header nav a span {
     text-transform: uppercase;
     width: 20%;
   }
-  /* line 128, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  /* line 127, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app header nav a:hover, body.milo-app header nav a.active {
     color: #FFF;
     border-bottom: 3px solid rgba(0, 0, 0, 0.5);
   }
-  /* line 132, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  /* line 131, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app header nav a i.fa {
     display: block;
     font-size: 2em;
     margin: 0 0 6px;
   }
 }
-/* line 140, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 139, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header a.sign-out {
   background: #352D52;
   bottom: 0;
   color: #FFF;
+  font-family: 'Futura Bold';
   font-size: 0.9em;
-  font-weight: 700;
   height: 50px;
   left: 0;
   line-height: 50px;
@@ -8106,7 +8105,7 @@ body.milo-app header a.sign-out {
   width: 100%;
 }
 @media (max-width: 767px) {
-  /* line 140, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  /* line 139, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app header a.sign-out {
     background: none;
     float: right;
@@ -8117,11 +8116,11 @@ body.milo-app header a.sign-out {
     width: auto;
   }
 }
-/* line 162, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 161, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header a.sign-out:hover {
   text-decoration: none;
 }
-/* line 168, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 167, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app .page-content {
   box-sizing: border-box;
   margin: 0 0 0 240px;
@@ -8130,18 +8129,18 @@ body.milo-app .page-content {
   width: calc(100% - 420px);
 }
 @media (max-width: 767px) {
-  /* line 168, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  /* line 167, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app .page-content {
     margin: 0;
     padding: 70px 16px 16px;
     width: 100%;
   }
 }
-/* line 179, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 178, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app .page-content .container {
   padding: 0;
 }
-/* line 184, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 183, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app .sidebar {
   background: #F7F9FA;
   box-sizing: border-box;
@@ -8153,7 +8152,7 @@ body.milo-app .sidebar {
   width: 180px;
 }
 @media (max-width: 767px) {
-  /* line 184, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  /* line 183, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app .sidebar {
     display: none;
     visibility: hidden;
@@ -8579,8 +8578,8 @@ body.milo-signup {
 body.milo-signup a.signup-logo {
   color: #352D52;
   display: block;
+  font-family: 'Futura Bold';
   font-size: 2.625em;
-  font-weight: 700;
   margin: 32px 0 56px;
 }
 @media (max-width: 479px) {
@@ -8637,15 +8636,15 @@ body.milo-signup .signup h1 {
 body.milo-signup .signup h1 span {
   color: #BBC5C7;
   display: block;
+  font-family: 'Futura Bold';
   font-size: 0.48em;
-  font-weight: 600;
   margin: 0 0 8px;
 }
 /* line 58, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 body.milo-signup .signup h3 {
   color: #6E7386;
+  font-family: 'Futura Bold';
   font-size: 1.5em;
-  font-weight: 600;
   line-height: 1;
   margin: 0 0 40px;
   text-align: center;
@@ -8782,7 +8781,7 @@ ul.signup-steps li span {
 /* line 9, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_about.scss */
 header.head-market.-about {
   height: auto;
-  min-height: 64vh;
+  min-height: auto;
 }
 
 /* line 14, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_about.scss */
@@ -8834,7 +8833,7 @@ header.head-market.-legal {
 
 /* line 26, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
 .milo-pattern {
-  background-image: url("/assets/bg-milo-pattern.png");
+  background-image: url(/assets/bg-milo-pattern-f8d35d4ebd48710085005cc2845b9f9cada69caa72b4dd6e14eaa8db70ca6adc.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -9337,7 +9336,7 @@ section.fine-print a:last-child {
 /* line 9, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
 header.head-market.-works {
   height: auto;
-  min-height: 64vh;
+  min-height: auto;
 }
 
 /* line 15, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
