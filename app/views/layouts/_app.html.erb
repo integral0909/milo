@@ -18,7 +18,7 @@
       <a href="#"><i class="fa fa-exchange"></i> Transfer</a>
       <a href="#"><i class="fa fa-clock-o"></i> History</a>-->
       <a href="/users/edit"><i class="fa fa-gear"></i> Settings</a>
-      <% if @user.admin %>
+      <% if current_user.admin %>
         <a href="/admin"><i class="fa fa-lock"></i> Admin</a>
       <% end %>
     </nav>
