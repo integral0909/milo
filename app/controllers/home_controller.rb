@@ -5,14 +5,6 @@ class HomeController < ApplicationController
   before_action :get_referral_rank, only: :index
 
   def index
-    # Find all accounts associated with the user
-    @accounts = Account.where(user_id: @user.id)
-    # Find the checking account associated with the user
-    @checking = Checking.find_by(user_id: @user.id)
-    # If, checking account exists get the transactions for that account
-    if @checking
-      @transactions = @user.transactions.where(account_id: @checking.plaid_acct_id)
-    end
     @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
   end
 
@@ -30,13 +22,6 @@ class HomeController < ApplicationController
     @referral_rank = @referrals.keys.index(@user.id.to_s) ? @referrals.keys.index(@user.id.to_s) + 1 : User.all.count
     # show the amount of referrals the user has based on their user id as the hash field or 0 if none present
     @referral_count = @referrals[@user.id.to_s] ? @referrals[@user.id.to_s] : 0
-
-
-
-  end
-
-  def set_user
-    @user = User.find(current_user.id)
   end
 
 end

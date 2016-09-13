@@ -4,7 +4,7 @@
   <div class="page-content">
     <div class="container">
       <div class="row">
-        <% if @accounts.present? %>
+        <% if @accounts.present? || (@transactions && !@transactions.empty?) %>
           <% if @checking == nil %>
             <div class="col-md-12">
               <div class="milo-card">
@@ -94,7 +94,10 @@
       <% if @transactions.present? %>
         <ul class="pr-list">
           <% @transactions.each do |t| %>
-            <li>+ $<%= t.roundup %><span><strong>$<%= t.amount %></strong> <%= t.trans_name %></span></li>
+          <!-- Only show positive amount -->
+            <% if t.amount > 0 %>
+              <li>+ $<%= t.roundup %><span><strong>$<%= t.amount %></strong> <%= t.trans_name %></span></li>
+            <% end %>
           <% end %>
         </ul>
       <% else %>

@@ -16,44 +16,27 @@ ActiveRecord::Schema.define(version: 20160816183203) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "accounts", force: :cascade do |t|
+  create_table "accounts", id: false, force: :cascade do |t|
+    t.string   "plaid_acct_id"
+    t.string   "account_name"
+    t.string   "account_number"
+    t.float    "available_balance"
+    t.float    "current_balance"
+    t.string   "institution_type"
+    t.string   "name"
+    t.string   "numbers"
+    t.string   "acct_subtype"
+    t.string   "acct_type"
     t.integer  "user_id"
-    t.integer  "bank_id"
-    t.integer  "yodlee_id"
-    t.integer  "status_code",  default: 801
-    t.datetime "last_refresh"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-  end
-
-  add_index "accounts", ["bank_id"], name: "index_accounts_on_bank_id", using: :btree
-  add_index "accounts", ["user_id"], name: "index_accounts_on_user_id", using: :btree
-
-  create_table "banks", force: :cascade do |t|
-    t.integer  "content_service_id"
-    t.string   "content_service_display_name"
-    t.integer  "site_id"
-    t.string   "site_display_name"
-    t.string   "mfa"
-    t.string   "home_url"
-    t.string   "container"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "public_token_id"
+    t.integer  "checking_id"
   end
 
   create_table "checkings", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "plaid_acct_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  create_table "logs", force: :cascade do |t|
-    t.string   "endpoint"
-    t.string   "method"
-    t.text     "params"
-    t.integer  "response_code"
-    t.text     "response"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
@@ -102,8 +85,6 @@ ActiveRecord::Schema.define(version: 20160816183203) do
     t.datetime "updated_at",                             null: false
     t.boolean  "invited",                default: false
     t.boolean  "admin",                  default: false
-    t.string   "yodlee_username"
-    t.string   "yodlee_password"
     t.string   "referral_code"
     t.string   "name"
     t.string   "zip"
@@ -112,6 +93,4 @@ ActiveRecord::Schema.define(version: 20160816183203) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "accounts", "banks"
-  add_foreign_key "accounts", "users"
 end
