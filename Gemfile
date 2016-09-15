@@ -61,6 +61,9 @@ gem 'bitly', '~> 0.10.4'
 # admin console for easily viewing data
 gem 'rails_admin'
 
+# awesome print for better console logs
+gem 'awesome_print', '~> 1.7'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
