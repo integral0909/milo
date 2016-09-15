@@ -3,12 +3,11 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper ApplicationHelper
-  before_filter :set_user
-
+  before_filter :set_user, :capture_referral
 
   private
 # pull the referral id from the params if the user is signing up from a referral url
-  def capture_referal
+  def capture_referral
     if !session[:referral]
       session[:referral] = params[:referral] if params[:referral]
     end
