@@ -1,8 +1,8 @@
 class RegistrationsController < Devise::RegistrationsController
+  before_filter :configure_account_update_params, only: [:update]
 
   def create
     build_resource(sign_up_params)
-
     if resource.save
       yield resource if block_given?
       if resource.persisted?
@@ -58,6 +58,10 @@ class RegistrationsController < Devise::RegistrationsController
 
   def account_update_params
     params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :password_confirmation, :current_password)
+  end
+
+  def configure_account_update_params
+    devise_parameter_sanitizer.for(:account_update) << :mobile_number
   end
 
 end

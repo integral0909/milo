@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  # add custom devise controllers here
-  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions' }
 
+  # Devise
+  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions' }
     resources :users, :only => [:show] do
     resources :transactions, only: [:index, :show, :edit, :update]
     resources :accounts, only: [:index]
   end
+
+  # Mobile Phone Verification
+  post 'verifications' => 'verifications#create'
+  put 'verifications' => 'verifications#verify'
 
   # Root, User Logged In
   authenticated :user do
