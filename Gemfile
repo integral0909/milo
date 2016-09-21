@@ -40,6 +40,10 @@ gem 'social-share-button'
 # User Accounts with Devise
 gem 'devise'
 
+# Mobile Phone Confirmation
+gem 'twilio-ruby', '~> 4.0.0'
+gem 'phonelib'
+
 # Argyle for Plaid API
 gem 'argyle'
 gem 'plaid'
