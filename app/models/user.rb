@@ -15,6 +15,17 @@ class User < ActiveRecord::Base
 
   #filter_parameter_logging :verification_code
 
+  # Phone Verification
+  def needs_mobile_number_verifying?
+    if is_verified
+      return false
+    end
+    if mobile_number.blank?
+      return false
+    end
+    return true
+  end
+
   private
 
   # Email should be unique
@@ -25,17 +36,5 @@ class User < ActiveRecord::Base
       errors.add(:email, "is already taken by another account")
     end
   end
-
-  # Verify mobile number
-  def needs_mobile_number_verifying?
-    if is_verified
-      return false
-    end
-    if mobile_number.empty?
-      return false
-    end
-    return true
-  end
-
 
 end

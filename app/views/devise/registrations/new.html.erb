@@ -55,11 +55,8 @@
           <small class="text-muted">Minimum 8 characters.</small>
         </fieldset>
         <!-- hidden input which will add the refferal code from the url to the user -->
-        <%= f.hidden_field :referral_code, value: session[:referral]  %>
+        <%= f.hidden_field :referral_code, value: session[:referral] %>
         <button type="submit" class="button -full -green">Sign Up</button>
-        <!-- <button type="submit" class="button -green">Sign Up</button> -->
-        <!-- <a href="{{ "/phone.html" | prepend: site.baseurl }}" class="button -full -green">Sign Up</a>
-        <p><strong>OR,</strong> sign up using your preferred <a class="social-show" href="#">social</a> network.</p> -->
       <% end %>
     </div>
     <p class="disclaimer">By continuing, I agree to Milo's <!--<a href="#">ACH Authorization</a>, <a href="#">E-Sign Consent</a>, --><a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms of Service</a>.</p>

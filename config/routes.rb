@@ -9,16 +9,16 @@ Rails.application.routes.draw do
     resources :accounts, only: [:index]
   end
 
-  # Mobile Phone Verification
-  post 'verifications' => 'verifications#create'
-  put 'verifications' => 'verifications#verify'
-
   # Root, User Logged In
   authenticated :user do
     root 'home#index', as: :authenticated_root
   end
   # Root, User Logged Out
   root 'pages#show', page: 'home'
+
+  # Mobile Phone Verification
+  post 'verifications' => 'verifications#create'
+  patch 'verifications' => 'verifications#verify'
 
   resources :checkings
   resources :contacts, only: [:new, :create]

@@ -6,9 +6,9 @@ class VerificationsController < ApplicationController
     current_user.save
     # If the number starts with 0 add country code in front
     to = current_user.mobile_number
-    if to[0] = "0"
-      to.sub!("0", '+1')
-    end
+    # if to[0] = "0"
+    #   to.sub!("0", '+1')
+    # end
     # Create an instance of the Twilio class
     @twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
     # Send the message to Twilio
@@ -18,7 +18,7 @@ class VerificationsController < ApplicationController
       :body => "#{current_user.verification_code} is your Milo phone verification code."
     )
     # Redirect back to the edit profile page
-    redirect_to edit_user_registration, :flash => { :success => "A verification code has been sent to your phone. Please fill it in below." }
+    redirect_to edit_user_registration_path, :flash => { :success => "A verification code has been sent to your phone. Please fill it in below." }
     return
   end
 

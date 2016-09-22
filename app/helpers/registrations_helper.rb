@@ -1,4 +1,4 @@
-module Registrations::RegistrationsHelper
+module RegistrationsHelper
 
   def mobile_verification_button
     # Return an empty string unless the user needs to be verified
@@ -13,8 +13,8 @@ module Registrations::RegistrationsHelper
   end
 
   def verify_mobile_number_form
-    return '' if current_user.verification_code.empty?
-    p current_user.verification_code.empty?
+    return '' if current_user.verification_code.blank?
+    p current_user.verification_code.blank?
     html = <<-HTML
       <h3>Enter Verification Code</h3>
       #{form_tag(verifications_path, method: "patch")}

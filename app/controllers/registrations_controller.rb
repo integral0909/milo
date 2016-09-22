@@ -50,6 +50,10 @@ class RegistrationsController < Devise::RegistrationsController
     resource.update_without_password(params)
   end
 
+  def configure_account_update_params
+    devise_parameter_sanitizer.for(:account_update) << :mobile_number
+  end
+
   private
 
   def sign_up_params
@@ -57,11 +61,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def account_update_params
-    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :password_confirmation, :current_password)
-  end
-
-  def configure_account_update_params
-    devise_parameter_sanitizer.for(:account_update) << :mobile_number
+    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :password_confirmation, :current_password, :mobile_number)
   end
 
 end
