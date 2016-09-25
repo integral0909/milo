@@ -11,7 +11,7 @@ class PlaidapiController < ApplicationController
     exchange_token_response = Argyle.plaid_client.exchange_token(public_token.token)
 
     #4 Initialize a Plaid user
-    @plaid_user = Argyle.plaid_client.set_user(exchange_token_response.access_token, ['connect'])
+    @plaid_user = Argyle.plaid_client.set_user(exchange_token_response.access_token, ['auth'])
 
     #6 Upgrade user to utilizing Plaid Auth
     #auth_user = @plaid_user.upgrade(:auth)
