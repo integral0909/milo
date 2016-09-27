@@ -32,25 +32,30 @@ module Dwolla
 
     # Add funding source for user to Dwolla
     def self.connect_funding_source(user)
-      # Find the checking account associated with the user
-      # user_checking = Checking.where(user_id: user.id)
-      # # Get the info from the Account to add a funding source to Dwolla
-      # funding_account = Account.where(plaid_acct_id: user_checking.plaid_acct_id)
-      #
-      # customer_url = user.dwolla_id
-      # request_body = {
-      #   routingNumber: funding_account.number['routing'],
-      #   accountNumber: funding_account.number['account'],
-      #   type: funding_account.acct_subtype,
-      #   name: funding_account.name
-      # }
-      #
-      # funding_source = account_token.post "#{customer_url}/funding-sources", request_body
-      #
-      # # Add the funding source to the user
-      # user = User.find(user.id)
-      # user.dwolla_funding_source = funding_source.headers[:location]
-      # user.save!
+      # begin
+        # Find the checking account associated with the user
+        user_checking = Checking.find_by_user_id(user.id)
+        # Get the info from the Account to add a funding source to Dwolla
+        funding_account = Account.find_by_plaid_acct_id(user_checking.plaid_acct_id)
+
+        customer_url = user.dwolla_id
+        request_body = {
+          routingNumber: funding_account.bank_routing_number,
+          accountNumber: funding_account.bank_account_number,
+          type: funding_account.acct_subtype,
+          name: funding_account.name
+        }
+
+        funding_source = TokenConcern.account_token.post "#{customer_url}/funding-sources", request_body
+
+        # Add the funding source to the user
+        user = User.find(user.id)
+        user.dwolla_funding_source = funding_source.headers[:location]
+        user.save!
+      # rescue=> e
+      #   p e
+      #   # Let user go through to the home screen but send email with error from dwolla
+      # end
     end
 
     # add the users funding source, our account number, and the total roundup ammount
@@ -61,7 +66,7 @@ module Dwolla
             :href => user.dwolla_funding_source
           },
           :destination => {
-            :href => "https://api-uat.dwolla.com/accounts/ab443d36-3757-44c1-a1b4-29727fb3111c"
+            :href => "https://api-uat.dwolla.com/accounts/#{ENV["DWOLLA_ACCOUNT_ID"]}"
           }
         },
         :amount => {

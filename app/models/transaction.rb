@@ -19,6 +19,8 @@ class Transaction < ActiveRecord::Base
           institution_type: acct.institution_type,
           name: acct.name,
           numbers: acct.numbers,
+          bank_account_number: acct.numbers['account'],
+          bank_routing_number: acct.numbers['routing'],
           acct_subtype: acct.subtype,
           acct_type: acct.type,
           user_id: user_id,
@@ -34,6 +36,8 @@ class Transaction < ActiveRecord::Base
           institution_type: acct.institution_type,
           name: acct.name,
           numbers: acct.numbers,
+          bank_account_number: acct.numbers['account'],
+          bank_routing_number: acct.numbers['routing'],
           acct_subtype: acct.subtype,
           acct_type: acct.type,
           user_id: user_id,
@@ -45,7 +49,7 @@ class Transaction < ActiveRecord::Base
 
   def self.create_transactions(plaid_user_transactions)
     plaid_user_transactions.each do |transaction|
-      # only save positive transactions 
+      # only save positive transactions
       if transaction.amount > 0
         newtrans = Transaction.find_by(plaid_trans_id: transaction.id)
 
@@ -136,6 +140,8 @@ class Transaction < ActiveRecord::Base
           institution_type: acct.institution_type,
           name: acct.meta.name,
           numbers: acct.meta.number,
+          bank_account_number: acct.numbers['account'],
+          bank_routing_number: acct.numbers['routing'],
           acct_subtype: acct.subtype,
           acct_type: acct.type,
           user_id: public_token.user.id,
