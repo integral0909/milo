@@ -40,6 +40,9 @@ gem 'social-share-button'
 # User Accounts with Devise
 gem 'devise'
 
+# Intercom
+gem 'intercom-rails'
+
 # Argyle for Plaid API
 gem 'argyle'
 gem 'plaid'
