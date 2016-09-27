@@ -44,6 +44,9 @@ gem 'devise'
 gem 'twilio-ruby', '~> 4.0.0'
 gem 'phonelib'
 
+# Intercom
+gem 'intercom-rails'
+
 # Argyle for Plaid API
 gem 'argyle'
 gem 'plaid'
