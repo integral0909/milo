@@ -1,50 +1,82 @@
-require 'dwolla_swagger'
-
 # All Dwolla functionality will be held here
 module Dwolla
+  include TokenConcern
+
 
     # Create user on Dwolla
     def self.create_user(user)
-      # We don't save name in 2 seperate fields so append -Milo to the name
-      # TODO: add :ip_address => to customer creation with request.remote_ip
-      request_body = {
-        :firstName => user.name,
-        :lastName => '-Milo',
-        :email => user.email
-      }
+      begin
+        # We don't save name in 2 seperate fields so append -Milo to the name
+        # TODO: add :ip_address => to customer creation with request.remote_ip
+        request_body = {
+          :firstName => user.name,
+          :lastName => '-Milo',
+          :email => user.email
+        }
 
-      # Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-      dwolla_customer_url = DwollaSwagger::CustomersApi.create(:body => request_body)
-      puts "Adding dwolla url to user"
-      ap dwolla_customer_url
+        # Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+        dwolla_customer_url = TokenConcern.account_token.post "customers", request_body
+        puts "Adding dwolla url to user"
+        ap dwolla_customer_url
 
-      # Add dwolla customer URL to the user
-      user = User.find(user.id)
-      user.dwolla_id = dwolla_customer_url
-      user.save!
+        # Add dwolla customer URL to the user
+        user = User.find(user.id)
+        user.dwolla_id = dwolla_customer_url.headers[:location]
+        user.save!
+      rescue => e
+        p e
+        # Let user go through to the welcome screen but send email with error from dwolla
+        return
+      end
     end
 
     # Add funding source for user to Dwolla
     def self.connect_funding_source(user)
       # Find the checking account associated with the user
-      user_checking = Checking.where(user_id: user.id)
-      # Get the info from the Account to add a funding source to Dwolla
-      funding_account = Account.where(plaid_acct_id: user_checking.plaid_acct_id)
+      # user_checking = Checking.where(user_id: user.id)
+      # # Get the info from the Account to add a funding source to Dwolla
+      # funding_account = Account.where(plaid_acct_id: user_checking.plaid_acct_id)
+      #
+      # customer_url = user.dwolla_id
+      # request_body = {
+      #   routingNumber: funding_account.number['routing'],
+      #   accountNumber: funding_account.number['account'],
+      #   type: funding_account.acct_subtype,
+      #   name: funding_account.name
+      # }
+      #
+      # funding_source = account_token.post "#{customer_url}/funding-sources", request_body
+      #
+      # # Add the funding source to the user
+      # user = User.find(user.id)
+      # user.dwolla_funding_source = funding_source.headers[:location]
+      # user.save!
+    end
 
-      customer_url = user.dwolla_id
+    # add the users funding source, our account number, and the total roundup ammount
+    def self.withdraw_roundups(user, roundup_ammount)
       request_body = {
-        routingNumber: funding_account.number,
-        accountNumber: funding_account.account_number,
-        type: funding_account.acct_subtype,
-        name: funding_account.name
+        :_links => {
+          :source => {
+            :href => user.dwolla_funding_source
+          },
+          :destination => {
+            :href => "https://api-uat.dwolla.com/accounts/ab443d36-3757-44c1-a1b4-29727fb3111c"
+          }
+        },
+        :amount => {
+          :currency => "USD",
+          :value => roundup_ammount
+        },
+        :metadata => {
+          :foo => "bar",
+          :baz => "boo"
+        }
       }
+      transfer = account_token.post "transfers", request_body
+      # Create Transaction object to save the data returned
 
-      funding_source = DwollaSwagger::FundingsourcesApi.create_customer_funding_source(customer_url, :body => request_body)
-
-      # Add the funding source to the user
-      user = User.find(user.id)
-      user.dwolla_funding_source = funding_source
-      user.save!
 
     end
+
 end

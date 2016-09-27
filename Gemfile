@@ -66,8 +66,9 @@ gem 'awesome_print', '~> 1.7'
 
 # Dwolla v2 api wrapper for accepting money from users
 gem 'dwolla_v2', '~> 1.1'
-# Dwolla v2 SDK
-gem 'dwolla_swagger'
+
+gem "attr_encrypted"
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -77,6 +78,7 @@ group :development, :test do
 
   # ENV variables
   gem 'dotenv-rails'
+
 end
 
 group :development do
