@@ -39,6 +39,8 @@ gem 'social-share-button'
 
 # User Accounts with Devise
 gem 'devise'
+# Multi-Step Forms
+gem 'wicked'
 
 # Mobile Phone Confirmation
 gem 'twilio-ruby', '~> 4.0.0'

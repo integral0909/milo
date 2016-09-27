@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     resources :accounts, only: [:index]
   end
 
+  # User Sign Up Wizard
+  resources :after_signup
+
   # Root, User Logged In
   authenticated :user do
     root 'home#index', as: :authenticated_root
@@ -16,7 +19,7 @@ Rails.application.routes.draw do
   # Root, User Logged Out
   root 'pages#show', page: 'home'
 
-  # Mobile Phone Verification
+  # Mobile Phone Verification, TODO :: delete when wizard is created
   post 'verifications' => 'verifications#create'
   patch 'verifications' => 'verifications#verify'
 

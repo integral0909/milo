@@ -54,6 +54,16 @@ class RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.for(:account_update) << :mobile_number
   end
 
+  # Route user to next registration path
+  def after_sign_up_path_for(resource)
+    registration_steps_path
+  end
+
+  # Route to direct user after profile update
+  def after_update_path_for(resource)
+    super
+  end
+
   private
 
   def sign_up_params
