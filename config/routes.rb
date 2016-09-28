@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   # User Sign Up Wizard
-  resources :after_signup
+  resources :registration_steps
 
   # Root, User Logged In
   authenticated :user do

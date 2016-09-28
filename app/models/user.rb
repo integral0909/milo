@@ -9,9 +9,10 @@ class User < ActiveRecord::Base
   has_many :transactions
   has_one  :checking
 
+  attr_accessor :current_step
+
   validate :email_is_unique, on: :create
-  validates_uniqueness_of :mobile_number
-  validates :mobile_number, phone: { possible: false, allow_blank: true, types: [:mobile] }
+  validates :mobile_number, phone: { possible: false, allow_blank: true, types: [:mobile] }, if: -> { current_step?(:phone_confirm) }
 
   #filter_parameter_logging :verification_code
 
@@ -24,6 +25,11 @@ class User < ActiveRecord::Base
       return false
     end
     return true
+  end
+
+  # Current Step
+  def current_step?(step_key)
+    current_step.blank? || current_step == step_key
   end
 
   private

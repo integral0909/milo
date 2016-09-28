@@ -27,14 +27,7 @@
   <div class="col-md-5 col-md-offset-2">
     <div class="signup">
       <h1><span>Sign Up</span> Make Change Happen</h1>
-      <%= render "../views/layouts/messages" %>
-
-      <!-- <div class="social-signup">
-        <a href="{{ "/phone.html" | prepend: site.baseurl }}" class="btn-social -facebook"><i class="fa fa-facebook"></i> Sign up with Facebook</a>
-        <a href="{{ "/phone.html" | prepend: site.baseurl }}" class="btn-social -twitter"><i class="fa fa-twitter"></i> Sign up with Twitter</a>
-        <a href="{{ "/phone.html" | prepend: site.baseurl }}" class="btn-social -google"><i class="fa fa-google"></i> Sign up with Google</a>
-        <p><strong>OR,</strong> sign up using your <a class="email-show" href="#">email</a> address.</p>
-      </div> -->
+      <%= render "layouts/messages" %>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "email-signup") do |f| %>
         <%= devise_error_messages! %>
         <fieldset class="form-group">
@@ -54,7 +47,6 @@
           <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
           <small class="text-muted">Minimum 8 characters.</small>
         </fieldset>
-        <!-- hidden input which will add the refferal code from the url to the user -->
         <%= f.hidden_field :referral_code, value: session[:referral] %>
         <button type="submit" class="button -full -green">Sign Up</button>
       <% end %>

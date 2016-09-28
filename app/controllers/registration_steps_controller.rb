@@ -1,14 +1,13 @@
 class RegistrationStepsController < Wicked::WizardController
-  layout "signup"
 
   steps :phone_verify, :phone_confirm
 
   def update
     @user = current_user
     case step
-      when :employment_info
+    when :phone_confirm
         @user.update_attributes(user_params)
-      when :upload_network
+      when :phone_verify
         @user.update_attributes(user_params)
     end
     sign_in(@user, bypass: true) # needed for devise
