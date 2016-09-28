@@ -32,7 +32,7 @@ module Dwolla
 
     # Add funding source for user to Dwolla
     def self.connect_funding_source(user)
-      # begin
+      begin
         # Find the checking account associated with the user
         user_checking = Checking.find_by_user_id(user.id)
         # Get the info from the Account to add a funding source to Dwolla
@@ -52,10 +52,11 @@ module Dwolla
         user = User.find(user.id)
         user.dwolla_funding_source = funding_source.headers[:location]
         user.save!
-      # rescue=> e
-      #   p e
-      #   # Let user go through to the home screen but send email with error from dwolla
-      # end
+      rescue => e
+        p e
+        # Let user go through to the home screen but send email with error from dwolla
+        return
+      end
     end
 
     # add the users funding source, our account number, and the total roundup ammount
@@ -74,14 +75,18 @@ module Dwolla
           :value => roundup_ammount
         },
         :metadata => {
-          :foo => "bar",
-          :baz => "boo"
+          :user_id => user.id
         }
       }
-      transfer = account_token.post "transfers", request_body
+      transfer = TokenConcern.account_token.post "transfers", request_body
       # Create Transaction object to save the data returned
-
+      transfer.headers[:location]
 
     end
+
+    # TODO: create recurring fee for $1 tech fee
+    # def self.monthly_tech_fee
+    #   request_body
+    # end
 
 end
