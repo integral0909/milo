@@ -78,13 +78,16 @@ module Dwolla
           :user_id => user.id
         }
       }
-      transfer = TokenConcern.account_token.post "transfers", request_body
       # Create Transaction object to save the data returned
+      transfer = TokenConcern.account_token.post "transfers", request_body
       current_transfer_url = transfer.headers[:location]
-      current_transfer_status = transfer.headers[:location]
 
-      # Save transfer data 
-      Transfer.create_transfer_on_roundup(current_transfer_url, current_transfer_status, user, roundup_ammount, roundup_count, "deposit")
+      # Get the status of the current transfer
+      transfer_status = TokenConcern.account_token.get current_transfer_url
+      current_transfer_status = transfer_status.status
+
+      # Save transfer data
+      Transfer.create_transfer_on_roundup(user, current_transfer_url, current_transfer_status, roundup_ammount, roundup_count, "deposit")
 
     end
 

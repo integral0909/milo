@@ -1,14 +1,14 @@
 class Transfer < ActiveRecord::Base
 
-  def self.create_transfer_on_roundup(current_transfer_url, current_transfer_status, user, roundup_ammount, roundup_count, type)
+  def self.create_transfer_on_roundup(user, transfer_url, transfer_status, roundup_ammount, roundup_count, transfer_type)
     # creat transfer object on roundup depoit
     Transfer.create(
       user_id: user.id,
-      dwolla_url: current_transfer_url,
-      status: current_transfer_status,
-      roundup_count: roundup_count,
+      dwolla_url: transfer_url,
+      status: transfer_status,
       roundup_ammount: roundup_ammount,
-      type: type
+      roundup_count: roundup_count,
+      type: transfer_type
     )
   end
 
