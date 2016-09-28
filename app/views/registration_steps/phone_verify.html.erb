@@ -1,5 +1,28 @@
-<h1>Verify Phone</h1>
-
-
-
-<%= link_to 'Skip this Page', next_wizard_path %> # will skip this step
+<div class="row">
+  <div class="col-md-5 col-md-offset-2">
+    <div class="signup">
+      <h1><span>Mobile Number</span> What's Your Number?</h1>
+      <p>For security please add your phone.</p>
+      <%= render "layouts/messages" %>
+      <%= form_for @user, url: wizard_path, class: "email-signup", method: :put do |f| %>
+        <fieldset class="form-group">
+          <label>Phone</label>
+          <%= f.text_field :mobile_number, class: "form-control" %>
+          <% if @user.is_verified %>
+            You're mobile number is verified.
+          <% end%>
+        </fieldset>
+        <button type="submit" class="button -full -green">Sign Up</button>
+      <% end %>
+      <%= mobile_verification_button %>
+      <%= verify_mobile_number_form %>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <ul class="signup-steps">
+      <li><span></span> Basic Info</li>
+      <li class="active"><span></span> Mobile Number</li>
+      <!-- <li><span></span> Checking Account</li> -->
+    </ul>
+  </div>
+</div>

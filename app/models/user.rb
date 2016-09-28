@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   attr_accessor :current_step
 
   validate :email_is_unique, on: :create
-  validates :mobile_number, phone: { possible: false, allow_blank: true, types: [:mobile] }, if: -> { current_step?(:phone_confirm) }
+  validates :mobile_number, phone: { possible: false, allow_blank: true, types: [:mobile] }, if: -> { current_step?(:phone_verify) }
 
   #filter_parameter_logging :verification_code
 

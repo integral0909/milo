@@ -1,5 +1,12 @@
 <h1>Confirm Phone</h1>
 
+<h3>Verify Mobile Number</h3>
+<%= form_tag(verifications_path, method: "post") do %>
+  <%= button_tag('Send verification code', type: "submit") %>
+<% end %>
 
-
-<%= link_to 'Skip this Page', next_wizard_path %> # will skip this step
+<h3>Enter Verification Code</h3>
+<%= form_tag(verifications_path, method: "patch") do %>
+  <%= text_field_tag('verification_code') %>
+  <%= button_tag('Submit', type: "submit") %>
+<% end %>
