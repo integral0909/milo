@@ -60,7 +60,7 @@ module Dwolla
     end
 
     # add the users funding source, our account number, and the total roundup ammount
-    def self.withdraw_roundups(user, roundup_ammount)
+    def self.withdraw_roundups(user, roundup_ammount, roundup_count)
       request_body = {
         :_links => {
           :source => {
@@ -80,7 +80,11 @@ module Dwolla
       }
       transfer = TokenConcern.account_token.post "transfers", request_body
       # Create Transaction object to save the data returned
-      transfer.headers[:location]
+      current_transfer_url = transfer.headers[:location]
+      current_transfer_status = transfer.headers[:location]
+
+      # Save transfer data 
+      Transfer.create_transfer_on_roundup(current_transfer_url, current_transfer_status, user, roundup_ammount, roundup_count, "deposit")
 
     end
 

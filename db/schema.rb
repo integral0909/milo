@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927122439) do
+ActiveRecord::Schema.define(version: 20160928024014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,17 @@ ActiveRecord::Schema.define(version: 20160927122439) do
     t.float    "new_amount"
     t.float    "roundup"
     t.integer  "user_id"
+  end
+
+  create_table "transfers", force: :cascade do |t|
+    t.string   "dwolla_url"
+    t.string   "user_id"
+    t.string   "roundup_count"
+    t.string   "roundup_ammount"
+    t.string   "status"
+    t.string   "type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "users", force: :cascade do |t|
