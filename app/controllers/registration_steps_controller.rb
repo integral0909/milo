@@ -25,6 +25,16 @@ class RegistrationStepsController < Wicked::WizardController
       )
     when :phone_confirm
       @user.update_attributes(user_params)
+      if @user.verification_code == params[:verification_code]
+        @user.is_verified = true
+        @user.verification_code = ''
+        @user.save
+        #   redirect_to edit_user_registration_path, :flash => { :success => "Thank you for verifying your mobile number." }
+        #   return
+        # else
+        #   redirect_to edit_user_registration_path, :flash => { :errors => "Invalid verification code." }
+        #   return
+      end
     when :bank_connect
       @user.update_attributes(user_params)
     when :on_demand
