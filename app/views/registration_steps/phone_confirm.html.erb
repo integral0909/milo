@@ -1,12 +1,19 @@
-<h1>Confirm Phone</h1>
-
-<h3>Verify Mobile Number</h3>
-<%= form_tag(verifications_path, method: "post") do %>
-  <%= button_tag('Send verification code', type: "submit") %>
-<% end %>
-
-<h3>Enter Verification Code</h3>
-<%= form_tag(verifications_path, method: "patch") do %>
-  <%= text_field_tag('verification_code') %>
-  <%= button_tag('Submit', type: "submit") %>
-<% end %>
+<div class="row">
+  <div class="col-md-5 col-md-offset-2">
+    <div class="signup">
+      <h1><span>Mobile Number</span> Confirm Number</h1>
+      <p>Please submit the 6-digit code we just sent to:<br/><strong><%= @user.mobile_number %></strong></p>
+      <%= form_tag(verifications_path, class: "email-signup", method: "patch") do %>
+        <%= text_field_tag('verification_code') %>
+        <button type="submit" class="button -full -green">Confirm</button>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <ul class="signup-steps">
+      <li><span></span> Basic Info</li>
+      <li class="active"><span></span> Mobile Number</li>
+      <li><span></span> Checking Account</li>
+    </ul>
+  </div>
+</div>
