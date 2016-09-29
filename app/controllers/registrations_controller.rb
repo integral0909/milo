@@ -67,11 +67,11 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   def sign_up_params
-    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :mobile_number)
+    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :mobile_number, :on_demand)
   end
 
   def account_update_params
-    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :password_confirmation, :current_password, :mobile_number)
+    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :password_confirmation, :current_password, :mobile_number, :on_demand)
   end
 
 end
