@@ -6,82 +6,95 @@
 
 
 body.milo-signup {
-  background: #F5F5F5;
+  background: #FAFAFA;
+
   a.signup-logo {
     color: #352D52;
     display: block;
     font-family: 'Futura Bold';
     font-size: 2.625em;
     margin: 32px 0 56px;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+
     @include breakpoint(l-one) {
       margin: 20px auto;
       text-align: center;
     }
-    &:hover {
-      text-decoration: none;
-    }
   }
-  p.disclaimer {
-    font-size: 0.8em;
-    margin: 0 0 120px;
-    padding: 0 24px;
-    text-align: center;
-    @include breakpoint(l-one) {
-      margin: 0 0 32px;
-      padding: 0;
-    }
-  }
-  .signup {
-    background: #FFF;
-    margin: 0 0 24px;
-    padding: 40px 40px 32px;
-    @include breakpoint(l-one) {
-      margin: 0 0 20px;
-      padding: 16px 12px;
-    }
-    h1 {
-      font-size: 2em;
-      margin: 0 0 24px;
-      text-align: center;
+}
 
-      @include breakpoint(l-one) {
-        margin: 0 0 16px;
-      }
-      span {
-        color: #BBC5C7;
-        display: block;
-        font-family: 'Futura Bold';
-        font-size: 0.48em;
-        margin: 0 0 8px;
-      }
+p.disclaimer {
+  font-size: 0.8em;
+  margin: 0 0 120px;
+  padding: 0 24px;
+  text-align: center;
+  @include breakpoint(l-one) {
+    margin: 0 0 32px;
+    padding: 0;
+  }
+}
+
+// Sign Up Form
+.signup {
+  background: #FFF;
+  margin: 0 0 24px;
+  padding: 40px 40px 32px;
+
+  @include breakpoint(l-one) {
+    margin: 0 0 20px;
+    padding: 16px 12px;
+  }
+
+  h1 {
+    color: #292242;
+    font-family: 'Futura Bold';
+    font-size: 2em;
+    margin: 0 0 40px;
+    text-align: center;
+
+    @include breakpoint(l-one) {
+      margin: 0 0 16px;
     }
-    h3 {
-      color: #6E7386;
-      font-family: 'Futura Bold';
-      font-size: 1.5em;
-      line-height: 1;
-      margin: 0 0 40px;
-      text-align: center;
-    }
-    p {
-      font-size: 1.25em;
-      margin: 0 0 24px;
-      padding: 0;
-      text-align: center;
-    }
-    .top-banks {
-      border: 1px solid #E1E5E6;
-      border-radius: 4px;
+
+    span {
+      color: #BBC5C7;
       display: block;
-      padding: 20px 0 0 20px;
-      @extend %clear;
-      .tb-item {
-        background: #999;
-        float: left;
-        height: 48px;
-        margin: 0 20px 20px 0;
-        width: 48px;
-      }
+      font-family: 'Futura Bold';
+      font-size: 0.48em;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+    }
+  }
+  h3 {
+    color: #6E7386;
+    font-family: 'Futura Bold';
+    font-size: 1.5em;
+    line-height: 1;
+    margin: 0 0 40px;
+    text-align: center;
+  }
+  p {
+    font-size: 1.25em;
+    margin: 0 0 24px;
+    padding: 0;
+    text-align: center;
+  }
+  .top-banks {
+    border: 1px solid #E1E5E6;
+    border-radius: 4px;
+    display: block;
+    padding: 20px 0 0 20px;
+    @extend %clear;
+    .tb-item {
+      background: #999;
+      float: left;
+      height: 48px;
+      margin: 0 20px 20px 0;
+      width: 48px;
     }
   }
 }
@@ -130,25 +143,33 @@ form.email-signup {
   }
 }
 
+// Sign Up Steps
 ul.signup-steps {
   list-style: none;
   margin: 32px 0 0 24px;
   padding: 0;
+
   @include breakpoint(l-three) {
     display: none;
     visibility: hidden;
   }
+
   li {
-    color: #96A3A8;
+    color: #BBC5C7;
     height: 16px;
     line-height: 16px;
     margin: 0 0 20px;
+
     &.active {
-      color: #6E7386;
-      span { background: #6E7386; }
+      color: #4C3E70;
+
+      span {
+        background: #4C3E70;
+      }
     }
+
     span {
-      background: #E1E5E6;
+      background: #DDE1E2;
       border-radius: 8px;
       display: inline-block;
       height: 16px;

@@ -22,7 +22,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # bootstrap for stylesheets
-gem 'bootstrap', '~> 4.0.0.alpha3'
+gem 'bootstrap', '4.0.0.alpha3'
+# Tooltips and popovers depend on tether
+gem 'rails-assets-tether', '>= 1.1.0'
 
 # SEO
 gem 'meta-tags'

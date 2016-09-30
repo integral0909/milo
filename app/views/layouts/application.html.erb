@@ -14,20 +14,10 @@
   <%= csrf_meta_tags %>
 
   <script type="text/javascript">
-    // Hide / Show Sign Up Forms
-    $(function() {
-      $(".email-show").click(function() {
-        $(".social-signup").hide();
-        $(".email-signup").show();
-      });
-      $(".social-show").click(function() {
-        $(".email-signup").hide();
-        $(".social-signup").show();
-      });
-    });
     // Sidebar Equal Height to Page Content
     $(function() {
       $(".sidebar").css("height", $(".page-content").height() + 80);
+      $('[data-toggle="tooltip"]').tooltip();
     });
   </script>
 
