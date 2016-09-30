@@ -38,7 +38,7 @@ module Dwolla
         # Get the info from the Account to add a funding source to Dwolla
         funding_account = Account.find_by_plaid_acct_id(user_checking.plaid_acct_id)
 
-        customer_url = user.dwolla_id
+        dwoll_customer_url = user.dwolla_id
         request_body = {
           routingNumber: funding_account.bank_routing_number,
           accountNumber: funding_account.bank_account_number,
@@ -46,7 +46,7 @@ module Dwolla
           name: funding_account.name
         }
 
-        funding_source = TokenConcern.account_token.post "#{customer_url}/funding-sources", request_body
+        funding_source = TokenConcern.account_token.post "#{dwolla_customer_url}/funding-sources", request_body
 
         # Add the funding source to the user
         user = User.find(user.id)
@@ -61,15 +61,15 @@ module Dwolla
 
     # recieve a total of all transations from each user
     def self.weekly_roundup
-      # set last weeks date and convert to transation date format
-      Date.now(last week)
+      # set last weeks date
+      last_week_date = Date.today - 1.week
 
       # loop through all CHECKING accounts connected with Milo
       Checking.all.each do |ck|
         # Find user based on checking.user_id
         user = User.find(ck.user_id)
         # find all transactions where transaction.account_id = ck.plaid_acct_id & pending = false OR transaction.user_id once it's added && within the last week
-        # transactions = Transaction.where(account_id == ck.plaid_acct_id && pending == false && date > )
+        transactions = Transaction.where(account_id == ck.plaid_acct_id && pending == false && date > last_week_date )
         ####### total the roundups
         # set variable for roundup_total
         roundup_total = 0
@@ -81,13 +81,8 @@ module Dwolla
         # account = Account.where(plaid_acct_id = ck.plaid_acct_id) should be 1
         account = Account.where(plaid_acct_id == ck.plaid_acct_id)
 
-        checking_acct_number = account.account_number
-
-        checking_routing_number = account.number
-
-        # grab the account number of the checking and routing number from account found with account.numbers (routing) & account.account_number
-
         # send the total amount to Dwolla
+        withdraw_roundups(user, roundup_total.round(2), transactions.count )
 
         # on success => update the transaction with roundup 0.00 or rounded up. Also update total roundups on the user -> this will be where we know how much they have in their account.
 
@@ -96,7 +91,7 @@ module Dwolla
     end
 
     # add the users funding source, our account number, and the total roundup ammount
-    def self.withdraw_roundups(user, roundup_ammount, roundup_count)
+    def withdraw_roundups(user, roundup_ammount, transaction_total)
       request_body = {
         :_links => {
           :source => {
@@ -111,7 +106,8 @@ module Dwolla
           :value => roundup_ammount
         },
         :metadata => {
-          :user_id => user.id
+          :user_id => user.id,
+          :total_transactions => transaction_total
         }
       }
       # Create Transaction object to save the data returned

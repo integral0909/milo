@@ -1,6 +1,7 @@
 class PlaidapiController < ApplicationController
 
   def add_account
+    # NOTE: We are using v 1.7.1 for plaid-ruby: https://github.com/plaid/plaid-ruby/tree/v1.7.1
     #1 generate a public token for the user
     public_token = PublicToken.find_or_create_by(token: params[:public_token])
 
@@ -15,7 +16,6 @@ class PlaidapiController < ApplicationController
 
     #5 Initialize a Plaid user with connect then save the transactions
     connect_user = Argyle.plaid_client.set_user(exchange_token_response.access_token, ['connect'])
-
     Transaction.create_transactions(connect_user.transactions, user.id)
 
     #6 Upgrade user to utilizing Plaid Auth and save the account info
