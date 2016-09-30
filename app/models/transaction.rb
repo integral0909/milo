@@ -47,7 +47,7 @@ class Transaction < ActiveRecord::Base
     end
   end
 
-  def self.create_transactions(plaid_user_transactions)
+  def self.create_transactions(plaid_user_transactions, user_id)
     plaid_user_transactions.each do |transaction|
       # only save positive transactions
       if transaction.amount > 0
@@ -85,7 +85,8 @@ class Transaction < ActiveRecord::Base
 
             pending: transaction.pending,
             pending_transaction: transaction.pending_transaction,
-            name_score: transaction.score["name"]
+            name_score: transaction.score["name"],
+            user_id: user_id
             )
         else
           newtrans = Transaction.create(
@@ -106,7 +107,8 @@ class Transaction < ActiveRecord::Base
 
             pending: transaction.pending,
             pending_transaction: transaction.pending_transaction,
-            name_score: transaction.score["name"]
+            name_score: transaction.score["name"],
+            user_id: user_id
             )
         end
         if newtrans.plaid_cat_id == 0 || newtrans.plaid_cat_id == nil
@@ -120,7 +122,7 @@ class Transaction < ActiveRecord::Base
     end
   end
 
-  def self.update_accounts(user_id, public_token)
+  def self.update_accounts(user_id, public_token, milo_id)
     user_accounts = Account.where(user_id: user_id).all
     user_accounts.each do |acct|
       account = Account.find_by(plaid_acct_id: acct._id)
@@ -144,7 +146,7 @@ class Transaction < ActiveRecord::Base
           bank_routing_number: acct.numbers['routing'],
           acct_subtype: acct.subtype,
           acct_type: acct.type,
-          user_id: public_token.user.id,
+          user_id: milo_id,
           public_token_id: public_token.id
           )
 
@@ -182,7 +184,8 @@ class Transaction < ActiveRecord::Base
 
           pending: transaction.pending,
           pending_transaction: transaction.pending_transaction,
-          name_score: transaction.score.name
+          name_score: transaction.score.name,
+          user_id: user_id
           )
       end
     end

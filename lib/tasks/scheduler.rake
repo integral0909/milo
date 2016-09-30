@@ -2,7 +2,7 @@ desc "This task will calculate all users transactions for the past week and send
 # rake weekly_roundup
 task :weekly_roundup => :environment do
   puts "Calculating transactions..."
-  Transactions.weekly_roundup
+  Dwolla.weekly_roundup
   puts "emails sent"
 end
 
