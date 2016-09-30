@@ -1,5 +1,9 @@
+<% set_meta_tags :site => 'Verify Phone • Milo',
+  :noindex => true
+%>
+
 <div class="row">
-  <div class="col-md-5 col-md-offset-2">
+  <div class="col-md-6 col-md-offset-2">
     <div class="signup">
       <h1><span>Mobile Number</span> What's Your Number?</h1>
       <p>For security please add your phone.</p>
@@ -7,18 +11,19 @@
       <%= form_for @user, url: wizard_path, class: "email-signup", method: :put do |f| %>
         <fieldset class="form-group">
           <label>Phone</label>
-          <%= f.text_field :mobile_number, class: "form-control" %>
+          <%= f.phone_field :mobile_number, class: "form-control", required: true %>
           <% if @user.is_verified %>
             You're mobile number is verified.
           <% end%>
         </fieldset>
         <button type="submit" class="button -full -green">Sign Up</button>
       <% end %>
+      <!-- Remove? -->
       <%= mobile_verification_button %>
       <%= verify_mobile_number_form %>
     </div>
   </div>
-  <div class="col-md-5">
+  <div class="col-md-4">
     <ul class="signup-steps">
       <li><span></span> Basic Info</li>
       <li class="active"><span></span> Mobile Number</li>
