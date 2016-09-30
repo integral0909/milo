@@ -27,17 +27,6 @@ body.milo-signup {
   }
 }
 
-p.disclaimer {
-  font-size: 0.8em;
-  margin: 0 0 120px;
-  padding: 0 24px;
-  text-align: center;
-  @include breakpoint(l-one) {
-    margin: 0 0 32px;
-    padding: 0;
-  }
-}
-
 // Sign Up Form
 .signup {
   background: #FFF;
@@ -56,6 +45,10 @@ p.disclaimer {
     margin: 0 0 40px;
     text-align: center;
 
+    &.marg-16 {
+      margin: 0 0 16px;
+    }
+
     @include breakpoint(l-one) {
       margin: 0 0 16px;
     }
@@ -65,43 +58,22 @@ p.disclaimer {
       display: block;
       font-family: 'Futura Bold';
       font-size: 0.48em;
-      margin: 0 0 8px;
+      margin: 0 0 12px;
       text-transform: uppercase;
     }
   }
 
-  h3 {
-    color: #6E7386;
-    font-family: 'Futura Bold';
-    font-size: 1.5em;
-    line-height: 1;
-    margin: 0 0 40px;
-    text-align: center;
-  }
   p {
-    font-size: 1.25em;
+    font-size: 1em;
     margin: 0 0 24px;
     padding: 0;
     text-align: center;
-  }
-  .top-banks {
-    border: 1px solid #E1E5E6;
-    border-radius: 4px;
-    display: block;
-    padding: 20px 0 0 20px;
-    @extend %clear;
-    .tb-item {
-      background: #999;
-      float: left;
-      height: 48px;
-      margin: 0 20px 20px 0;
-      width: 48px;
-    }
   }
 }
 
 form.email-signup {
   margin: 24px 0 0;
+
   .button {
     margin: 0 0 24px;
   }
@@ -109,6 +81,7 @@ form.email-signup {
 
 .social-signup {
   margin: 24px 0 0;
+
   a.btn-social {
     background: #666;
     border-radius: 4px;
@@ -121,22 +94,30 @@ form.email-signup {
     margin: 0 0 8px;
     padding: 0 16px;
     width: 100%;
+
     &.-facebook {
       background: #3B5998;
+
       &:hover { background: #30497E; }
     }
+
     &.-twitter {
       background: #55ACEE;
+
       &:hover { background: #4690C8; }
     }
+
     &.-google {
       background: #4885ED;
       margin: 0 0 24px;
+
       &:hover { background: #3D73CD; }
     }
+
     &:hover, &:focus {
       text-decoration: none;
     }
+
     i.fa {
       margin: 0 12px 0 0;
       width: 16px;

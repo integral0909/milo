@@ -6,8 +6,6 @@
 
 
 // Tooltips
-
-
 .tooltip {
 
   &.in {
@@ -46,5 +44,17 @@
       border-top-color: #DDE1E2;
     }
   }
+}
 
+// Icon Helper w/ Tooltip
+i.helper {
+  background: #DDE1E2;
+  border-radius: 8px;
+  color: #8B999F;
+  cursor: pointer;
+  font-size: 0.75em;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  width: 16px;
 }

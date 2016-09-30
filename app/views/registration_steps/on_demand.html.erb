@@ -5,19 +5,18 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-2">
     <div class="signup">
-      <h1><span>Checking Account</span> Sweet Success!</h1>
+      <h1 class="marg-16"><span>Checking Account</span> Sweet Success!</h1>
       <p>Your bank account has been verified. The only thing left for us to do is to authorize the On-Demand Transfers.</p>
       <p>On-Demand Transfers allow Milo to automatically transfer your weekly round ups from your checking into your savings account.</p>
       <%= form_for @user, url: wizard_path, class: "email-signup", method: :put do |f| %>
-        <fieldset class="form-group">
+        <fieldset class="checkbox" style="text-align: center;">
           <label>
-            <%= f.check_box :on_demand %>
-            Phone
+            <%= f.check_box :on_demand, required: true %>
+            On-Demand Transfer Authorization <i class="fa fa-question helper" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>On-Demand Transfer:</strong>In order to save automatically and transfer funds from your checking to your Milo savings account we need your authorization. You may disable On-Demand Transfers at anytime from your settings."></i>
           </label>
         </fieldset>
-        <button type="submit" class="button -full -green">Start Saving</button>
+        <button type="submit" class="button -full -blue">Start Saving</button>
       <% end %>
-      <%= link_to 'test skip', next_wizard_path %>
     </div>
   </div>
   <div class="col-md-4">

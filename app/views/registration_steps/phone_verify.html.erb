@@ -5,18 +5,15 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-2">
     <div class="signup">
-      <h1><span>Mobile Number</span> What's Your Number?</h1>
+      <h1 class="marg-16"><span>Mobile Number</span> What's Your Number?</h1>
       <p>For security please add your phone.</p>
       <%= render "layouts/messages" %>
       <%= form_for @user, url: wizard_path, class: "email-signup", method: :put do |f| %>
         <fieldset class="form-group">
           <label>Phone</label>
-          <%= f.phone_field :mobile_number, class: "form-control", required: true %>
-          <% if @user.is_verified %>
-            You're mobile number is verified.
-          <% end%>
+          <%= f.phone_field :mobile_number, class: "form-control", placeholder: "(xxx) xxx-xxxx", required: true %>
         </fieldset>
-        <button type="submit" class="button -full -green">Sign Up</button>
+        <button type="submit" class="button -full -blue">Continue</button>
       <% end %>
       <!-- Remove? -->
       <%= mobile_verification_button %>
