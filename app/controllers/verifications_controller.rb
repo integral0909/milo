@@ -2,7 +2,7 @@ class VerificationsController < ApplicationController
 
   def create
     # Create a random six digit verification code
-    current_user.verification_code =  1_000_000 + rand(10_000_000 - 1_000_000)
+    current_user.verification_code =  100_000 + rand(1_000_000 - 100_000)
     current_user.save
     # If the number starts with 0 add country code in front
     to = current_user.mobile_number
