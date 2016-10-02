@@ -69,7 +69,7 @@ gem 'dwolla_v2', '~> 1.1'
 
 gem "attr_encrypted"
 
-group :development, :test do
+group :development, :test, :staging do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   # Test mailers in development

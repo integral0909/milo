@@ -62,7 +62,9 @@ module Dwolla
     # recieve a total of all transations from each user
     def self.weekly_roundup
       # set last weeks date
-      last_week_date = Date.today - 1.week
+      current_date = Date.today
+      last_week_date = current_date - 1.week
+
 
       # loop through all CHECKING accounts connected with Milo
       Checking.all.each do |ck|
