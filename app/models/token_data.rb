@@ -8,12 +8,12 @@ class TokenData < ActiveRecord::Base
   # look in the token_data table for the most recent token matching the given criteria
   # if one does not exist throw an `ActiveRecord::RecordNotFound` error
   # if one does exist convert the `TokenData` to a fresh `DwollaV2::Token` (see `#to_fresh_token`)
-  # def self.fresh_token_by! criteria
-  #   where(criteria)
-  #     .order(created_at: :desc)
-  #     .first!
-  #     .to_fresh_token
-  # end
+  def self.fresh_token_by! criteria
+    where(criteria)
+      .order(created_at: :desc)
+      .first!
+      .to_fresh_token
+  end
 
   def to_fresh_token
     if expired?
