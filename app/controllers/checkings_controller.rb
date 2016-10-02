@@ -29,6 +29,9 @@ class CheckingsController < ApplicationController
 
     respond_to do |format|
       if @checking.save
+        Dwolla.connect_funding_source(@user)
+        # TODO:send email about connecting the funding source
+        
         format.html { redirect_to root_path, notice: 'Checking was successfully created.' } #@checking
         format.json { render :show, status: :created, location: @checking }
       else

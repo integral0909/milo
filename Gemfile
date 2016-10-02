@@ -64,7 +64,15 @@ gem 'bitly', '~> 0.10.4'
 # admin console for easily viewing data
 gem 'rails_admin'
 
-group :development, :test do
+# awesome print for better console logs
+gem 'awesome_print', '~> 1.7'
+
+# Dwolla v2 api wrapper for accepting money from users
+gem 'dwolla_v2', '~> 1.1'
+
+gem "attr_encrypted"
+
+group :development, :test, :staging do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   # Test mailers in development
@@ -72,6 +80,7 @@ group :development, :test do
 
   # ENV variables
   gem 'dotenv-rails'
+
 end
 
 group :development do
