@@ -52,7 +52,7 @@ class RegistrationStepsController < Wicked::WizardController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :zip, :mobile_number, :on_demand)
+    params.require(:user).permit(:name, :email, :password, :zip, :mobile_number, :on_demand, :agreement, :verification_code, :is_verified, :invited)
   end
 
 end

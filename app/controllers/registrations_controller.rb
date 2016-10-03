@@ -59,7 +59,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   # Route user to next registration path
   def after_sign_up_path_for(resource)
-    if self.invited
+    if current_user.invited
       registration_steps_path
     else
       root_path
@@ -74,11 +74,11 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   def sign_up_params
-    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :mobile_number, :on_demand, :agreement)
+    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :mobile_number, :on_demand, :agreement, :is_verified, :invited)
   end
 
   def account_update_params
-    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :password_confirmation, :current_password, :mobile_number, :on_demand, :agreement)
+    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :password_confirmation, :current_password, :mobile_number, :on_demand, :agreement, :is_verified, :invited)
   end
 
 end
