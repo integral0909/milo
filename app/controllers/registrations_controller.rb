@@ -15,6 +15,9 @@ class RegistrationsController < Devise::RegistrationsController
             user_count = User.all.count
             notifier.ping "#{current_user.email} just signed up! Milo currently has #{user_count} users!"
           end
+          # add user to Dwolla
+          Dwolla.create_user(current_user)
+
           # send welcome email
           UserMailer.welcome_email(current_user).deliver_now
           # Response After Sign Up
@@ -56,7 +59,11 @@ class RegistrationsController < Devise::RegistrationsController
 
   # Route user to next registration path
   def after_sign_up_path_for(resource)
-    registration_steps_path
+    if self.invited
+      registration_steps_path
+    else
+      root_path
+    end
   end
 
   # Route to direct user after profile update
@@ -67,11 +74,11 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   def sign_up_params
-    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :mobile_number, :on_demand)
+    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :mobile_number, :on_demand, :agreement)
   end
 
   def account_update_params
-    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :password_confirmation, :current_password, :mobile_number, :on_demand)
+    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :password_confirmation, :current_password, :mobile_number, :on_demand, :agreement)
   end
 
 end

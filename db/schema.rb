@@ -28,10 +28,12 @@ ActiveRecord::Schema.define(version: 20160930005424) do
     t.string   "acct_subtype"
     t.string   "acct_type"
     t.integer  "user_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "public_token_id"
     t.integer  "checking_id"
+    t.string   "bank_account_number"
+    t.string   "bank_routing_number"
   end
 
   create_table "checkings", force: :cascade do |t|
@@ -44,6 +46,20 @@ ActiveRecord::Schema.define(version: 20160930005424) do
   create_table "public_tokens", force: :cascade do |t|
     t.string "token"
     t.string "user_id"
+  end
+
+  create_table "token_data", force: :cascade do |t|
+    t.string   "encrypted_access_token"
+    t.string   "encrypted_access_token_salt"
+    t.string   "encrypted_access_token_iv"
+    t.string   "encrypted_refresh_token"
+    t.string   "encrypted_refresh_token_salt"
+    t.string   "encrypted_refresh_token_iv"
+    t.integer  "expires_in"
+    t.string   "scope"
+    t.string   "account_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "transactions", id: false, force: :cascade do |t|
@@ -70,6 +86,17 @@ ActiveRecord::Schema.define(version: 20160930005424) do
     t.integer  "user_id"
   end
 
+  create_table "transfers", force: :cascade do |t|
+    t.string   "dwolla_url"
+    t.string   "user_id"
+    t.string   "roundup_count"
+    t.string   "roundup_ammount"
+    t.string   "status"
+    t.string   "type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -88,6 +115,8 @@ ActiveRecord::Schema.define(version: 20160930005424) do
     t.string   "referral_code"
     t.string   "name"
     t.string   "zip"
+    t.string   "dwolla_id"
+    t.string   "dwolla_funding_source"
     t.string   "mobile_number"
     t.string   "verification_code"
     t.boolean  "is_verified"

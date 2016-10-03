@@ -3,8 +3,6 @@ class WebhooksController < ApplicationController
 
   def plaid_callback
     puts "DID THIS HIT THE CALLBACK??"
-    debugger
-    binding.pry
   end
 
 end

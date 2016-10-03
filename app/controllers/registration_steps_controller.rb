@@ -8,20 +8,16 @@ class RegistrationStepsController < Wicked::WizardController
     when :phone_verify
       @user.update_attributes(user_params)
       # Create a random six digit verification code
-      @user.verification_code =  1_000_000 + rand(10_000_000 - 1_000_000)
+      @user.verification_code =  100_000 + rand(1_000_000 - 100_000)
       @user.save
-      # If the number starts with 0 add country code in front
       to = @user.mobile_number
-      # if to[0] = "0"
-      #   to.sub!("0", '+1')
-      # end
       # Create an instance of the Twilio class
       @twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
       # Send the message to Twilio
       @twilio_client.account.sms.messages.create(
         :from => ENV['TWILIO_PHONE_NUMBER'],
         :to => to,
-        :body => "#{@user.verification_code} is your Milo phone verification code."
+        :body => "Your Milo verification code is #{@user.verification_code}."
       )
     when :phone_confirm
       @user.update_attributes(user_params)

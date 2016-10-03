@@ -10,7 +10,7 @@
       <%= form_for @user, url: wizard_path, class: "email-signup", method: :put do |f| %>
         <fieldset class="form-group">
           <label>Confirmation Code</label>
-          <%= f.text_field :verification_code, class: "form-control", required: true %>
+          <%= f.text_field :verification_code, class: "form-control", value: "", required: true %>
         </fieldset>
         <button type="submit" class="button -full -blue">Confirm</button>
       <% end %>

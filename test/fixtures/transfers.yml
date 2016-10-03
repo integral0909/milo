@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dwolla_url: MyString
+  user_id: MyString
+  roundup_count: MyString
+  roundup_ammount: MyString
+  status: MyString
+  type: 
+
+two:
+  dwolla_url: MyString
+  user_id: MyString
+  roundup_count: MyString
+  roundup_ammount: MyString
+  status: MyString
+  type: 
