@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   attr_accessor :current_step
 
   validate :email_is_unique, on: :create
+  validate :password_strength
+
   validates :mobile_number, phone: { possible: false, allow_blank: true, types: [:mobile] }, if: -> { current_step?(:phone_verify) }
 
   #filter_parameter_logging :verification_code
@@ -40,6 +42,13 @@ class User < ActiveRecord::Base
     return false unless self.errors[:email].empty?
     unless User.find_by_email(email).nil?
       errors.add(:email, "is already taken by another account")
+    end
+  end
+
+  # Strong password
+  def password_strength
+    if password.present? and not password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)./)
+      errors.add :password, "must include at least one lowercase letter, one uppercase letter, and one number."
     end
   end
 
