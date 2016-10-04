@@ -97,11 +97,9 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <div class="milo-card">
-              <div class="mc-title">Welcome to Milo!</div>
-              <p><strong>Milo</strong> is a roundup based app that will help you build savings for college! It looks like you haven't connected an account to track and transfer your roundups from. Click the link below to connect your account.</p>
-              <a href="/users/<%= current_user.id %>/accounts" class="button -green">Connect</a>
-            </div>
+            <h6>Connect Bank Account</h6>
+            <p>Before you can begin using Milo we need to connect a bank account that we can track, calculate round ups and transfer funds to and from your Milo savings account.</p>
+            <a href="/users/<%= current_user.id %>/accounts" class="button -blue">Connect Account</a>
           </div>
         </div>
       </div>
