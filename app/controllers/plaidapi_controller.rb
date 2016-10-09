@@ -1,7 +1,7 @@
 class PlaidapiController < ApplicationController
 
   def add_account
-    being
+    begin
       # NOTE: We are using v 1.7.1 for plaid-ruby: https://github.com/plaid/plaid-ruby/tree/v1.7.1
       #1 generate a public token for the user
       public_token = PublicToken.find_or_create_by(token: params[:public_token])
