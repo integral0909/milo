@@ -24,6 +24,7 @@ module Dwolla
         user.save!
       rescue => e
         p e
+        # EMAIL: send the error and the user that errored
         # Let user go through to the welcome screen but send email with error from dwolla
         return
       end
@@ -54,6 +55,7 @@ module Dwolla
       rescue => e
         p e
         # Let user go through to the home screen but send email with error from dwolla
+        # EMAIL: send user and error from Dwolla
         return
       end
     end
@@ -104,12 +106,12 @@ module Dwolla
         # end
       rescue ExceptionName
         # EMAIL: if all round up task breaks
-        ap ExceptionName
+        puts ExceptionName
       end
     end
 
     # add the users funding source, our account number, and the total roundup ammount
-    def self.withdraw_roundups(user, roundup_ammount, transaction_total)
+    def self.withdraw_roundups(user, roundup_ammount, total_transactions)
       begin
         request_body = {
           :_links => {
@@ -126,9 +128,10 @@ module Dwolla
           },
           :metadata => {
             :user_id => user.id,
-            :total_transactions => transaction_total
+            :total_transactions => total_transactions
           }
         }
+
         # Create Transaction object to save the data returned
         transfer = TokenConcern.account_token.post "transfers", request_body
         current_transfer_url = transfer.headers[:location]
@@ -138,8 +141,9 @@ module Dwolla
         current_transfer_status = transfer_status.status
 
         # Save transfer data
-        Transfer.create_transfer_on_roundup(user, current_transfer_url, current_transfer_status, roundup_ammount, transaction_total, "deposit")
-      rescue
+        Transfer.create_transfers(user, current_transfer_url, current_transfer_status, roundup_ammount, total_transactions, "deposit")
+      rescue => e
+        puts e
         # EMAIL: send email if the roundup withdrawal fails
       end
 
