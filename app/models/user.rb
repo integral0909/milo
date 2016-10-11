@@ -9,16 +9,13 @@ class User < ActiveRecord::Base
   has_many :transactions
   has_one  :checking
 
-  attr_accessor :current_step
-
   validate :email_is_unique, on: :create
   validate :password_strength
 
-  validates :mobile_number, phone: { possible: false, allow_blank: true, types: [:mobile] }, if: -> { current_step?(:phone_verify) }
+  # validate :mobile_number_is_unique, on: :update
+  validates :mobile_number, phone: { possible: false, allow_blank: true, types: [:mobile] }
 
-  #filter_parameter_logging :verification_code
-
-  # Phone Verification
+  # Does the user account need to be verified?
   def needs_mobile_number_verifying?
     if is_verified
       return false
@@ -27,11 +24,6 @@ class User < ActiveRecord::Base
       return false
     end
     return true
-  end
-
-  # Current Step
-  def current_step?(step_key)
-    current_step.blank? || current_step == step_key
   end
 
   private
