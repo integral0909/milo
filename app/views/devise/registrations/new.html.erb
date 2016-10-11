@@ -45,7 +45,7 @@
         <fieldset class="form-group">
           <%= f.label :password %>
           <%= f.password_field :password, autocomplete: "off", class: "form-control", required: true %>
-          <small class="text-muted">Strong Password <i class="fa fa-question helper" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>Password Requirements:</strong><ul><li>minimum of 8 characters</li><li>one lower case</li><li>one upper case</li><li>one symbol</li><li>one number</li></ul>"></i></small>
+          <small class="text-muted">Strong Password <i class="fa fa-question helper" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>Password Requirements:</strong><ul><li>minimum of 8 characters</li><li>one lowercase</li><li>one uppercase</li><li>one number</li></ul>"></i></small>
         </fieldset>
         <fieldset class="checkbox">
           <label>
@@ -53,6 +53,9 @@
             I agree to Milo's <a href="/privacy" target="_blank">Privacy Policy</a> and <a href="/terms" target="_blank">Terms of Service</a>.
           </label>
         </fieldset>
+        <% if params[:access] == "early" %>
+          <%= f.hidden_field :invited, value: true %>
+        <% end %>
         <%= f.hidden_field :referral_code, value: session[:referral] %>
         <button type="submit" class="button -full -blue">Sign Up</button>
       <% end %>

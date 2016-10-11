@@ -16,18 +16,21 @@ body.milo-app {
     top: 0;
     width: 240px;
     z-index: 9999;
+
     @include breakpoint(l-three) {
       height: 50px;
       padding: 8px 0 0;
       width: 100%;
     }
+
     a.logo {
       color: #FFF;
       display: block;
       font-family: 'Futura Bold';
       font-size: 2em;
-      margin: 16px 0 32px;
+      margin: 16px 0 24px;
       text-align: center;
+
       @include breakpoint(l-three) {
         display: block;
         float: left;
@@ -36,41 +39,58 @@ body.milo-app {
         text-align: left;
         width: auto;
       }
-      &:hover {
+
+      &:focus, &:hover {
         text-decoration: none;
       }
     }
+
     .milo-user {
       margin: 0 0 40px;
       text-align: center;
+
       @include breakpoint(l-three) {
         display: none;
         visibility: hidden;
       }
+
       .mu-img {
+        background: #352D52;
         border-radius: 60px;
         height: 120px;
         margin: 0 auto 16px auto;
         overflow: hidden;
         width: 120px;
+
+        a.add-avatar {
+          box-sizing: content-box;
+          display: block;
+          height: 42px;
+          padding: 39px 36px;
+          width: 48px;
+        }
+
         img {
           height: auto;
           max-width: 100%;
         }
       }
+
       h5 {
         color: #FFF;
         font-size: 1.5em;
         line-height: 1.4;
         margin: 0;
       }
+
       span {
-        color: #6FB7E9;
+        color: #4C3E70;
         font-family: 'Futura Bold';
-        font-size: 0.9em;
+        font-size: 0.875em;
         text-transform: uppercase;
       }
     }
+
     nav {
       padding: 0 20px;
       @extend %clear;
@@ -79,25 +99,24 @@ body.milo-app {
         padding: 0;
         visibility: hidden;
       }
+
       a {
-        color: #FAFAFA;
+        color: #F1F3F6;
         display: block;
-        font-size: 1em;
+        font-size: 1.25em;
         line-height: 1;
         margin: 0 0 16px 0;
+
         &:hover, &.active {
+          color: #4C3E70;
+          text-decoration: none;
+        }
+
+        &.active {
           color: #FFF;
           font-family: 'Futura Bold';
-          text-decoration: none;
-          i.fa {
-            color: #FFF;
-          }
         }
-        i.fa {
-          color: #A2BCD5;
-          font-size: 1em;
-          margin: 0 12px 0 0;
-        }
+
         span {
           background: #3E445C;
           border-radius: 4px;
@@ -110,11 +129,13 @@ body.milo-app {
           line-height: 20px;
           text-align: center;
           width: 30px;
+
           @include breakpoint(l-three) {
             display: none;
             visibility: hidden;
           }
         }
+
         @include breakpoint(l-three) {
           color: rgba(255,255,255,0.6);
           float: left;
@@ -124,10 +145,12 @@ body.milo-app {
           text-align: center;
           text-transform: uppercase;
           width: 20%;
+
           &:hover, &.active {
             color: #FFF;
             border-bottom: 3px solid rgba(0,0,0,0.5);
           }
+
           i.fa {
             display: block;
             font-size: 2em;
@@ -136,6 +159,7 @@ body.milo-app {
         }
       }
     }
+
     a.sign-out {
       background: #352D52;
       bottom: 0;
@@ -149,6 +173,7 @@ body.milo-app {
       text-align: center;
       text-transform: uppercase;
       width: 100%;
+
       @include breakpoint(l-three) {
         background: none;
         float: right;
@@ -158,7 +183,9 @@ body.milo-app {
         position: relative;
         width: auto;
       }
+
       &:hover {
+        background: #4C3E70;
         text-decoration: none;
       }
     }
@@ -170,18 +197,20 @@ body.milo-app {
     min-height: 100vh;
     padding: 48px 32px 32px;
     width: calc(100% - 420px);
+
     @include breakpoint(l-three) {
       margin: 0;
       padding: 70px 16px 16px;
       width: 100%;
     }
+
     .container {
       padding: 0;
     }
   }
 
   .sidebar {
-    background: #F7F9FA;
+    background: #F8FAFB;
     box-sizing: border-box;
     min-height: 100vh;
     padding: 48px 0 0;
@@ -189,9 +218,15 @@ body.milo-app {
     right: 0;
     top: 0;
     width: 180px;
+
     @include breakpoint(l-three) {
       display: none;
       visibility: hidden;
     }
+  }
+
+  p {
+    font-size: 1em;
+    margin: 0 0 24px;
   }
 }

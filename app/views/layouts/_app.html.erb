@@ -3,26 +3,31 @@
   <header>
     <a class="logo" href="/">Milo</a>
     <div class="milo-user">
-      <!-- <div class="mu-img"> -->
+      <div class="mu-img">
         <!-- TODO :: provide a fallback user image -->
-        <!-- <img src="https://s3.amazonaws.com/uifaces/faces/twitter/ok/128.jpg">
-      </div>-->
+        <% if !current_user %>
+          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/ok/128.jpg">
+        <% else %>
+          <a href="#" class="add-avatar"><%= image_tag("img-add-avatar.png", alt: "Add avatar") %></a>
+        <% end %>
+      </div>
       <% if current_user.name %>
         <h5><%= current_user.name %></h5>
       <% end %>
-      <!--<span>Chicago, IL</span> -->
+      <span>Chicago, IL</span>
     </div>
     <nav>
-      <!--<a class="active" href="/"><i class="fa fa-home"></i> Overview</a>
-      <a href="#"><i class="fa fa-circle-o"></i> Round-Ups <span>8</span></a>
-      <a href="#"><i class="fa fa-exchange"></i> Transfer</a>
-      <a href="#"><i class="fa fa-clock-o"></i> History</a>-->
-      <a href="/users/edit"><i class="fa fa-gear"></i> Settings</a>
+      <a class="active" href="/">Overview</a>
+      <!--
+      <a href="#">Round-Ups <span>8</span></a>
+      <a href="#">Transfer</a>
+      <a href="#">History</a>-->
+      <a href="/users/edit">Settings</a>
       <% if current_user.admin %>
-        <a href="/admin"><i class="fa fa-lock"></i> Admin</a>
+        <a href="/admin">Admin</a>
       <% end %>
     </nav>
-    <%= link_to('Sign Out', destroy_user_session_path, :method => :delete, class: "sign-out") %>
+    <%= link_to('Log Out', destroy_user_session_path, :method => :delete, class: "sign-out") %>
   </header>
 
   <%= yield %>

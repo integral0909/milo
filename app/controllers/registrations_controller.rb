@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  before_filter :configure_account_update_params, only: [:update]
+  before_action :configure_account_update_params, only: [:update]
 
   def create
     build_resource(sign_up_params)
@@ -54,31 +54,27 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_account_update_params
-    devise_parameter_sanitizer.for(:account_update) << :mobile_number
+    devise_parameter_sanitizer.permit(:account_update, keys: [:mobile_number])
   end
 
   # Route user to next registration path
   def after_sign_up_path_for(resource)
-    if self.invited
-      registration_steps_path
-    else
-      root_path
-    end
+    super
   end
 
   # Route to direct user after profile update
   def after_update_path_for(resource)
-    super
+    edit_user_registration_path
   end
 
   private
 
   def sign_up_params
-    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :mobile_number, :on_demand, :agreement)
+    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :invited, :agreement, :mobile_number, :is_verified, :on_demand)
   end
 
   def account_update_params
-    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :password_confirmation, :current_password, :mobile_number, :on_demand, :agreement)
+    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :password_confirmation, :current_password, :invited, :agreement, :mobile_number, :is_verified, :on_demand)
   end
 
 end

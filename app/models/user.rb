@@ -9,14 +9,13 @@ class User < ActiveRecord::Base
   has_many :transactions
   has_one  :checking
 
-  attr_accessor :current_step
-
   validate :email_is_unique, on: :create
-  validates :mobile_number, phone: { possible: false, allow_blank: true, types: [:mobile] }, if: -> { current_step?(:phone_verify) }
+  validate :password_strength
 
-  #filter_parameter_logging :verification_code
+  # validate :mobile_number_is_unique, on: :update
+  validates :mobile_number, phone: { possible: false, allow_blank: true, types: [:mobile] }
 
-  # Phone Verification
+  # Does the user account need to be verified?
   def needs_mobile_number_verifying?
     if is_verified
       return false
@@ -27,11 +26,6 @@ class User < ActiveRecord::Base
     return true
   end
 
-  # Current Step
-  def current_step?(step_key)
-    current_step.blank? || current_step == step_key
-  end
-
   private
 
   # Email should be unique
@@ -40,6 +34,13 @@ class User < ActiveRecord::Base
     return false unless self.errors[:email].empty?
     unless User.find_by_email(email).nil?
       errors.add(:email, "is already taken by another account")
+    end
+  end
+
+  # Strong password
+  def password_strength
+    if password.present? and not password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)./)
+      errors.add :password, "must include at least one lowercase letter, one uppercase letter, and one number."
     end
   end
 

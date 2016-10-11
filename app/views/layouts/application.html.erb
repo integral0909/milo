@@ -24,11 +24,7 @@
 </head>
 <!-- current_page?(root_path) || -->
 <% if user_signed_in? %>
-  <% if (params["controller"] == "registration_steps") %>
-    <%= render :partial => 'layouts/signup' %>
-  <% else %>
-    <%= render :partial => 'layouts/app' %>
-  <% end %>
+  <%= render :partial => 'layouts/app' %>
 <% else %>
   <% if current_page?(new_user_registration_path) || current_page?(new_user_session_path) %>
     <%= render :partial => 'layouts/signup' %>
