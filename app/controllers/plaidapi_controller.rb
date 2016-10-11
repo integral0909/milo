@@ -26,6 +26,8 @@ class PlaidapiController < ApplicationController
       redirect_to root_path
     rescue => e
       # EMAIL: header=> Error while adding users account and transactions message=> @user was not able to add account through plaid. Error: e
+      redirect_to root_path
+
     end
   end
 

@@ -48,6 +48,9 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.create_transactions(plaid_user_transactions, user_id)
+    current_date = Date.today
+    last_week_date = current_date - 1.week
+    
     plaid_user_transactions.each do |transaction|
       # only save positive transactions
       if transaction.amount > 0
