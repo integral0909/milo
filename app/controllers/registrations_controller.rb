@@ -1,4 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
+  layout "signup"
+  
   prepend_before_action :require_no_authentication, only: [:new, :create, :cancel]
   prepend_before_action :authenticate_scope!, only: [:edit, :security, :update, :destroy]
   prepend_before_action :set_minimum_password_length, only: [:new, :edit]
@@ -47,8 +49,12 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def phone
+    render :phone
+  end
+
   def edit
-    super
+    render layout: "application"
   end
 
   def accounts
@@ -71,12 +77,16 @@ class RegistrationsController < Devise::RegistrationsController
 
   # Route user to next registration path
   def after_sign_up_path_for(resource)
-    super
+    if current_user.invited
+      signup_phone_path
+    else
+      root_path
+    end
   end
 
   # Route to direct user after profile update
   def after_update_path_for(resource)
-    edit_user_registration_path
+    settings_path
   end
 
   private

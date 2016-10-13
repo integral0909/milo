@@ -22,12 +22,44 @@
   </script>
 
 </head>
-<!-- current_page?(root_path) || -->
-<% if user_signed_in? %>
-  <%= render :partial => 'layouts/app' %>
-<% else %>
-  <% if current_page?(new_user_registration_path) || current_page?(new_user_session_path) %>
-    <%= render :partial => 'layouts/signup' %>
-  <% end %>
-<% end %>
+<body class="milo-app">
+
+  <header>
+    <a class="logo" href="/">Milo</a>
+    <div class="milo-user">
+      <div class="mu-img">
+        <!-- TODO :: provide a fallback user image -->
+        <% if !current_user %>
+          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/ok/128.jpg">
+        <% else %>
+          <a href="#" class="add-avatar"><%= image_tag("img-add-avatar.png", alt: "Add avatar") %></a>
+        <% end %>
+      </div>
+      <% if current_user.name %>
+        <h5><%= current_user.name %></h5>
+      <% end %>
+      <span>Chicago, IL</span>
+    </div>
+    <nav>
+      <a href="/" class="<%= active_page_class?('/')%>">Overview</a>
+      <!--
+      <a href="#">Round-Ups <span>8</span></a>
+      <a href="#">Transfer</a>
+      <a href="#">History</a>-->
+      <a href="/settings" class="<%= active_control_class?('registrations') %>">Settings</a>
+      <% if current_user.admin %>
+        <a href="/admin">Admin</a>
+      <% end %>
+    </nav>
+    <%= link_to('Log Out', destroy_user_session_path, :method => :delete, class: "sign-out") %>
+  </header>
+
+  <%= yield %>
+
+  <!-- Go to www.addthis.com/dashboard to customize your tools -->
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-578d8d001a062943"></script>
+
+  <%= render :partial => 'layouts/analytics' %>
+
+</body>
 </html>

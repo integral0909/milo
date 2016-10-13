@@ -10,9 +10,13 @@ Rails.application.routes.draw do
   end
 
   devise_scope :user do
+    # User Settings
     get "settings", to: "registrations#edit", as: :settings
     get 'settings/accounts', to: 'registrations#accounts', as: :settings_accounts
     get 'settings/security', to: 'registrations#security', as: :settings_security
+    # User Sign Up
+    get 'signup/phone', to: 'registrations#phone', as: :signup_phone
+    get 'signup/phone_confirm', to: 'registrations#phone_confirm', as: :signup_phone_confirm
   end
 
   # Root, User Logged In
