@@ -103,11 +103,11 @@ body.milo-app {
       a {
         color: #F1F3F6;
         display: block;
-        font-size: 1.25em;
+        font-size: 1.125em;
         line-height: 1;
         margin: 0 0 16px 0;
 
-        &:hover, &.active {
+        &:hover, &:focus {
           color: #4C3E70;
           text-decoration: none;
         }
@@ -115,6 +115,7 @@ body.milo-app {
         &.active {
           color: #FFF;
           font-family: 'Futura Bold';
+          text-decoration: none;
         }
 
         span {

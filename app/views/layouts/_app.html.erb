@@ -17,12 +17,12 @@
       <span>Chicago, IL</span>
     </div>
     <nav>
-      <a class="active" href="/">Overview</a>
+      <a href="/" class="<%= active_page_class?('/')%>">Overview</a>
       <!--
       <a href="#">Round-Ups <span>8</span></a>
       <a href="#">Transfer</a>
       <a href="#">History</a>-->
-      <a href="/users/edit">Settings</a>
+      <a href="/settings" class="<%= active_control_class?('registrations') %>">Settings</a>
       <% if current_user.admin %>
         <a href="/admin">Admin</a>
       <% end %>

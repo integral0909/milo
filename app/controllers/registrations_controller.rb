@@ -1,4 +1,8 @@
 class RegistrationsController < Devise::RegistrationsController
+  prepend_before_action :require_no_authentication, only: [:new, :create, :cancel]
+  prepend_before_action :authenticate_scope!, only: [:edit, :security, :update, :destroy]
+  prepend_before_action :set_minimum_password_length, only: [:new, :edit]
+
   before_action :configure_account_update_params, only: [:update]
 
   def create
@@ -43,6 +47,14 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def edit
+    super
+  end
+
+  def accounts
+    render :accounts
+  end
+
   def update
     super
   end
@@ -74,7 +86,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def account_update_params
-    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :password_confirmation, :current_password, :invited, :agreement, :mobile_number, :is_verified, :on_demand)
+    params.require(:user).permit(:referral_code, :name, :address, :city, :state, :zip, :email, :password, :password_confirmation, :current_password, :invited, :agreement, :mobile_number, :is_verified, :on_demand)
   end
 
 end

@@ -1,0 +1,76 @@
+/*
+* Milo
+* Copyright Milo 2016
+* milosavings.com
+*/
+
+
+// Settings Page
+nav.setting-subheader {
+  border-bottom: 1px solid #F1F3F6;
+  margin: 0 0 40px;
+  padding: 0 8px 16px;
+  @extend %clear;
+
+  a {
+    color: #8B999F;
+    float: left;
+    line-height: 20px;
+    margin: 0 32px 0 0;
+
+    &.last {
+      margin: 0;
+    }
+
+    &.active {
+      color: #352D52;
+      font-family: 'Futura Bold';
+    }
+
+    &:hover, &:focus {
+      color: #4A90E2;
+      text-decoration: none;
+    }
+  }
+}
+
+// Connected Account
+.connected-account {
+  background: #F8FAFB;
+  border: 1px solid #DDE1E2;
+  border-radius: 4px;
+  margin: 16px 0 40px;
+  padding: 24px;
+
+  .ca-name {
+    color: #352D52;
+    font-size: 1.25em;
+    margin: 0 0 4px;
+  }
+
+  .ca-number {
+    color: #BBC5C7;
+    font-family: 'Futura Bold';
+    font-size: 0.75em;
+  }
+
+  a.ca-remove {
+    color: #8B999F;
+    float: right;
+    font-family: 'Futura Bold';
+    font-size: 0.75em;
+    line-height: 1;
+    padding: 16px 0;
+    text-transform: uppercase;
+
+    i.fa {
+      font-size: 1em;
+      margin: 0 0 0 4px;
+    }
+
+    &:focus, &:hover {
+      color: #FF5455;
+      text-decoration: none;
+    }
+  }
+}

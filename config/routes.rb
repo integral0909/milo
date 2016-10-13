@@ -9,6 +9,12 @@ Rails.application.routes.draw do
     resources :accounts, only: [:index]
   end
 
+  devise_scope :user do
+    get "settings", to: "registrations#edit", as: :settings
+    get 'settings/accounts', to: 'registrations#accounts', as: :settings_accounts
+    get 'settings/security', to: 'registrations#security', as: :settings_security
+  end
+
   # Root, User Logged In
   authenticated :user do
     root 'home#index', as: :authenticated_root
@@ -28,7 +34,5 @@ Rails.application.routes.draw do
 
   post '/users/:id/add_account', to: 'plaidapi#add_account'
   patch '/users/:id/update_accounts', to: 'plaidapi#update_accounts'
-
-  get "/settings" => "settings#index"
 
 end

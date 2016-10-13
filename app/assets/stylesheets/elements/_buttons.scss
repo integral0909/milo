@@ -54,6 +54,11 @@
     }
   }
 
+  // Button Position
+  &.-right {
+    float: right;
+  }
+
   // Button Colors
   &.-blue {
     border: 2px solid #4A90E2;
