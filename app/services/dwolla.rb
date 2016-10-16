@@ -38,7 +38,7 @@ module Dwolla
         # Get the info from the Account to add a funding source to Dwolla
         funding_account = Account.find_by_plaid_acct_id(user_checking.plaid_acct_id)
 
-        dwoll_customer_url = user.dwolla_id
+        dwolla_customer_url = user.dwolla_id
         request_body = {
           routingNumber: funding_account.bank_routing_number,
           accountNumber: funding_account.bank_account_number,
@@ -95,7 +95,9 @@ module Dwolla
               end
 
               # on success => update the transaction with roundup 0.00 or rounded up. Also update total roundups on the user -> this will be where we know how much they have in their account <= IMPORTANT: Backup on gathering total roundups for a user is to query the Transfer with the user's id
-              withdraw_roundups(user, roundup_total.round(2), transactions.count)
+              if roundup_total > 0 && transactions.count > 0
+                withdraw_roundups(user, roundup_total.round(2), transactions.count)
+              end
 
               # send email to user with weekly data and how much they have in their account
             rescue
@@ -133,6 +135,7 @@ module Dwolla
         }
 
         # Create Transaction object to save the data returned
+
         transfer = TokenConcern.account_token.post "transfers", request_body
         current_transfer_url = transfer.headers[:location]
 
@@ -142,6 +145,7 @@ module Dwolla
 
         # Save transfer data
         Transfer.create_transfers(user, current_transfer_url, current_transfer_status, roundup_ammount, total_transactions, "deposit")
+        puts "$#{roundup_ammount}"
       rescue => e
         puts e
         # EMAIL: send email if the roundup withdrawal fails

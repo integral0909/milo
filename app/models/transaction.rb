@@ -50,10 +50,10 @@ class Transaction < ActiveRecord::Base
   def self.create_transactions(plaid_user_transactions, user_id)
     current_date = Date.today
     last_week_date = current_date - 1.week
-    
+
     plaid_user_transactions.each do |transaction|
       # only save positive transactions
-      if transaction.amount > 0
+      if (transaction.amount > 0) && (transaction.date.to_date > last_week_date)
         newtrans = Transaction.find_by(plaid_trans_id: transaction.id)
 
         vendor_address = transaction.location["address"]
