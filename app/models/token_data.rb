@@ -2,9 +2,6 @@ class TokenData < ActiveRecord::Base
   DESIRED_FRESHNESS = 1.minute
   SECRET_KEY = ENV["DWOLLA_SECRET_KEY"]
 
-  attr_encrypted :access_token, key: SECRET_KEY, mode: :per_attribute_iv_and_salt
-  attr_encrypted :refresh_token, key: SECRET_KEY, mode: :per_attribute_iv_and_salt
-
   # look in the token_data table for the most recent token matching the given criteria
   # if one does not exist throw an `ActiveRecord::RecordNotFound` error
   # if one does exist convert the `TokenData` to a fresh `DwollaV2::Token` (see `#to_fresh_token`)

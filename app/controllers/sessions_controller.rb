@@ -8,6 +8,8 @@ class SessionsController < Devise::SessionsController
   def create
     @user = User.find_by_email(params[:user][:email])
     if @user != nil
+      # TODO: refresh transactions for the current week to show the user
+
       super
     else
       # redirect to login page with error if login with wrong credentials

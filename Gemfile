@@ -76,7 +76,7 @@ gem 'awesome_print', '~> 1.7'
 # Dwolla v2 api wrapper for accepting money from users
 gem 'dwolla_v2', '~> 1.1'
 
-gem "attr_encrypted"
+# gem "attr_encrypted"
 
 group :development, :test, :staging do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

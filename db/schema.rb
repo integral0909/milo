@@ -49,17 +49,13 @@ ActiveRecord::Schema.define(version: 20161013164201) do
   end
 
   create_table "token_data", force: :cascade do |t|
-    t.string   "encrypted_access_token"
-    t.string   "encrypted_access_token_salt"
-    t.string   "encrypted_access_token_iv"
-    t.string   "encrypted_refresh_token"
-    t.string   "encrypted_refresh_token_salt"
-    t.string   "encrypted_refresh_token_iv"
     t.integer  "expires_in"
     t.string   "scope"
     t.string   "account_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "access_token"
+    t.string   "refresh_token"
   end
 
   create_table "transactions", id: false, force: :cascade do |t|
@@ -92,9 +88,9 @@ ActiveRecord::Schema.define(version: 20161013164201) do
     t.string   "roundup_count"
     t.string   "roundup_ammount"
     t.string   "status"
-    t.string   "type"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "transfer_type"
   end
 
   create_table "users", force: :cascade do |t|
