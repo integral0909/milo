@@ -19,7 +19,7 @@ class VerificationsController < ApplicationController
       :body => "#{current_user.verification_code} is your Milo phone verification code."
     )
     # Redirect back to the edit profile page
-    redirect_to signup_phone_confirm_path, :flash => { :success => "A verification code has been sent to your phone. Please fill it in below." }
+    redirect_to signup_phone_confirm_path
     return
   end
 
@@ -28,7 +28,7 @@ class VerificationsController < ApplicationController
       current_user.is_verified = true
       current_user.verification_code = ''
       current_user.save
-      redirect_to settings_path, :flash => { :success => "Thank you for verifying your mobile number." }
+      redirect_to user_accounts_path(current_user)
       return
     else
       redirect_to signup_phone_confirm_path, :flash => { :errors => "Invalid verification code." }

@@ -1,13 +1,20 @@
-<div class="page-content">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="milo-card">
-          <div class="mc-title">Connect Account</div>
-          <p>Search for your bank and connect to begin calculating and saving roundups.</p>
-          <%= plaid_link(name:@user.email, action:'add_account', data: {longtail: true})%>
-        </div>
-      </div>
+<% set_meta_tags :site => 'Connect Bank • Milo',
+  :noindex => true
+%>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-2">
+    <div class="signup">
+      <h1 class="marg-16"><span>Checking Account</span> Connect Your Bank</h1>
+      <p>Select your bank account to begin saving.</p>
+      <%= plaid_link(name: current_user.email, action: "add_account", data: { longtail: true }) %>
     </div>
+  </div>
+  <div class="col-md-4">
+    <ul class="signup-steps">
+      <li><span></span> Basic Info</li>
+      <li><span></span> Mobile Number</li>
+      <li class="active"><span></span> Checking Account</li>
+    </ul>
   </div>
 </div>

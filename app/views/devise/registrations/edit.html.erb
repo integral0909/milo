@@ -28,7 +28,10 @@
                 </fieldset>
               </div>
               <div class="col-sm-6">
-                - phone -
+                <fieldset class="form-group">
+                  <label>Phone</label>
+                  <%= f.text_field :mobile_number, class: "form-control", disabled: true %>
+                </fieldset>
               </div>
             </div>
           </section>
@@ -64,23 +67,7 @@
               </div>
             </div>
           </section>
-          <%= f.submit "Update Profile", class: "button -blue -right" %>
-
-
-
-          <hr />
-          <h5>Phone Verification</h5>
-          <fieldset class="form-group">
-            <label>Phone</label>
-            <%= f.text_field :mobile_number, class: "form-control" %>
-            <% if resource.is_verified %>
-              You're mobile number is verified.
-            <% end%>
-          </fieldset>
-          <%= mobile_verification_button %>
-          <%= verify_mobile_number_form %>
-          <hr />
-
+          <%= f.submit "Update Profile", class: "button -blue" %>
         <% end %>
       </div>
     </div>

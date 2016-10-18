@@ -10,9 +10,9 @@
       <%= form_tag(verifications_path, method: "post" ) %>
         <fieldset class="form-group">
           <label>Phone</label>
-          <%= text_field_tag :mobile_number %>
+          <%= text_field_tag(:mobile_number, "", class: "form-control") %>
         </fieldset>
-        <%=button_tag('Send Verification Code', type: "submit", class: "button -blue")%>
+        <%=button_tag('Continue', type: "submit", class: "button -full -blue")%>
       </form>
     </div>
   </div>

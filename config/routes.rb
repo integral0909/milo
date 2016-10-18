@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     # User Sign Up
     get 'signup/phone', to: 'registrations#phone', as: :signup_phone
     get 'signup/phone_confirm', to: 'registrations#phone_confirm', as: :signup_phone_confirm
+    get 'signup/on_demand', to: 'registrations#on_demand', as: :signup_on_demand
   end
 
   # Root, User Logged In
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
   # Pages for Marketing Site
   get '/*page' => 'pages#show'
 
+  # Plaid Link to Connect Bank Account
   post '/users/:id/add_account', to: 'plaidapi#add_account'
   patch '/users/:id/update_accounts', to: 'plaidapi#update_accounts'
 

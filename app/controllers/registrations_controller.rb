@@ -1,6 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   layout "signup"
-  
+
   prepend_before_action :require_no_authentication, only: [:new, :create, :cancel]
   prepend_before_action :authenticate_scope!, only: [:edit, :security, :update, :destroy]
   prepend_before_action :set_minimum_password_length, only: [:new, :edit]
@@ -53,12 +53,20 @@ class RegistrationsController < Devise::RegistrationsController
     render :phone
   end
 
+  def on_demand
+    render :on_demand
+  end
+
   def edit
     render layout: "application"
   end
 
   def accounts
-    render :accounts
+    render layout: "application"
+  end
+
+  def security
+    render layout: "application"
   end
 
   def update

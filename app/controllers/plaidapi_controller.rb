@@ -22,7 +22,7 @@ class PlaidapiController < ApplicationController
     auth_user = connect_user.upgrade(:auth)
     Transaction.create_accounts(auth_user.accounts, public_token, user.id)
 
-    redirect_to root_path
+    redirect_to signup_on_demand_path
   end
 
   def update_accounts
@@ -35,7 +35,7 @@ class PlaidapiController < ApplicationController
         #Transaction.update_transactions(user_obj.transactions, @user.id)
       end
     end
-    redirect_to root_path #@user
+    redirect_to root_path
   end
 
   private
