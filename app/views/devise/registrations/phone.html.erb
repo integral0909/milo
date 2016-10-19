@@ -6,6 +6,7 @@
   <div class="col-md-6 col-md-offset-2">
     <div class="signup">
       <h1 class="marg-16"><span>Mobile Number</span> What's Your Number?</h1>
+      <%= render "layouts/messages" %>
       <p>For security please add your phone.</p>
       <%= form_tag(verifications_path, method: "post" ) %>
         <fieldset class="form-group">

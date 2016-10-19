@@ -6,6 +6,7 @@
   <div class="col-md-6 col-md-offset-2">
     <div class="signup">
       <h1 class="marg-16"><span>Mobile Number</span> Confirm Number</h1>
+      <%= render "layouts/messages" %>
       <p>Please submit the 6-digit code we just sent to:<br/><strong><%= @user.mobile_number %></strong></p>
       <%= form_tag(verifications_path, method: "patch") %>
         <fieldset class="form-group">
