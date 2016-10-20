@@ -1,0 +1,27 @@
+<% set_meta_tags :site => 'Verify Phone • Milo',
+  :noindex => true
+%>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-2">
+    <div class="signup">
+      <h1 class="marg-16"><span>Mobile Number</span> What's Your Number?</h1>
+      <%= render "layouts/messages" %>
+      <p>For security please add your phone.</p>
+      <%= form_tag(verifications_path, method: "post" ) %>
+        <fieldset class="form-group">
+          <label>Phone</label>
+          <%= text_field_tag(:mobile_number, "", class: "form-control") %>
+        </fieldset>
+        <%=button_tag('Continue', type: "submit", class: "button -full -blue")%>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <ul class="signup-steps">
+      <li><span></span> Basic Info</li>
+      <li class="active"><span></span> Mobile Number</li>
+      <li><span></span> Checking Account</li>
+    </ul>
+  </div>
+</div>

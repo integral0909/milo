@@ -1,8 +1,14 @@
 class RegistrationsController < Devise::RegistrationsController
+  layout "signup"
+
+  prepend_before_action :require_no_authentication, only: [:new, :create, :cancel]
+  prepend_before_action :authenticate_scope!, only: [:edit, :security, :update, :destroy]
+  prepend_before_action :set_minimum_password_length, only: [:new, :edit]
+
+  before_action :configure_account_update_params, only: [:update]
 
   def create
     build_resource(sign_up_params)
-
     if resource.save
       yield resource if block_given?
       if resource.persisted?
@@ -15,6 +21,9 @@ class RegistrationsController < Devise::RegistrationsController
             user_count = User.all.count
             notifier.ping "#{current_user.email} just signed up! Milo currently has #{user_count} users!"
           end
+          # add user to Dwolla
+          Dwolla.create_user(current_user)
+
           # send welcome email
           UserMailer.welcome_email(current_user).deliver_now
           # Response After Sign Up
@@ -40,6 +49,26 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def phone
+    render :phone
+  end
+
+  def on_demand
+    render :on_demand
+  end
+
+  def edit
+    render layout: "application"
+  end
+
+  def accounts
+    render layout: "application"
+  end
+
+  def security
+    render layout: "application"
+  end
+
   def update
     super
   end
@@ -50,14 +79,32 @@ class RegistrationsController < Devise::RegistrationsController
     resource.update_without_password(params)
   end
 
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:mobile_number])
+  end
+
+  # Route user to next registration path
+  def after_sign_up_path_for(resource)
+    if current_user.invited
+      signup_phone_path
+    else
+      root_path
+    end
+  end
+
+  # Route to direct user after profile update
+  def after_update_path_for(resource)
+    settings_path
+  end
+
   private
 
   def sign_up_params
-    params.require(:user).permit(:referral_code, :name, :zip, :email, :password)
+    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :invited, :agreement, :mobile_number, :is_verified, :on_demand)
   end
 
   def account_update_params
-    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :password_confirmation, :current_password)
+    params.require(:user).permit(:referral_code, :name, :address, :city, :state, :zip, :email, :password, :password_confirmation, :current_password, :invited, :agreement, :mobile_number, :is_verified, :on_demand)
   end
 
 end

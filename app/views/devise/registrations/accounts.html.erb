@@ -1,0 +1,29 @@
+<% set_meta_tags :site => 'Bank Account • Settings • Milo' %>
+
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <%= render :partial => 'devise/shared/subheader' %>
+        <h6>Connected Accounts</h6>
+        <div class="connected-account">
+          <a href="#" class="ca-remove">Remove <i class="fa fa-question helper" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>Remove Account</strong>Removing your account will disable the automatic saving and transfer of funds from your checking into your Milo savings account."></i></a>
+          <div class="ca-name">%Checking - Account Name%</div>
+          <div class="ca-number">XXXXX %9045%</div>
+        </div>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= devise_error_messages! %>
+          <h6>On-Demand Transfers</h6>
+          <p>In order to save automatically and transfer funds from your checking into your Milo savings account we need your authorization. You may disable On-Demand Transfers, but doing so will disable transfers from your checking account to your Milo savings account until you re-enable.</p>
+          <fieldset class="checkbox">
+            <label>
+              <%= f.check_box :on_demand %>
+              On-Demand Transfer Authorization
+            </label>
+          </fieldset>
+          <%= f.submit "Update Account", class: "button -blue" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

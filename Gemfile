@@ -22,7 +22,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # bootstrap for stylesheets
-gem 'bootstrap', '~> 4.0.0.alpha3'
+gem 'bootstrap', '4.0.0.alpha3'
+# Tooltips and popovers depend on tether
+gem 'rails-assets-tether', '>= 1.1.0'
 
 # SEO
 gem 'meta-tags'
@@ -39,6 +41,10 @@ gem 'social-share-button'
 
 # User Accounts with Devise
 gem 'devise'
+
+# Mobile Phone Confirmation
+gem 'twilio-ruby', '~> 4.0.0'
+gem 'phonelib'
 
 # Intercom
 gem 'intercom-rails'
@@ -64,7 +70,15 @@ gem 'bitly', '~> 0.10.4'
 # admin console for easily viewing data
 gem 'rails_admin'
 
-group :development, :test do
+# awesome print for better console logs
+gem 'awesome_print', '~> 1.7'
+
+# Dwolla v2 api wrapper for accepting money from users
+gem 'dwolla_v2', '~> 1.1'
+
+# gem "attr_encrypted"
+
+group :development, :test, :staging do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   # Test mailers in development
@@ -72,11 +86,15 @@ group :development, :test do
 
   # ENV variables
   gem 'dotenv-rails'
+
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
+
+  # Better Error Messages
+  gem 'better_errors'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'

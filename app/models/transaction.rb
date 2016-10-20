@@ -19,6 +19,8 @@ class Transaction < ActiveRecord::Base
           institution_type: acct.institution_type,
           name: acct.name,
           numbers: acct.numbers,
+          bank_account_number: acct.numbers['account'],
+          bank_routing_number: acct.numbers['routing'],
           acct_subtype: acct.subtype,
           acct_type: acct.type,
           user_id: user_id,
@@ -34,6 +36,8 @@ class Transaction < ActiveRecord::Base
           institution_type: acct.institution_type,
           name: acct.name,
           numbers: acct.numbers,
+          bank_account_number: acct.numbers['account'],
+          bank_routing_number: acct.numbers['routing'],
           acct_subtype: acct.subtype,
           acct_type: acct.type,
           user_id: user_id,
@@ -43,10 +47,13 @@ class Transaction < ActiveRecord::Base
     end
   end
 
-  def self.create_transactions(plaid_user_transactions)
+  def self.create_transactions(plaid_user_transactions, user_id)
+    current_date = Date.today
+    last_week_date = current_date - 1.week
+
     plaid_user_transactions.each do |transaction|
-      # only save positive transactions 
-      if transaction.amount > 0
+      # only save positive transactions
+      if (transaction.amount > 0) && (transaction.date.to_date > last_week_date)
         newtrans = Transaction.find_by(plaid_trans_id: transaction.id)
 
         vendor_address = transaction.location["address"]
@@ -81,7 +88,8 @@ class Transaction < ActiveRecord::Base
 
             pending: transaction.pending,
             pending_transaction: transaction.pending_transaction,
-            name_score: transaction.score["name"]
+            name_score: transaction.score["name"],
+            user_id: user_id
             )
         else
           newtrans = Transaction.create(
@@ -102,7 +110,8 @@ class Transaction < ActiveRecord::Base
 
             pending: transaction.pending,
             pending_transaction: transaction.pending_transaction,
-            name_score: transaction.score["name"]
+            name_score: transaction.score["name"],
+            user_id: user_id
             )
         end
         if newtrans.plaid_cat_id == 0 || newtrans.plaid_cat_id == nil
@@ -116,7 +125,7 @@ class Transaction < ActiveRecord::Base
     end
   end
 
-  def self.update_accounts(user_id, public_token)
+  def self.update_accounts(user_id, public_token, milo_id)
     user_accounts = Account.where(user_id: user_id).all
     user_accounts.each do |acct|
       account = Account.find_by(plaid_acct_id: acct._id)
@@ -136,9 +145,11 @@ class Transaction < ActiveRecord::Base
           institution_type: acct.institution_type,
           name: acct.meta.name,
           numbers: acct.meta.number,
+          bank_account_number: acct.numbers['account'],
+          bank_routing_number: acct.numbers['routing'],
           acct_subtype: acct.subtype,
           acct_type: acct.type,
-          user_id: public_token.user.id,
+          user_id: milo_id,
           public_token_id: public_token.id
           )
 
@@ -176,7 +187,8 @@ class Transaction < ActiveRecord::Base
 
           pending: transaction.pending,
           pending_transaction: transaction.pending_transaction,
-          name_score: transaction.score.name
+          name_score: transaction.score.name,
+          user_id: user_id
           )
       end
     end

@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require tether
 //= require bootstrap-sprockets
 //= require social-share-button

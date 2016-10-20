@@ -1,0 +1,31 @@
+<% set_meta_tags :site => 'Security • Settings • Milo' %>
+
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <%= render :partial => 'devise/shared/subheader' %>
+        <h6>Change Password</h6>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <section>
+            <div class="row">
+              <%= devise_error_messages! %>
+              <div class="col-sm-12">
+                - current password -
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                - new password -
+              </div>
+              <div class="col-sm-6">
+                - confirm password -
+              </div>
+            </div>
+          </section>
+          <%= f.submit "Change Password", class: "button -blue" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

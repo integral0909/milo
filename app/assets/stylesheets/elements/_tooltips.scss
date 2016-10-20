@@ -1,0 +1,60 @@
+/*
+* Milo
+* Copyright Milo 2016
+* milosavings.com
+*/
+
+
+// Tooltips
+.tooltip {
+
+  &.in {
+    opacity: 1;
+  }
+
+  > .tooltip-inner {
+    background-color: #FFF;
+    border: 1px solid #DDE1E2;
+    border-radius: 4px;
+    -moz-box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08);
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08);
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08);
+    color: #8B999F;
+    font-size: 0.875em;
+    padding: 24px;
+    text-align: left;
+
+    strong {
+      display: block;
+      font-family: 'Futura Bold';
+      margin: 0 0 8px;
+      min-width: 264px;
+    }
+
+    ul {
+      margin: 0 0 0 8px;
+      min-width: 264px;
+      padding: 0 0 0 8px;
+    }
+  }
+
+  &.tooltip-top,
+  &.bs-tether-element-attached-bottom {
+    .tooltip-arrow {
+      border-top-color: #DDE1E2;
+    }
+  }
+}
+
+// Icon Helper w/ Tooltip
+i.helper {
+  background: #DDE1E2;
+  border-radius: 8px;
+  color: #8B999F;
+  cursor: pointer;
+  font-size: 0.75em;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  width: 16px;
+}

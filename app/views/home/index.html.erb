@@ -1,11 +1,11 @@
-<% set_meta_tags :site => 'Milo' %>
+<% set_meta_tags :site => 'Overview • Milo' %>
 
 <% if current_user.invited %>
-  <div class="page-content">
-    <div class="container">
-      <div class="row">
-        <% if @accounts.present? || (@transactions && !@transactions.empty?) %>
-          <% if @checking == nil %>
+  <% if @accounts.present? || (@transactions && !@transactions.empty?) %>
+    <% if @checking == nil %>
+      <div class="page-content">
+        <div class="container">
+          <div class="row">
             <div class="col-md-12">
               <div class="milo-card">
                 <div class="mc-title">Confirm Checking Account</div>
@@ -13,98 +13,96 @@
                 <a href="/checkings/new" class="button -green">Confirm</a>
               </div>
             </div>
-          <% else %>
-            <p>Thanks for setting up your checking account! That is it for now, we will notify you when we roll out new updates shortly.</p>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div class="page-content">
+        <div class="container">
+          <div class="row">
             <div class="col-md-12">
-              <div class="milo-card">
-                <div class="mc-title">* For Testing</div>
-                <a href="/users/<%= current_user.id %>/accounts">Add Accounts</a><br>
-                <a href="/users/<%= current_user.id %>">View User</a>
+              <div class="milo-card progress">
+                <div class="mc-title">
+                  Savings Progress
+                  <span><em>$19,482</em> / $46,000</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="current-progress"></div>
+                  <div class="bar one"></div>
+                  <div class="bar two"></div>
+                  <div class="bar three"></div>
+                  <div class="bar four"></div>
+                  <div class="bar five"></div>
+                  <div class="bar six"></div>
+                  <div class="bar seven"></div>
+                </div>
               </div>
             </div>
-          <% end %>
-        <% else %>
-          <div class="col-md-12">
-            <div class="milo-card">
-              <div class="mc-title">Welcome to Milo!</div>
-              <p><strong>Milo</strong> is a roundup based app that will help you build savings for college! It looks like you haven't connected an account to track and transfer your roundups from. Click the link below to connect your account.</p>
-              <a href="/users/<%= current_user.id %>/accounts" class="button -green">Connect</a>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="milo-card account-value">
+                <div class="mc-title">
+                  Account Value
+                  <span>Last 30 Days <i class="fa fa-chevron-down"></i></span>
+                </div>
+                <div class="av-total">$6,482.15<span>+$21.83</span></div>
+                - chart -
+              </div>
             </div>
           </div>
-        <% end %>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="milo-card history">
+                <div class="mc-title">History</div>
+                <ul class="recent-transactions">
+                  <li>$16.22<span><strong>Deposit</strong>AUG 24, 2016</span></li>
+                  <li>$37.49<span><strong>Deposit</strong>AUG 17, 2016</span></li>
+                  <li>$12.85<span><strong>Deposit</strong>AUG 10, 2016</span></li>
+                </ul>
+                <a href="/history.html">View History</a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="milo-card quick-save">
+                <div class="mc-title">Quick Save</div>
+                <div class="amount">+$20.00</div>
+                <button class="button -full -green">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <!-- <div class="row">
-        <div class="col-md-12">
-          <div class="milo-card progress">
-            <div class="mc-title">
-              Savings Progress
-              <span><em>$19,482</em> / $46,000</span>
-            </div>
-            <div class="progress-bar">
-              <div class="current-progress"></div>
-              <div class="bar one"></div>
-              <div class="bar two"></div>
-              <div class="bar three"></div>
-              <div class="bar four"></div>
-              <div class="bar five"></div>
-              <div class="bar six"></div>
-              <div class="bar seven"></div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="row">
-        <div class="col-md-12">
-          <div class="milo-card account-value">
-            <div class="mc-title">
-              Account Value
-              <span>Last 30 Days <i class="fa fa-chevron-down"></i></span>
-            </div>
-            <div class="av-total">$6,482.15<span>+$21.83</span></div>
-            - chart -
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="row">
-        <div class="col-md-6">
-          <div class="milo-card history">
-            <div class="mc-title">History</div>
-            <ul class="recent-transactions">
-              <li>$16.22<span><strong>Deposit</strong>AUG 24, 2016</span></li>
-              <li>$37.49<span><strong>Deposit</strong>AUG 17, 2016</span></li>
-              <li>$12.85<span><strong>Deposit</strong>AUG 10, 2016</span></li>
+      <div class="sidebar">
+        <div class="pending-roundups">
+          <div class="pr-title">Pending Round-Ups</div>
+          <% if @transactions.present? %>
+            <ul class="pr-list">
+              <% @transactions.each do |t| %>
+                <% if t.amount > 0 %>
+                  <li>+ $<%= t.roundup %><span><strong>$<%= t.amount %></strong> <%= t.trans_name %></span></li>
+                <% end %>
+              <% end %>
             </ul>
-            <a href="/history.html">View History</a>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="milo-card quick-save">
-            <div class="mc-title">Quick Save</div>
-            <div class="amount">+$20.00</div>
-            <button class="button -full -green">Save</button>
-          </div>
-        </div>
-      </div> -->
-
-    </div>
-  </div>
-  <div class="sidebar">
-    <div class="pending-roundups">
-      <div class="pr-title">Pending Round-Ups</div>
-      <% if @transactions.present? %>
-        <ul class="pr-list">
-          <% @transactions.each do |t| %>
-          <!-- Only show positive amount -->
-            <% if t.amount > 0 %>
-              <li>+ $<%= t.roundup %><span><strong>$<%= t.amount %></strong> <%= t.trans_name %></span></li>
-            <% end %>
+          <% else %>
+            <small>No current roundups available.<small>
           <% end %>
-        </ul>
-      <% else %>
-        <small>No current roundups available.<small>
-      <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="page-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h6>Connect Bank Account</h6>
+            <p>Before you can begin using Milo we need to connect a bank account that we can track, calculate round ups and transfer funds to and from your Milo savings account.</p>
+            <a href="/users/<%= current_user.id %>/accounts" class="button -blue">Connect Account</a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  <% end %>
 <% else %>
   <div class="page-content">
     <div class="container">

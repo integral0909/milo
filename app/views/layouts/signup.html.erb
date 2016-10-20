@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <%= display_meta_tags %>
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+  <script type="text/javascript">
+    $(function() {
+      // Tooltip
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
+
+</head>
+<body class="milo-signup">
+
+  <div class="container">
+    <div class="row">
+      <% if current_page?(new_user_session_path) %>
+        <a href="/users/sign_up">Sign Up</a>
+      <% end %>
+      <a href="/" class="signup-logo">Milo</a>
+    </div>
+
+    <%= yield %>
+
+  </div>
+
+  <%= render :partial => 'layouts/analytics' %>
+
+</body>
+</html>

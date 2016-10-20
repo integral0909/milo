@@ -24,51 +24,48 @@
 %>
 
 <div class="row">
-  <div class="col-md-5 col-md-offset-2">
+  <div class="col-md-6 col-md-offset-2">
     <div class="signup">
       <h1><span>Sign Up</span> Make Change Happen</h1>
-      <%= render "../views/layouts/messages" %>
-
-      <!-- <div class="social-signup">
-        <a href="{{ "/phone.html" | prepend: site.baseurl }}" class="btn-social -facebook"><i class="fa fa-facebook"></i> Sign up with Facebook</a>
-        <a href="{{ "/phone.html" | prepend: site.baseurl }}" class="btn-social -twitter"><i class="fa fa-twitter"></i> Sign up with Twitter</a>
-        <a href="{{ "/phone.html" | prepend: site.baseurl }}" class="btn-social -google"><i class="fa fa-google"></i> Sign up with Google</a>
-        <p><strong>OR,</strong> sign up using your <a class="email-show" href="#">email</a> address.</p>
-      </div> -->
+      <%= render "layouts/messages" %>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "email-signup") do |f| %>
         <%= devise_error_messages! %>
         <fieldset class="form-group">
-          <%= f.label :name %>
-          <%= f.text_field :name, autofocus: true, class: "form-control" %>
+          <label>Full Name</label>
+          <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "Name", required: true %>
         </fieldset>
         <fieldset class="form-group">
           <label>Postal Code</label>
-          <%= f.text_field :zip, class: "form-control" %>
+          <%= f.text_field :zip, class: "form-control", placeholder: "xxxxx", required: true %>
         </fieldset>
         <fieldset class="form-group">
           <%= f.label :email %>
-          <%= f.email_field :email, autofocus: true, class: "form-control" %>
+          <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "Email", required: true %>
         </fieldset>
         <fieldset class="form-group">
           <%= f.label :password %>
-          <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-          <small class="text-muted">Minimum 8 characters.</small>
+          <%= f.password_field :password, autocomplete: "off", class: "form-control", required: true %>
+          <small class="text-muted">Strong Password <i class="fa fa-question helper" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>Password Requirements:</strong><ul><li>minimum of 8 characters</li><li>one lowercase</li><li>one uppercase</li><li>one number</li></ul>"></i></small>
         </fieldset>
-        <!-- hidden input which will add the refferal code from the url to the user -->
-        <%= f.hidden_field :referral_code, value: session[:referral]  %>
-        <button type="submit" class="button -full -green">Sign Up</button>
-        <!-- <button type="submit" class="button -green">Sign Up</button> -->
-        <!-- <a href="{{ "/phone.html" | prepend: site.baseurl }}" class="button -full -green">Sign Up</a>
-        <p><strong>OR,</strong> sign up using your preferred <a class="social-show" href="#">social</a> network.</p> -->
+        <fieldset class="checkbox">
+          <label>
+            <%= f.check_box :agreement, required: true %>
+            I agree to Milo's <a href="/privacy" target="_blank">Privacy Policy</a> and <a href="/terms" target="_blank">Terms of Service</a>.
+          </label>
+        </fieldset>
+        <% if params[:access] == "early" %>
+          <%= f.hidden_field :invited, value: true %>
+        <% end %>
+        <%= f.hidden_field :referral_code, value: session[:referral] %>
+        <button type="submit" class="button -full -blue">Sign Up</button>
       <% end %>
     </div>
-    <p class="disclaimer">By continuing, I agree to Milo's <!--<a href="#">ACH Authorization</a>, <a href="#">E-Sign Consent</a>, --><a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms of Service</a>.</p>
   </div>
-  <div class="col-md-5">
+  <div class="col-md-4">
     <ul class="signup-steps">
       <li class="active"><span></span> Basic Info</li>
-      <!-- <li><span></span> Mobile Number</li>
-      <li><span></span> Checking Account</li> -->
+      <li><span></span> Mobile Number</li>
+      <li><span></span> Checking Account</li>
     </ul>
   </div>
 </div>
