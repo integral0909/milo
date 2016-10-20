@@ -1,15 +1,57 @@
+# == Schema Information
+#
+# Table name: transactions
+#
+#  plaid_trans_id                   :integer          primary key
+#  account_id                       :string
+#  amount                           :float
+#  trans_name                       :string
+#  plaid_cat_id                     :integer
+#  plaid_cat_type                   :string
+#  date                             :date
+#  vendor_address                   :string
+#  vendor_city                      :string
+#  vendor_state                     :string
+#  vendor_zip                       :string
+#  vendor_lat                       :float
+#  vendor_lon                       :float
+#  pending                          :boolean
+#  pending_transaction              :string
+#  name_score                       :integer
+#  new_amount                       :float            scale: 2
+#  roundup                          :float            scale: 2
+#  user_id                          :integer
+#
+
+# ================================================
+# RUBY->MODEL->TRANSACTION =======================
+# ================================================
 class Transaction < ActiveRecord::Base
 
+  # ----------------------------------------------
+  # PRIMARY-KEY ----------------------------------
+  # ----------------------------------------------
   self.primary_key = 'plaid_trans_id'
 
+  # ----------------------------------------------
+  # RELATIONS ------------------------------------
+  # ----------------------------------------------
   belongs_to :account
+
   delegate :user, :to => :account
 
+  # ----------------------------------------------
+  # CALLBACKS ------------------------------------
+  # ----------------------------------------------
   before_save :round_transaction, :roundup
 
+  # ----------------------------------------------
+  # ACCOUNTS-CREATE ------------------------------
+  # ----------------------------------------------
   def self.create_accounts(plaid_user_accounts, public_token, user_id)
     plaid_user_accounts.each do |acct|
       account = Account.find_by(plaid_acct_id: acct.id)
+      # IF, account exists update
       if account
         account.update(
           account_name: acct.meta["name"],
@@ -26,6 +68,7 @@ class Transaction < ActiveRecord::Base
           user_id: user_id,
           public_token_id: public_token.id
           )
+      # ELSE, create account
       else
         Account.create(
           plaid_acct_id: acct.id,
@@ -47,6 +90,9 @@ class Transaction < ActiveRecord::Base
     end
   end
 
+  # ----------------------------------------------
+  # TRANSACTIONS-CREATE --------------------------
+  # ----------------------------------------------
   def self.create_transactions(plaid_user_transactions, user_id)
     current_date = Date.today
     last_week_date = current_date - 1.week
@@ -68,7 +114,7 @@ class Transaction < ActiveRecord::Base
           vendor_lat = nil
           vendor_lon = nil
         end
-
+        # IF, transactions exists update
         if newtrans
           newtrans.update(
             plaid_trans_id: transaction.id,
@@ -91,6 +137,7 @@ class Transaction < ActiveRecord::Base
             name_score: transaction.score["name"],
             user_id: user_id
             )
+        # ELSE, create transaction
         else
           newtrans = Transaction.create(
             plaid_trans_id: transaction.id,
@@ -125,6 +172,9 @@ class Transaction < ActiveRecord::Base
     end
   end
 
+  # ----------------------------------------------
+  # ACCOUNTS-UPDATE ------------------------------
+  # ----------------------------------------------
   def self.update_accounts(user_id, public_token, milo_id)
     user_accounts = Account.where(user_id: user_id).all
     user_accounts.each do |acct|
@@ -152,14 +202,14 @@ class Transaction < ActiveRecord::Base
           user_id: milo_id,
           public_token_id: public_token.id
           )
-
       end
     end
   end
 
-
+  # ----------------------------------------------
+  # TRANSACTIONS-UPDATE --------------------------
+  # ----------------------------------------------
   def self.update_transactions(user_transactions, user_id)
-
     user_transactions.each do |transaction|
       trans = Transaction.find_by(plaid_trans_id: transaction._id)
       vendor_lat = nil
@@ -194,10 +244,16 @@ class Transaction < ActiveRecord::Base
     end
   end
 
+  # ----------------------------------------------
+  # TRANSACTION-ROUNDUP --------------------------
+  # ----------------------------------------------
   def round_transaction
     self.new_amount = self.amount.ceil
   end
 
+  # ----------------------------------------------
+  # ROUNDUP --------------------------------------
+  # ----------------------------------------------
   def roundup
     if self.new_amount > 0.00
       subtract = self.new_amount - self.amount
