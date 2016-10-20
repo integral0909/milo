@@ -13,6 +13,13 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
+  <script type="text/javascript">
+    $(function() {
+      // Tooltip
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
+
 </head>
 <body class="milo-signup">
 

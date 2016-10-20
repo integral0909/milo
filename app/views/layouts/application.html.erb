@@ -14,9 +14,10 @@
   <%= csrf_meta_tags %>
 
   <script type="text/javascript">
-    // Sidebar Equal Height to Page Content
     $(function() {
+      // Sidebar Equal Height to Page Content
       $(".sidebar").css("height", $(".page-content").height() + 80);
+      // Tooltip
       $('[data-toggle="tooltip"]').tooltip();
     });
   </script>
