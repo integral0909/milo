@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   # DEVISE ---------------------------------------
   # ----------------------------------------------
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :timeoutable
+         :recoverable, :trackable, :validatable, :timeoutable
 
   # ----------------------------------------------
   # RELATIONS ------------------------------------
