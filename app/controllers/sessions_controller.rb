@@ -1,4 +1,6 @@
 class SessionsController < Devise::SessionsController
+  layout "signup"
+  
   after_action :prepare_intercom_shutdown, only: [:destroy]
 
   def new
