@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161016193639) do
+ActiveRecord::Schema.define(version: 20161013164201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,17 +111,16 @@ ActiveRecord::Schema.define(version: 20161016193639) do
     t.string   "referral_code"
     t.string   "name"
     t.string   "zip"
-    t.string   "dwolla_id"
-    t.string   "dwolla_funding_source"
     t.string   "mobile_number"
     t.string   "verification_code"
     t.boolean  "is_verified"
+    t.string   "dwolla_id"
+    t.string   "dwolla_funding_source"
     t.boolean  "on_demand"
     t.boolean  "agreement"
     t.string   "address"
     t.string   "city"
     t.string   "state"
-    t.string   "plaid_access_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
