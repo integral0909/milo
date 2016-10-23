@@ -47,12 +47,12 @@ class Transaction < ActiveRecord::Base
     end
   end
 
-  def self.create_transactions(plaid_user_transactions, user_id)
+  def self.create_transactions(plaid_user_transactions, plaid_checking_id, user_id)
     current_date = Date.today
     last_week_date = current_date - 1.week
 
     plaid_user_transactions.each do |transaction|
-      # only save positive transactions
+      # only save positive transactions and that are within a week old
       if (transaction.amount > 0) && (transaction.date.to_date > last_week_date)
         newtrans = Transaction.find_by(plaid_trans_id: transaction.id)
 
@@ -89,37 +89,40 @@ class Transaction < ActiveRecord::Base
             pending: transaction.pending,
             pending_transaction: transaction.pending_transaction,
             name_score: transaction.score["name"],
-            user_id: user_id
             )
         else
-          newtrans = Transaction.create(
-            plaid_trans_id: transaction.id,
-            account_id: transaction.account,
-            amount: transaction.amount,
-            trans_name: transaction.name,
-            plaid_cat_id: transaction.category_id.to_i,
-            plaid_cat_type: transaction.type["primary"],
-            date: transaction.date.to_date,
+          if transaction.account == plaid_checking_id
+            newtrans = Transaction.create(
+              plaid_trans_id: transaction.id,
+              account_id: transaction.account,
+              amount: transaction.amount,
+              trans_name: transaction.name,
+              plaid_cat_id: transaction.category_id.to_i,
+              plaid_cat_type: transaction.type["primary"],
+              date: transaction.date.to_date,
 
-            vendor_address: vendor_address,
-            vendor_city: vendor_city,
-            vendor_state: vendor_state,
-            vendor_zip: vendor_zip,
-            vendor_lat: vendor_lat,
-            vendor_lon: vendor_lon,
+              vendor_address: vendor_address,
+              vendor_city: vendor_city,
+              vendor_state: vendor_state,
+              vendor_zip: vendor_zip,
+              vendor_lat: vendor_lat,
+              vendor_lon: vendor_lon,
 
-            pending: transaction.pending,
-            pending_transaction: transaction.pending_transaction,
-            name_score: transaction.score["name"],
-            user_id: user_id
-            )
+              pending: transaction.pending,
+              pending_transaction: transaction.pending_transaction,
+              name_score: transaction.score["name"],
+              user_id: user_id
+              )
+          end
         end
-        if newtrans.plaid_cat_id == 0 || newtrans.plaid_cat_id == nil
-          #newtrans.category = Category.find_by(name: "Tag")
-          newtrans.save
-        else
-          #newtrans.category = PlaidCategory.find_by(plaid_cat_id: newtrans.plaid_cat_id).category
-          newtrans.save
+        if newtrans
+          if newtrans.plaid_cat_id == 0 || newtrans.plaid_cat_id == nil
+            #newtrans.category = Category.find_by(name: "Tag")
+            newtrans.save
+          else
+            #newtrans.category = PlaidCategory.find_by(plaid_cat_id: newtrans.plaid_cat_id).category
+            newtrans.save
+          end
         end
       end
     end
