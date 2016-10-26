@@ -28,6 +28,7 @@
 #  address                          :string
 #  city                             :string
 #  state                            :string
+#  avater                           :attachment
 #
 
 # ================================================
@@ -58,6 +59,12 @@ class User < ActiveRecord::Base
 
   # validate :mobile_number_is_unique, on: :update
   validates :mobile_number, phone: { possible: false, allow_blank: true, types: [:mobile] }
+
+  # ----------------------------------------------
+  # AVATAR ---------------------------------------
+  # ----------------------------------------------
+  has_attached_file :avatar, styles: { large: "512x512", medium: "300x300", thumb: "100x100" }
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   # ----------------------------------------------
   # MOBILE-NUMBER-VERIFY -------------------------
