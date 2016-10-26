@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   # DEVISE ---------------------------------------
   # ----------------------------------------------
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :trackable, :validatable, :timeoutable, :lockable
 
   # ----------------------------------------------
   # RELATIONS ------------------------------------
@@ -49,10 +49,12 @@ class User < ActiveRecord::Base
   has_many :public_tokens
   has_many :accounts
   has_many :transactions
+  has_one  :checking
 
   # ----------------------------------------------
   # VALIDATIONS ----------------------------------
   # ----------------------------------------------
+
   validate :email_is_unique, on: :create
   validate :password_strength
 
@@ -71,6 +73,12 @@ class User < ActiveRecord::Base
       return false
     end
     return true
+  end
+
+  # Saving the plaid access token to the user model
+  def self.add_plaid_access_token(user, access_token)
+    user.plaid_access_token = access_token
+    user.save!
   end
 
   # ==============================================

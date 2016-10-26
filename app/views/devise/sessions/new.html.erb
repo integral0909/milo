@@ -12,12 +12,7 @@
           <%= f.label :password %>
           <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
         </fieldset>
-        <% if devise_mapping.rememberable? -%>
-          <fieldset class="form-group">
-            <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
-          </fieldset>
-        <% end -%>
+        <div class="spacer -space-16"></div>
         <button type="submit" class="button -full -blue">Log In</button>
       <% end %>
     </div>
