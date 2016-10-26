@@ -42,6 +42,9 @@ gem 'social-share-button'
 # User Accounts with Devise
 gem 'devise'
 
+# Upload Images
+gem 'paperclip'
+
 # Mobile Phone Confirmation
 gem 'twilio-ruby', '~> 4.0.0'
 gem 'phonelib'

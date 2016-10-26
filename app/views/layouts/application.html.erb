@@ -29,11 +29,12 @@
     <a class="logo" href="/">Milo</a>
     <div class="milo-user">
       <div class="mu-img">
-        <!-- TODO :: provide a fallback user image -->
-        <% if !current_user %>
-          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/ok/128.jpg">
+        <% if current_user.avatar? %>
+          <%= image_tag current_user.avatar.url(:medium) %>
         <% else %>
-          <a href="#" class="add-avatar"><%= image_tag("img-add-avatar.png", alt: "Add avatar") %></a>
+          <%= link_to settings_path, class: "add-avatar" do %>
+            <%= image_tag("img-add-avatar.png", alt: "Add avatar") %>
+          <% end %>
         <% end %>
       </div>
       <% if current_user.name %>
