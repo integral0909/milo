@@ -17,10 +17,10 @@ rescue ActiveRecord::RecordNotFound => e
 end
 
 # create an account token if one doesn't already exist
-begin
-  TokenData.fresh_token_by! account_id: ENV["DWOLLA_ACCOUNT_ID"]
-rescue ActiveRecord::RecordNotFound => e
-  TokenData.create! account_id: ENV["DWOLLA_ACCOUNT_ID"],
-                    refresh_token: ENV["DWOLLA_ACCOUNT_REFRESH_TOKEN"],
-                    expires_in: -1
-end
+# begin
+#   TokenData.fresh_token_by! account_id: ENV["DWOLLA_ACCOUNT_ID"]
+# rescue ActiveRecord::RecordNotFound => e
+#   TokenData.create! account_id: ENV["DWOLLA_ACCOUNT_ID"],
+#                     refresh_token: ENV["DWOLLA_ACCOUNT_REFRESH_TOKEN"],
+#                     expires_in: -1
+# end
