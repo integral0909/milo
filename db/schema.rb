@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161016193639) do
+ActiveRecord::Schema.define(version: 20161027004327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,11 +86,11 @@ ActiveRecord::Schema.define(version: 20161016193639) do
     t.string   "dwolla_url"
     t.string   "user_id"
     t.string   "roundup_count"
-    t.string   "roundup_ammount"
     t.string   "status"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.string   "transfer_type"
+    t.string   "roundup_amount"
   end
 
   create_table "users", force: :cascade do |t|
@@ -122,9 +122,17 @@ ActiveRecord::Schema.define(version: 20161016193639) do
     t.string   "city"
     t.string   "state"
     t.string   "plaid_access_token"
+    t.integer  "failed_attempts",        default: 0,     null: false
+    t.string   "unlock_token"
+    t.datetime "locked_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
 end

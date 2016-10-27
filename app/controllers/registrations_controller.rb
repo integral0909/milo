@@ -62,6 +62,12 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def accounts
+    @accounts = Account.where(user_id: current_user.id).all
+    if current_user.checking.present?
+      @checking = Checking.find_by(user_id: current_user.id)
+      @account = Account.find_by(plaid_acct_id: @checking.plaid_acct_id)
+    end
+
     render layout: "application"
   end
 
@@ -104,7 +110,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def account_update_params
-    params.require(:user).permit(:referral_code, :name, :address, :city, :state, :zip, :email, :password, :password_confirmation, :current_password, :invited, :agreement, :mobile_number, :is_verified, :on_demand)
+    params.require(:user).permit(:referral_code, :name, :address, :city, :state, :zip, :email, :password, :password_confirmation, :current_password, :invited, :agreement, :mobile_number, :is_verified, :on_demand, :avatar)
   end
 
 end
