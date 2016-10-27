@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Your Milo transfer was a success!</title>
+    <title>%USER_NAME%, Welcome to Milo!</title>
     <style>
       .wrapper {
   width: 100%; }
@@ -910,7 +910,7 @@ a {
   a:active {
     color: #4A90E2; }
   a:visited {
-    color: #4A90E2; }
+    color: #4C3E70; }
 
 h1 a,
 h1 a:visited,
@@ -1486,7 +1486,7 @@ body.outlook p {
                     <table class="row" style="border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;">
                       <tbody>
                         <tr style="padding: 0;vertical-align: top;text-align: left;">
-                          <td height="4px" style="font-size: 4px;line-height: 4px;background-color: #4C3E70;word-wrap: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 0;vertical-align: top;text-align: left;border-collapse: collapse !important;">&#xA0;</td>
+                          <th><img src="http://d3g67u7u30r42d.cloudfront.net/hero-milo-welcome.png" alt="" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;width: auto;max-width: 100%;clear: both;display: block;"></th>
                         </tr>
                       </tbody>
                     </table>
@@ -1504,16 +1504,33 @@ body.outlook p {
                             <table style="border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;">
                               <tr style="padding: 0;vertical-align: top;text-align: left;">
                                 <th>
-                                  <h2>Transfer Success!</h2>
-                                  <p style="margin: 0 0 0 10px;">The amount of <b>$%TRANSFER_AMOUNT%</b> has been successfully transferred from %BANK_ACCOUNT% to your Milo savings account.</p>
+                                  <h2>Welcome to Milo</h2>
+                                  <p style="margin: 0 0 0 10px;">Now that you've joined Milo and connected your bank account, you are ready to begin automatically saving. Below is a quick recap explaining the service agreements with Milo.</p>
+                                  <ul style="padding: 0; Margin: 0 0 0 40px;">
+                                    <li style="Margin: 16px 0 16px 0;">You have agreed to Milo's and our partner's <a href="https://milosavings.com/privacy" target="_blank">privacy policies</a> and <a href="https://milosavings.com/terms" target="_blank">terms of service</a>.</li>
+                                    <li style="Margin: 0 0 16px 0">You have authorized On-Demand Transfers, which enable Milo to automatically transfer funds from your bank account into your Milo savings account. At anytime you may disable automatic saving from your <a href="https://milosavings.com/settings" target="_blank">settings.</a></li>
+                                    <li style="Margin: 0 0 16px 0">The bank account <b><%= @funding_account.name %></b> has been connected to your Milo account.</li>
+                                  </ul>
+                                  <h3>Ready to set a goal?</h3>
+                                  <p style="margin: 0 0 0 10px;">We want to help you do just that. Log in and we will help you create your first goal and show you around.</p>
                                   <table class="spacer" style="border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;">
                                     <tbody>
                                       <tr style="padding: 0;vertical-align: top;text-align: left;">
-                                        <td height="8px" style="font-size: 8px;line-height: 8px;word-wrap: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 0;vertical-align: top;text-align: left;border-collapse: collapse !important;">&#xA0;</td>
+                                        <td height="16px" style="font-size: 8px;line-height: 8px;word-wrap: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 0;vertical-align: top;text-align: left;border-collapse: collapse !important;">&#xA0;</td>
                                       </tr>
                                     </tbody>
                                   </table>
-                                  <p style="margin: 0 0 0 10px;"><a href="#" target="_blank">View Account</a></p>
+                                  <table class="button large expand" style="border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;">
+                                    <tr style="padding: 0;vertical-align: top;text-align: left;">
+                                      <td style="word-wrap: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 0;vertical-align: top;text-align: left;border-collapse: collapse !important;">
+                                        <table style="border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;">
+                                          <tr style="padding: 0;vertical-align: top;text-align: left;">
+                                            <td style="word-wrap: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 0;vertical-align: top;text-align: left;border-collapse: collapse !important;"><a href="https://milosavings.com" target="_blank">Set a Goal</a></td>
+                                          </tr>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </table>
                                   <table class="spacer" style="border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;">
                                     <tbody>
                                       <tr style="padding: 0;vertical-align: top;text-align: left;">
