@@ -6,11 +6,25 @@
       <div class="col-md-12">
         <%= render :partial => 'devise/shared/subheader' %>
         <h6>Connected Accounts</h6>
-        <div class="connected-account">
-          <a href="#" class="ca-remove">Remove <i class="fa fa-question helper" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>Remove Account</strong>Removing your account will disable the automatic saving and transfer of funds from your checking into your Milo savings account."></i></a>
-          <div class="ca-name">%Checking - Account Name%</div>
-          <div class="ca-number">XXXXX %9045%</div>
-        </div>
+        <% if @checking.present? %>
+          <div class="connected-account">
+            <%= link_to accounts_remove_path, data: { confirm: "Are you sure you want to remove this bank account?" }, remote: true, class: "ca-remove" do %>
+              Remove <i class="fa fa-question helper" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>Remove Account</strong>Removing your account will disable the automatic saving and transfer of funds from your checking into your Milo savings account."></i>
+            <% end %>
+            <div class="ca-name"><%= @account.account_name %></div>
+            <div class="ca-number">XXXXXX <%= @account.bank_account_number.last(4) %></div>
+          </div>
+        <% else %>
+          <% if @accounts.present? %>
+            <p>Confirm the checking account that you would like to use with Milo.</p>
+            <a href="/checkings/new" class="button -blue">Confirm</a>
+            <div class="spacer -space-32"></div>
+          <% else %>
+            <p>Please connect your checking account to begin saving round ups from your daily transactions.</p>
+            <%= link_to "Add Account", user_accounts_path(current_user), class: "button -blue" %>
+            <div class="spacer -space-32"></div>
+          <% end %>
+        <% end %>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
           <%= devise_error_messages! %>
           <h6>On-Demand Transfers</h6>
@@ -27,3 +41,5 @@
     </div>
   </div>
 </div>
+
+<div id="account-remove-modal" class="modal fade"></div>

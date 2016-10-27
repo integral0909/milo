@@ -12,16 +12,14 @@ class PlaidapiController < ApplicationController
       #3 Exchange the Link public_token for a Plaid API access token
       exchange_token_response = Argyle.plaid_client.exchange_token(public_token.token)
 
-      #4 Initialize current user NOTE: We can probably access the user with @user
-      user = User.find(current_user.id)
+      #4 Initialize current user
+
+      # add plaid access token for easy access when wanting to reconnect
+      User.add_plaid_access_token(@user, exchange_token_response.access_token)
 
       #5 Initialize a Plaid user with connect then save the transactions
-      connect_user = Argyle.plaid_client.set_user(exchange_token_response.access_token, ['connect'])
-      Transaction.create_transactions(connect_user.transactions, user.id)
-
-      #6 Upgrade user to utilizing Plaid Auth and save the account info
-      auth_user = connect_user.upgrade(:auth)
-      Transaction.create_accounts(auth_user.accounts, public_token, user.id)
+      auth_user = Argyle.plaid_client.set_user(exchange_token_response.access_token, ['auth'])
+      Transaction.create_accounts(auth_user.accounts, public_token, @user.id)
 
       redirect_to signup_on_demand_path
     rescue => e
