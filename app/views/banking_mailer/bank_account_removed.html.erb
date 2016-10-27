@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Your weekly transfer has been initiated by Milo!</title>
+    <title>Your bank account has been removed from Milo.</title>
     <style>
       .wrapper {
   width: 100%; }
@@ -1486,7 +1486,7 @@ body.outlook p {
                     <table class="row" style="border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;">
                       <tbody>
                         <tr style="padding: 0;vertical-align: top;text-align: left;">
-                          <th><img src="http://d3g67u7u30r42d.cloudfront.net/hero-milo-savings.png" alt="" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;width: auto;max-width: 100%;clear: both;display: block;"></th>
+                          <td height="4px" style="font-size: 4px;line-height: 4px;background-color: #4C3E70;word-wrap: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 0;vertical-align: top;text-align: left;border-collapse: collapse !important;">&#xA0;</td>
                         </tr>
                       </tbody>
                     </table>
@@ -1504,17 +1504,8 @@ body.outlook p {
                             <table style="border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;">
                               <tr style="padding: 0;vertical-align: top;text-align: left;">
                                 <th>
-                                  <h2>Your Weekly Savings</h2>
-                                  <p style="margin: 0 0 0 10px;">This week you totaled <b>$%TRANSFER%</b> in round ups. A transfer from your Chase - Checking Account to your Milo savings account has been initiated.</p>
-                                  <table class="spacer" style="border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;">
-                                    <tbody>
-                                      <tr style="padding: 0;vertical-align: top;text-align: left;">
-                                        <td height="16px" style="font-size: 8px;line-height: 8px;word-wrap: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 0;vertical-align: top;text-align: left;border-collapse: collapse !important;">&#xA0;</td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                  <h4>Contribution by %COMPANY_NAME%</h4>
-                                  <p style="margin: 0 0 0 10px;">Your employer, <b>%COMPANY_NAME%</b>, has matched your weekly round ups with $<b>%COMPANY_CONTRIBUTION%</b>. This contribution will be added to your account.</p>
+                                  <h2>Banking Account Removed</h2>
+                                  <p style="margin: 0 0 0 10px;">The funding source, <%= @funding_account.name %>, has been removed from your Milo account. If you would like to continue automatic savings with Milo please reconnect or connect another checking account.</p>
                                   <table class="spacer" style="border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;">
                                     <tbody>
                                       <tr style="padding: 0;vertical-align: top;text-align: left;">
@@ -1527,20 +1518,12 @@ body.outlook p {
                                       <td style="word-wrap: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 0;vertical-align: top;text-align: left;border-collapse: collapse !important;">
                                         <table style="border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;">
                                           <tr style="padding: 0;vertical-align: top;text-align: left;">
-                                            <td style="word-wrap: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 0;vertical-align: top;text-align: left;border-collapse: collapse !important;"><a href="https://milosavings.com" target="_blank">View Savings</a></td>
+                                            <td style="word-wrap: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 0;vertical-align: top;text-align: left;border-collapse: collapse !important;"><a href="https://milosavings.com/settings" target="_blank">Connect Account</a></td>
                                           </tr>
                                         </table>
                                       </td>
                                     </tr>
                                   </table>
-                                  <table class="spacer" style="border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;">
-                                    <tbody>
-                                      <tr style="padding: 0;vertical-align: top;text-align: left;">
-                                        <td height="16px" style="font-size: 16px;line-height: 16px;word-wrap: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 0;vertical-align: top;text-align: left;border-collapse: collapse !important;">&#xA0;</td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                  <p style="margin: 0 0 0 10px;">Have questions about your account? Please, <a href="https://milosavings.com/contacts/new" target="_blank">contact</a> the Milo team and we will be happy to help.</p>
                                   <table class="spacer" style="border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;">
                                     <tbody>
                                       <tr style="padding: 0;vertical-align: top;text-align: left;">

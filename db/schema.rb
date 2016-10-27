@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161021031451) do
+ActiveRecord::Schema.define(version: 20161027004327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,11 +86,11 @@ ActiveRecord::Schema.define(version: 20161021031451) do
     t.string   "dwolla_url"
     t.string   "user_id"
     t.string   "roundup_count"
-    t.string   "roundup_ammount"
     t.string   "status"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.string   "transfer_type"
+    t.string   "roundup_amount"
   end
 
   create_table "users", force: :cascade do |t|
@@ -111,16 +111,17 @@ ActiveRecord::Schema.define(version: 20161021031451) do
     t.string   "referral_code"
     t.string   "name"
     t.string   "zip"
+    t.string   "dwolla_id"
+    t.string   "dwolla_funding_source"
     t.string   "mobile_number"
     t.string   "verification_code"
     t.boolean  "is_verified"
-    t.string   "dwolla_id"
-    t.string   "dwolla_funding_source"
     t.boolean  "on_demand"
     t.boolean  "agreement"
     t.string   "address"
     t.string   "city"
     t.string   "state"
+    t.string   "plaid_access_token"
     t.integer  "failed_attempts",        default: 0,     null: false
     t.string   "unlock_token"
     t.datetime "locked_at"

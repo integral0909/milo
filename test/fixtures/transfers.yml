@@ -4,14 +4,14 @@ one:
   dwolla_url: MyString
   user_id: MyString
   roundup_count: MyString
-  roundup_ammount: MyString
+  roundup_amount: MyString
   status: MyString
-  type: 
+  type:
 
 two:
   dwolla_url: MyString
   user_id: MyString
   roundup_count: MyString
-  roundup_ammount: MyString
+  roundup_amount: MyString
   status: MyString
-  type: 
+  type:
