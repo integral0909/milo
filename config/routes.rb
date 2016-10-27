@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     # User Settings
-    get "settings", to: "registrations#edit", as: :settings
+    get 'settings', to: 'registrations#edit', as: :settings
     get 'settings/accounts', to: 'registrations#accounts', as: :settings_accounts
     get 'settings/security', to: 'registrations#security', as: :settings_security
     # User Sign Up
@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   # Mobile Phone Verification
   post 'verifications' => 'verifications#create'
   patch 'verifications' => 'verifications#verify'
+
+  # Remove Bank Accounts
+  get 'accounts/remove', to: 'accounts#remove', as: :accounts_remove
 
   resources :checkings
   resources :contacts, only: [:new, :create]

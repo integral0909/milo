@@ -62,6 +62,12 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def accounts
+    @accounts = Account.where(user_id: current_user.id).all
+    if current_user.checking.present?
+      @checking = Checking.find_by(user_id: current_user.id)
+      @account = Account.find_by(plaid_acct_id: @checking.plaid_acct_id)
+    end
+
     render layout: "application"
   end
 
