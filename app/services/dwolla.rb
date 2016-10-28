@@ -146,10 +146,17 @@ module Dwolla
 
         # Save transfer data
         Transfer.create_transfers(user, current_transfer_url, current_transfer_status, roundup_amount, total_transactions, "deposit")
+
+        # add the roundup amount to the users balance
+        User.add_account_balance(user, roundup_amount)
+
         puts "$#{roundup_amount}"
+
+        # Email the user that the round up was successfully withdrawn
         BankingMailer.transfer_success(user, roundup_amount, funding_account).deliver_now
       rescue => e
         puts e
+        # Email the user that there was an issue when withdrawing the round up
         BankingMailer.transfer_failed(user, roundup_amount, funding_account).deliver_now
       end
 

@@ -88,6 +88,19 @@ class User < ActiveRecord::Base
     user.save!
   end
 
+  # Add round up amount to the users account balance
+  def self.add_account_balance(user, amount)
+    # Save the roundup amount in cents
+    !user.account_balance.nil? ? user.account_balance += (amount.to_f * 100) : user.account_balance = (amount.to_f * 100)
+    user.save!
+  end
+
+  # Decrease withdrawn amount from the users account balance
+  def self.decrease_account_balance(user, amount)
+    user.account_balance -= amount
+    user.save!
+  end
+
   # ==============================================
   # PRIVATE ======================================
   # ==============================================
