@@ -1,0 +1,10 @@
+<li id="goal-<%= goal.id %>">
+  <span class="user"><%= link_to goal.user.name, goal.user %></span>
+  <span class="name"><%= goal.name %></span>
+  <span class="description"><%= goal.description %></span>
+  <span class="amount"><%= goal.amount %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(goal.created_at) %> ago.
+  </span>
+  <hr/>
+</li>

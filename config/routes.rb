@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
   resources :checkings
   resources :contacts, only: [:new, :create]
+  resources :goals, only: [:create, :destroy]
 
   # Pages for Marketing Site
   get '/*page' => 'pages#show'

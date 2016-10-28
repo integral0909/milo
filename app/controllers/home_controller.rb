@@ -6,6 +6,8 @@ class HomeController < ApplicationController
 
   def index
     @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
+    @goal = current_user.goals.build
+
     # Redirect users to proper sign up page if not complete
     if (@user.invited && !@user.is_verified)
       redirect_to signup_phone_path

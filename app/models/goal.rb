@@ -20,5 +20,12 @@ class Goal < ActiveRecord::Base
   # RELATIONS ------------------------------------
   # ----------------------------------------------
   belongs_to :user
-  
+
+  # ----------------------------------------------
+  # VALIDATIONS ----------------------------------
+  # ----------------------------------------------
+  validates :name, presence: true
+  validates :amount, presence: true
+  validates :user_id, presence: true
+
 end

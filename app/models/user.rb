@@ -48,10 +48,10 @@ class User < ActiveRecord::Base
   # ----------------------------------------------
   has_one  :checking
 
-  has_many :public_tokens
   has_many :accounts
+  has_many :goals, dependent: :destroy
+  has_many :public_tokens
   has_many :transactions
-  has_one  :checking
 
   # ----------------------------------------------
   # VALIDATIONS ----------------------------------

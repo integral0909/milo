@@ -85,8 +85,8 @@ module Dwolla
               # find all transactions where transaction.account_id = ck.plaid_acct_id & pending = false OR transaction.user_id once it's added && within the last week
               transactions = Transaction
                 .where(:account_id => ck.plaid_acct_id, :pending => false)
-                # TODO :: DWOLLA TESTING FOR SUCCESS
                 .where("date > ?", last_week_date)
+                # TODO :: DWOLLA TESTING FOR SUCCESS
 
 
               ####### total the roundups

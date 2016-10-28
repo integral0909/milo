@@ -55,4 +55,12 @@ class UserTest < ActiveSupport::TestCase
     assert_not duplicate_user.valid?
   end
 
+  test "associated goals should be destroyed" do
+    @user.save
+    @user.goals.create!(name: "New Home", description: "Saving up to buy a bigger home for the family.", amount: 150000)
+    assert_difference 'Goal.count', -1 do
+      @user.destroy
+    end
+  end
+
 end
