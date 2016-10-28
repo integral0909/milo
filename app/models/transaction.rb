@@ -53,6 +53,9 @@ class Transaction < ActiveRecord::Base
 
     plaid_user_transactions.each do |transaction|
       # only save positive transactions and that are within a week old
+
+      # TODO :: DWOLLA TESTING
+      #if (transaction.amount > 0)
       if (transaction.amount > 0) && (transaction.date.to_date > last_week_date)
         newtrans = Transaction.find_by(plaid_trans_id: transaction.id)
 
