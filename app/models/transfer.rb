@@ -1,5 +1,25 @@
+# == Schema Information
+#
+# Table name: transfers
+#
+#  id                               :integer          not null, primary key
+#  dwolla_url                       :string
+#  user_id                          :string
+#  roundup_count                    :string
+#  roundup_amount                   :string
+#  status                           :string
+#  transfer_type                    :string
+#
+
+# ================================================
+# RUBY->MODEL->TRANSFER ==========================
+# ================================================
 class Transfer < ActiveRecord::Base
 
+
+  # ----------------------------------------------
+  # TRANSFER-CREATE ------------------------------
+  # ----------------------------------------------
   def self.create_transfers(user, transfer_url, transfer_status, roundup_amount, roundup_count, transfer_type)
     # creat transfer object on roundup deposit
     Transfer.create(
