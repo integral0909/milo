@@ -56,8 +56,11 @@ class User < ActiveRecord::Base
   # ----------------------------------------------
   # VALIDATIONS ----------------------------------
   # ----------------------------------------------
-
-  validate :email_is_unique, on: :create
+  validates :name, presence: true
+  validates :zip, presence: true
+  validates :email, presence: true, length: { maximum: 255 },
+              format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i },
+              uniqueness: { case_sensitive: false }
   validate :password_strength
 
   # validate :mobile_number_is_unique, on: :update
