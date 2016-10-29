@@ -54,6 +54,13 @@
     }
   }
 
+  &.-small {
+    font-size: 0.875em;
+    height: 36px;
+    line-height: 32px;
+    padding: 0 16px;
+  }
+
   // Button Position
   &.-right {
     float: right;

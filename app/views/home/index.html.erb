@@ -108,53 +108,5 @@
     </div>
   <% end %>
 <% else %>
-  <div class="page-content">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-          <div class="milo-card growth-hack">
-            <h4>Thank You!</h4>
-            <p><strong>We have added your email to the signup queue.</strong></p>
-            <p>Spread the word about Milo on your favorite social networks to get in sooner. Share your unique referral link below and move up the queue!</p>
-            <div class="gh-link"><%= @referral_link %></div>
-            <div class="social-share-button" data-url="<%= @referral_link %>" data-title="Make change happen with Milo. Round up, save daily transactions and achieve your financial goals." data-via="milosavings">
-  						<a rel="nofollow" data-site="facebook" class="ssb ssb-facebook" onclick="return SocialShareButton.share(this);" title="Share to Facebook" href="#"><i class="fa fa-facebook"></i> Post to Facebook</a>
-  						<a rel="nofollow" data-site="twitter" class="ssb ssb-twitter" onclick="return SocialShareButton.share(this);" title="Share to Twitter" href="#"><i class="fa fa-twitter"></i> Post to Twitter</a>
-  						<a rel="nofollow" data-site="linkedin" class="ssb ssb-linkedin" onclick="return SocialShareButton.share(this);" title="Share to Linkedin" href="#"><i class="fa fa-linkedin"></i> Post to LinkedIn</a>
-  					</div>
-          </div>
-        </div>
-      </div>
-      <div id="mobile" class="row">
-        <% if @referral_rank %>
-          <div class="col-md-6">
-            <div class="milo-card">
-              <div class="mc-title">Waitlist Position</div>
-              <p><strong><%= @referral_rank %></strong> out of <%= User.count %></p>
-            </div>
-          </div>
-        <% end %>
-        <% if @referral_count %>
-          <div class="col-md-6">
-            <div class="milo-card">
-              <div class="mc-title">Total Referrals</div>
-              <p><strong><%= @referral_count %></strong> referrals</p>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="sidebar">
-    <div class="pending-roundups">
-      <% if @referral_rank %>
-        <div class="pr-title">Waitlist Position</div>
-        <div class="pr-growth-hack"><strong><%= @referral_rank %></strong> out of <%= User.count %></div>
-      <% end %>
-      <% if @referral_count %>
-        <div class="pr-title">Total Referrals</div>
-        <div class="pr-growth-hack"><strong><%= @referral_count %></strong> referrals</div>
-      <% end %>
-    </div>
-  </div>
+  <%= render partial: "home/waitlist" %>
 <% end %>

@@ -21,7 +21,19 @@ class PlaidapiController < ApplicationController
       auth_user = Argyle.plaid_client.set_user(exchange_token_response.access_token, ['auth'])
       Transaction.create_accounts(auth_user.accounts, public_token, @user.id)
 
-      redirect_to signup_on_demand_path
+      #6 Set checking account
+      accounts = Account.where(user_id: @user.id, acct_subtype: "checking")
+      # IF, only one checking account connect automatically
+      if accounts.size == 1
+        Checking.create(
+          user_id: accounts.first.user_id,
+          plaid_acct_id: accounts.first.plaid_acct_id
+        )
+        redirect_to signup_on_demand_path
+      # ELSE, allow user to select
+      else
+        redirect_to new_checking_path
+      end
     rescue => e
       # EMAIL: header=> Error while adding users account and transactions message=> @user was not able to add account through plaid. Error: e
       redirect_to user_accounts_path

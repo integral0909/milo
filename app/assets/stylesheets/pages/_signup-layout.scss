@@ -69,6 +69,20 @@ body.milo-signup {
     padding: 0;
     text-align: center;
   }
+
+  form.new_checking {
+    border-bottom: 1px solid #DDE1E2;
+    padding: 16px;
+    @extend %clear;
+
+    span.checking-name {
+      color: #292242;
+      display: inline-block;
+      font-family: 'Futura Bold';
+      line-height: 36px;
+      vertical-align: middle;
+    }
+  }
 }
 
 .shared-links {

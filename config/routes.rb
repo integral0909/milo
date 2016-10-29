@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   # Remove Bank Accounts
   get 'accounts/remove', to: 'accounts#remove', as: :accounts_remove
 
-  resources :checkings
+  resources :checkings, only: [:new, :create]
   resources :contacts, only: [:new, :create]
   resources :goals, only: [:create, :destroy]
 
