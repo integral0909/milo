@@ -29,6 +29,7 @@
 #  city                             :string
 #  state                            :string
 #  avater                           :attachment
+#  account_balance                  :integer
 #
 
 # ================================================
@@ -82,12 +83,18 @@ class User < ActiveRecord::Base
     return true
   end
 
+  # ----------------------------------------------
+  # PLAID-ACCESS-TOKEN ---------------------------
+  # ----------------------------------------------
   # Saving the plaid access token to the user model
   def self.add_plaid_access_token(user, access_token)
     user.plaid_access_token = access_token
     user.save!
   end
 
+  # ----------------------------------------------
+  # ADD-BALANCE ----------------------------------
+  # ----------------------------------------------
   # Add round up amount to the users account balance
   def self.add_account_balance(user, amount)
     # Save the roundup amount in cents
@@ -95,6 +102,9 @@ class User < ActiveRecord::Base
     user.save!
   end
 
+  # ----------------------------------------------
+  # DECREASE-BALANCE -----------------------------
+  # ----------------------------------------------
   # Decrease withdrawn amount from the users account balance
   def self.decrease_account_balance(user, amount)
     user.account_balance -= amount
