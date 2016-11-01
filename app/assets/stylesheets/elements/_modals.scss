@@ -1,0 +1,25 @@
+/*
+* Milo
+* Copyright Milo 2016
+* milosavings.com
+*/
+
+
+// Modals
+.modal-header {
+  background: #292242;
+  border-bottom: 0;
+  padding: 12px 16px;
+
+  button.close {
+    color: #FFF;
+    text-shadow: initial;
+    opacity: 0.48;
+  }
+
+  .modal-title {
+    color: #FFF;
+    font-size: 1.5em;
+    line-height: 1.2;
+  }
+}

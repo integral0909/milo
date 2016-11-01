@@ -15,7 +15,7 @@ body.milo-app {
     position: fixed;
     top: 0;
     width: 240px;
-    z-index: 9999;
+    z-index: 900;
 
     @include breakpoint(l-three) {
       height: 50px;
