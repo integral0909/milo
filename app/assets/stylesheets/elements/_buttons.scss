@@ -24,11 +24,14 @@
     width: 100%;
   }
 
-  &:hover, &:focus {
-    background: #BBC5C7;
-    color: #FFF;
+  &:focus {
     outline: none;
     text-decoration: none;
+  }
+
+  &:hover {
+    background: #BBC5C7;
+    color: #FFF;
   }
 
   // Button Size
