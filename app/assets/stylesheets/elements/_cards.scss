@@ -82,11 +82,13 @@
 
 // Value
 .milo-card.account-value {
+
   .av-total {
-    color: #282C37;
+    color: #292242;
+    font-family: 'Futura Bold';
     font-size: 3.5em;
-    font-weight: 600;
     line-height: 1;
+
     span {
       color: #1ABD7D;
       float: right;
