@@ -85,7 +85,7 @@ module Dwolla
               # find all transactions where transaction.account_id = ck.plaid_acct_id & pending = false OR transaction.user_id once it's added && within the last week
               transactions = Transaction
                 .where(:account_id => ck.plaid_acct_id, :pending => false)
-                .where("date > ?", last_week_date)
+                #.where("date > ?", last_week_date)
                 # TODO :: DWOLLA TESTING FOR SUCCESS
 
 
@@ -123,7 +123,7 @@ module Dwolla
           :_links => {
             :source => {
               # TODO :: DWOLLA TESTING FOR FAILURE
-              :href => user.dwolla_funding_source
+              #:href => user.dwolla_funding_source
             },
             :destination => {
               :href => "https://api-uat.dwolla.com/accounts/#{ENV["DWOLLA_ACCOUNT_ID"]}"
