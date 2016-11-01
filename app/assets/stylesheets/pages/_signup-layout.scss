@@ -187,3 +187,26 @@ ul.signup-steps {
     }
   }
 }
+
+// Plaid Link Button
+#plaid-link-button {
+  background: inherit;
+  border: 2px solid #4A90E2;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #4A90E2;
+  display: block;
+  font-family: 'Futura Bold';
+  font-size: 1.125em;
+  height: 50px;
+  line-height: 46px;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+
+  &:hover, &:focus {
+    background: #4A90E2;
+    color: #FFF;
+    text-decoration: none;
+  }
+}
