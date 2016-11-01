@@ -7,14 +7,13 @@
     <div class="signup">
       <h1 class="marg-16"><span>Checking Account</span> Sweet Success!</h1>
       <p>Your bank account has been verified. The only thing left for us to do is to authorize the On-Demand Transfers.</p>
-      <p>Dwolla On-Demand Transfers allow Milo to automatically transfer your weekly round ups from your checking into your savings account.</p>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "email-signup", method: :put }) do |f| %>
         <%= devise_error_messages! %>
         <%= hidden_field_tag :referer, (params[:referer] || request.env['HTTP_REFERER']) %>
         <fieldset class="checkbox" style="text-align: center;">
           <label>
             <%= f.check_box :on_demand, required: true %>
-            Dwolla On-Demand Transfer Authorization <i class="fa fa-question helper" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>On-Demand Transfer:</strong>In order to save automatically and transfer funds from your checking to your Milo savings account we need your authorization. You may disable On-Demand Transfers at anytime from your settings."></i>
+            I agree that my automatic savings from my selected checking account into my Milo savings account will be processed by the Dwolla payment system. At anytime you may cancel this authorization from your settings. <i class="fa fa-question helper" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>On-Demand Transfer:</strong>In order to save automatically and transfer funds from your checking to your Milo savings account we need your authorization. You may disable On-Demand Transfers at anytime from your settings."></i>
           </label>
         </fieldset>
         <button type="submit" class="button -full -blue">Start Saving</button>
