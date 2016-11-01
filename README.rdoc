@@ -24,3 +24,9 @@ Things you may want to cover:
 * ...
 
 Beta branch initialized
+
+## Testing
+
+### Brakeman Security
+
+To view Brakeman security report, run `$ brakeman -o brakeman_output.html`, then open brakeman_output.html  in your browser
