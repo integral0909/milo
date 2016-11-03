@@ -84,6 +84,9 @@ gem 'dwolla_v2', '~> 1.1'
 # Checking for security flaws in code
 gem "brakeman", :require => false
 
+# Store sessions in Active Record instead of cookies
+gem 'activerecord-session_store'
+
 
 group :development, :test, :staging do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
