@@ -112,7 +112,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   # Route to direct user after profile update
   def after_update_path_for(resource)
-    settings_path
+    root_path
   end
 
   private

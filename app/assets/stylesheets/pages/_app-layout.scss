@@ -144,6 +144,11 @@ body.milo-app {
           }
         }
 
+        i.fa {
+          display: none;
+          visibility: hidden;
+        }
+
         @include breakpoint(l-three) {
           color: #BBC5C7;
           float: left;
