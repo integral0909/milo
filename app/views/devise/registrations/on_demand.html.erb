@@ -6,8 +6,8 @@
   <div class="col-md-6 col-md-offset-2">
     <div class="signup">
       <h1 class="marg-16"><span>Checking Account</span> Sweet Success!</h1>
-      <p>Your bank account has been verified. The only thing left for us to do is to authorize the On-Demand Transfers.</p>
-      <p>I agree that my automatic savings from my selected checking account into my Milo savings account will be processed by the Dwolla payment system. At anytime you may cancel this authorization from your settings.</p>
+      <p class="on-demand">Your bank account has been verified. The only thing left for us to do is to authorize the On-Demand Transfers.</p>
+      <p class="on-demand">I agree that my automatic savings from my selected checking account into my Milo savings account will be processed by the Dwolla payment system. At anytime you may cancel this authorization from your settings.</p>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "email-signup", method: :put }) do |f| %>
         <%= devise_error_messages! %>
         <%= hidden_field_tag :referer, (params[:referer] || request.env['HTTP_REFERER']) %>
