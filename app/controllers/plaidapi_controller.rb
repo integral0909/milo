@@ -18,17 +18,16 @@ class PlaidapiController < ApplicationController
       User.add_plaid_access_token(@user, exchange_token_response.access_token)
 
       #5 Initialize a Plaid user with connect then save the transactions
-      auth_user = Argyle.plaid_client.set_user(exchange_token_response.access_token, ['auth'])
+      auth_user = Argyle.plaid_client.set_user(@user.plaid_access_token, ['auth'])
+
       Transaction.create_accounts(auth_user.accounts, public_token, @user.id)
 
       #6 Set checking account
       accounts = Account.where(user_id: @user.id, acct_subtype: "checking")
       # IF, only one checking account connect automatically
       if accounts.size == 1
-        Checking.create(
-          user_id: accounts.first.user_id,
-          plaid_acct_id: accounts.first.plaid_acct_id
-        )
+        Checking.create_checking(accounts)
+
         redirect_to signup_on_demand_path
       # ELSE, allow user to select
       else

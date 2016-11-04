@@ -19,4 +19,11 @@ class Checking < ActiveRecord::Base
 
   has_one :account
 
+  def self.create_checking(accounts)
+    Checking.create(
+      user_id: accounts.first.user_id,
+      plaid_acct_id: accounts.first.plaid_acct_id
+    )
+  end
+
 end
