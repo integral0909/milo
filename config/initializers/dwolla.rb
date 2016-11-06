@@ -1,7 +1,9 @@
 require 'dwolla_v2'
 
 $dwolla = DwollaV2::Client.new(id: ENV["DWOLLA_CLIENT_ID"], secret: ENV["DWOLLA_CLIENT_SECRET"]) do |config|
-  config.environment = :sandbox
+  if !Rails.env.production?
+    config.environment = :sandbox
+  end
 
   # whenever a token is granted, save it to ActiveRecord
   config.on_grant do |token|
