@@ -6,7 +6,7 @@ class PlaidapiController < ApplicationController
       # NOTE: We are using v 1.7.1 for plaid-ruby: https://github.com/plaid/plaid-ruby/tree/v1.7.1
       #1 generate a public token for the user
       public_token = PublicToken.find_or_create_by(token: params[:public_token])
-      puts "public_token: #{public_token}"
+      puts "public_token: #{public_token.token}"
       #2 save public token to user's cashflow account
       save_public_token(public_token)
 
