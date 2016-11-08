@@ -5,41 +5,35 @@ class PlaidapiController < ApplicationController
       "User: #{@user}"
       # NOTE: We are using v 1.7.1 for plaid-ruby: https://github.com/plaid/plaid-ruby/tree/v1.7.1
       #1 generate a public token for the user
-
       public_token = PublicToken.find_or_create_by(token: params[:public_token])
-      puts "public_token: #{public_token.token}"
+
       #2 save public token to user's cashflow account
       save_public_token(public_token)
-      puts "public token saved to user!"
+
       #3 Exchange the Link public_token for a Plaid API access token
       exchange_token_response = Argyle.plaid_client.exchange_token(public_token.token)
-      puts "exchange_token_response: #{exchange_token_response}"
-      #4 Initialize current user
 
-      # add plaid access token for easy access when wanting to reconnect
+      #4 add plaid access token for easy access when wanting to reconnect
       User.add_plaid_access_token(@user, exchange_token_response.access_token)
 
       #5 Initialize a Plaid user with connect then save the transactions
       auth_user = Argyle.plaid_client.set_user(@user.plaid_access_token, ['auth'])
-      puts "auth_user: #{auth_user}"
       Transaction.create_accounts(auth_user.accounts, public_token, @user.id)
 
       #6 Set checking account
       accounts = Account.where(user_id: @user.id, acct_subtype: "checking")
       # IF, only one checking account connect automatically
       if accounts.size == 1
-        puts "just one checking account"
         Checking.create_checking(accounts)
 
         redirect_to signup_on_demand_path
       # ELSE, allow user to select
       else
-        puts "multiple checking accounts"
         redirect_to new_checking_path
       end
     rescue => e
       # EMAIL: header=> Error while adding users account and transactions message=> @user was not able to add account through plaid. Error: e
-      puts e
+      # puts e
       redirect_to user_accounts_path
     end
   end
