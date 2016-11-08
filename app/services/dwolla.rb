@@ -15,8 +15,6 @@ module Dwolla
 
         # Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
         dwolla_customer_url = TokenConcern.account_token.post "customers", request_body
-        puts "Adding dwolla url to user"
-        ap dwolla_customer_url
 
         # Add dwolla customer URL to the user
         user = User.find(user.id)

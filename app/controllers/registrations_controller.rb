@@ -78,16 +78,20 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def update
-    if @user.plaid_access_token
-      # Upgrade user to utilizing Plaid Connect and save the transaction info for the checking account
-      connect_user = Argyle.plaid_client.set_user(@user.plaid_access_token)
-      # Upgrade user to use the connect product
-      connect_user.upgrade(:connect)
+    if params['first_login'] == "true"
+      if @user.plaid_access_token
+        # Upgrade user to utilizing Plaid Connect and save the transaction info for the checking account
+        connect_user = Argyle.plaid_client.set_user(@user.plaid_access_token)
+        # Upgrade user to use the connect product
+        connect_user.upgrade(:connect)
 
-      Transaction.create_transactions(connect_user.transactions, @checking.plaid_acct_id, @user.id)
+        Transaction.create_transactions(connect_user.transactions, @checking.plaid_acct_id, @user.id)
+      end
 
-      # connect Dwolla funding source and send email
-      Dwolla.connect_funding_source(@user)
+      if !@user.dwolla_funding_source
+        # connect Dwolla funding source and send email
+        Dwolla.connect_funding_source(@user)
+      end
     end
 
     super
