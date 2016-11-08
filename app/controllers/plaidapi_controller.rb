@@ -17,7 +17,10 @@ class PlaidapiController < ApplicationController
 
       #5 Initialize a Plaid user with connect then save the transactions
       auth_user = Argyle.plaid_client.set_user(@user.plaid_access_token, ['auth'])
+
       Transaction.create_accounts(auth_user.accounts, public_token, @user.id)
+
+      auth_user.upgrade(:connect)
 
       #6 Set checking account
       accounts = Account.where(user_id: @user.id, acct_subtype: "checking")

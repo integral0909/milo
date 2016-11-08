@@ -25,7 +25,7 @@ Things you may want to cover:
 
 Beta branch initialized
 
-## Deploying
+##Deploying
 
 * If changing styles, run `rake assets:precompile` and commit the changes before pushing.
 
@@ -34,8 +34,8 @@ Beta branch initialized
 
 * To Production: `git push https://git.heroku.com/getmilo.git beta:master`
 
-## Testing
+##Testing
 
-### Brakeman Security
+###Brakeman Security
 
 To view Brakeman security report, run `$ brakeman -o brakeman_output.html`, then open brakeman_output.html  in your browser
