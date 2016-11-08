@@ -2,12 +2,11 @@ class PlaidapiController < ApplicationController
 
   def add_account
     begin
-      "User: #{@user}"
       # NOTE: We are using v 1.7.1 for plaid-ruby: https://github.com/plaid/plaid-ruby/tree/v1.7.1
       #1 generate a public token for the user
       public_token = PublicToken.find_or_create_by(token: params[:public_token])
 
-      #2 save public token to user's cashflow account
+      #2 save public token to user's account
       save_public_token(public_token)
 
       #3 Exchange the Link public_token for a Plaid API access token
@@ -25,7 +24,6 @@ class PlaidapiController < ApplicationController
       # IF, only one checking account connect automatically
       if accounts.size == 1
         Checking.create_checking(accounts)
-
         redirect_to signup_on_demand_path
       # ELSE, allow user to select
       else

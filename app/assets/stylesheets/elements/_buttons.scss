@@ -6,7 +6,7 @@
 
 
 // Buttons
-.button {
+.button, a.button {
   background: inherit;
   border: 2px solid #BBC5C7;
   border-radius: 4px;
@@ -32,6 +32,7 @@
   &:hover {
     background: #BBC5C7;
     color: #FFF;
+    text-decoration: none;
   }
 
   // Button Size
