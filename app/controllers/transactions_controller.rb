@@ -12,7 +12,7 @@ class TransactionsController < ApplicationController
   private
 
   def set_transactions
-    @transaction = Transaction.find_by(params[:plaid_trans_id])
+    @transaction = Transaction.where(plaid_trans_id: params[:plaid_trans_id])
   end
 
   def transaciton_params

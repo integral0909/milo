@@ -29,28 +29,26 @@
     <a class="logo" href="/">Milo</a>
     <div class="milo-user">
       <div class="mu-img">
-        <!-- TODO :: provide a fallback user image -->
-        <% if !current_user %>
-          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/ok/128.jpg">
+        <% if current_user.avatar? %>
+          <%= image_tag current_user.avatar.url(:medium) %>
         <% else %>
-          <a href="#" class="add-avatar"><%= image_tag("img-add-avatar.png", alt: "Add avatar") %></a>
+          <%= link_to settings_path, class: "add-avatar" do %>
+            <%= image_tag("img-add-avatar.png", alt: "Add avatar") %>
+          <% end %>
         <% end %>
       </div>
       <% if current_user.name %>
         <h5><%= current_user.name %></h5>
       <% end %>
-      <span>
-        <%= current_user.city if current_user.city %>
-        <% if current_user.city? && current_user.state? %>, <% end %>
-        <%= current_user.state if current_user.state %></span>
+      <span><%= current_user.city if current_user.city %><% if current_user.city? && current_user.state? %>, <% end %><%= current_user.state if current_user.state %></span>
     </div>
     <nav>
-      <a href="/" class="<%= active_page_class?('/')%>">Overview</a>
+      <a href="/" class="<%= active_page_class?('/')%>"><i class="fa fa-home"></i> Overview</a>
       <!--
-      <a href="#">Round-Ups <span>8</span></a>
-      <a href="#">Transfer</a>
-      <a href="#">History</a>-->
-      <a href="/settings" class="<%= active_control_class?('registrations') %>">Settings</a>
+      <a href="#"><i class="fa fa-circle-o"></i> Round-Ups <span>8</span></a>
+      <a href="#"><i class="fa fa-exchange"></i> Transfer</a>
+      <a href="#"><i class="fa fa-clock-o"></i> History</a>-->
+      <a href="/settings" class="<%= active_control_class?('registrations') %>"><i class="fa fa-gear"></i> Settings</a>
       <% if current_user.admin %>
         <a href="/admin">Admin</a>
       <% end %>
@@ -60,7 +58,8 @@
 
   <%= yield %>
 
-  <!-- Go to www.addthis.com/dashboard to customize your tools -->
+  <%= content_for :modal %>
+
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-578d8d001a062943"></script>
 
   <%= render :partial => 'layouts/analytics' %>

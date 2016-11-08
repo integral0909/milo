@@ -1,15 +1,27 @@
-<div class="page-content">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
+<% set_meta_tags :site => 'Select Checking Account • Milo',
+  :noindex => true
+%>
 
-        <h1>New Checking</h1>
-
-        <%= render 'form' %>
-
-        <%= link_to 'Back', checkings_path %>
-
-      </div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-2">
+    <div class="signup">
+      <h1 class="marg-16"><span>Checking Account</span> Multiple Accounts</h1>
+      <p>Select the checking account you would like connect.</p>
+      <% @accounts.each do |a| %>
+        <%= form_for(@checking) do |f| %>
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+          <%= f.hidden_field :plaid_acct_id, :value => a.plaid_acct_id %>
+          <span class="checking-name"><%= a.name %></span>
+          <%= f.submit "Select", class: "button -blue -small -right" %>
+        <% end %>
+      <% end %>
     </div>
+  </div>
+  <div class="col-md-4">
+    <ul class="signup-steps">
+      <li><span></span> Basic Info</li>
+      <li><span></span> Mobile Number</li>
+      <li class="active"><span></span> Checking Account</li>
+    </ul>
   </div>
 </div>

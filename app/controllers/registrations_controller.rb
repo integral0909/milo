@@ -25,7 +25,9 @@ class RegistrationsController < Devise::RegistrationsController
           Dwolla.create_user(current_user)
 
           # send welcome email
-          UserMailer.welcome_email(current_user).deliver_now
+          if current_user.invited.nil?
+            UserMailer.welcome_email(current_user).deliver_now
+          end
           # Response After Sign Up
           respond_with resource, location: after_sign_up_path_for(resource)
         else
@@ -62,6 +64,12 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def accounts
+    @accounts = Account.where(user_id: current_user.id).all
+    if current_user.checking.present?
+      @checking = Checking.find_by(user_id: current_user.id)
+      @account = Account.find_by(plaid_acct_id: @checking.plaid_acct_id)
+    end
+
     render layout: "application"
   end
 
@@ -70,6 +78,22 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def update
+    if params['set_on_demand'] == "true"
+      if @user.plaid_access_token
+        # Upgrade user to utilizing Plaid Connect and save the transaction info for the checking account
+        connect_user = Argyle.plaid_client.set_user(@user.plaid_access_token, ['connect'])
+        # Upgrade user to use the connect product
+        # connect_user.upgrade(:connect)
+
+        Transaction.create_transactions(connect_user.transactions, @checking.plaid_acct_id, @user.id)
+      end
+
+      if !@user.dwolla_funding_source
+        # connect Dwolla funding source and send email
+        Dwolla.connect_funding_source(@user)
+      end
+    end
+
     super
   end
 
@@ -94,7 +118,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   # Route to direct user after profile update
   def after_update_path_for(resource)
-    settings_path
+    root_path
   end
 
   private
@@ -104,7 +128,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def account_update_params
-    params.require(:user).permit(:referral_code, :name, :address, :city, :state, :zip, :email, :password, :password_confirmation, :current_password, :invited, :agreement, :mobile_number, :is_verified, :on_demand)
+    params.require(:user).permit(:referral_code, :name, :address, :city, :state, :zip, :email, :password, :password_confirmation, :current_password, :invited, :agreement, :mobile_number, :is_verified, :on_demand, :avatar)
   end
 
 end

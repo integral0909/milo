@@ -59,10 +59,18 @@
               </div>
               <div class="col-sm-3">
                 <fieldset class="form-group">
-                  <fieldset class="form-group">
-                    <label>Postal Code</label>
-                    <%= f.text_field :zip, class: "form-control" %>
-                  </fieldset>
+                  <label>Postal Code</label>
+                  <%= f.text_field :zip, class: "form-control" %>
+                </fieldset>
+              </div>
+            </div>
+          </section>
+          <section class="form-section">
+            <div class="row">
+              <div class="col-sm-6">
+                <fieldset class="form-group">
+                  <label>Avatar</label>
+                  <%= f.file_field :avatar, class: "form-control" %>
                 </fieldset>
               </div>
             </div>

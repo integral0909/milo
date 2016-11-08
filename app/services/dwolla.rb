@@ -15,8 +15,6 @@ module Dwolla
 
         # Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
         dwolla_customer_url = TokenConcern.account_token.post "customers", request_body
-        puts "Adding dwolla url to user"
-        ap dwolla_customer_url
 
         # Add dwolla customer URL to the user
         user = User.find(user.id)
@@ -52,6 +50,8 @@ module Dwolla
         user = User.find(user.id)
         user.dwolla_funding_source = funding_source.headers[:location]
         user.save!
+
+        BankingMailer.account_added(user, funding_account).deliver_now
       rescue => e
         p e
         # Let user go through to the home screen but send email with error from dwolla
@@ -83,7 +83,8 @@ module Dwolla
               # find all transactions where transaction.account_id = ck.plaid_acct_id & pending = false OR transaction.user_id once it's added && within the last week
               transactions = Transaction
                 .where(:account_id => ck.plaid_acct_id, :pending => false)
-                .where("date > ?", last_week_date)
+                #.where("date > ?", last_week_date)
+                # TODO :: DWOLLA TESTING FOR SUCCESS
 
 
               ####### total the roundups
@@ -96,7 +97,7 @@ module Dwolla
 
               # on success => update the transaction with roundup 0.00 or rounded up. Also update total roundups on the user -> this will be where we know how much they have in their account <= IMPORTANT: Backup on gathering total roundups for a user is to query the Transfer with the user's id
               if roundup_total > 0 && transactions.count > 0
-                withdraw_roundups(user, roundup_total.round(2), transactions.count)
+                withdraw_roundups(user, number_to_currency(roundup_total.round(2), unit:""), transactions.count, ck)
               end
 
               # send email to user with weekly data and how much they have in their account
@@ -112,13 +113,15 @@ module Dwolla
       end
     end
 
-    # add the users funding source, our account number, and the total roundup ammount
-    def self.withdraw_roundups(user, roundup_ammount, total_transactions)
+    # add the users funding source, our account number, and the total roundup amount
+    def self.withdraw_roundups(user, roundup_amount, total_transactions, funding_account)
+      BankingMailer.transfer_start(user, roundup_amount, funding_account).deliver_now
       begin
         request_body = {
           :_links => {
             :source => {
-              :href => user.dwolla_funding_source
+              # TODO :: DWOLLA TESTING FOR FAILURE
+              #:href => user.dwolla_funding_source
             },
             :destination => {
               :href => "https://api-uat.dwolla.com/accounts/#{ENV["DWOLLA_ACCOUNT_ID"]}"
@@ -126,15 +129,13 @@ module Dwolla
           },
           :amount => {
             :currency => "USD",
-            :value => roundup_ammount
+            :value => roundup_amount
           },
           :metadata => {
             :user_id => user.id,
             :total_transactions => total_transactions
           }
         }
-
-        # Create Transaction object to save the data returned
 
         transfer = TokenConcern.account_token.post "transfers", request_body
         current_transfer_url = transfer.headers[:location]
@@ -144,11 +145,19 @@ module Dwolla
         current_transfer_status = transfer_status.status
 
         # Save transfer data
-        Transfer.create_transfers(user, current_transfer_url, current_transfer_status, roundup_ammount, total_transactions, "deposit")
-        puts "$#{roundup_ammount}"
+        Transfer.create_transfers(user, current_transfer_url, current_transfer_status, roundup_amount, total_transactions, "deposit")
+
+        # add the roundup amount to the users balance
+        User.add_account_balance(user, roundup_amount)
+
+        puts "$#{roundup_amount}"
+
+        # Email the user that the round up was successfully withdrawn
+        BankingMailer.transfer_success(user, roundup_amount, funding_account).deliver_now
       rescue => e
         puts e
-        # EMAIL: send email if the roundup withdrawal fails
+        # Email the user that there was an issue when withdrawing the round up
+        BankingMailer.transfer_failed(user, roundup_amount, funding_account).deliver_now
       end
 
     end

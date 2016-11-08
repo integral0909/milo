@@ -28,6 +28,8 @@
 #  address                          :string
 #  city                             :string
 #  state                            :string
+#  avater                           :attachment
+#  account_balance                  :integer
 #
 
 # ================================================
@@ -46,20 +48,29 @@ class User < ActiveRecord::Base
   # ----------------------------------------------
   has_one  :checking
 
-  has_many :public_tokens
   has_many :accounts
+  has_many :goals, dependent: :destroy
+  has_many :public_tokens
   has_many :transactions
-  has_one  :checking
 
   # ----------------------------------------------
   # VALIDATIONS ----------------------------------
   # ----------------------------------------------
-
-  validate :email_is_unique, on: :create
+  validates :name, presence: true
+  validates :zip, presence: true
+  validates :email, presence: true, length: { maximum: 255 },
+              format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i },
+              uniqueness: { case_sensitive: false }
   validate :password_strength
 
   # validate :mobile_number_is_unique, on: :update
   validates :mobile_number, phone: { possible: false, allow_blank: true, types: [:mobile] }
+
+  # ----------------------------------------------
+  # AVATAR ---------------------------------------
+  # ----------------------------------------------
+  has_attached_file :avatar, styles: { large: "512x512", medium: "300x300", thumb: "100x100" }
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   # ----------------------------------------------
   # MOBILE-NUMBER-VERIFY -------------------------
@@ -75,9 +86,31 @@ class User < ActiveRecord::Base
     return true
   end
 
+  # ----------------------------------------------
+  # PLAID-ACCESS-TOKEN ---------------------------
+  # ----------------------------------------------
   # Saving the plaid access token to the user model
   def self.add_plaid_access_token(user, access_token)
     user.plaid_access_token = access_token
+    user.save!
+  end
+
+  # ----------------------------------------------
+  # ADD-BALANCE ----------------------------------
+  # ----------------------------------------------
+  # Add round up amount to the users account balance
+  def self.add_account_balance(user, amount)
+    # Save the roundup amount in cents
+    !user.account_balance.nil? ? user.account_balance += (amount.to_f * 100) : user.account_balance = (amount.to_f * 100)
+    user.save!
+  end
+
+  # ----------------------------------------------
+  # DECREASE-BALANCE -----------------------------
+  # ----------------------------------------------
+  # Decrease withdrawn amount from the users account balance
+  def self.decrease_account_balance(user, amount)
+    user.account_balance -= amount
     user.save!
   end
 

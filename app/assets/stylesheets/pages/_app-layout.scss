@@ -15,11 +15,11 @@ body.milo-app {
     position: fixed;
     top: 0;
     width: 240px;
-    z-index: 9999;
+    z-index: 900;
 
     @include breakpoint(l-three) {
-      height: 50px;
-      padding: 8px 0 0;
+      height: 56px;
+      padding: 8px 0.9375rem;
       width: 100%;
     }
 
@@ -34,8 +34,9 @@ body.milo-app {
       @include breakpoint(l-three) {
         display: block;
         float: left;
+        font-size: 1.625em;
         line-height: 40px;
-        margin: 0 0 0 16px;
+        margin: 0;
         text-align: left;
         width: auto;
       }
@@ -94,10 +95,16 @@ body.milo-app {
     nav {
       padding: 0 20px;
       @extend %clear;
+
       @include breakpoint(l-three) {
-        display: none;
+        background: #F8FAFB;
+        border-top: 1px solid #F1F3F6;
+        bottom: 0;
+        height: 60px;
+        left: 0;
         padding: 0;
-        visibility: hidden;
+        position: fixed;
+        right: 0;
       }
 
       a {
@@ -137,25 +144,33 @@ body.milo-app {
           }
         }
 
+        i.fa {
+          display: none;
+          visibility: hidden;
+        }
+
         @include breakpoint(l-three) {
-          color: rgba(255,255,255,0.6);
+          color: #BBC5C7;
           float: left;
+          font-family: 'Futura Bold';
           font-size: 0.6em;
-          height: 42px;
+          height: 59px;
           margin: 0;
+          padding: 12px 0 0;
           text-align: center;
           text-transform: uppercase;
-          width: 20%;
+          width: 25%;
 
           &:hover, &.active {
-            color: #FFF;
-            border-bottom: 3px solid rgba(0,0,0,0.5);
+            color: #4C3E70;
+            border-bottom: 3px solid #352D52;
           }
 
           i.fa {
             display: block;
             font-size: 2em;
             margin: 0 0 6px;
+            visibility: visible;
           }
         }
       }
@@ -178,16 +193,21 @@ body.milo-app {
       @include breakpoint(l-three) {
         background: none;
         float: right;
-        height: 40px;
-        line-height: 40px;
-        margin: 0 16px 0 0;
+        font-size: 0.75em;
+        height: 20px;
+        line-height: 20px;
+        margin: 10px 0;
         position: relative;
         width: auto;
       }
 
-      &:hover {
+      &:focus, &:hover {
         background: #4C3E70;
         text-decoration: none;
+
+        @include breakpoint(l-three) {
+          background: none;
+        }
       }
     }
   }
@@ -201,7 +221,7 @@ body.milo-app {
 
     @include breakpoint(l-three) {
       margin: 0;
-      padding: 70px 16px 16px;
+      padding: 76px 16px 84px;
       width: 100%;
     }
 

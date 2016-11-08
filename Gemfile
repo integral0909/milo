@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.7.1'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -42,6 +42,10 @@ gem 'social-share-button'
 # User Accounts with Devise
 gem 'devise'
 
+# Upload Images
+gem 'paperclip'
+gem 'aws-sdk', '~> 2.3'
+
 # Mobile Phone Confirmation
 gem 'twilio-ruby', '~> 4.0.0'
 gem 'phonelib'
@@ -77,6 +81,13 @@ gem 'awesome_print', '~> 1.7'
 gem 'dwolla_v2', '~> 1.1'
 
 # gem "attr_encrypted"
+
+# Checking for security flaws in code
+gem "brakeman", :require => false
+
+# Store sessions in Active Record instead of cookies
+gem 'activerecord-session_store'
+
 
 group :development, :test, :staging do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

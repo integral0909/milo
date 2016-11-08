@@ -36,4 +36,8 @@
 
 .form-section {
   margin: 0 0 24px;
+
+  fieldset.form-group {
+    text-align: left;
+  }
 }

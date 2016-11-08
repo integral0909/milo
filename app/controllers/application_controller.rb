@@ -6,13 +6,20 @@ class ApplicationController < ActionController::Base
   before_filter :set_user, :capture_referral
 
   private
-# pull the referral id from the params if the user is signing up from a referral url
+
+  # Overwriting the sign_out redirect path method
+  def after_sign_out_path_for(resource_or_scope)
+    new_user_session_path
+  end
+
+  # pull the referral id from the params if the user is signing up from a referral url
   def capture_referral
     if !session[:referral]
       session[:referral] = params[:referral] if params[:referral]
     end
   end
-# The following variables need to set in order of function call
+
+  # The following variables need to set in order of function call
   def set_user
     @user = User.find(current_user.id) if current_user
     set_accounts_and_checking
@@ -31,6 +38,15 @@ class ApplicationController < ActionController::Base
   def set_transactions
     # If, checking account exists get the transactions for that account
     @transactions = Transaction.where(account_id: @checking.plaid_acct_id) if @checking
+
+    set_dwolla_id
+  end
+
+  # Add Dwolla funding source to user if not already set
+  def set_dwolla_id
+    if !@user.dwolla_id
+      Dwolla.create_user(@user)
+    end
   end
 
 end

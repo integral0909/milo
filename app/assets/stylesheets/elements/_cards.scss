@@ -12,9 +12,11 @@
   border-radius: 0;
   margin: 0 0 32px;
   padding: 24px;
-  @include breakpoint(l-one) {
+
+  @include breakpoint(l-three) {
     margin: 0 0 16px;
   }
+
   .mc-title {
     border-bottom: 1px solid #DDE1E2;
     box-sizing: border-box;
@@ -82,11 +84,13 @@
 
 // Value
 .milo-card.account-value {
+
   .av-total {
-    color: #282C37;
+    color: #292242;
+    font-family: 'Futura Bold';
     font-size: 3.5em;
-    font-weight: 600;
     line-height: 1;
+
     span {
       color: #1ABD7D;
       float: right;

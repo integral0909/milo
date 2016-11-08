@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  include ActionView::Helpers::NumberHelper
+
   BASE_URL = "http://milosavings.com?referral="
   before_action :authenticate_user!
   before_action :set_user
@@ -6,10 +8,13 @@ class HomeController < ApplicationController
 
   def index
     @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
+    @goal = current_user.goals.build
+
     # Redirect users to proper sign up page if not complete
     if (@user.invited && !@user.is_verified)
       redirect_to signup_phone_path
     end
+    @account_balance = number_to_currency((@user.account_balance / 100).round(2), unit:"") if @user.account_balance
   end
 
   private

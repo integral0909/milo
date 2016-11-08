@@ -6,12 +6,12 @@
 
 
 // Buttons
-.button {
+.button, a.button {
   background: inherit;
-  border: 2px solid #999;
+  border: 2px solid #BBC5C7;
   border-radius: 4px;
   box-sizing: border-box;
-  color: #999;
+  color: #BBC5C7;
   display: block;
   font-family: 'Futura Bold';
   font-size: 1.125em;
@@ -24,7 +24,14 @@
     width: 100%;
   }
 
-  &:hover, &:focus {
+  &:focus {
+    outline: none;
+    text-decoration: none;
+  }
+
+  &:hover {
+    background: #BBC5C7;
+    color: #FFF;
     text-decoration: none;
   }
 
@@ -54,7 +61,18 @@
     }
   }
 
+  &.-small {
+    font-size: 0.875em;
+    height: 36px;
+    line-height: 32px;
+    padding: 0 16px;
+  }
+
   // Button Position
+  &.-inline {
+    display: inline-block;
+  }
+
   &.-right {
     float: right;
   }

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   # Devise
-  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions' }
+  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords' }
     resources :users, :only => [:show] do
     resources :transactions, only: [:index, :show, :edit, :update]
     resources :accounts, only: [:index]
@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     # User Settings
-    get "settings", to: "registrations#edit", as: :settings
+    get 'settings', to: 'registrations#edit', as: :settings
     get 'settings/accounts', to: 'registrations#accounts', as: :settings_accounts
     get 'settings/security', to: 'registrations#security', as: :settings_security
     # User Sign Up
@@ -31,8 +31,12 @@ Rails.application.routes.draw do
   post 'verifications' => 'verifications#create'
   patch 'verifications' => 'verifications#verify'
 
-  resources :checkings
+  # Remove Bank Accounts
+  get 'accounts/remove', to: 'accounts#remove', as: :accounts_remove
+
+  resources :checkings, only: [:new, :create]
   resources :contacts, only: [:new, :create]
+  resources :goals, only: [:create, :destroy]
 
   # Pages for Marketing Site
   get '/*page' => 'pages#show'

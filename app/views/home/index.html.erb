@@ -8,9 +8,9 @@
           <div class="row">
             <div class="col-md-12">
               <div class="milo-card">
-                <div class="mc-title">Confirm Checking Account</div>
+                <div class="mc-title">Checking Account</div>
                 <p>Now that we have connected with your account/s we need to confirm the checking account that you would like to use with Milo.</p>
-                <a href="/checkings/new" class="button -green">Confirm</a>
+                <a href="/checkings/new" class="button -blue">Confirm</a>
               </div>
             </div>
           </div>
@@ -22,20 +22,33 @@
           <div class="row">
             <div class="col-md-12">
               <div class="milo-card progress">
-                <div class="mc-title">
-                  Savings Progress
-                  <span><em>$19,482</em> / $46,000</span>
-                </div>
-                <div class="progress-bar">
-                  <div class="current-progress"></div>
-                  <div class="bar one"></div>
-                  <div class="bar two"></div>
-                  <div class="bar three"></div>
-                  <div class="bar four"></div>
-                  <div class="bar five"></div>
-                  <div class="bar six"></div>
-                  <div class="bar seven"></div>
-                </div>
+                <% if (current_user.goals.count >= 1) %>
+                  <div class="mc-title">
+                    Savings Progress
+                    <% if !current_user.account_balance.nil?
+                      goal_percentage = current_user.account_balance * 100
+                      goal_percentage = goal_percentage / current_user.goals.first.amount
+                    else
+                      goal_percentage = 0
+                    end
+                    %>
+                    <span><em>$<%= current_user.account_balance ? current_user.account_balance : "0" %></em> / $<%= current_user.goals.first.amount %></span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="current-progress" style="width: <%= goal_percentage %>"></div>
+                    <div class="bar one"></div>
+                    <div class="bar two"></div>
+                    <div class="bar three"></div>
+                    <div class="bar four"></div>
+                    <div class="bar five"></div>
+                    <div class="bar six"></div>
+                    <div class="bar seven"></div>
+                  </div>
+                <% else %>
+                  <div class="mc-title">Create a Goal</div>
+                  <p>Make a bigger impact and set a goal to motivate yourself to save for an important financial goal like a college education, new home or vacation.</p>
+                  <button type="button" class="button -blue" data-toggle="modal" data-target="#setGoal">Set Goal</button>
+                <% end %>
               </div>
             </div>
           </div>
@@ -44,13 +57,13 @@
               <div class="milo-card account-value">
                 <div class="mc-title">
                   Account Value
-                  <span>Last 30 Days <i class="fa fa-chevron-down"></i></span>
+                  <!-- <span>Last 30 Days <i class="fa fa-chevron-down"></i></span> -->
                 </div>
-                <div class="av-total">$6,482.15<span>+$21.83</span></div>
-                - chart -
+                <div class="av-total">$<%= @account_balance ? @account_balance : "0.00" %><!-- <span>+$21.83</span> --></div>
               </div>
             </div>
           </div>
+          <!--
           <div class="row">
             <div class="col-md-6">
               <div class="milo-card history">
@@ -71,6 +84,7 @@
               </div>
             </div>
           </div>
+          -->
         </div>
       </div>
       <div class="sidebar">
@@ -85,7 +99,7 @@
               <% end %>
             </ul>
           <% else %>
-            <small>No current roundups available.<small>
+            <small>No current roundups available.</small>
           <% end %>
         </div>
       </div>
@@ -104,53 +118,9 @@
     </div>
   <% end %>
 <% else %>
-  <div class="page-content">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-          <div class="milo-card growth-hack">
-            <h4>Thank You!</h4>
-            <p><strong>We have added your email to the signup queue.</strong></p>
-            <p>Spread the word about Milo on your favorite social networks to get in sooner. Share your unique referral link below and move up the queue!</p>
-            <div class="gh-link"><%= @referral_link %></div>
-            <div class="social-share-button" data-url="<%= @referral_link %>" data-title="Make change happen with Milo. Round up, save daily transactions and achieve your financial goals." data-via="milosavings">
-  						<a rel="nofollow" data-site="facebook" class="ssb ssb-facebook" onclick="return SocialShareButton.share(this);" title="Share to Facebook" href="#"><i class="fa fa-facebook"></i> Post to Facebook</a>
-  						<a rel="nofollow" data-site="twitter" class="ssb ssb-twitter" onclick="return SocialShareButton.share(this);" title="Share to Twitter" href="#"><i class="fa fa-twitter"></i> Post to Twitter</a>
-  						<a rel="nofollow" data-site="linkedin" class="ssb ssb-linkedin" onclick="return SocialShareButton.share(this);" title="Share to Linkedin" href="#"><i class="fa fa-linkedin"></i> Post to LinkedIn</a>
-  					</div>
-          </div>
-        </div>
-      </div>
-      <div id="mobile" class="row">
-        <% if @referral_rank %>
-          <div class="col-md-6">
-            <div class="milo-card">
-              <div class="mc-title">Waitlist Position</div>
-              <p><strong><%= @referral_rank %></strong> out of <%= User.count %></p>
-            </div>
-          </div>
-        <% end %>
-        <% if @referral_count %>
-          <div class="col-md-6">
-            <div class="milo-card">
-              <div class="mc-title">Total Referrals</div>
-              <p><strong><%= @referral_count %></strong> referrals</p>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="sidebar">
-    <div class="pending-roundups">
-      <% if @referral_rank %>
-        <div class="pr-title">Waitlist Position</div>
-        <div class="pr-growth-hack"><strong><%= @referral_rank %></strong> out of <%= User.count %></div>
-      <% end %>
-      <% if @referral_count %>
-        <div class="pr-title">Total Referrals</div>
-        <div class="pr-growth-hack"><strong><%= @referral_count %></strong> referrals</div>
-      <% end %>
-    </div>
-  </div>
+  <%= render partial: "home/waitlist" %>
+<% end %>
+
+<% content_for :modal do %>
+  <%= render 'goals/modal_add_goal' %>
 <% end %>
