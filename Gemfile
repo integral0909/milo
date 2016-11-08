@@ -44,6 +44,7 @@ gem 'devise'
 
 # Upload Images
 gem 'paperclip'
+gem 'aws-sdk', '~> 2.3'
 
 # Mobile Phone Confirmation
 gem 'twilio-ruby', '~> 4.0.0'
