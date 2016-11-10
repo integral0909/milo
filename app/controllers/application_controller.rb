@@ -38,6 +38,15 @@ class ApplicationController < ActionController::Base
   def set_transactions
     # If, checking account exists get the transactions for that account
     @transactions = Transaction.where(account_id: @checking.plaid_acct_id) if @checking
+
+    set_dwolla_id
+  end
+
+  # Add Dwolla funding source to user if not already set
+  def set_dwolla_id
+    if !@user.dwolla_id
+      Dwolla.create_user(@user)
+    end
   end
 
 end
