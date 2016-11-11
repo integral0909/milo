@@ -7,8 +7,11 @@ class HomeController < ApplicationController
   before_action :get_referral_rank, only: :index
 
   def index
+
     @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
     @goal = current_user.goals.build
+
+    @transactions = PlaidHelper.current_week_transactions(@user, @checking)
 
     # Redirect users to proper sign up page if not complete
     if (@user.invited && !@user.is_verified)

@@ -93,8 +93,8 @@
           <% if @transactions.present? %>
             <ul class="pr-list">
               <% @transactions.each do |t| %>
-                <% if t.amount > 0 %>
-                  <li>+ $<%= t.roundup %><span><strong>$<%= t.amount %></strong> <%= t.trans_name %></span></li>
+                <% if t[:amount] > 0 %>
+                  <li>+ <%= number_to_currency(t[:roundup].round(2)) %><span><strong><%= number_to_currency(t[:amount].round(2)) %></strong> <%= t[:trans_name] %></span></li>
                 <% end %>
               <% end %>
             </ul>
