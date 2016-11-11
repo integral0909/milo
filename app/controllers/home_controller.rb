@@ -17,7 +17,8 @@ class HomeController < ApplicationController
     if (@user.invited && !@user.is_verified)
       redirect_to signup_phone_path
     end
-    @account_balance = number_to_currency((@user.account_balance / 100).round(2), unit:"") if @user.account_balance
+    
+    @account_balance = number_to_currency(@user.account_balance / 100.00, unit:"") if @user.account_balance
   end
 
   private
