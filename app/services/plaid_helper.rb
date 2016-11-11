@@ -3,10 +3,11 @@ module PlaidHelper
 
   private
   # ----------------------------------------------
-  # WEEKLY-TRANSACTIONS --------------------------
+  # CREATE-WEEKLY-TRANSACTIONS -------------------
   # Pull in last weeks transactions from the connected user account
   # ----------------------------------------------
-  def self.weekly_transactions
+  def self.create_weekly_transactions
+    sunday = set_sunday
     begin
       # NOTE: Uncomment when live
       # if day.saturday?
@@ -14,11 +15,16 @@ module PlaidHelper
         Checking.all.each do |ck|
           # Find user based on checking.user_id
           user = User.find(ck.user_id)
+
+          # Pull in plaid connect user
           connect_user = Argyle.plaid_client.set_user(user.plaid_access_token, ['connect'])
-          # set condition to upgrade user if they do not have connect yet.
-          puts connect_user.transactions.length
-          
-          Transaction.create_transactions(connect_user.transactions, ck.plaid_acct_id, user.id)
+          user_transactions = connect_user.transactions()
+
+          # filter transactions to the ones that match the users checking and this past week
+          current_transactions = user_transactions.select{|a| (a.account == ck.plaid_acct_id) && (a.date.to_date >= sunday)}
+
+          # create the transactions 
+          Transaction.create_transactions(current_transactions, ck.plaid_acct_id, user.id)
         end
     rescue => e
       # EMAIL: if all round up task breaks
@@ -39,6 +45,7 @@ module PlaidHelper
       sunday = set_sunday
 
       # Pull in plaid connect user
+      # upgrade to connect_user = Plaid::User.load(:connect, user.plaid_access_token) when upgrading to the most recent API
       connect_user = Argyle.plaid_client.set_user(user.plaid_access_token, ['connect'])
       user_transactions = connect_user.transactions()
 
