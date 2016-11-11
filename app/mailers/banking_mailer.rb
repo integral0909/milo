@@ -19,7 +19,7 @@ class BankingMailer < ApplicationMailer
 
   # email to send user when the Dwolla transfer starts
   def transfer_start(user, roundup_amount, funding_account)
-    puts "start"
+    puts "transfer start"
    @roundup_amount = roundup_amount
    @funding_account = find_account(funding_account)
    @user = user
@@ -28,7 +28,7 @@ class BankingMailer < ApplicationMailer
 
   # email to send user when the transfer was successful
   def transfer_success(user, roundup_amount, funding_account)
-    puts "success"
+    puts "Round Up Success"
    @roundup_amount = roundup_amount
    @funding_account = find_account(funding_account)
    @user = user
@@ -37,7 +37,7 @@ class BankingMailer < ApplicationMailer
 
   # email to send user when the transfer fails
   def transfer_failed(user, roundup_amount, funding_account)
-    puts "failed"
+    puts "Round Up Failed"
    @roundup_amount = roundup_amount
    @funding_account = find_account(funding_account)
    @user = user

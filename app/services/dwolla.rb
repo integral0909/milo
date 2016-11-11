@@ -69,21 +69,22 @@ module Dwolla
 
         # NOTE: Uncomment when setting automatic roundups
         # if day.saturday?
-          # set last weeks date
+          # set beginning of the week
           current_date = Date.today
-          last_week_date = current_date - 1.week
-
-
+          sunday = current_date.beginning_of_week(start_day = :sunday)
           # loop through all CHECKING accounts connected with Milo
           Checking.all.each do |ck|
             # Find user based on checking.user_id
             user = User.find(ck.user_id)
+            puts "User #{user.id} Roundups"
+            puts "-"*40
+
             begin
 
               # find all transactions where transaction.account_id = ck.plaid_acct_id & pending = false OR transaction.user_id once it's added && within the last week
               transactions = Transaction
                 .where(:account_id => ck.plaid_acct_id, :pending => false)
-                #.where("date > ?", last_week_date)
+                .where("date > ?", sunday)
                 # TODO :: DWOLLA TESTING FOR SUCCESS
 
 
@@ -121,7 +122,7 @@ module Dwolla
           :_links => {
             :source => {
               # TODO :: DWOLLA TESTING FOR FAILURE
-              #:href => user.dwolla_funding_source
+              :href => user.dwolla_funding_source
             },
             :destination => {
               :href => "https://api-uat.dwolla.com/accounts/#{ENV["DWOLLA_ACCOUNT_ID"]}"
