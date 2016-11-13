@@ -7,7 +7,7 @@ class HomeController < ApplicationController
   before_action :get_referral_rank, only: :index
 
   def index
-    @account_balance = number_to_currency((@user.account_balance / 100).round(2), unit:"") if @user.account_balance
+    @account_balance = number_to_currency((@user.account_balance / 100.00).round(2), unit:"") if @user.account_balance
     @goal = current_user.goals.build
     @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
     @transactions = PlaidHelper.current_week_transactions(@user, @checking)
