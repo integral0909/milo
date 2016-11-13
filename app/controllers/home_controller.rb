@@ -7,18 +7,21 @@ class HomeController < ApplicationController
   before_action :get_referral_rank, only: :index
 
   def index
-
-    @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
+    @account_balance = number_to_currency(@user.account_balance / 100.00, unit:"") if @user.account_balance
     @goal = current_user.goals.build
-
+    @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
     @transactions = PlaidHelper.current_week_transactions(@user, @checking)
+    @transfers = Transfer.where(user_id: @user.id).order('date ASC').limit(3)
 
     # Redirect users to proper sign up page if not complete
     if (@user.invited && !@user.is_verified)
       redirect_to signup_phone_path
     end
-    
-    @account_balance = number_to_currency(@user.account_balance / 100.00, unit:"") if @user.account_balance
+  end
+
+  # Page to see round up transfer history
+  def history
+    @transfers = Transfer.where(user_id: @user.id)
   end
 
   private
