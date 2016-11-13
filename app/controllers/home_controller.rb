@@ -11,7 +11,7 @@ class HomeController < ApplicationController
     @goal = current_user.goals.build
     @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
     @transactions = PlaidHelper.current_week_transactions(@user, @checking)
-    @transfers = Transfer.where(user_id: @user.id).limit(3)
+    @transfers = Transfer.where(user_id: @user.id).order('date ASC').limit(3)
 
     # Redirect users to proper sign up page if not complete
     if (@user.invited && !@user.is_verified)
