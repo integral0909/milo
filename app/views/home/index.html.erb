@@ -63,19 +63,23 @@
               </div>
             </div>
           </div>
-          <!--
           <div class="row">
             <div class="col-md-6">
               <div class="milo-card history">
                 <div class="mc-title">History</div>
-                <ul class="recent-transactions">
-                  <li>$16.22<span><strong>Deposit</strong>AUG 24, 2016</span></li>
-                  <li>$37.49<span><strong>Deposit</strong>AUG 17, 2016</span></li>
-                  <li>$12.85<span><strong>Deposit</strong>AUG 10, 2016</span></li>
-                </ul>
-                <a href="/history.html">View History</a>
+                <% if @transfers.present? %>
+                  <ul class="recent-transactions">
+                    <% @transfers.each do |tr| %>
+                      <li>$<%= tr.roundup_amount %><span><strong><%= tr.status == '200' ? "Processed" : "Pending" %></strong><%= tr.date.to_date.strftime("%B %d, %Y") %></span></li>
+                    <% end %>
+                  </ul>
+                <% else %>
+                  <p>No transfers currently exist.</p>
+                <% end %>
+                <a href="/history">View History</a>
               </div>
             </div>
+            <!--
             <div class="col-md-6">
               <div class="milo-card quick-save">
                 <div class="mc-title">Quick Save</div>
@@ -83,8 +87,8 @@
                 <button class="button -full -green">Save</button>
               </div>
             </div>
+            -->
           </div>
-          -->
         </div>
       </div>
       <div class="sidebar">
