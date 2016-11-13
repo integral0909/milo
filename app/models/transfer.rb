@@ -9,6 +9,7 @@
 #  roundup_amount                   :string
 #  status                           :string
 #  transfer_type                    :string
+#  date                             :string
 #
 
 # ================================================
@@ -20,7 +21,7 @@ class Transfer < ActiveRecord::Base
   # ----------------------------------------------
   # TRANSFER-CREATE ------------------------------
   # ----------------------------------------------
-  def self.create_transfers(user, transfer_url, transfer_status, roundup_amount, roundup_count, transfer_type)
+  def self.create_transfers(user, transfer_url, transfer_status, roundup_amount, roundup_count, transfer_type, current_date)
     # creat transfer object on roundup deposit
     Transfer.create(
       user_id: user.id,
@@ -28,7 +29,8 @@ class Transfer < ActiveRecord::Base
       status: transfer_status,
       roundup_amount: roundup_amount,
       roundup_count: roundup_count,
-      transfer_type: transfer_type
+      transfer_type: transfer_type,
+      date: current_date
     )
   end
 

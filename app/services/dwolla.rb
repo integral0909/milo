@@ -98,7 +98,8 @@ module Dwolla
 
               # on success => update the transaction with roundup 0.00 or rounded up. Also update total roundups on the user -> this will be where we know how much they have in their account <= IMPORTANT: Backup on gathering total roundups for a user is to query the Transfer with the user's id
               if roundup_total > 0 && transactions.count > 0
-                withdraw_roundups(user, number_to_currency(roundup_total.round(2), unit:""), transactions.count, ck)
+                roundup_total = number_to_currency(roundup_total.round(2), unit:"")
+                withdraw_roundups(user, roundup_total, transactions.count, ck, current_date)
               end
 
               # send email to user with weekly data and how much they have in their account
@@ -115,7 +116,7 @@ module Dwolla
     end
 
     # add the users funding source, our account number, and the total roundup amount
-    def self.withdraw_roundups(user, roundup_amount, total_transactions, funding_account)
+    def self.withdraw_roundups(user, roundup_amount, total_transactions, funding_account, current_date)
       BankingMailer.transfer_start(user, roundup_amount, funding_account).deliver_now
       begin
         request_body = {
@@ -134,7 +135,8 @@ module Dwolla
           },
           :metadata => {
             :user_id => user.id,
-            :total_transactions => total_transactions
+            :total_transactions => total_transactions,
+            :date => current_date
           }
         }
 
@@ -146,7 +148,7 @@ module Dwolla
         current_transfer_status = transfer_status.status
 
         # Save transfer data
-        Transfer.create_transfers(user, current_transfer_url, current_transfer_status, roundup_amount, total_transactions, "deposit")
+        Transfer.create_transfers(user, current_transfer_url, current_transfer_status, roundup_amount, total_transactions, "deposit", current_date)
 
         # add the roundup amount to the users balance
         User.add_account_balance(user, roundup_amount)

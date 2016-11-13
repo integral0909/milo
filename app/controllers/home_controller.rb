@@ -20,6 +20,11 @@ class HomeController < ApplicationController
     @account_balance = number_to_currency((@user.account_balance / 100).round(2), unit:"") if @user.account_balance
   end
 
+  # Page to see round up transfer history
+  def history
+    @transfers = Transfer.where(user_id: @user.id)
+  end
+
   private
 
   def get_referral_rank
