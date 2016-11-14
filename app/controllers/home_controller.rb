@@ -7,10 +7,19 @@ class HomeController < ApplicationController
   before_action :get_referral_rank, only: :index
 
   def index
+    # Users account balance converted to dollars
     @account_balance = number_to_currency(@user.account_balance / 100.00, unit:"") if @user.account_balance
     @goal = current_user.goals.build
+
+    # Users unique referral link
     @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
+
+    @goal = current_user.goals.build
+
+    # Pull in the users transactions from the current week. The week starts on Sunday
     @transactions = PlaidHelper.current_week_transactions(@user, @checking)
+
+    # Show the latest 3 transfers
     @transfers = Transfer.where(user_id: @user.id).order('date ASC').limit(3)
 
     # Redirect users to proper sign up page if not complete

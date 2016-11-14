@@ -79,20 +79,6 @@ class RegistrationsController < Devise::RegistrationsController
 
   def update
     if params['set_on_demand'] == "true"
-      if @user.plaid_access_token
-
-        connect_user = Argyle.plaid_client.set_user(@user.plaid_access_token, ['connect'])
-
-        # waiting for a response from Plaid
-        # current_date = Date.today
-        # last_week_date = current_date - 1.week
-        # connect_user_transactions = connect_user.get_connect({'gte': last_week_date, account: @checking.plaid_acct_id})
-        # connect_user.transactions.select{|a| a.account == @checking.plaid_acct_id}
-        connect_user_transactions = connect_user.transactions()
-        # Save the transaction info for the checking account
-        Transaction.create_transactions(connect_user_transactions, @checking.plaid_acct_id, @user.id)
-      end
-
       if @user.dwolla_funding_source.blank?
         # connect Dwolla funding source and send email
         Dwolla.connect_funding_source(@user)

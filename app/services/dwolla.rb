@@ -79,6 +79,12 @@ module Dwolla
             puts "User #{user.id} Roundups"
             puts "-"*40
 
+            if user.dwolla_funding_source.blank?
+              puts "Createing Dwolla funding source"
+              # connect Dwolla funding source and send email
+              Dwolla.connect_funding_source(user)
+            end
+
             begin
 
               # find all transactions where transaction.account_id = ck.plaid_acct_id & pending = false OR transaction.user_id once it's added && within the last week
