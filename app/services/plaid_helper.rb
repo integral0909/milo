@@ -83,7 +83,7 @@ module PlaidHelper
   # ----------------------------------------------
   def self.set_sunday
     current_date = Date.today
-    sunday = current_date.beginning_of_week(start_day = :monday)
+    sunday = current_date.beginning_of_week(start_day = :sunday)
   end
 
 end

@@ -64,57 +64,51 @@ module Dwolla
     # recieve a total of all transations from each user
     def self.weekly_roundup
       begin
-        # run roundups on Saturday
-        day = Time.now
+      # run roundups on Saturday
+        # set beginning of the week
+        current_date = Date.today
+        sunday = current_date.beginning_of_week(start_day = :sunday)
+        # loop through all CHECKING accounts connected with Milo
+        Checking.all.each do |ck|
+          # Find user based on checking.user_id
+          user = User.find(ck.user_id)
+          puts "-"*40
+          puts "User #{user.id} Roundups"
 
-        # NOTE: Uncomment when setting automatic roundups
-        # if day.saturday?
-          # set beginning of the week
-          current_date = Date.today
-          sunday = current_date.beginning_of_week(start_day = :monday)
-          # loop through all CHECKING accounts connected with Milo
-          Checking.all.each do |ck|
-            # Find user based on checking.user_id
-            user = User.find(ck.user_id)
-            puts "User #{user.id} Roundups"
-            puts "-"*40
-
-            if user.dwolla_funding_source.blank?
-              puts "Createing Dwolla funding source"
-              # connect Dwolla funding source and send email
-              Dwolla.connect_funding_source(user)
-            end
-
-            begin
-
-              # find all transactions where transaction.account_id = ck.plaid_acct_id & pending = false OR transaction.user_id once it's added && within the last week
-              transactions = Transaction
-                .where(:account_id => ck.plaid_acct_id, :pending => false)
-                .where("date > ?", sunday)
-                # TODO :: DWOLLA TESTING FOR SUCCESS
-
-
-              ####### total the roundups
-              # set variable for roundup_total
-              roundup_total = 0
-              # go through transactions and add transaction.roundup to the total
-              transactions.each do |trns|
-                roundup_total += trns.roundup
-              end
-
-              # on success => update the transaction with roundup 0.00 or rounded up. Also update total roundups on the user -> this will be where we know how much they have in their account <= IMPORTANT: Backup on gathering total roundups for a user is to query the Transfer with the user's id
-              if roundup_total > 0 && transactions.count > 0
-                roundup_total = number_to_currency(roundup_total.round(2), unit:"")
-                withdraw_roundups(user, roundup_total, transactions.count, ck, current_date)
-              end
-
-              # send email to user with weekly data and how much they have in their account
-            rescue
-              # EMAIL: send us an email if a user's roundup task fails
-            end
+          if user.dwolla_funding_source.blank?
+            puts "Createing Dwolla funding source"
+            # connect Dwolla funding source and send email
+            Dwolla.connect_funding_source(user)
           end
-          # NOTE: Uncomment when setting automatic roundups
-        # end
+
+          begin
+
+            # find all transactions where transaction.account_id = ck.plaid_acct_id & pending = false OR transaction.user_id once it's added && within the last week
+            transactions = Transaction
+              .where(:account_id => ck.plaid_acct_id, :pending => false)
+              .where("date > ?", sunday)
+              # TODO :: DWOLLA TESTING FOR SUCCESS
+
+
+            ####### total the roundups
+            # set variable for roundup_total
+            roundup_total = 0
+            # go through transactions and add transaction.roundup to the total
+            transactions.each do |trns|
+              roundup_total += trns.roundup
+            end
+
+            # on success => update the transaction with roundup 0.00 or rounded up. Also update total roundups on the user -> this will be where we know how much they have in their account <= IMPORTANT: Backup on gathering total roundups for a user is to query the Transfer with the user's id
+            if roundup_total > 0 && transactions.count > 0
+              roundup_total = number_to_currency(roundup_total.round(2), unit:"")
+              withdraw_roundups(user, roundup_total, transactions.count, ck, current_date)
+            end
+
+            # send email to user with weekly data and how much they have in their account
+          rescue
+            # EMAIL: send us an email if a user's roundup task fails
+          end
+        end
       rescue ExceptionName
         # EMAIL: if all round up task breaks
         puts ExceptionName
