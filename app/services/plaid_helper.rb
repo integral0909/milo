@@ -1,11 +1,19 @@
+# ================================================
+# RUBY->PLAID-HELPER =============================
+# ================================================
 # Plaid helper functions should be held here
+# TODO :: should this be in /helpers instead of /services ?
 module PlaidHelper
 
+  # ==============================================
+  # PRIVATE ======================================
+  # ==============================================
   private
+
   # ----------------------------------------------
   # CREATE-WEEKLY-TRANSACTIONS -------------------
-  # Pull in last weeks transactions from the connected user account
   # ----------------------------------------------
+  # Pull in last weeks transactions from the connected user account
   def self.create_weekly_transactions
     sunday = set_sunday
     begin
@@ -33,12 +41,12 @@ module PlaidHelper
   end
 
   # ----------------------------------------------
-  # CURRENT-WEEK-TRANSACTIONS -------------------
+  # CURRENT-WEEK-TRANSACTIONS --------------------
+  # ----------------------------------------------
   # Pull in current weeks transactions from the connected user account and send to the view
   # user : current_user that is logged in
   # checking : Checking account connected to the current_user
   # return : array of transaction objects for the view
-  # ----------------------------------------------
   def self.current_week_transactions(user, checking)
     if user && checking
       # set date to beginning of the week
@@ -60,11 +68,11 @@ module PlaidHelper
   end
 
   # ----------------------------------------------
-  # ROUND-TRANSACTIONS -------------------
+  # ROUND-TRANSACTIONS ---------------------------
+  # ----------------------------------------------
   # Set the amount that we would round up for the transaction shown
   # amount : transaction amount
   # return : amount we are going to round up
-  # ----------------------------------------------
   def self.round_transaction(amount)
     new_amount = amount.ceil
 
@@ -78,9 +86,9 @@ module PlaidHelper
   end
 
   # ----------------------------------------------
-  # SET-SUNDAY -------------------
-  # Set the previous Sunday's date
+  # SET-SUNDAY -----------------------------------
   # ----------------------------------------------
+  # Set the previous Sunday's date
   def self.set_sunday
     current_date = Date.today
     sunday = current_date.beginning_of_week(start_day = :sunday)
