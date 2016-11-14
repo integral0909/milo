@@ -71,7 +71,7 @@ module Dwolla
         # if day.saturday?
           # set beginning of the week
           current_date = Date.today
-          sunday = current_date.beginning_of_week(start_day = :sunday)
+          sunday = current_date.beginning_of_week(start_day = :monday)
           # loop through all CHECKING accounts connected with Milo
           Checking.all.each do |ck|
             # Find user based on checking.user_id

@@ -23,7 +23,7 @@ module PlaidHelper
           # filter transactions to the ones that match the users checking and this past week
           current_transactions = user_transactions.select{|a| (a.account == ck.plaid_acct_id) && (a.date.to_date >= sunday)}
 
-          # create the transactions 
+          # create the transactions
           Transaction.create_transactions(current_transactions, ck.plaid_acct_id, user.id)
         end
     rescue => e
@@ -83,7 +83,7 @@ module PlaidHelper
   # ----------------------------------------------
   def self.set_sunday
     current_date = Date.today
-    sunday = current_date.beginning_of_week(start_day = :sunday)
+    sunday = current_date.beginning_of_week(start_day = :monday)
   end
 
 end
