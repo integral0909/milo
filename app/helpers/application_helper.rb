@@ -1,3 +1,6 @@
+# ================================================
+# RUBY->APPLICATION-HELPER =======================
+# ================================================
 module ApplicationHelper
 
   # ----------------------------------------------
@@ -32,7 +35,7 @@ module ApplicationHelper
 
     render partial: partial_name, locals: options
   end
-  
+
 
   def bootstrap_class_for(flash_type)
     case flash_type
