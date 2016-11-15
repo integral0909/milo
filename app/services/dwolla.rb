@@ -161,6 +161,7 @@ module Dwolla
         puts e
         # Email the user that there was an issue when withdrawing the round up
         BankingMailer.transfer_failed(user, roundup_amount, funding_account).deliver_now
+        BankingMailer.support_transfer_failed_notice(user, roundup_amount, e).deliver_now
       end
 
     end
