@@ -1,11 +1,32 @@
+# ================================================
+# RUBY->CONTROLLER->HOME-CONTROLLER ==============
+# ================================================
 class HomeController < ApplicationController
+
+  # ----------------------------------------------
+  # INCLUDES -------------------------------------
+  # ----------------------------------------------
   include ActionView::Helpers::NumberHelper
 
+  # ----------------------------------------------
+  # VARIABLES ------------------------------------
+  # ----------------------------------------------
   BASE_URL = "http://milosavings.com?referral="
+
+  # ----------------------------------------------
+  # FILTERS --------------------------------------
+  # ----------------------------------------------
   before_action :authenticate_user!
   before_action :set_user
   before_action :get_referral_rank, only: :index
 
+  # ==============================================
+  # ACTIONS ======================================
+  # ==============================================
+
+  # ----------------------------------------------
+  # INDEX ----------------------------------------
+  # ----------------------------------------------
   def index
     # Users account balance converted to dollars
     @account_balance = number_to_currency(@user.account_balance / 100.00, unit:"") if @user.account_balance
@@ -28,13 +49,22 @@ class HomeController < ApplicationController
     end
   end
 
+  # ----------------------------------------------
+  # HISTORY --------------------------------------
+  # ----------------------------------------------
   # Page to see round up transfer history
   def history
     @transfers = Transfer.where(user_id: @user.id)
   end
 
+  # ==============================================
+  # PRIVATE ======================================
+  # ==============================================
   private
 
+  # ----------------------------------------------
+  # REFERRAL-RANK --------------------------------
+  # ----------------------------------------------
   def get_referral_rank
     # @referral_rank = 1
     all_referrals = User.all.pluck("referral_code")

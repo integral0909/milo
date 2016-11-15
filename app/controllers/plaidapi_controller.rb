@@ -1,5 +1,11 @@
+# ================================================
+# RUBY->CONTROLLER->PLAIDAPI-CONTROLLER ==========
+# ================================================
 class PlaidapiController < ApplicationController
 
+  # ----------------------------------------------
+  # ADD-ACCOUNT ----------------------------------
+  # ----------------------------------------------
   def add_account
     begin
       # NOTE: We are using v 1.7.1 for plaid-ruby: https://github.com/plaid/plaid-ruby/tree/v1.7.1
@@ -39,6 +45,9 @@ class PlaidapiController < ApplicationController
     end
   end
 
+  # ----------------------------------------------
+  # UPDATE-ACCOUNTS ------------------------------
+  # ----------------------------------------------
   def update_accounts
     @user = User.find(current_user.id)
     @user.public_tokens.each do |t|
@@ -52,7 +61,14 @@ class PlaidapiController < ApplicationController
     redirect_to root_path
   end
 
+  # ==============================================
+  # PRIVATE ======================================
+  # ==============================================
   private
+
+  # ----------------------------------------------
+  # SAVE-PUBLIC-TOKEN -----------------------------
+  # ----------------------------------------------
   def save_public_token(token)
     milo_current_user = User.find(current_user.id)
     milo_current_user.public_tokens << token
