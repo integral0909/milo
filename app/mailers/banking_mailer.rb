@@ -64,14 +64,6 @@ class BankingMailer < ApplicationMailer
    mail(to: @user.email, bcc: 'robert.schwartz@milosavings.com', subject: 'Transfer to Savings Failed')
   end
 
-  # email to send support when the transfer fails
-  def support_transfer_failed_notice(user, roundup_amount, error)
-   @roundup_amount = roundup_amount
-   @error = error
-   @user = user
-   mail(to: 'robert.schwartz@milosavings.com', subject: "Transfer Failed for #{@user.email}")
-  end
-
   # ----------------------------------------------
   # BANK-ACCOUNT-REMOVED -------------------------
   # ----------------------------------------------

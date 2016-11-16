@@ -29,10 +29,8 @@ module Dwolla
       user.dwolla_id = dwolla_customer_url.headers[:location]
       user.save!
     rescue => e
-      p e
-      
-      # EMAIL: send the error and the user that errored
-      # Let user go through to the welcome screen but send email with error from dwolla
+      # EMAIL: send support the error from
+      SupportMailer.add_dwolla_user_failed(user, e).deliver_now
       return
     end
   end
@@ -65,10 +63,9 @@ module Dwolla
 
       BankingMailer.account_added(user, funding_account).deliver_now
     rescue => e
-      p e
-      # Let user go through to the home screen but send email with error from dwolla
-      # EMAIL: send user and error from Dwolla
-      return
+
+      # EMAIL: send support the error from Dwolla
+      SupportMailer.connect_funding_source_failed(user, user_checking, funding_account, e).deliver_now
     end
   end
 
@@ -183,7 +180,7 @@ module Dwolla
         # Email the user that there was an issue when withdrawing the round up
         BankingMailer.transfer_failed(user, roundup_amount, funding_account).deliver_now
         # Email support that there was an issue when withdrawing the round up
-        BankingMailer.support_transfer_failed_notice(user, roundup_amount, e).deliver_now
+        SupportMailer.support_transfer_failed_notice(user, roundup_amount, e).deliver_now
       end
   end
 
