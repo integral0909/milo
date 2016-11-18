@@ -19,7 +19,9 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
       Checking.all.each do |ck|
         user = User.find(ck.user_id)
         # run weekly_roundup for all users with checking accounts
-        Dwolla.weekly_roundup(user, ck)
+        if user
+          Dwolla.weekly_roundup(user, ck)
+        end
       end
     end
 
@@ -45,7 +47,9 @@ task :create_weekly_transactions, [:user_id] => :environment do |t, args|
       Checking.all.each do |ck|
         user = User.find(ck.user_id)
         # run create_weekly_transactions for all users with checking accounts
-        PlaidHelper.create_weekly_transactions(user, ck)
+        if user
+          PlaidHelper.create_weekly_transactions(user, ck)
+        end
       end
     end
 
