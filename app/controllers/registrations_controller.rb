@@ -1,12 +1,29 @@
+# ================================================
+# RUBY->CONTROLLER->REGISTRATIONS-CONTROLLER =====
+# ================================================
 class RegistrationsController < Devise::RegistrationsController
+
+  # ----------------------------------------------
+  # LAYOUT ---------------------------------------
+  # ----------------------------------------------
   layout "signup"
 
+  # ----------------------------------------------
+  # FILTERS -------------------------------------
+  # ----------------------------------------------
   prepend_before_action :require_no_authentication, only: [:new, :create, :cancel]
   prepend_before_action :authenticate_scope!, only: [:edit, :security, :update, :destroy]
   prepend_before_action :set_minimum_password_length, only: [:new, :edit]
 
   before_action :configure_account_update_params, only: [:update]
 
+  # ==============================================
+  # ACTIONS ======================================
+  # ==============================================
+
+  # ----------------------------------------------
+  # CREATE ---------------------------------------
+  # ----------------------------------------------
   def create
     build_resource(sign_up_params)
     if resource.save
@@ -51,18 +68,30 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  # ----------------------------------------------
+  # PHONE ----------------------------------------
+  # ----------------------------------------------
   def phone
     render :phone
   end
 
+  # ----------------------------------------------
+  # ON-DEMAND ------------------------------------
+  # ----------------------------------------------
   def on_demand
     render :on_demand
   end
 
+  # ----------------------------------------------
+  # EDIT ------------------------------------------
+  # ----------------------------------------------
   def edit
     render layout: "application"
   end
 
+  # ----------------------------------------------
+  # ACCOUNTS -------------------------------------
+  # ----------------------------------------------
   def accounts
     @accounts = Account.where(user_id: current_user.id).all
     if current_user.checking.present?
@@ -73,26 +102,18 @@ class RegistrationsController < Devise::RegistrationsController
     render layout: "application"
   end
 
+  # ----------------------------------------------
+  # SECURITY -------------------------------------
+  # ----------------------------------------------
   def security
     render layout: "application"
   end
 
+  # ----------------------------------------------
+  # UPDATE ---------------------------------------
+  # ----------------------------------------------
   def update
     if params['set_on_demand'] == "true"
-      if @user.plaid_access_token
-
-        connect_user = Argyle.plaid_client.set_user(@user.plaid_access_token, ['connect'])
-
-        # waiting for a response from Plaid
-        # current_date = Date.today
-        # last_week_date = current_date - 1.week
-        # connect_user_transactions = connect_user.get_connect({'gte': last_week_date, account: @checking.plaid_acct_id})
-        # connect_user.transactions.select{|a| a.account == @checking.plaid_acct_id}
-        connect_user_transactions = connect_user.transactions()
-        # Save the transaction info for the checking account
-        Transaction.create_transactions(connect_user_transactions, @checking.plaid_acct_id, @user.id)
-      end
-
       if @user.dwolla_funding_source.blank?
         # connect Dwolla funding source and send email
         Dwolla.connect_funding_source(@user)
@@ -102,16 +123,28 @@ class RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  # ==============================================
+  # PROTECTED ====================================
+  # ==============================================
   protected
 
+  # ----------------------------------------------
+  # UPDATE-RESOURCE ------------------------------
+  # ----------------------------------------------
   def update_resource(resource, params)
     resource.update_without_password(params)
   end
 
+  # ----------------------------------------------
+  # CONFIGURE-ACCOUNT-UPDATE ---------------------
+  # ----------------------------------------------
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [:mobile_number])
   end
 
+  # ----------------------------------------------
+  # AFTER-SIGN-UP-PATH ---------------------------
+  # ----------------------------------------------
   # Route user to next registration path
   def after_sign_up_path_for(resource)
     if current_user.invited
@@ -121,17 +154,29 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  # ----------------------------------------------
+  # AFTER-UPDATE-PATH ----------------------------
+  # ----------------------------------------------
   # Route to direct user after profile update
   def after_update_path_for(resource)
     root_path
   end
 
+  # ==============================================
+  # PRIVATE ======================================
+  # ==============================================
   private
 
+  # ----------------------------------------------
+  # SIGN-UP-PARAMS -------------------------------
+  # ----------------------------------------------
   def sign_up_params
     params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :invited, :agreement, :mobile_number, :is_verified, :on_demand)
   end
 
+  # ----------------------------------------------
+  # ACCOUNT-UPDATE-PARAMS ------------------------
+  # ----------------------------------------------
   def account_update_params
     params.require(:user).permit(:referral_code, :name, :address, :city, :state, :zip, :email, :password, :password_confirmation, :current_password, :invited, :agreement, :mobile_number, :is_verified, :on_demand, :avatar)
   end

@@ -101,7 +101,7 @@ class User < ActiveRecord::Base
   # Add round up amount to the users account balance
   def self.add_account_balance(user, amount)
     # Save the roundup amount in cents
-    !user.account_balance.nil? ? user.account_balance += (amount.to_f * 100) : user.account_balance = (amount.to_f * 100)
+    !user.account_balance.nil? ? user.account_balance += (amount.to_f * 100).round(0) : user.account_balance = (amount.to_f * 100).round(0)
     user.save!
   end
 

@@ -1,27 +1,70 @@
+# ================================================
+# RUBY->CONTROLLER->HOME-CONTROLLER ==============
+# ================================================
 class HomeController < ApplicationController
+
+  # ----------------------------------------------
+  # INCLUDES -------------------------------------
+  # ----------------------------------------------
   include ActionView::Helpers::NumberHelper
 
+  # ----------------------------------------------
+  # VARIABLES ------------------------------------
+  # ----------------------------------------------
   BASE_URL = "http://milosavings.com?referral="
+
+  # ----------------------------------------------
+  # FILTERS --------------------------------------
+  # ----------------------------------------------
   before_action :authenticate_user!
   before_action :set_user
   before_action :get_referral_rank, only: :index
 
-  def index
+  # ==============================================
+  # ACTIONS ======================================
+  # ==============================================
 
-    @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
+  # ----------------------------------------------
+  # INDEX ----------------------------------------
+  # ----------------------------------------------
+  def index
+    # Users account balance converted to dollars
+    @account_balance = number_to_currency(@user.account_balance / 100.00, unit:"") if @user.account_balance
     @goal = current_user.goals.build
 
+    # Users unique referral link
+    @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
+
+    @goal = current_user.goals.build
+
+    # Pull in the users transactions from the current week. The week starts on Sunday
     @transactions = PlaidHelper.current_week_transactions(@user, @checking)
+
+    # Show the latest 3 transfers
+    @transfers = Transfer.where(user_id: @user.id).order('date ASC').limit(3)
 
     # Redirect users to proper sign up page if not complete
     if (@user.invited && !@user.is_verified)
       redirect_to signup_phone_path
     end
-    @account_balance = number_to_currency((@user.account_balance / 100).round(2), unit:"") if @user.account_balance
   end
 
+  # ----------------------------------------------
+  # HISTORY --------------------------------------
+  # ----------------------------------------------
+  # Page to see round up transfer history
+  def history
+    @transfers = Transfer.where(user_id: @user.id)
+  end
+
+  # ==============================================
+  # PRIVATE ======================================
+  # ==============================================
   private
 
+  # ----------------------------------------------
+  # REFERRAL-RANK --------------------------------
+  # ----------------------------------------------
   def get_referral_rank
     # @referral_rank = 1
     all_referrals = User.all.pluck("referral_code")

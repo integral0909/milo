@@ -1,5 +1,11 @@
+# ================================================
+# RUBY->REGISTRATIONS-HELPER =====================
+# ================================================
 module RegistrationsHelper
 
+  # ----------------------------------------------
+  # MOBILE-VERIFICATION-BUTTON -------------------
+  # ----------------------------------------------
   def mobile_verification_button
     # Return an empty string unless the user needs to be verified
     return '' unless current_user.needs_mobile_number_verifying?
@@ -11,6 +17,9 @@ module RegistrationsHelper
     html.html_safe
   end
 
+  # ----------------------------------------------
+  # VERIFY-MOBILE-NUMBER -------------------------
+  # ----------------------------------------------
   def verify_mobile_number_form
     return '' if current_user.verification_code.blank?
     p current_user.verification_code.blank?

@@ -1,5 +1,15 @@
+# ================================================
+# RUBY->CONTROLLER->VERIFICATIONS-CONTROLLER =====
+# ================================================
 class VerificationsController < ApplicationController
 
+  # ==============================================
+  # ACTIONS ======================================
+  # ==============================================
+
+  # ----------------------------------------------
+  # CREATE ---------------------------------------
+  # ----------------------------------------------
   def create
     begin
       current_user.mobile_number = params[:mobile_number]
@@ -28,6 +38,9 @@ class VerificationsController < ApplicationController
     end
   end
 
+  # ----------------------------------------------
+  # VERIFY ---------------------------------------
+  # ----------------------------------------------
   def verify
     if current_user.verification_code == params[:verification_code]
       current_user.is_verified = true

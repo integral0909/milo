@@ -1,44 +1,44 @@
+# ================================================
+# RUBY->PLAID-HELPER =============================
+# ================================================
 # Plaid helper functions should be held here
+# TODO :: should this be in /helpers instead of /services ?
 module PlaidHelper
 
+  # ==============================================
+  # PRIVATE ======================================
+  # ==============================================
   private
+
   # ----------------------------------------------
   # CREATE-WEEKLY-TRANSACTIONS -------------------
-  # Pull in last weeks transactions from the connected user account
   # ----------------------------------------------
-  def self.create_weekly_transactions
+  # Pull in last weeks transactions from the connected user account
+  def self.create_weekly_transactions(user, checking)
     sunday = set_sunday
     begin
-      # NOTE: Uncomment when live
-      # if day.saturday?
-        # loop through all CHECKING accounts connected with Milo
-        Checking.all.each do |ck|
-          # Find user based on checking.user_id
-          user = User.find(ck.user_id)
+      # Pull in plaid connect user
+      connect_user = Argyle.plaid_client.set_user(user.plaid_access_token, ['connect'])
+      user_transactions = connect_user.transactions()
 
-          # Pull in plaid connect user
-          connect_user = Argyle.plaid_client.set_user(user.plaid_access_token, ['connect'])
-          user_transactions = connect_user.transactions()
+      # filter transactions to the ones that match the users checking and this past week
+      current_transactions = user_transactions.select{|a| (a.account == checking.plaid_acct_id) && (a.date.to_date >= sunday)}
 
-          # filter transactions to the ones that match the users checking and this past week
-          current_transactions = user_transactions.select{|a| (a.account == ck.plaid_acct_id) && (a.date.to_date >= sunday)}
-
-          # create the transactions 
-          Transaction.create_transactions(current_transactions, ck.plaid_acct_id, user.id)
-        end
+      # create the transactions
+      Transaction.create_transactions(current_transactions, checking.plaid_acct_id, user.id)
     rescue => e
-      # EMAIL: if all round up task breaks
+      # EMAIL: email if creating the weekly transactions task breaks
       puts e
     end
   end
 
   # ----------------------------------------------
-  # CURRENT-WEEK-TRANSACTIONS -------------------
+  # CURRENT-WEEK-TRANSACTIONS --------------------
+  # ----------------------------------------------
   # Pull in current weeks transactions from the connected user account and send to the view
   # user : current_user that is logged in
   # checking : Checking account connected to the current_user
   # return : array of transaction objects for the view
-  # ----------------------------------------------
   def self.current_week_transactions(user, checking)
     if user && checking
       # set date to beginning of the week
@@ -60,11 +60,11 @@ module PlaidHelper
   end
 
   # ----------------------------------------------
-  # ROUND-TRANSACTIONS -------------------
+  # ROUND-TRANSACTIONS ---------------------------
+  # ----------------------------------------------
   # Set the amount that we would round up for the transaction shown
   # amount : transaction amount
   # return : amount we are going to round up
-  # ----------------------------------------------
   def self.round_transaction(amount)
     new_amount = amount.ceil
 
@@ -78,9 +78,9 @@ module PlaidHelper
   end
 
   # ----------------------------------------------
-  # SET-SUNDAY -------------------
-  # Set the previous Sunday's date
+  # SET-SUNDAY -----------------------------------
   # ----------------------------------------------
+  # Set the previous Sunday's date
   def self.set_sunday
     current_date = Date.today
     sunday = current_date.beginning_of_week(start_day = :sunday)

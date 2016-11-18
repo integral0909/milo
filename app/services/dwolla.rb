@@ -1,171 +1,190 @@
-# All Dwolla functionality will be held here
+# ================================================
+# RUBY->DWOLLA-SERVICE ===========================
+# ================================================
 module Dwolla
+
+  # ----------------------------------------------
+  # INCLUDES -------------------------------------
+  # ----------------------------------------------
   include TokenConcern
 
-    # Create user on Dwolla
-    def self.create_user(user)
-      begin
-        # We don't save name in 2 seperate fields so append -Milo to the name
-        # TODO: add :ip_address => to customer creation with request.remote_ip
-        request_body = {
-          :firstName => user.name,
-          :lastName => '-Milo',
-          :email => user.email
-        }
+  # ----------------------------------------------
+  # CREATE-DWOLLA-USER ---------------------------
+  # ----------------------------------------------
+  def self.create_user(user)
+    begin
+      # We don't save name in 2 seperate fields so append -Milo to the name
+      # TODO: add :ip_address => to customer creation with request.remote_ip
+      request_body = {
+        :firstName => user.name,
+        :lastName => '-Milo',
+        :email => user.email
+      }
 
-        # Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-        dwolla_customer_url = TokenConcern.account_token.post "customers", request_body
+      # Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
+      dwolla_customer_url = TokenConcern.account_token.post "customers", request_body
 
-        # Add dwolla customer URL to the user
-        user = User.find(user.id)
-        user.dwolla_id = dwolla_customer_url.headers[:location]
-        user.save!
-      rescue => e
-        p e
-        # EMAIL: send the error and the user that errored
-        # Let user go through to the welcome screen but send email with error from dwolla
-        return
-      end
+      # Add dwolla customer URL to the user
+      user = User.find(user.id)
+      user.dwolla_id = dwolla_customer_url.headers[:location]
+      user.save!
+    rescue => e
+      # EMAIL: send support the error from
+      SupportMailer.add_dwolla_user_failed(user, e).deliver_now
+      return
     end
+  end
 
-    # Add funding source for user to Dwolla
-    def self.connect_funding_source(user)
-      begin
-        # Find the checking account associated with the user
-        user_checking = Checking.find_by_user_id(user.id)
-        # Get the info from the Account to add a funding source to Dwolla
-        funding_account = Account.find_by_plaid_acct_id(user_checking.plaid_acct_id)
+  # ----------------------------------------------
+  # CONNECT-FUNDING-SOURCE -----------------------
+  # ----------------------------------------------
+  # Add funding source for user to Dwolla
+  def self.connect_funding_source(user)
+    begin
+      # Find the checking account associated with the user
+      user_checking = Checking.find_by_user_id(user.id)
+      # Get the info from the Account to add a funding source to Dwolla
+      funding_account = Account.find_by_plaid_acct_id(user_checking.plaid_acct_id)
 
-        dwolla_customer_url = user.dwolla_id
-        request_body = {
-          routingNumber: funding_account.bank_routing_number,
-          accountNumber: funding_account.bank_account_number,
-          type: funding_account.acct_subtype,
-          name: funding_account.name
-        }
+      dwolla_customer_url = user.dwolla_id
+      request_body = {
+        routingNumber: funding_account.bank_routing_number,
+        accountNumber: funding_account.bank_account_number,
+        type: funding_account.acct_subtype,
+        name: funding_account.name
+      }
 
-        funding_source = TokenConcern.account_token.post "#{dwolla_customer_url}/funding-sources", request_body
+      funding_source = TokenConcern.account_token.post "#{dwolla_customer_url}/funding-sources", request_body
 
-        # Add the funding source to the user
-        user = User.find(user.id)
-        user.dwolla_funding_source = funding_source.headers[:location]
-        user.save!
+      # Add the funding source to the user
+      user = User.find(user.id)
+      user.dwolla_funding_source = funding_source.headers[:location]
+      user.save!
 
-        BankingMailer.account_added(user, funding_account).deliver_now
-      rescue => e
-        p e
-        # Let user go through to the home screen but send email with error from dwolla
-        # EMAIL: send user and error from Dwolla
-        return
-      end
+      BankingMailer.account_added(user, funding_account).deliver_now
+    rescue => e
+
+      # EMAIL: send support the error from Dwolla
+      SupportMailer.connect_funding_source_failed(user, user_checking, funding_account, e).deliver_now
     end
+  end
 
-    private
-    # recieve a total of all transations from each user
-    def self.weekly_roundup
-      begin
-        # run roundups on Saturday
-        day = Time.now
+  # ==============================================
+  # PRIVATE ======================================
+  # ==============================================
+  private
 
-        # NOTE: Uncomment when setting automatic roundups
-        # if day.saturday?
-          # set beginning of the week
-          current_date = Date.today
-          sunday = current_date.beginning_of_week(start_day = :sunday)
-          # loop through all CHECKING accounts connected with Milo
-          Checking.all.each do |ck|
-            # Find user based on checking.user_id
-            user = User.find(ck.user_id)
-            puts "User #{user.id} Roundups"
-            puts "-"*40
+  # ----------------------------------------------
+  # WEEKLY-ROUNDUP -------------------------------
+  # ----------------------------------------------
+  # recieve a total of all transations from each user
+  def self.weekly_roundup(user, checking)
+    begin
+      # set beginning of the week
+      current_date = Date.today
+      sunday = current_date.beginning_of_week(start_day = :sunday)
+        puts "-"*40
+        puts "User #{user.id} Roundups"
 
-            begin
+        if user.dwolla_funding_source.blank?
+          puts "Createing Dwolla funding source"
+          # connect Dwolla funding source and send email
+          Dwolla.connect_funding_source(user)
+        end
 
-              # find all transactions where transaction.account_id = ck.plaid_acct_id & pending = false OR transaction.user_id once it's added && within the last week
-              transactions = Transaction
-                .where(:account_id => ck.plaid_acct_id, :pending => false)
-                .where("date > ?", sunday)
-                # TODO :: DWOLLA TESTING FOR SUCCESS
+        begin
+
+          # find all transactions where transaction.account_id = ck.plaid_acct_id & pending = false OR transaction.user_id once it's added && within the last week
+          transactions = Transaction
+            .where(:account_id => checking.plaid_acct_id, :pending => false)
+            .where("date > ?", sunday)
+            # TODO :: DWOLLA TESTING FOR SUCCESS
 
 
-              ####### total the roundups
-              # set variable for roundup_total
-              roundup_total = 0
-              # go through transactions and add transaction.roundup to the total
-              transactions.each do |trns|
-                roundup_total += trns.roundup
-              end
-
-              # on success => update the transaction with roundup 0.00 or rounded up. Also update total roundups on the user -> this will be where we know how much they have in their account <= IMPORTANT: Backup on gathering total roundups for a user is to query the Transfer with the user's id
-              if roundup_total > 0 && transactions.count > 0
-                withdraw_roundups(user, number_to_currency(roundup_total.round(2), unit:""), transactions.count, ck)
-              end
-
-              # send email to user with weekly data and how much they have in their account
-            rescue
-              # EMAIL: send us an email if a user's roundup task fails
-            end
+          ####### total the roundups
+          # set variable for roundup_total
+          roundup_total = 0
+          # go through transactions and add transaction.roundup to the total
+          transactions.each do |trns|
+            roundup_total += trns.roundup
           end
-          # NOTE: Uncomment when setting automatic roundups
-        # end
-      rescue ExceptionName
-        # EMAIL: if all round up task breaks
-        puts ExceptionName
-      end
+
+          # on success => update the transaction with roundup 0.00 or rounded up. Also update total roundups on the user -> this will be where we know how much they have in their account <= IMPORTANT: Backup on gathering total roundups for a user is to query the Transfer with the user's id
+          if roundup_total > 0 && transactions.count > 0
+            roundup_total = number_to_currency(roundup_total.round(2), unit:"")
+            withdraw_roundups(user, roundup_total, transactions.count, checking, current_date)
+          end
+
+          # send email to user with weekly data and how much they have in their account
+        rescue => e
+          puts e
+          # EMAIL: send us an email if a user's roundup task fails
+        end
+    rescue ExceptionName
+      # EMAIL: if all round up task breaks
+      puts ExceptionName
     end
+  end
 
-    # add the users funding source, our account number, and the total roundup amount
-    def self.withdraw_roundups(user, roundup_amount, total_transactions, funding_account)
-      BankingMailer.transfer_start(user, roundup_amount, funding_account).deliver_now
-      begin
-        request_body = {
-          :_links => {
-            :source => {
-              # TODO :: DWOLLA TESTING FOR FAILURE
-              :href => user.dwolla_funding_source
-            },
-            :destination => {
-              :href => "https://api-uat.dwolla.com/accounts/#{ENV["DWOLLA_ACCOUNT_ID"]}"
-            }
+  # ----------------------------------------------
+  # WITHDRAW-ROUNDUPS ----------------------------
+  # ----------------------------------------------
+  # add the users funding source, our account number, and the total roundup amount
+  def self.withdraw_roundups(user, roundup_amount, total_transactions, funding_account, current_date)
+    BankingMailer.transfer_start(user, roundup_amount, funding_account).deliver_now
+    begin
+      request_body = {
+        :_links => {
+          :source => {
+            # TODO :: DWOLLA TESTING FOR FAILURE
+            :href => user.dwolla_funding_source
           },
-          :amount => {
-            :currency => "USD",
-            :value => roundup_amount
-          },
-          :metadata => {
-            :user_id => user.id,
-            :total_transactions => total_transactions
+          :destination => {
+            :href => "https://api-uat.dwolla.com/accounts/#{ENV["DWOLLA_ACCOUNT_ID"]}"
           }
+        },
+        :amount => {
+          :currency => "USD",
+          :value => roundup_amount
+        },
+        :metadata => {
+          :user_id => user.id,
+          :total_transactions => total_transactions,
+          :date => current_date
         }
+      }
 
-        transfer = TokenConcern.account_token.post "transfers", request_body
-        current_transfer_url = transfer.headers[:location]
+      transfer = TokenConcern.account_token.post "transfers", request_body
+      current_transfer_url = transfer.headers[:location]
 
-        # Get the status of the current transfer
-        transfer_status = TokenConcern.account_token.get current_transfer_url
-        current_transfer_status = transfer_status.status
+      # Get the status of the current transfer
+      transfer_status = TokenConcern.account_token.get current_transfer_url
+      current_transfer_status = transfer_status.status
 
-        # Save transfer data
-        Transfer.create_transfers(user, current_transfer_url, current_transfer_status, roundup_amount, total_transactions, "deposit")
+      # Save transfer data
+      Transfer.create_transfers(user, current_transfer_url, current_transfer_status, roundup_amount, total_transactions, "deposit", current_date)
 
-        # add the roundup amount to the users balance
-        User.add_account_balance(user, roundup_amount)
+      # add the roundup amount to the users balance
+      User.add_account_balance(user, roundup_amount)
 
         puts "$#{roundup_amount}"
 
         # Email the user that the round up was successfully withdrawn
         BankingMailer.transfer_success(user, roundup_amount, funding_account).deliver_now
       rescue => e
-        puts e
         # Email the user that there was an issue when withdrawing the round up
         BankingMailer.transfer_failed(user, roundup_amount, funding_account).deliver_now
+        # Email support that there was an issue when withdrawing the round up
+        SupportMailer.support_transfer_failed_notice(user, roundup_amount, e).deliver_now
       end
+  end
 
-    end
-
-    # TODO: create recurring fee for $1 tech fee
-    # def self.monthly_tech_fee
-    #   request_body
-    # end
+  # ----------------------------------------------
+  # RECURRING-FEE --------------------------------
+  # ----------------------------------------------
+  # TODO: create recurring fee for $1 tech fee
+  # def self.monthly_tech_fee
+  #   request_body
+  # end
 
 end
