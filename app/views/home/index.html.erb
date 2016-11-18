@@ -24,15 +24,15 @@
               <div class="milo-card progress">
                 <% if (current_user.goals.count >= 1) %>
                   <div class="mc-title">
-                    Savings Progress
+                    <b>Savings Goal</b>: <%= current_user.goals.first.name %>
                     <% if !current_user.account_balance.nil?
-                      goal_percentage = current_user.account_balance * 100
+                      goal_percentage = (current_user.account_balance / 100.00)
                       goal_percentage = goal_percentage / current_user.goals.first.amount
                     else
                       goal_percentage = 0
                     end
                     %>
-                    <span><em>$<%= current_user.account_balance ? current_user.account_balance : "0" %></em> / $<%= current_user.goals.first.amount %></span>
+                    <span><em>$<%= current_user.account_balance ? (current_user.account_balance / 100.00) : "0" %></em> / $<%= current_user.goals.first.amount %></span>
                   </div>
                   <div class="progress-bar">
                     <div class="current-progress" style="width: <%= goal_percentage %>"></div>
@@ -102,6 +102,7 @@
                 <% end %>
               <% end %>
             </ul>
+            <b>Total</b> <%= number_to_currency(@total_pending.round(2)) %>
           <% else %>
             <small>No current roundups available.</small>
           <% end %>

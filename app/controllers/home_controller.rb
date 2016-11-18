@@ -30,7 +30,6 @@ class HomeController < ApplicationController
   def index
     # Users account balance converted to dollars
     @account_balance = number_to_currency(@user.account_balance / 100.00, unit:"") if @user.account_balance
-    @goal = current_user.goals.build
 
     # Users unique referral link
     @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
@@ -39,6 +38,9 @@ class HomeController < ApplicationController
 
     # Pull in the users transactions from the current week. The week starts on Sunday
     @transactions = PlaidHelper.current_week_transactions(@user, @checking)
+    @total_pending = 0
+
+    @transactions.each{ |tr| @total_pending += tr[:roundup]  } if @transactions 
 
     # Show the latest 3 transfers
     @transfers = Transfer.where(user_id: @user.id).order('date ASC').limit(3)
