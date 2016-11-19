@@ -11,8 +11,10 @@
             <%= link_to accounts_remove_path, data: { confirm: "Are you sure you want to remove this bank account?" }, remote: true, class: "ca-remove" do %>
               Remove <i class="fa fa-question helper" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>Remove Account</strong>Removing your account will disable the automatic saving and transfer of funds from your checking into your Milo savings account."></i>
             <% end %>
+            <%= link_to "Verify", new_user_account_path(user_id: current_user.id), class: "ca-verify", remote: true %>
             <div class="ca-name"><%= @account.account_name %></div>
             <div class="ca-number">XXXXXX <%= @account.bank_account_number.last(4) %></div>
+            <div class="ca-verify-message">In 1-3 business days, we'll make two < 20¢ deposits into the account you provided. Please note the amounts, return to this page, and click "Verify" to enter the two amounts.</div>
           </div>
         <% else %>
           <% if @accounts.present? %>

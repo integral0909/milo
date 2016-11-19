@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords' }
     resources :users, :only => [:show] do
     resources :transactions, only: [:index, :show, :edit, :update]
-    resources :accounts, only: [:index]
+    resources :accounts, only: [:index, :new]
   end
 
   devise_scope :user do
@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   # Mobile Phone Verification
   post 'verifications' => 'verifications#create'
   patch 'verifications' => 'verifications#verify'
+
+  # Verify Bank Account
+  get 'accounts/bank_verify', to: 'accounts#bank_verify', as: :signup_bank_verify
 
   # Remove Bank Accounts
   get 'accounts/remove', to: 'accounts#remove', as: :accounts_remove

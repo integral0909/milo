@@ -1,0 +1,32 @@
+<% set_meta_tags :site => 'Verify Bank • Milo',
+  :noindex => true
+%>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-2">
+    <div class="signup">
+      <h1 class="marg-16"><span>Checking Account</span> Verify Bank</h1>
+      <p>Institution Name</p>
+      <%= render "layouts/messages" %>
+      <form>
+        <fieldset class="form-group">
+          <label>Routing Number</label>
+          <input type="text" class="form-control" />
+        </fieldset>
+        <fieldset class="form-group">
+          <label>Routing Number</label>
+          <input type="text" class="form-control" />
+        </fieldset>
+        <div class="spacer -space-16"></div>
+        <button type="submit" class="button -full -blue">Verify</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <ul class="signup-steps">
+      <li><span></span> Basic Info</li>
+      <li><span></span> Mobile Number</li>
+      <li class="active"><span></span> Checking Account</li>
+    </ul>
+  </div>
+</div>
