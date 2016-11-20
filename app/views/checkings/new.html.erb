@@ -11,7 +11,7 @@
         <%= form_for(@checking) do |f| %>
           <%= f.hidden_field :user_id, :value => current_user.id %>
           <%= f.hidden_field :plaid_acct_id, :value => a.plaid_acct_id %>
-          <span class="checking-name"><%= a.name %> | <%= a.account_number %></span>
+          <span class="checking-name"><%= a.name %><br/><em>XXXXX <%= a.account_number %></em></span>
           <%= f.submit "Select", class: "button -blue -small -right" %>
         <% end %>
       <% end %>
