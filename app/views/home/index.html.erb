@@ -63,6 +63,25 @@
               </div>
             </div>
           </div>
+          <div id="mobile" class="row">
+            <div class="col-md-12">
+              <div class="milo-card mobile-roundups">
+                <div class="mc-title">Pending Round Ups</div>
+                <% if @transactions.present? %>
+                  <ul class="recent-transactions">
+                    <% @transactions.each do |t| %>
+                      <% if t[:amount] > 0 %>
+                        <li><%= number_to_currency(t[:roundup].round(2)) %><span><strong><%= number_to_currency(t[:amount].round(2)) %></strong><%= t[:trans_name] %></span></li>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                  <p class="align-center">Total: <strong><%= number_to_currency(@total_pending.round(2)) %></strong></p>
+                <% else %>
+                  <p>No current roundups available.</p>
+                <% end %>
+              </div>
+            </div>
+          </div>
           <div class="row">
             <div class="col-md-6">
               <div class="milo-card history">
@@ -93,7 +112,7 @@
       </div>
       <div class="sidebar">
         <div class="pending-roundups">
-          <div class="pr-title">Pending Round-Ups</div>
+          <div class="pr-title">Pending Round Ups</div>
           <% if @transactions.present? %>
             <ul class="pr-list">
               <% @transactions.each do |t| %>
@@ -102,7 +121,7 @@
                 <% end %>
               <% end %>
             </ul>
-            <b>Total</b> <%= number_to_currency(@total_pending.round(2)) %>
+            <small>Total: <strong><%= number_to_currency(@total_pending.round(2)) %></strong></small>
           <% else %>
             <small>No current roundups available.</small>
           <% end %>
