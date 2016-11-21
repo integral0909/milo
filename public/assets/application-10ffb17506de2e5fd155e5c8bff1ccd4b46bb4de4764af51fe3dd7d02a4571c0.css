@@ -7279,7 +7279,7 @@ img {
 * milosavings.com
 */
 /* line 9, /Users/Pudge/Desktop/milo/app/assets/stylesheets/utilities/_visible.scss */
-.milo-card.progress .progress-bar:after, .milo-card.quick-save .amount ul.ac-options:after, .milo-card.recurring .amount ul.ac-options:after, .milo-card.full-history:after, body.milo-app header nav:after, .hm-navbar:after, .hm-navbar nav.hm-nav:after, footer ul:after, .signup form.new_checking:after, section.section-goals .goal-icons:after, nav.setting-subheader:after, .timeline-wrapper:after {
+.milo-card.progress .progress-bar:after, .milo-card.quick-save .amount ul.ac-options:after, .milo-card.recurring .amount ul.ac-options:after, body.milo-app header nav:after, .hm-navbar:after, .hm-navbar nav.hm-nav:after, footer ul:after, .signup form.new_checking:after, section.section-goals .goal-icons:after, nav.setting-subheader:after, .timeline-wrapper:after {
   content: "";
   display: table;
   clear: both;
@@ -7330,7 +7330,7 @@ img {
 * milosavings.com
 */
 /* line 9, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-.button {
+.button, a.button {
   background: inherit;
   border: 2px solid #BBC5C7;
   border-radius: 4px;
@@ -7346,27 +7346,28 @@ img {
 }
 @media (max-width: 479px) {
   /* line 9, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-  .button {
+  .button, a.button {
     width: 100%;
   }
 }
 /* line 27, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-.button:focus {
+.button:focus, a.button:focus {
   outline: none;
   text-decoration: none;
 }
 /* line 32, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-.button:hover {
+.button:hover, a.button:hover {
   background: #BBC5C7;
   color: #FFF;
+  text-decoration: none;
 }
-/* line 38, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-.button.-full {
+/* line 39, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+.button.-full, a.button.-full {
   padding: 0;
   width: 100%;
 }
-/* line 43, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-.button.-large {
+/* line 44, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+.button.-large, a.button.-large {
   font-size: 1.5em;
   line-height: 76px;
   height: 80px;
@@ -7374,83 +7375,83 @@ img {
   text-transform: initial;
 }
 @media (max-width: 767px) {
-  /* line 43, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-  .button.-large {
+  /* line 44, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+  .button.-large, a.button.-large {
     font-size: 1.25em;
     height: 56px;
     line-height: 52px;
   }
 }
 @media (max-width: 479px) {
-  /* line 43, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-  .button.-large {
+  /* line 44, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+  .button.-large, a.button.-large {
     font-size: 1.125em;
     height: 50px;
     line-height: 46px;
   }
 }
-/* line 63, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-.button.-small {
+/* line 64, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+.button.-small, a.button.-small {
   font-size: 0.875em;
   height: 36px;
   line-height: 32px;
   padding: 0 16px;
 }
-/* line 71, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-.button.-inline {
+/* line 72, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+.button.-inline, a.button.-inline {
   display: inline-block;
 }
-/* line 75, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-.button.-right {
+/* line 76, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+.button.-right, a.button.-right {
   float: right;
 }
-/* line 80, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-.button.-blue {
+/* line 81, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+.button.-blue, a.button.-blue {
   border: 2px solid #4A90E2;
   color: #4A90E2;
 }
-/* line 84, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-.button.-blue:hover {
+/* line 85, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+.button.-blue:hover, a.button.-blue:hover {
   background: #4A90E2;
   color: #FFF;
 }
-/* line 90, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-.button.-green {
+/* line 91, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+.button.-green, a.button.-green {
   border: 2px solid #1ABD7D;
   color: #1ABD7D;
 }
-/* line 94, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-.button.-green:hover {
+/* line 95, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+.button.-green:hover, a.button.-green:hover {
   background: #1ABD7D;
   color: #FFF;
 }
-/* line 100, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-.button.-purple {
+/* line 101, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+.button.-purple, a.button.-purple {
   border: 2px solid #292242;
   color: #292242;
 }
-/* line 104, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-.button.-purple:hover {
+/* line 105, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+.button.-purple:hover, a.button.-purple:hover {
   background: #292242;
   color: #FFF;
 }
-/* line 110, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-.button.-red {
+/* line 111, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+.button.-red, a.button.-red {
   border: 2px solid #FF5455;
   color: #FF5455;
 }
-/* line 114, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
-.button.-red:hover {
+/* line 115, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+.button.-red:hover, a.button.-red:hover {
   background: #FF5455;
   color: #FFF;
 }
 
-/* line 121, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+/* line 122, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
 a.button {
   display: inline-block;
 }
 
-/* line 127, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+/* line 128, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
 a.ssb {
   background: #DDD;
   border-radius: 4px;
@@ -7466,42 +7467,42 @@ a.ssb {
   width: 100%;
 }
 @media (max-width: 767px) {
-  /* line 127, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+  /* line 128, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
   a.ssb {
     margin: 0 0 8px;
   }
 }
-/* line 145, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+/* line 146, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
 a.ssb:hover, a.ssb:focus {
   text-decoration: none;
 }
-/* line 149, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+/* line 150, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
 a.ssb .fa {
   display: inline-block;
   margin: 0 16px 0 0;
 }
-/* line 154, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+/* line 155, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
 a.ssb.ssb-twitter {
   background: #00ACED;
 }
-/* line 157, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+/* line 158, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
 a.ssb.ssb-twitter:hover {
   background: #018FBD;
 }
-/* line 162, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+/* line 163, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
 a.ssb.ssb-facebook {
   background: #3B5998;
 }
-/* line 165, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+/* line 166, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
 a.ssb.ssb-facebook:hover {
   background: #334B79;
 }
-/* line 170, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+/* line 171, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
 a.ssb.ssb-linkedin {
   background: #007BB6;
   margin: 0;
 }
-/* line 174, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
+/* line 175, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_buttons.scss */
 a.ssb.ssb-linkedin:hover {
   background: #00648E;
 }
@@ -7519,13 +7520,13 @@ a.ssb.ssb-linkedin:hover {
   margin: 0 0 32px;
   padding: 24px;
 }
-@media (max-width: 479px) {
+@media (max-width: 767px) {
   /* line 9, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
   .milo-card {
     margin: 0 0 16px;
   }
 }
-/* line 18, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 20, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card .mc-title {
   border-bottom: 1px solid #DDE1E2;
   box-sizing: border-box;
@@ -7535,7 +7536,7 @@ a.ssb.ssb-linkedin:hover {
   line-height: 1;
   margin: 0 0 24px;
 }
-/* line 26, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 28, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card .mc-title span {
   color: #8B999F;
   float: right;
@@ -7543,21 +7544,21 @@ a.ssb.ssb-linkedin:hover {
   font-weight: 600;
   line-height: 28px;
 }
-/* line 32, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 34, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card .mc-title span em {
   color: #1ABD7D;
   font-style: normal;
 }
-/* line 36, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 38, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card .mc-title span i.fa {
   margin: 0 0 0 4px;
 }
 
-/* line 44, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 46, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress {
   height: auto;
 }
-/* line 46, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 48, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar {
   background: #F8FAFB;
   border: 1px solid #E5E8E9;
@@ -7566,7 +7567,7 @@ a.ssb.ssb-linkedin:hover {
   position: relative;
   z-index: 1;
 }
-/* line 54, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 56, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .current-progress {
   background: #2BC38A;
   border: 1px solid #2B906C;
@@ -7575,10 +7576,9 @@ a.ssb.ssb-linkedin:hover {
   left: -1px;
   position: absolute;
   top: -1px;
-  width: 42%;
   z-index: 2;
 }
-/* line 65, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 66, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .bar {
   background: rgba(0, 0, 0, 0.12);
   height: 38px;
@@ -7587,91 +7587,120 @@ a.ssb.ssb-linkedin:hover {
   width: 1px;
   z-index: 3;
 }
-/* line 72, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 73, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .bar.one {
   left: 12.5%;
 }
-/* line 73, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 74, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .bar.two {
   left: 25%;
 }
-/* line 74, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 75, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .bar.three {
   left: 37.5%;
 }
-/* line 75, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 76, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .bar.four {
   left: 50%;
 }
-/* line 76, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 77, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .bar.five {
   left: 62.5%;
 }
-/* line 77, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 78, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .bar.six {
   left: 75%;
 }
-/* line 78, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 79, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .bar.seven {
   left: 87.5%;
 }
 
-/* line 86, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 87, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.account-value .av-total {
   color: #292242;
   font-family: 'Futura Bold';
   font-size: 3.5em;
   line-height: 1;
 }
-/* line 92, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 93, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.account-value .av-total span {
   color: #1ABD7D;
   float: right;
   font-size: 0.32em;
 }
 
-/* line 102, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.history ul.recent-transactions {
+/* line 104, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+.milo-card.history ul.recent-transactions, .milo-card.mobile-roundups ul.recent-transactions {
   list-style: none;
   margin: 0 0 24px;
   padding: 0;
 }
-/* line 106, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.history ul.recent-transactions li {
-  border-bottom: 2px solid #EDF1F2;
-  color: #333A4E;
+/* line 109, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+.milo-card.history ul.recent-transactions li, .milo-card.mobile-roundups ul.recent-transactions li {
+  border-bottom: 1px solid #DDE1E2;
+  color: #352D52;
   font-size: 1.25em;
   height: 54px;
-  line-height: 20px;
-  padding: 16px;
+  line-height: 32px;
+  padding: 11px 16px;
   width: 100%;
 }
-/* line 114, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.history ul.recent-transactions li span {
+/* line 118, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+.milo-card.history ul.recent-transactions li span, .milo-card.mobile-roundups ul.recent-transactions li span {
   color: #8B999F;
   float: right;
   font-size: 0.5em;
-  line-height: 1;
+  line-height: 1.6;
+  overflow: hidden;
   text-align: right;
+  text-overflow: ellipsis;
   text-transform: uppercase;
-}
-/* line 121, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.history ul.recent-transactions li span strong {
-  display: block;
-  font-size: 1.25em;
-  font-weight: 600;
-  line-height: 1.2;
+  white-space: nowrap;
+  width: 72%;
 }
 /* line 130, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.history a {
-  color: #6FB7E9;
+.milo-card.history ul.recent-transactions li span strong, .milo-card.mobile-roundups ul.recent-transactions li span strong {
   display: block;
-  font-weight: 600;
+  font-family: 'Futura Bold';
+  font-size: 1.25em;
+  line-height: 1.2;
+}
+/* line 140, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+.milo-card.history a, .milo-card.mobile-roundups a {
+  display: block;
   margin: 0 0 6px;
   text-align: center;
 }
 
-/* line 141, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 149, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+.milo-card.mobile-roundups ul.recent-transactions li {
+  height: auto;
+  line-height: 1.6;
+  padding: 12px 16px;
+}
+/* line 154, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+.milo-card.mobile-roundups ul.recent-transactions li span {
+  display: block;
+  float: none;
+  text-align: left;
+  width: 100%;
+}
+/* line 160, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+.milo-card.mobile-roundups ul.recent-transactions li span strong {
+  display: inline;
+  margin: 0 12px 0 0;
+}
+/* line 167, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+.milo-card.mobile-roundups p {
+  margin: 0;
+}
+/* line 170, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+.milo-card.mobile-roundups p.align-center {
+  text-align: center;
+}
+
+/* line 179, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.quick-save .amount, .milo-card.recurring .amount {
   background: #F8FAFB;
   border: 1px solid #E5E8E9;
@@ -7684,18 +7713,18 @@ a.ssb.ssb-linkedin:hover {
   padding: 54px 0;
   text-align: center;
 }
-/* line 152, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 190, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.quick-save .amount.-schedule, .milo-card.recurring .amount.-schedule {
   padding: 36px 0 0;
 }
-/* line 155, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 193, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.quick-save .amount ul.ac-options, .milo-card.recurring .amount ul.ac-options {
   border-top: 1px solid #E5E8E9;
   list-style: none;
   margin: 33px 0 0;
   padding: 0;
 }
-/* line 161, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 199, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.quick-save .amount ul.ac-options li, .milo-card.recurring .amount ul.ac-options li {
   border-right: 1px solid #E5E8E9;
   color: #96A3A8;
@@ -7709,22 +7738,22 @@ a.ssb.ssb-linkedin:hover {
   text-transform: uppercase;
   width: 33.33%;
 }
-/* line 173, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 211, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.quick-save .amount ul.ac-options li:last-child, .milo-card.recurring .amount ul.ac-options li:last-child {
   border-right: 0;
 }
-/* line 176, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 214, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.quick-save .amount ul.ac-options li.active, .milo-card.quick-save .amount ul.ac-options li.active:hover, .milo-card.recurring .amount ul.ac-options li.active, .milo-card.recurring .amount ul.ac-options li.active:hover {
   background: #FFF;
   color: #3B4357;
 }
-/* line 180, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 218, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.quick-save .amount ul.ac-options li:hover, .milo-card.recurring .amount ul.ac-options li:hover {
   background: #FAFAFA;
   color: #4C3E70;
 }
 
-/* line 190, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 228, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.round-up-stat {
   box-sizing: border-box;
   color: #333A4E;
@@ -7735,7 +7764,7 @@ a.ssb.ssb-linkedin:hover {
   padding: 40px 0 0;
   text-align: center;
 }
-/* line 199, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 237, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.round-up-stat span {
   color: #8B999F;
   display: block;
@@ -7743,124 +7772,47 @@ a.ssb.ssb-linkedin:hover {
   font-weight: normal;
 }
 
-/* line 208, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.full-history {
-  padding: 0;
-}
-/* line 211, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.full-history .fh-left {
-  box-sizing: border-box;
-  border-right: 1px solid #DDE1E2;
-  float: left;
-  padding: 24px 0 24px 24px;
-  width: 60%;
-}
-/* line 217, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.full-history .fh-left .mc-title {
+/* line 248, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+.milo-card.full-history .mc-title.no-marg {
   margin: 0;
 }
-/* line 221, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.full-history .fh-left table.table th {
+/* line 252, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+.milo-card.full-history table.table {
+  margin: 0;
+}
+/* line 255, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+.milo-card.full-history table.table th {
   background: #F9FBFB;
   border-top: 0;
   color: #3B4357;
+  font-family: 'Futura Bold';
   font-size: 0.8em;
-  font-weight: 600;
   text-transform: uppercase;
-}
-/* line 231, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.full-history .fh-right {
-  box-sizing: border-box;
-  float: left;
-  padding: 64px 32px 32px;
-  width: 40%;
-}
-/* line 236, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.full-history .fh-right .transaction-info {
-  margin: 0 0 24px;
-}
-/* line 238, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.full-history .fh-right .transaction-info span {
-  color: #2D323E;
-  font-size: 0.8em;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-/* line 244, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.full-history .fh-right .transaction-info h1 {
-  color: #2D323E;
-  font-size: 3.5em;
-  font-weight: 600;
-  line-height: 1.2;
-}
-/* line 250, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.full-history .fh-right .transaction-info em {
-  font-style: normal;
-}
-/* line 255, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.full-history .fh-right table.table th {
-  border: 0;
-  color: #2D323E;
-  font-weight: 600;
-  font-size: 0.8em;
-  line-height: 1;
-  padding: 0.5em;
-  text-transform: uppercase;
-}
-/* line 263, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.full-history .fh-right table.table th:first-child {
-  padding-left: 0;
-}
-/* line 266, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.full-history .fh-right table.table th:nth-child(2) {
-  text-align: center;
-}
-/* line 269, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.full-history .fh-right table.table th:last-child {
-  text-align: right;
-}
-/* line 273, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.full-history .fh-right table.table td {
-  border-top: 0;
-  line-height: 1;
-  padding: 0.5em;
-}
-/* line 277, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.full-history .fh-right table.table td:first-child {
-  padding-left: 0;
-}
-/* line 280, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.full-history .fh-right table.table td:nth-child(2) {
-  text-align: center;
-}
-/* line 283, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
-.milo-card.full-history .fh-right table.table td:last-child {
-  text-align: right;
 }
 
-/* line 292, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 267, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.growth-hack {
   padding: 40px;
   text-align: center;
 }
 @media (max-width: 767px) {
-  /* line 292, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+  /* line 267, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
   .milo-card.growth-hack {
     padding: 20px 16px;
   }
 }
-/* line 300, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 275, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.growth-hack h4 {
   margin: 0 0 16px;
 }
 @media (max-width: 767px) {
-  /* line 304, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+  /* line 279, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
   .milo-card.growth-hack p {
     font-size: 1em;
     margin: 0 0 16px;
   }
 }
-/* line 311, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 286, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.growth-hack .gh-link {
   background: #F1F3F6;
   border-radius: 4px;
@@ -7870,7 +7822,7 @@ a.ssb.ssb-linkedin:hover {
   padding: 16px 24px;
 }
 @media (max-width: 767px) {
-  /* line 311, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+  /* line 286, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
   .milo-card.growth-hack .gh-link {
     font-size: 1em;
   }
@@ -7914,6 +7866,10 @@ a.ssb.ssb-linkedin:hover {
 .form-section {
   margin: 0 0 24px;
 }
+/* line 40, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_forms.scss */
+.form-section fieldset.form-group {
+  text-align: left;
+}
 
 /*
 * Milo
@@ -7948,35 +7904,35 @@ a.ssb.ssb-linkedin:hover {
 .pending-roundups {
   margin: 0 0 24px;
 }
-/* line 11, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_roundups.scss */
+/* line 12, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_roundups.scss */
 .pending-roundups .pr-title {
   color: #4C3E70;
   margin: 0 0 8px;
   padding: 0 16px;
 }
-/* line 16, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_roundups.scss */
+/* line 18, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_roundups.scss */
 .pending-roundups .pr-growth-hack {
   font-size: 1.5em;
   margin: 0 0 16px;
   padding: 0 16px;
 }
-/* line 21, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_roundups.scss */
+/* line 23, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_roundups.scss */
 .pending-roundups .pr-growth-hack strong {
   color: #4C3E70;
 }
-/* line 25, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_roundups.scss */
+/* line 28, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_roundups.scss */
 .pending-roundups small {
   display: block;
   font-size: 0.72em;
-  padding: 0 16px;
+  padding: 16px;
 }
-/* line 30, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_roundups.scss */
+/* line 34, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_roundups.scss */
 .pending-roundups ul.pr-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-/* line 34, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_roundups.scss */
+/* line 39, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_roundups.scss */
 .pending-roundups ul.pr-list li {
   border-bottom: 2px solid #EDF1F2;
   box-sizing: border-box;
@@ -7987,7 +7943,7 @@ a.ssb.ssb-linkedin:hover {
   padding: 13px 16px;
   width: 100%;
 }
-/* line 43, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_roundups.scss */
+/* line 49, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_roundups.scss */
 .pending-roundups ul.pr-list li span {
   color: #96A3A8;
   display: block;
@@ -7997,7 +7953,7 @@ a.ssb.ssb-linkedin:hover {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-/* line 51, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_roundups.scss */
+/* line 58, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_roundups.scss */
 .pending-roundups ul.pr-list li span strong {
   margin: 0 4px 0 0;
 }
@@ -8103,8 +8059,8 @@ body.milo-app header {
 @media (max-width: 767px) {
   /* line 11, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app header {
-    height: 50px;
-    padding: 8px 0 0;
+    height: 56px;
+    padding: 8px 0.9375rem;
     width: 100%;
   }
 }
@@ -8122,29 +8078,30 @@ body.milo-app header a.logo {
   body.milo-app header a.logo {
     display: block;
     float: left;
+    font-size: 1.625em;
     line-height: 40px;
-    margin: 0 0 0 16px;
+    margin: 0;
     text-align: left;
     width: auto;
   }
 }
-/* line 43, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 44, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header a.logo:focus, body.milo-app header a.logo:hover {
   text-decoration: none;
 }
-/* line 48, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 49, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header .milo-user {
   margin: 0 0 40px;
   text-align: center;
 }
 @media (max-width: 767px) {
-  /* line 48, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  /* line 49, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app header .milo-user {
     display: none;
     visibility: hidden;
   }
 }
-/* line 57, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 58, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header .milo-user .mu-img {
   background: #352D52;
   border-radius: 60px;
@@ -8153,7 +8110,7 @@ body.milo-app header .milo-user .mu-img {
   overflow: hidden;
   width: 120px;
 }
-/* line 65, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 66, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header .milo-user .mu-img a.add-avatar {
   box-sizing: content-box;
   display: block;
@@ -8161,38 +8118,43 @@ body.milo-app header .milo-user .mu-img a.add-avatar {
   padding: 39px 36px;
   width: 48px;
 }
-/* line 73, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 74, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header .milo-user .mu-img img {
   height: auto;
   max-width: 100%;
 }
-/* line 79, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 80, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header .milo-user h5 {
   color: #FFF;
   font-size: 1.5em;
   line-height: 1.4;
   margin: 0;
 }
-/* line 86, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 87, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header .milo-user span {
   color: #4C3E70;
   font-family: 'Futura Bold';
   font-size: 0.875em;
   text-transform: uppercase;
 }
-/* line 94, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 95, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header nav {
   padding: 0 20px;
 }
 @media (max-width: 767px) {
-  /* line 94, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  /* line 95, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app header nav {
-    display: none;
+    background: #F8FAFB;
+    border-top: 1px solid #F1F3F6;
+    bottom: 0;
+    height: 60px;
+    left: 0;
     padding: 0;
-    visibility: hidden;
+    position: fixed;
+    right: 0;
   }
 }
-/* line 103, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 110, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header nav a {
   color: #F1F3F6;
   display: block;
@@ -8200,18 +8162,18 @@ body.milo-app header nav a {
   line-height: 1;
   margin: 0 0 16px 0;
 }
-/* line 110, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 117, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header nav a:hover, body.milo-app header nav a:focus {
   color: #4C3E70;
   text-decoration: none;
 }
-/* line 115, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 122, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header nav a.active {
   color: #FFF;
   font-family: 'Futura Bold';
   text-decoration: none;
 }
-/* line 121, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 128, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header nav a span {
   background: #3E445C;
   border-radius: 4px;
@@ -8226,37 +8188,45 @@ body.milo-app header nav a span {
   width: 30px;
 }
 @media (max-width: 767px) {
-  /* line 121, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  /* line 128, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app header nav a span {
     display: none;
     visibility: hidden;
   }
 }
+/* line 147, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+body.milo-app header nav a i.fa {
+  display: none;
+  visibility: hidden;
+}
 @media (max-width: 767px) {
-  /* line 103, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  /* line 110, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app header nav a {
-    color: rgba(255, 255, 255, 0.6);
+    color: #BBC5C7;
     float: left;
+    font-family: 'Futura Bold';
     font-size: 0.6em;
-    height: 42px;
+    height: 59px;
     margin: 0;
+    padding: 12px 0 0;
     text-align: center;
     text-transform: uppercase;
-    width: 20%;
+    width: 25%;
   }
-  /* line 150, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  /* line 164, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app header nav a:hover, body.milo-app header nav a.active {
-    color: #FFF;
-    border-bottom: 3px solid rgba(0, 0, 0, 0.5);
+    color: #4C3E70;
+    border-bottom: 3px solid #352D52;
   }
-  /* line 155, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  /* line 169, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app header nav a i.fa {
     display: block;
     font-size: 2em;
     margin: 0 0 6px;
+    visibility: visible;
   }
 }
-/* line 164, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 179, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app header a.sign-out {
   background: #352D52;
   bottom: 0;
@@ -8272,23 +8242,30 @@ body.milo-app header a.sign-out {
   width: 100%;
 }
 @media (max-width: 767px) {
-  /* line 164, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  /* line 179, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app header a.sign-out {
     background: none;
     float: right;
-    height: 40px;
-    line-height: 40px;
-    margin: 0 16px 0 0;
+    font-size: 0.75em;
+    height: 20px;
+    line-height: 20px;
+    margin: 10px 0;
     position: relative;
     width: auto;
   }
 }
-/* line 188, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
-body.milo-app header a.sign-out:hover {
+/* line 204, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+body.milo-app header a.sign-out:focus, body.milo-app header a.sign-out:hover {
   background: #4C3E70;
   text-decoration: none;
 }
-/* line 195, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+@media (max-width: 767px) {
+  /* line 204, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  body.milo-app header a.sign-out:focus, body.milo-app header a.sign-out:hover {
+    background: none;
+  }
+}
+/* line 215, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app .page-content {
   box-sizing: border-box;
   margin: 0 0 0 240px;
@@ -8297,18 +8274,18 @@ body.milo-app .page-content {
   width: calc(100% - 420px);
 }
 @media (max-width: 767px) {
-  /* line 195, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  /* line 215, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app .page-content {
     margin: 0;
-    padding: 70px 16px 16px;
+    padding: 76px 16px 84px;
     width: 100%;
   }
 }
-/* line 208, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 228, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app .page-content .container {
   padding: 0;
 }
-/* line 213, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 233, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app .sidebar {
   background: #F8FAFB;
   box-sizing: border-box;
@@ -8320,13 +8297,13 @@ body.milo-app .sidebar {
   width: 180px;
 }
 @media (max-width: 767px) {
-  /* line 213, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  /* line 233, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
   body.milo-app .sidebar {
     display: none;
     visibility: hidden;
   }
 }
-/* line 229, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+/* line 249, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
 body.milo-app p {
   font-size: 1em;
   margin: 0 0 24px;
@@ -8763,7 +8740,7 @@ body.milo-signup a.signup-logo:hover {
 @media (max-width: 479px) {
   /* line 11, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
   body.milo-signup a.signup-logo {
-    margin: 20px auto;
+    margin: 16px auto;
     text-align: center;
   }
 }
@@ -8778,7 +8755,7 @@ body.milo-signup a.signup-logo:hover {
   /* line 31, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
   .signup {
     margin: 0 0 20px;
-    padding: 16px 12px;
+    padding: 24px 12px;
   }
 }
 /* line 41, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
@@ -8793,13 +8770,14 @@ body.milo-signup a.signup-logo:hover {
 .signup h1.marg-16 {
   margin: 0 0 16px;
 }
-@media (max-width: 479px) {
+@media (max-width: 767px) {
   /* line 41, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
   .signup h1 {
+    font-size: 1.625em;
     margin: 0 0 16px;
   }
 }
-/* line 56, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 57, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .signup h1 span {
   color: #BBC5C7;
   display: block;
@@ -8808,7 +8786,7 @@ body.milo-signup a.signup-logo:hover {
   margin: 0 0 12px;
   text-transform: uppercase;
 }
-/* line 66, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 67, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .signup p {
   font-size: 1em;
   margin: 0 0 24px;
@@ -8816,60 +8794,70 @@ body.milo-signup a.signup-logo:hover {
   text-align: center;
 }
 /* line 73, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+.signup p.on-demand {
+  text-align: left;
+}
+/* line 78, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .signup form.new_checking {
   border-bottom: 1px solid #DDE1E2;
   padding: 16px;
 }
-/* line 78, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 83, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .signup form.new_checking span.checking-name {
   color: #292242;
   display: inline-block;
   font-family: 'Futura Bold';
-  line-height: 36px;
+  line-height: 1.2;
   vertical-align: middle;
 }
+/* line 90, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+.signup form.new_checking span.checking-name em {
+  color: #8B999F;
+  font-size: 0.75em;
+  font-style: normal;
+}
 
-/* line 88, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 99, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .shared-links {
   margin: 0 0 64px;
   padding: 24px 0 0;
   text-align: center;
 }
-/* line 93, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 104, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .shared-links a.shared-link {
   border-right: 1px solid #DDE1E2;
   color: #BBC5C7;
   display: inline-block;
   padding: 0 20px 0 12px;
 }
-/* line 99, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 110, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .shared-links a.shared-link:focus, .shared-links a.shared-link:hover {
   color: #4A90E2;
 }
-/* line 103, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 114, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .shared-links a.shared-link.-first {
   padding-left: 0;
 }
-/* line 107, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 118, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .shared-links a.shared-link.-last {
   border-right: 0;
   padding-right: 0;
 }
 
-/* line 114, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 125, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 form.email-signup {
   margin: 24px 0 0;
 }
-/* line 117, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 128, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 form.email-signup .button {
   margin: 0 0 24px;
 }
 
-/* line 122, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 133, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .social-signup {
   margin: 24px 0 0;
 }
-/* line 125, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 136, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .social-signup a.btn-social {
   background: #666;
   border-radius: 4px;
@@ -8883,70 +8871,70 @@ form.email-signup .button {
   padding: 0 16px;
   width: 100%;
 }
-/* line 138, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 149, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .social-signup a.btn-social.-facebook {
   background: #3B5998;
 }
-/* line 141, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 152, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .social-signup a.btn-social.-facebook:hover {
   background: #30497E;
 }
-/* line 144, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 155, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .social-signup a.btn-social.-twitter {
   background: #55ACEE;
 }
-/* line 147, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 158, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .social-signup a.btn-social.-twitter:hover {
   background: #4690C8;
 }
-/* line 150, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 161, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .social-signup a.btn-social.-google {
   background: #4885ED;
   margin: 0 0 24px;
 }
-/* line 154, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 165, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .social-signup a.btn-social.-google:hover {
   background: #3D73CD;
 }
-/* line 157, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 168, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .social-signup a.btn-social:hover, .social-signup a.btn-social:focus {
   text-decoration: none;
 }
-/* line 161, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 172, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 .social-signup a.btn-social i.fa {
   margin: 0 12px 0 0;
   width: 16px;
 }
 
-/* line 169, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 180, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 ul.signup-steps {
   list-style: none;
   margin: 32px 0 0 24px;
   padding: 0;
 }
 @media (max-width: 767px) {
-  /* line 169, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+  /* line 180, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
   ul.signup-steps {
     display: none;
     visibility: hidden;
   }
 }
-/* line 179, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 190, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 ul.signup-steps li {
   color: #BBC5C7;
   height: 16px;
   line-height: 16px;
   margin: 0 0 20px;
 }
-/* line 185, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 196, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 ul.signup-steps li.active {
   color: #4C3E70;
 }
-/* line 188, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 199, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 ul.signup-steps li.active span {
   background: #4C3E70;
 }
-/* line 193, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 204, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 ul.signup-steps li span {
   background: #DDE1E2;
   border-radius: 8px;
@@ -8957,7 +8945,7 @@ ul.signup-steps li span {
   width: 16px;
 }
 
-/* line 206, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 217, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 #plaid-link-button {
   background: inherit;
   border: 2px solid #4A90E2;
@@ -8973,7 +8961,7 @@ ul.signup-steps li span {
   text-align: center;
   width: 100%;
 }
-/* line 221, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
+/* line 232, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 #plaid-link-button:hover, #plaid-link-button:focus {
   background: #4A90E2;
   color: #FFF;
