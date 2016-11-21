@@ -20,7 +20,8 @@ Rails.application.routes.draw do
     get 'signup/on_demand', to: 'registrations#on_demand', as: :signup_on_demand
   end
 
-  get 'history', to: 'home#history'
+  get 'history', to: 'home#history', as: :history
+  get 'roundups', to: 'home#roundups', as: :roundups
 
   # Root, User Logged In
   authenticated :user do

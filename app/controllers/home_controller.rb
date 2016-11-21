@@ -40,7 +40,7 @@ class HomeController < ApplicationController
     @transactions = PlaidHelper.current_week_transactions(@user, @checking)
     @total_pending = 0
 
-    @transactions.each{ |tr| @total_pending += tr[:roundup]  } if @transactions 
+    @transactions.each{ |tr| @total_pending += tr[:roundup]  } if @transactions
 
     # Show the latest 3 transfers
     @transfers = Transfer.where(user_id: @user.id).order('date ASC').limit(3)
@@ -57,6 +57,26 @@ class HomeController < ApplicationController
   # Page to see round up transfer history
   def history
     @transfers = Transfer.where(user_id: @user.id)
+  end
+
+  # ----------------------------------------------
+  # ROUNDUPS ------------------------------------
+  # ----------------------------------------------
+  def roundups
+    # Users account balance converted to dollars
+    @account_balance = number_to_currency(@user.account_balance / 100.00, unit:"") if @user.account_balance
+    # Transfers
+    @transfers = Transfer.where(user_id: @user.id).all
+    @transfer_total = @transfers.size
+    # Transactions
+    @transactions.each{ |tr| @total_pending += tr[:roundup]  } if @transactions
+    # Round Ups
+    @trans = Transaction.where(user_id: @user.id).all
+    @roundup_total = @trans.size
+    @roundup_avg = @trans.average(:roundup)
+    # Spent
+    @spent_total = @trans.sum(:amount)
+    @spent_avg = @trans.average(:amount)
   end
 
   # ==============================================
