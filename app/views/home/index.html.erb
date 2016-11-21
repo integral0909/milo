@@ -32,7 +32,7 @@
                       goal_percentage = 0
                     end
                     %>
-                    <span><em>$<%= current_user.account_balance ? (current_user.account_balance / 100.00) : "0" %></em> / $<%= current_user.goals.first.amount %></span>
+                    <span><em><%= current_user.account_balance ? number_to_currency(current_user.account_balance / 100.00) : "0" %></em> / $<%= current_user.goals.first.amount %></span>
                   </div>
                   <div class="progress-bar">
                     <div class="current-progress" style="width: <%= goal_percentage %>"></div>
