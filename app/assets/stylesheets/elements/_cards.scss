@@ -121,8 +121,12 @@
         float: right;
         font-size: 0.5em;
         line-height: 1.6;
+        overflow: hidden;
         text-align: right;
+        text-overflow: ellipsis;
         text-transform: uppercase;
+        white-space: nowrap;
+        width: 72%;
 
         strong {
           display: block;
@@ -141,11 +145,32 @@
   }
 }
 
-.milo-card.mobile-roundups p {
-  margin: 0;
+.milo-card.mobile-roundups {
 
-  &.align-center {
-    text-align: center;
+  ul.recent-transactions li {
+    height: auto;
+    line-height: 1.6;
+    padding: 12px 16px;
+
+    span {
+      display: block;
+      float: none;
+      text-align: left;
+      width: 100%;
+
+      strong {
+        display: inline;
+        margin: 0 12px 0 0;
+      }
+    }
+  }
+
+  p {
+    margin: 0;
+
+    &.align-center {
+      text-align: center;
+    }
   }
 }
 
