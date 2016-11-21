@@ -36,6 +36,12 @@ class HomeController < ApplicationController
 
     @goal = current_user.goals.build
 
+    if !@user.account_balance.nil?
+      @goal_percentage = (@user.account_balance * 100 / @user.goals.first.amount) / 100.00
+    else
+      @goal_percentage = 0
+    end
+
     # Pull in the users transactions from the current week. The week starts on Sunday
     @transactions = PlaidHelper.current_week_transactions(@user, @checking)
     @total_pending = 0

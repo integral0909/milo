@@ -25,17 +25,10 @@
                 <% if (current_user.goals.count >= 1) %>
                   <div class="mc-title">
                     <%= current_user.goals.first.name %>
-                    <% if !current_user.account_balance.nil?
-                      goal_percentage = (current_user.account_balance / 100.00)
-                      goal_percentage = goal_percentage / current_user.goals.first.amount
-                    else
-                      goal_percentage = 0
-                    end
-                    %>
                     <span><em><%= current_user.account_balance ? number_to_currency(current_user.account_balance / 100.00) : "0" %></em> / $<%= current_user.goals.first.amount %></span>
                   </div>
                   <div class="progress-bar">
-                    <div class="current-progress" style="width: <%= goal_percentage %>"></div>
+                    <div class="current-progress" style="width: <%= @goal_percentage %>%"></div>
                     <div class="bar one"></div>
                     <div class="bar two"></div>
                     <div class="bar three"></div>
