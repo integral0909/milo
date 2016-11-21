@@ -14,28 +14,20 @@ module PlaidHelper
   # CREATE-WEEKLY-TRANSACTIONS -------------------
   # ----------------------------------------------
   # Pull in last weeks transactions from the connected user account
-  def self.create_weekly_transactions
+  def self.create_weekly_transactions(user, checking)
     sunday = set_sunday
     begin
-      # NOTE: Uncomment when live
-      # if day.saturday?
-        # loop through all CHECKING accounts connected with Milo
-        Checking.all.each do |ck|
-          # Find user based on checking.user_id
-          user = User.find(ck.user_id)
+      # Pull in plaid connect user
+      connect_user = Argyle.plaid_client.set_user(user.plaid_access_token, ['connect'])
+      user_transactions = connect_user.transactions()
 
-          # Pull in plaid connect user
-          connect_user = Argyle.plaid_client.set_user(user.plaid_access_token, ['connect'])
-          user_transactions = connect_user.transactions()
+      # filter transactions to the ones that match the users checking and this past week
+      current_transactions = user_transactions.select{|a| (a.account == checking.plaid_acct_id) && (a.date.to_date >= sunday)}
 
-          # filter transactions to the ones that match the users checking and this past week
-          current_transactions = user_transactions.select{|a| (a.account == ck.plaid_acct_id) && (a.date.to_date >= sunday)}
-
-          # create the transactions
-          Transaction.create_transactions(current_transactions, ck.plaid_acct_id, user.id)
-        end
+      # create the transactions
+      Transaction.create_transactions(current_transactions, checking.plaid_acct_id, user.id)
     rescue => e
-      # EMAIL: if all round up task breaks
+      # EMAIL: email if creating the weekly transactions task breaks
       puts e
     end
   end
