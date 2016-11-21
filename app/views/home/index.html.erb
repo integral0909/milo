@@ -24,7 +24,7 @@
               <div class="milo-card progress">
                 <% if (current_user.goals.count >= 1) %>
                   <div class="mc-title">
-                    <b>Savings Goal</b>: <%= current_user.goals.first.name %>
+                    <%= current_user.goals.first.name %>
                     <% if !current_user.account_balance.nil?
                       goal_percentage = (current_user.account_balance / 100.00)
                       goal_percentage = goal_percentage / current_user.goals.first.amount
