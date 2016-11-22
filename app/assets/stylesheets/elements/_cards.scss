@@ -25,6 +25,7 @@
     height: 36px;
     line-height: 1;
     margin: 0 0 24px;
+
     span {
       color: #8B999F;
       float: right;
@@ -227,18 +228,19 @@
 // Round Up Stats
 .milo-card.round-up-stat {
   box-sizing: border-box;
-  color: #333A4E;
+  color: #292242;
+  font-family: 'Futura Bold';
   font-size: 2em;
-  font-weight: 600;
   height: 160px;
-  margin: 0 0 16px;
+  margin: 0 0 32px;
   padding: 40px 0 0;
   text-align: center;
+
   span {
     color: #8B999F;
     display: block;
+    font-family: 'Futura Light';
     font-size: 0.5em;
-    font-weight: normal;
   }
 }
 

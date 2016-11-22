@@ -44,9 +44,8 @@
     </div>
     <nav>
       <a href="/" class="<%= active_page_class?('/')%>"><i class="fa fa-home"></i> Overview</a>
-      <!--
-      <a href="#"><i class="fa fa-circle-o"></i> Round-Ups <span>8</span></a>
-      <a href="#"><i class="fa fa-exchange"></i> Transfer</a>-->
+      <a href="/roundups" class="<%= active_page_class?('/roundups')%>"><i class="fa fa-circle-o"></i> Round Ups <!--<span>8</span>--></a>
+      <!--<a href="#"><i class="fa fa-exchange"></i> Transfer</a>-->
       <a href="/history" class="<%= active_page_class?('/history')%>"><i class="fa fa-clock-o"></i> History</a>
       <a href="/settings" class="<%= active_control_class?('registrations') %>"><i class="fa fa-gear"></i> Settings</a>
       <% if current_user.admin %>
