@@ -75,15 +75,16 @@ class HomeController < ApplicationController
     @transfers = Transfer.where(user_id: @user.id).all
     @transfer_total = @transfers.size
     all_transfer_amounts = @transfers.map {|tr| tr.roundup_amount.to_f }
-    @transfer_avg = number_to_currency(all_transfer_amounts.inject{ |sum, el| sum + el }.to_f / all_transfer_amounts.size)
+    all_transfer_average= (all_transfer_amounts.inject{ |sum, el| sum + el }.to_f / all_transfer_amounts.size)
+    @transfer_avg = (all_transfer_average > 0) ? number_to_currency(all_transfer_average) : "$0.00"
     # Transactions
     @transactions.each{ |tr| @total_pending += tr[:roundup]  } if @transactions
     # Round Ups
     @trans = Transaction.where(user_id: @user.id).all
     @roundup_total = @trans.size
-    @roundup_avg = number_to_currency(@trans.average(:roundup))
+    @roundup_avg = !@trans.blank? ? number_to_currency(@trans.average(:roundup)) : "$0.00"
     # Spent
-    @spent_avg = number_to_currency(@trans.average(:amount))
+    @spent_avg = !@trans.blank? ? number_to_currency(@trans.average(:amount)) : "$0.00"
   end
 
   # ==============================================
