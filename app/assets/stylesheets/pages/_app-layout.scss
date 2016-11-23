@@ -251,3 +251,11 @@ body.milo-app {
     margin: 0 0 24px;
   }
 }
+
+// Intercom
+#intercom-container .intercom-launcher-frame {
+
+  @include breakpoint(l-three) {
+    bottom: 80px !important;
+  }
+}
