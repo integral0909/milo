@@ -1,0 +1,78 @@
+<% set_meta_tags :site => 'Employer Sign Up • Milo',
+  :canonical => '-',
+  :author => 'Milo',
+  :copyright => '&copy; 2016 Milo',
+  :description => "-",
+  :keywords => ['Milo', 'Milo Savings', 'employer', 'benefits', 'employee', 'contributions', 'financial', 'matching', 'savings', 'sign up', 'join', 'registrer'],
+  :reverse => true,
+  :og => {
+    :title          => 'Employer Sign Up • Milo',
+    :type           => 'website',
+    :url            => request.original_url,
+    :image          => asset_url('social-banner-milo.png'),
+    :description    => "-",
+    :site_name      => 'Milo',
+  },
+  :twitter => {
+    :card           => 'summary',
+    :site           => '@milosavings',
+    :title          => 'Employer Sign Up • Milo',
+    :description    => "-",
+    :creator        => '@milosavings',
+    :image          => asset_url('social-banner-milo.png'),
+  }
+%>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-2">
+    <div class="signup">
+      <h1><span>Sign Up</span> Employer</h1>
+      <%= render "layouts/messages" %>
+
+      <%= form_for(@user, as: :user, url: registration_path(:user), class: "email-signup") do |f| %>
+        <%= devise_error_messages! %>
+        <%= f.fields_for :business do |b| %>
+          <fieldset class="form-group">
+            <label>Business</label>
+            <%= b.text_field :name, autofocus: true, class: "form-control", placeholder: "Business", required: true %>
+          </fieldset>
+	      <%end%>
+        <fieldset class="form-group">
+          <label>Full Name</label>
+          <%= f.text_field :name, class: "form-control", placeholder: "Name", required: true %>
+        </fieldset>
+        <fieldset class="form-group">
+          <label>Postal Code</label>
+          <%= f.text_field :zip, class: "form-control", placeholder: "xxxxx", required: true %>
+        </fieldset>
+        <fieldset class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "Email", required: true %>
+        </fieldset>
+        <fieldset class="form-group">
+          <%= f.label :password %>
+          <%= f.password_field :password, autocomplete: "off", class: "form-control", required: true %>
+          <small class="text-muted">Strong Password <i class="fa fa-question helper" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>Password Requirements:</strong><ul><li>minimum of 8 characters</li><li>one lowercase</li><li>one uppercase</li><li>one number</li></ul>"></i></small>
+        </fieldset>
+        <fieldset class="checkbox">
+          <label>
+            <%= f.check_box :agreement, required: true %>
+            I agree to Milo's <a href="/privacy" target="_blank">Privacy Policy</a> and <a href="/terms" target="_blank">Terms of Service</a>. I also agree to Dwolla's <a href="https://www.dwolla.com/legal/tos?whitelabel" target="_blank">Privacy Policay</a> and <a href="https://www.dwolla.com/legal/privacy?whitelabel" target="_blank">Terms of Service</a>.
+          </label>
+        </fieldset>
+        <% if params[:access] == "early" %>
+          <%= f.hidden_field :invited, value: true %>
+        <% end %>
+        <%= f.hidden_field :referral_code, value: session[:referral] %>
+        <button type="submit" class="button -full -blue">Sign Up</button>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <ul class="signup-steps">
+      <li class="active"><span></span> Basic Info</li>
+      <li><span></span> Mobile Number</li>
+      <li><span></span> Checking Account</li>
+    </ul>
+  </div>
+</div>

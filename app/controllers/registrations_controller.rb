@@ -69,6 +69,14 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   # ----------------------------------------------
+  # EMPLOYER -------------------------------------
+  # ----------------------------------------------
+  def employer
+    @user ||= User.new
+    @user.build_business
+  end
+
+  # ----------------------------------------------
   # PHONE ----------------------------------------
   # ----------------------------------------------
   def phone
@@ -171,14 +179,14 @@ class RegistrationsController < Devise::RegistrationsController
   # SIGN-UP-PARAMS -------------------------------
   # ----------------------------------------------
   def sign_up_params
-    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :invited, :agreement, :mobile_number, :is_verified, :on_demand)
+    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :invited, :agreement, :mobile_number, :is_verified, :on_demand, business_attributes: [:name])
   end
 
   # ----------------------------------------------
   # ACCOUNT-UPDATE-PARAMS ------------------------
   # ----------------------------------------------
   def account_update_params
-    params.require(:user).permit(:referral_code, :name, :address, :city, :state, :zip, :email, :password, :password_confirmation, :current_password, :invited, :agreement, :mobile_number, :is_verified, :on_demand, :avatar)
+    params.require(:user).permit(:referral_code, :name, :address, :city, :state, :zip, :email, :password, :password_confirmation, :current_password, :invited, :agreement, :mobile_number, :is_verified, :on_demand, :avatar, business_attributes: [:id, :name])
   end
 
 end
