@@ -121,7 +121,7 @@ body.milo-app {
 
         &.active {
           color: #FFF;
-          font-family: 'Futura Bold';
+          font-family: 'Futura Book';
           text-decoration: none;
         }
 
@@ -249,5 +249,13 @@ body.milo-app {
   p {
     font-size: 1em;
     margin: 0 0 24px;
+  }
+}
+
+// Intercom
+#intercom-container iframe.intercom-launcher-frame {
+
+  @include breakpoint(l-three) {
+    bottom: 80px !important;
   }
 }

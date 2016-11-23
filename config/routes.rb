@@ -22,7 +22,8 @@ Rails.application.routes.draw do
     get 'signup/employer', to: 'registrations#employer', as: :new_employer
   end
 
-  get 'history', to: 'home#history'
+  get 'history', to: 'home#history', as: :history
+  get 'roundups', to: 'home#roundups', as: :roundups
 
   # Root, User Logged In
   authenticated :user do
