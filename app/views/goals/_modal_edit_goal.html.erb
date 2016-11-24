@@ -1,0 +1,37 @@
+<div class="modal fade" id="editGoal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Edit Goal</h4>
+      </div>
+      <%= form_for (@goal), :url => {:controller => "goals", :action => "update", id: @current_goal.id}, :html => { :method => :put} do |f| %>
+        <div class="modal-body">
+          <%= form_errors @goal %>
+          <fieldset class="form-group">
+            <label>Amount</label>
+            <%= f.number_field :amount, class: "form-control", value: @current_goal.amount, require: true %>
+          </fieldset>
+          <fieldset class="form-group">
+            <label>Name</label>
+            <%= f.text_field :name, class: "form-control", value: @current_goal.name, require: true %>
+          </fieldset>
+          <fieldset class="form-group">
+            <label>Description</label>
+            <%= f.text_area :description, class: "form-control", value: @current_goal.description %>
+          </fieldset>
+          <fieldset class="form-group">
+            <label>Completed</label>
+            <%= f.check_box :completed, class: "form-control", value: @current_goal.completed %>
+          </fieldset>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="button -small -inline" data-dismiss="modal">Close</button>
+          <%= f.submit "Save", class: "button -blue -small -inline" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

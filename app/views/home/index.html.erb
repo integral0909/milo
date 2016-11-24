@@ -21,11 +21,12 @@
         <div class="container">
           <div class="row">
             <div class="col-md-12">
+              <%= render "layouts/messages" %>
               <div class="milo-card progress">
-                <% if (current_user.goals.count >= 1) %>
+                <% if (@current_goal) %>
                   <div class="mc-title">
-                    <%= current_user.goals.first.name %>
-                    <span><em><%= current_user.account_balance ? number_to_currency(current_user.account_balance / 100.00) : "0" %></em> / $<%= current_user.goals.first.amount %></span>
+                    <%= @current_goal.name %>
+                    <span><em><%= @user.account_balance ? number_to_currency(@user.account_balance / 100.00) : "0" %></em> / $<%= @current_goal.amount %></span>
                   </div>
                   <div class="progress-bar">
                     <div class="current-progress" style="width: <%= @goal_percentage %>%"></div>
@@ -37,6 +38,7 @@
                     <div class="bar six"></div>
                     <div class="bar seven"></div>
                   </div>
+                  <a data-toggle="modal" data-target="#editGoal">Edit</a>
                 <% else %>
                   <div class="mc-title">Create a Goal</div>
                   <p>Make a bigger impact and set a goal to motivate yourself to save for an important financial goal like a college education, new home or vacation.</p>
@@ -137,4 +139,7 @@
 
 <% content_for :modal do %>
   <%= render 'goals/modal_add_goal' %>
+  <% if @current_goal %>
+    <%= render 'goals/modal_edit_goal' %>
+  <% end %>
 <% end %>
