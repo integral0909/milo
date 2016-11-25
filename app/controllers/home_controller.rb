@@ -40,6 +40,12 @@ class HomeController < ApplicationController
 
     if !@user.account_balance.nil? && @current_goal
       @goal_percentage = (@user.account_balance * 100 / @current_goal.amount) / 100.00
+      if @goal_percentage >= 100
+
+        # If the user has hit 100% of their goal, mark it as completed and remove
+        @goal_complete_message = "Congrats! You've hit your goal of $#{@current_goal.amount}!!"
+        Goal.mark_as_completed(@current_goal)
+      end
     else
       @goal_percentage = 0
     end
@@ -50,6 +56,8 @@ class HomeController < ApplicationController
     # Show the latest 3 transfers
     @transfers = Transfer.where(user_id: @user.id).order('date ASC').limit(3)
 
+
+    flash[:success] = @goal_complete_message if @goal_complete_message
     # Redirect users to proper sign up page if not complete
     if (@user.invited && !@user.is_verified)
       redirect_to signup_phone_path
