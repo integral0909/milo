@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
   # ----------------------------------------------
   # Add Dwolla id to user if not already set NOTE: Depricate once all waitlist users sign up
   def set_dwolla_id
-    if !@user.dwolla_id
+    if @user.dwolla_id.blank?
       Dwolla.create_user(@user)
     end
   end
