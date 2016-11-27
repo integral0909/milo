@@ -3,27 +3,23 @@
 <div class="page-content">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <%= render :partial => 'devise/shared/subheader' %>
+        <%= render "layouts/messages" %>
         <h6>Change Password</h6>
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-          <section>
-            <div class="row">
-              <%= devise_error_messages! %>
-              <div class="col-sm-12">
-                - current password -
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                - new password -
-              </div>
-              <div class="col-sm-6">
-                - confirm password -
-              </div>
-            </div>
-          </section>
-          <%= f.submit "Change Password", class: "button -blue" %>
+        <%= form_for(@user, :url => { :action => "update_password", :controller=> "users" } ) do |f| %>
+        <%= devise_error_messages! %>
+          <div class="form-group">
+            <%= f.label :password, "Password" %><br />
+            <%= f.password_field :password, class: "form-control", autofocus: true, autocomplete: "off" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "off" %>
+          </div>
+          <div class="spacer -space-16"></div>
+          <button type="submit" class="button -full -blue">Change Password</button>
+          </div>
         <% end %>
       </div>
     </div>
