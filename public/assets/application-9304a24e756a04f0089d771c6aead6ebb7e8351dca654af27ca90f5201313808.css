@@ -8309,6 +8309,13 @@ body.milo-app p {
   margin: 0 0 24px;
 }
 
+@media (max-width: 767px) {
+  /* line 256, /Users/Pudge/Desktop/milo/app/assets/stylesheets/pages/_app-layout.scss */
+  #intercom-container iframe.intercom-launcher-frame {
+    bottom: 80px !important;
+  }
+}
+
 /*
 * Milo
 * Copyright Milo 2016
