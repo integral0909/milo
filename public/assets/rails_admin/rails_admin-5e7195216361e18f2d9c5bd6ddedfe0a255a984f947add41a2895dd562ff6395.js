@@ -1,5 +1,5 @@
 /*!
- * jQuery JavaScript Library v1.12.1
+ * jQuery JavaScript Library v1.12.4
  * http://jquery.com/
  *
  * Includes Sizzle.js
@@ -9,7 +9,7 @@
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2016-02-22T19:07Z
+ * Date: 2016-05-20T17:17Z
  */
 
 
@@ -66,7 +66,7 @@ var support = {};
 
 
 var
-	version = "1.12.1",
+	version = "1.12.4",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -6673,6 +6673,7 @@ var documentElement = document.documentElement;
 		if ( reliableHiddenOffsetsVal ) {
 			div.style.display = "";
 			div.innerHTML = "<table><tr><td></td><td>t</td></tr></table>";
+			div.childNodes[ 0 ].style.borderCollapse = "separate";
 			contents = div.getElementsByTagName( "td" );
 			contents[ 0 ].style.cssText = "margin:0;border:0;padding:0;display:none";
 			reliableHiddenOffsetsVal = contents[ 0 ].offsetHeight === 0;
@@ -6996,19 +6997,6 @@ function getWidthOrHeight( elem, name, extra ) {
 		styles = getStyles( elem ),
 		isBorderBox = support.boxSizing &&
 			jQuery.css( elem, "boxSizing", false, styles ) === "border-box";
-
-	// Support: IE11 only
-	// In IE 11 fullscreen elements inside of an iframe have
-	// 100x too small dimensions (gh-1764).
-	if ( document.msFullscreenElement && window.top !== window ) {
-
-		// Support: IE11 only
-		// Running getBoundingClientRect on a disconnected node
-		// in IE throws an error.
-		if ( elem.getClientRects().length ) {
-			val = Math.round( elem.getBoundingClientRect()[ name ] * 100 );
-		}
-	}
 
 	// some non-html elements return undefined for offsetWidth, so check for null/undefined
 	// svg - https://bugzilla.mozilla.org/show_bug.cgi?id=649285
@@ -8199,7 +8187,8 @@ jQuery.fn.delay = function( time, type ) {
 } )();
 
 
-var rreturn = /\r/g;
+var rreturn = /\r/g,
+	rspaces = /[\x20\t\r\n\f]+/g;
 
 jQuery.fn.extend( {
 	val: function( value ) {
@@ -8279,7 +8268,9 @@ jQuery.extend( {
 
 					// Support: IE10-11+
 					// option.text throws exceptions (#14686, #14858)
-					jQuery.trim( jQuery.text( elem ) );
+					// Strip and collapse whitespace
+					// https://html.spec.whatwg.org/#strip-and-collapse-whitespace
+					jQuery.trim( jQuery.text( elem ) ).replace( rspaces, " " );
 			}
 		},
 		select: {
@@ -8333,7 +8324,7 @@ jQuery.extend( {
 				while ( i-- ) {
 					option = options[ i ];
 
-					if ( jQuery.inArray( jQuery.valHooks.option.get( option ), values ) >= 0 ) {
+					if ( jQuery.inArray( jQuery.valHooks.option.get( option ), values ) > -1 ) {
 
 						// Support: IE6
 						// When new option element is added to select box we need to
@@ -8752,8 +8743,11 @@ if ( !support.hrefNormalized ) {
 }
 
 // Support: Safari, IE9+
-// mis-reports the default selected property of an option
-// Accessing the parent's selectedIndex property fixes it
+// Accessing the selectedIndex property
+// forces the browser to respect setting selected
+// on the option
+// The getter ensures a default option is selected
+// when in an optgroup
 if ( !support.optSelected ) {
 	jQuery.propHooks.selected = {
 		get: function( elem ) {
@@ -8768,6 +8762,16 @@ if ( !support.optSelected ) {
 				}
 			}
 			return null;
+		},
+		set: function( elem ) {
+			var parent = elem.parentNode;
+			if ( parent ) {
+				parent.selectedIndex;
+
+				if ( parent.parentNode ) {
+					parent.parentNode.selectedIndex;
+				}
+			}
 		}
 	};
 }
@@ -9984,6 +9988,11 @@ function getDisplay( elem ) {
 }
 
 function filterHidden( elem ) {
+
+	// Disconnected elements are considered hidden
+	if ( !jQuery.contains( elem.ownerDocument || document, elem ) ) {
+		return true;
+	}
 	while ( elem && elem.nodeType === 1 ) {
 		if ( getDisplay( elem ) === "none" || elem.type === "hidden" ) {
 			return true;
@@ -10350,13 +10359,6 @@ function createActiveXHR() {
 
 
 
-// Prevent auto-execution of scripts when no explicit dataType was provided (See gh-2432)
-jQuery.ajaxPrefilter( function( s ) {
-	if ( s.crossDomain ) {
-		s.contents.script = false;
-	}
-} );
-
 // Install script dataType
 jQuery.ajaxSetup( {
 	accepts: {
@@ -10543,21 +10545,6 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 
 
 
-// Support: Safari 8+
-// In Safari 8 documents created via document.implementation.createHTMLDocument
-// collapse sibling forms: the second one becomes a child of the first one.
-// Because of that, this security measure has to be disabled in Safari 8.
-// https://bugs.webkit.org/show_bug.cgi?id=137337
-support.createHTMLDocument = ( function() {
-	if ( !document.implementation.createHTMLDocument ) {
-		return false;
-	}
-	var doc = document.implementation.createHTMLDocument( "" );
-	doc.body.innerHTML = "<form></form><form></form>";
-	return doc.body.childNodes.length === 2;
-} )();
-
-
 // data: string of html
 // context (optional): If specified, the fragment will be created in this context,
 // defaults to document
@@ -10570,12 +10557,7 @@ jQuery.parseHTML = function( data, context, keepScripts ) {
 		keepScripts = context;
 		context = false;
 	}
-
-	// document.implementation stops scripts or inline event handlers from
-	// being executed immediately
-	context = context || ( support.createHTMLDocument ?
-		document.implementation.createHTMLDocument( "" ) :
-		document );
+	context = context || document;
 
 	var parsed = rsingleTag.exec( data ),
 		scripts = !keepScripts && [];
@@ -10657,7 +10639,7 @@ jQuery.fn.load = function( url, params, callback ) {
 		// If it fails, this function gets "jqXHR", "status", "error"
 		} ).always( callback && function( jqXHR, status ) {
 			self.each( function() {
-				callback.apply( self, response || [ jqXHR.responseText, status, jqXHR ] );
+				callback.apply( this, response || [ jqXHR.responseText, status, jqXHR ] );
 			} );
 		} );
 	}
@@ -11075,7 +11057,7 @@ return jQuery;
     requiredInputSelector: 'input[name][required]:not([disabled]), textarea[name][required]:not([disabled])',
 
     // Form file input elements
-    fileInputSelector: 'input[type=file]:not([disabled])',
+    fileInputSelector: 'input[name][type=file]:not([disabled])',
 
     // Link onClick disable selector with possible reenable after remote submission
     linkDisableSelector: 'a[data-disable-with], a[data-disable]',
@@ -11443,15 +11425,15 @@ return jQuery;
       });
     });
 
-    $document.delegate(rails.linkDisableSelector, 'ajax:complete', function() {
+    $document.on('ajax:complete', rails.linkDisableSelector, function() {
         rails.enableElement($(this));
     });
 
-    $document.delegate(rails.buttonDisableSelector, 'ajax:complete', function() {
+    $document.on('ajax:complete', rails.buttonDisableSelector, function() {
         rails.enableFormElement($(this));
     });
 
-    $document.delegate(rails.linkClickSelector, 'click.rails', function(e) {
+    $document.on('click.rails', rails.linkClickSelector, function(e) {
       var link = $(this), method = link.data('method'), data = link.data('params'), metaClick = e.metaKey || e.ctrlKey;
       if (!rails.allowAction(link)) return rails.stopEverything(e);
 
@@ -11475,7 +11457,7 @@ return jQuery;
       }
     });
 
-    $document.delegate(rails.buttonClickSelector, 'click.rails', function(e) {
+    $document.on('click.rails', rails.buttonClickSelector, function(e) {
       var button = $(this);
 
       if (!rails.allowAction(button) || !rails.isRemote(button)) return rails.stopEverything(e);
@@ -11492,7 +11474,7 @@ return jQuery;
       return false;
     });
 
-    $document.delegate(rails.inputChangeSelector, 'change.rails', function(e) {
+    $document.on('change.rails', rails.inputChangeSelector, function(e) {
       var link = $(this);
       if (!rails.allowAction(link) || !rails.isRemote(link)) return rails.stopEverything(e);
 
@@ -11500,7 +11482,7 @@ return jQuery;
       return false;
     });
 
-    $document.delegate(rails.formSubmitSelector, 'submit.rails', function(e) {
+    $document.on('submit.rails', rails.formSubmitSelector, function(e) {
       var form = $(this),
         remote = rails.isRemote(form),
         blankRequiredInputs,
@@ -11545,7 +11527,7 @@ return jQuery;
       }
     });
 
-    $document.delegate(rails.formInputClickSelector, 'click.rails', function(event) {
+    $document.on('click.rails', rails.formInputClickSelector, function(event) {
       var button = $(this);
 
       if (!rails.allowAction(button)) return rails.stopEverything(event);
@@ -11566,11 +11548,11 @@ return jQuery;
       form.data('ujs:submit-button-formmethod', button.attr('formmethod'));
     });
 
-    $document.delegate(rails.formSubmitSelector, 'ajax:send.rails', function(event) {
+    $document.on('ajax:send.rails', rails.formSubmitSelector, function(event) {
       if (this === event.target) rails.disableFormElements($(this));
     });
 
-    $document.delegate(rails.formSubmitSelector, 'ajax:complete.rails', function(event) {
+    $document.on('ajax:complete.rails', rails.formSubmitSelector, function(event) {
       if (this === event.target) rails.enableFormElements($(this));
     });
 
@@ -11697,10 +11679,13 @@ return jQuery;
     // and should revert all changes made to the page to enable the
     // submission via this transport.
     function cleanUp() {
-      markers.prop('disabled', false);
+      markers.each(function(i){
+        $(this).replaceWith(files[i]);
+        markers.splice(i, 1);
+      });
       form.remove();
       iframe.bind("load", function() { iframe.remove(); });
-      iframe.attr("src", "javascript:false;");
+      iframe.attr("src", "about:blank");
     }
 
     // Remove "iframe" from the data types list so that further processing is
@@ -11757,7 +11742,7 @@ return jQuery;
         // The `send` function is called by jQuery when the request should be
         // sent.
         send: function(headers, completeCallback) {
-          iframe = $("<iframe src='javascript:false;' name='" + name +
+          iframe = $("<iframe src='about:blank' name='" + name +
             "' id='" + name + "' style='display:none'></iframe>");
 
           // The first load event gets fired after the iframe has been injected
@@ -11818,9 +11803,6 @@ return jQuery;
 
 
 
-
-// This file is frozen in RailsAdmin to cope with https://github.com/JangoSteve/remotipart/pull/50
-
 (function($) {
 
   var remotipart;
@@ -11828,6 +11810,12 @@ return jQuery;
   $.remotipart = remotipart = {
 
     setup: function(form) {
+      // Preserve form.data('ujs:submit-button') before it gets nulled by $.ajax.handleRemote
+      var button = form.data('ujs:submit-button'),
+          csrfParam = $('meta[name="csrf-param"]').attr('content'),
+          csrfToken = $('meta[name="csrf-token"]').attr('content'),
+          csrfInput = form.find('input[name="' + csrfParam + '"]').length;
+
       form
         // Allow setup part of $.rails.handleRemote to setup remote settings before canceling default remote handler
         // This is required in order to change the remote settings using the form details
@@ -11840,16 +11828,35 @@ return jQuery;
           settings.iframe      = true;
           settings.files       = $($.rails.fileInputSelector, form);
           settings.data        = form.serializeArray();
+
+          // Insert the name/value of the clicked submit button, if any
+          if (button)
+            settings.data.push(button);
+
+          // jQuery 1.9 serializeArray() contains input:file entries
+          // so exclude them from settings.data, otherwise files will not be sent
+          settings.files.each(function(i, file){
+            for (var j = settings.data.length - 1; j >= 0; j--)
+              if (settings.data[j].name == file.name)
+                settings.data.splice(j, 1);
+          })
+
           settings.processData = false;
 
           // Modify some settings to integrate JS request with rails helpers and middleware
           if (settings.dataType === undefined) { settings.dataType = 'script *'; }
           settings.data.push({name: 'remotipart_submitted', value: true});
+          if (csrfToken && csrfParam && !csrfInput) {
+            settings.data.push({name: csrfParam, value: csrfToken});
+          }
 
           // Allow remotipartSubmit to be cancelled if needed
           if ($.rails.fire(form, 'ajax:remotipartSubmit', [xhr, settings])) {
             // Second verse, same as the first
-            $.rails.ajax(settings);
+            $.rails.ajax(settings).complete(function(data){
+              $.rails.fire(form, 'ajax:remotipartComplete', [data]);
+            });
+            setTimeout(function(){ $.rails.disableFormElements(form); }, 20);
           }
 
           //Run cleanup
@@ -11875,10 +11882,6 @@ return jQuery;
     var form = $(this);
 
     remotipart.setup(form);
-
-    // If browser does not support submit bubbling, then this live-binding will be called before direct
-    // bindings. Therefore, we should directly call any direct bindings before remotely submitting form.
-    if (!$.support.submitBubbles && $().jquery < '1.7' && $.rails.callFormSubmitBindings(form) === false) return $.rails.stopEverything(e);
 
     // Manually call jquery-ujs remote call so that it can setup form and settings as usual,
     // and trigger the `ajax:beforeSend` callback to which remotipart binds functionality.
@@ -30390,7 +30393,7 @@ return $.ui.autocomplete;
 
       var $content = $('<p>')
         .addClass('filter form-search')
-        .append('<span class="label label-info form-label"><a href="#delete" class="delete"><i class="fa fa-trash-o fa-fw icon-white"></i></a> ' + field_label + '</span>')
+        .append('<span class="label label-info form-label"><a href="#delete" class="delete"><i class="fa fa-trash-o fa-fw icon-white"></i>' + field_label + '</a></span>')
         .append('&nbsp;' + control + '&nbsp;' + (additional_control || ''));
 
       $('#filters_box').append($content);
@@ -30623,22 +30626,25 @@ return $.ui.autocomplete;
     _queryFilter: function(val) {
       var widget = this;
       widget._query(val, function(matches) {
-        var i;
+
         var filtered = [];
-        for (i in matches) {
-          if (matches.hasOwnProperty(i) && !widget.selected(matches[i].id)) {
+        var i;
+
+        for (i = 0; i < matches.length; i++) {
+          if (!widget.selected(matches[i].id)) {
             filtered.push(i);
           }
         }
         if (filtered.length > 0) {
-          widget.collection.html('');
-          for (i in filtered) {
-            widget.collection.append(
-              $('<option></option>').attr('value', matches[filtered[i]].id).attr('title', matches[filtered[i]].label).text(matches[filtered[i]].label)
-            );
+          widget.collection[0].innerHTML = '';
+          var filteredContainer = [];
+          for (i = 0; i < filtered.length; i++) {
+            var newOptions = '<option value="'+matches[filtered[i]].id+'" title="'+matches[filtered[i]].label+'">'+matches[filtered[i]].label+'</option>';
+            filteredContainer.push(newOptions);
           }
+          widget.collection[0].innerHTML = filteredContainer.join("");
         } else {
-          widget.collection.html(widget.noObjectsPlaceholder);
+          widget.collection[0].innerHTML = widget.noObjectsPlaceholder;
         }
       });
     },
@@ -30762,7 +30768,9 @@ return $.ui.autocomplete;
     },
 
     selected: function(value) {
-      return this.element.find('option[value="' + value + '"]').attr("selected");
+      if (this.selection[0].querySelectorAll('option[value="' + value + '"]')[0]) {
+        return true;
+      }
     },
 
     destroy: function() {
@@ -30789,7 +30797,9 @@ return $.ui.autocomplete;
  */
 
 (function($) {
-  $.widget("ra.filteringSelect", {
+  'use strict';
+
+  $.widget('ra.filteringSelect', {
     options: {
       createQuery: function(query) {
         return { query: query };
@@ -30801,135 +30811,89 @@ return $.ui.autocomplete;
       xhr: false
     },
 
+    button: null,
+    input: null,
+    select: null,
+
     _create: function() {
-      var self = this,
-        select = this.element.hide(),
-        selected = select.children(":selected"),
-        value = selected.val() ? selected.text() : "";
+      var filtering_select = this.element.siblings(
+        '[data-input-for="' + this.element.attr('id') + '"]'
+      );
 
-      if (this.options.xhr) {
-        this.options.source = this.options.remote_source;
+      // When using the browser back and forward buttons, it is possible that
+      // the autocomplete field will be cached which causes duplicate fields
+      // to be generated.
+      if (filtering_select.size() > 0) {
+        this.input = filtering_select.children('input');
+        this.button = filtering_select.children('.input-group-btn');
       } else {
-        this.options.source = select.children("option").map(function() {
-          return { label: $(this).text(), value: this.value };
-        }).toArray();
+        this.element.hide();
+        filtering_select = this._inputGroup(this.element.attr('id'));
+        this.input = this._inputField();
+        this.button = this._buttonField();
       }
-      var filtering_select = $('<div class="input-group filtering-select col-sm-2" style="float:left"></div>')
-      var input = this.input = $('<input type="text">')
-        .val(value)
-        .addClass("form-control ra-filtering-select-input")
-        .attr('style', select.attr('style'))
-        .show()
-        .autocomplete({
-          delay: this.options.searchDelay,
-          minLength: this.options.minLength,
-          source: this._getSourceFunction(this.options.source),
-          select: function(event, ui) {
-            var option = $('<option></option>').attr('value', ui.item.id).attr('selected', 'selected').text(ui.item.value);
-            select.html(option);
-            select.trigger("change", ui.item.id);
-            self._trigger("selected", event, {
-              item: option
-            });
-            $(self.element.parents('.controls')[0]).find('.update').removeClass('disabled');
-          },
-          change: function(event, ui) {
-            if (!ui.item) {
-              var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex($(this).val()) + "$", "i"),
-                  valid = false;
-              select.children("option").each(function() {
-                if ($(this).text().match(matcher)) {
-                  this.selected = valid = true;
-                  return false;
-                }
-              });
-              if (!valid || $(this).val() == '') {
-                // remove invalid value, as it didn't match anything
-                $(this).val(null);
-                select.html($('<option value="" selected="selected"></option>'));
-                input.data("ui-autocomplete").term = "";
-                $(self.element.parents('.controls')[0]).find('.update').addClass('disabled');
-                return false;
-              }
 
-            }
-          }
-        })
-        .keyup(function() {
-          /* Clear select options and trigger change if selected item is deleted */
-          if ($(this).val().length == 0) {
-            select.html($('<option value="" selected="selected"></option>'));
-            select.trigger("change");
-          }
-        })
+      this._setOptionsSource();
+      this._initAutocomplete();
+      this._initKeyEvent();
+      this._overloadRenderItem();
+      this._autocompleteDropdownEvent(this.button);
 
-      if(select.attr('placeholder'))
-        input.attr('placeholder', select.attr('placeholder'))
-
-      input.data("ui-autocomplete")._renderItem = function(ul, item) {
-        return $("<li></li>")
-          .data("ui-autocomplete-item", item)
-          .append( $( "<a></a>" ).html( item.html || item.id ) )
-          .appendTo(ul);
-      };
-
-      var button = this.button = $('<span class="input-group-btn"><label class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Show All Items" role="button"><span class="caret"></span><span class="ui-button-text">&nbsp;</span></label></span>')
-        .click(function() {
-          // close if already visible
-          if (input.autocomplete("widget").is(":visible")) {
-            input.autocomplete("close");
-            return;
-          }
-
-          // pass empty string as value to search for, displaying all results
-          input.autocomplete("search", "");
-          input.focus();
-        });
-
-      filtering_select.append(input).append(button).insertAfter(select);
-
-
+      return filtering_select.append(this.input)
+        .append(this.button)
+        .insertAfter(this.element);
     },
 
     _getResultSet: function(request, data, xhr) {
-      var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
-      var highlighter = function(label, word){
-        if(word.length > 0){
-          return $.map(label.split(word), function(el, i){
-            return $('<span></span>').text(el).html();
-          }).join($('<strong></strong>').text(word)[0].outerHTML);
-        }else{
-          return $('<span></span>').text(label).html();
+      var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), 'i');
+
+      var spannedContent = function(content) {
+        return $('<span>').text(content).html();
+      };
+
+      var highlighter = function(label, word) {
+        if(word.length) {
+          return $.map(
+            label.split(word),
+            function(el) {
+              return spannedContent(el);
+            })
+            .join($('<strong>')
+            .text(word)[0]
+            .outerHTML
+          );
+        } else {
+          return spannedContent(label);
         }
       };
 
-      return $.map(data, function(el, i) {
-        // match regexp only for local requests, remote ones are already filtered, and label may not contain filtered term.
-        if ((el.id || el.value) && (xhr || matcher.test(el.label))) {
-          return {
-            html: highlighter(el.label || el.id, request.term),
-            value: el.label || el.id,
-            id: el.id || el.value
-          };
-        }
+      return $.map(
+        data,
+        function(el) {
+          var id = el.id || el.value;
+          var value = el.label || el.id;
+          // match regexp only for local requests, remote ones are already
+          // filtered, and label may not contain filtered term.
+          if (id && (xhr || matcher.test(el.label))) {
+            return {
+              html: highlighter(value, request.term),
+              value: value,
+              id: id
+            };
+          }
       });
     },
 
     _getSourceFunction: function(source) {
-
-      var self = this,
-          requestIndex = 0;
+      var self = this;
+      var requestIndex = 0;
 
       if ($.isArray(source)) {
-
         return function(request, response) {
           response(self._getResultSet(request, source, false));
         };
-
-      } else if (typeof source === "string") {
-
+      } else if (typeof source === 'string') {
         return function(request, response) {
-
           if (this.xhr) {
             this.xhr.abort();
           }
@@ -30937,7 +30901,7 @@ return $.ui.autocomplete;
           this.xhr = $.ajax({
             url: source,
             data: self.options.createQuery(request.term),
-            dataType: "json",
+            dataType: 'json',
             autocompleteRequest: ++requestIndex,
             success: function(data, status) {
               if (this.autocompleteRequest === requestIndex) {
@@ -30951,11 +30915,149 @@ return $.ui.autocomplete;
             }
           });
         };
-
       } else {
-
         return source;
       }
+    },
+
+    _setOptionsSource: function() {
+      if (this.options.xhr) {
+        this.options.source = this.options.remote_source;
+      } else {
+        this.options.source = this.element.children('option').map(function() {
+          return { label: $(this).text(), value: this.value };
+        }).toArray();
+      }
+    },
+
+    _buttonField: function() {
+      return $(
+        '<span class="input-group-btn">' +
+          '<label class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Show All Items" role="button">' +
+            '<span class="caret"></span>' +
+            '<span class="ui-button-text">&nbsp;</span>' +
+          '</label>' +
+        '</span>'
+      );
+    },
+
+    _autocompleteDropdownEvent: function(element) {
+      var self = this;
+
+      return element.click(function() {
+        // close if already visible
+        if (self.input.autocomplete('widget').is(':visible')) {
+          self.input.autocomplete('close');
+          return;
+        }
+
+        // pass empty string as value to search for, displaying all results
+        self.input.autocomplete('search', '');
+        self.input.focus();
+      });
+    },
+
+    _inputField: function() {
+      var input;
+      var selected = this.element.children(':selected');
+      var value = selected.val() ? selected.text() : '';
+
+      input = $('<input type="text">')
+        .val(value)
+        .addClass('form-control ra-filtering-select-input')
+        .attr('style', this.element.attr('style'))
+        .show();
+
+      if (this.element.attr('placeholder')) {
+        input.attr('placeholder', this.element.attr('placeholder'));
+      }
+
+      return input;
+    },
+
+    _inputGroup: function(inputFor) {
+      return $('<div>')
+        .addClass('input-group filtering-select col-sm-2')
+        .attr('data-input-for', inputFor)
+        .css('float', 'left');
+    },
+
+    _initAutocomplete: function() {
+      var self = this;
+
+      return this.input.autocomplete({
+        delay: this.options.searchDelay,
+        minLength: this.options.minLength,
+        source: this._getSourceFunction(this.options.source),
+        select: function(event, ui) {
+          var option = $('<option>')
+            .attr('value', ui.item.id)
+            .attr('selected', 'selected')
+            .text(ui.item.value);
+          self.element.html(option)
+            .trigger('change', ui.item.id);
+          self._trigger('selected', event, {
+            item: option
+          });
+          $(self.element.parents('.controls')[0])
+            .find('.update')
+            .removeClass('disabled');
+        },
+        change: function(event, ui) {
+          if (ui.item) {
+            return;
+          }
+
+          var matcher = new RegExp('^' + $.ui.autocomplete.escapeRegex($(this).val()) + '$', 'i');
+          var valid = false;
+
+          self.element.children('option')
+            .each(function() {
+              if ($(this).text().match(matcher)) {
+                valid = true;
+                return false;
+              }
+            });
+
+          if (valid || $(this).val() !== '') {
+            return;
+          }
+
+          // remove invalid value, as it didn't match anything
+          $(this).val(null);
+          self.element.html($('<option value="" selected="selected"></option>'));
+          self.input.data('ui-autocomplete').term = '';
+          $(self.element.parents('.controls')[0])
+            .find('.update')
+            .addClass('disabled');
+          return false;
+        }
+      });
+    },
+
+    _initKeyEvent: function() {
+      var self = this;
+
+      return this.input.keyup(function() {
+        if ($(this).val().length) {
+          return;
+        }
+
+        /* Clear select options and trigger change if selected item is deleted */
+        return self.element
+          .html($('<option value="" selected="selected"></option>'))
+          .trigger('change');
+      });
+    },
+
+    _overloadRenderItem: function() {
+      this.input.data('ui-autocomplete')._renderItem = function(ul, item) {
+        return $('<li></li>')
+          .data('ui-autocomplete-item', item)
+          .append($('<a></a>')
+          .html(item.html || item.id))
+          .appendTo(ul);
+      };
     },
 
     destroy: function() {
@@ -32020,7 +32122,7 @@ $.support.pjax ? enable() : disable()
     var add_button, controls, current_li, field, nav, one_to_one, parent_group, toggler;
     field = content.field;
     nav = field.closest(".control-group").children('.controls').children('.nav');
-    current_li = nav.children('li').has('a[href=#' + field.attr('id') + ']');
+    current_li = nav.children('li').has('a[href="#' + field.attr('id') + '"]');
     parent_group = field.closest(".control-group");
     controls = parent_group.children('.controls');
     one_to_one = controls.data('nestedone') !== void 0;
@@ -32033,8 +32135,11 @@ $.support.pjax ? enable() : disable()
     }
     if (one_to_one) {
       add_button = toggler.next();
-      return add_button.addClass('add_nested_fields').html(add_button.data('add-label'));
+      add_button.addClass('add_nested_fields').html(add_button.data('add-label'));
     }
+    return field.find('[required]').each(function() {
+      return $(this).removeAttr('required');
+    });
   });
 
 }).call(this);
@@ -36158,7 +36263,7 @@ $.support.pjax ? enable() : disable()
             if (instance = window.CKEDITOR.instances[this.id]) {
               instance.destroy(true);
             }
-          } catch (undefined) {}
+          } catch (error1) {}
           window.CKEDITOR.replace(this, $(this).data('options'));
           return $(this).addClass('ckeditored');
         });
