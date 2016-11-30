@@ -34,23 +34,30 @@ class HomeController < ApplicationController
     # Users unique referral link
     @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
 
-    @goal = current_user.goals.build
 
-    if !@user.account_balance.nil?
-      @goal_percentage = (@user.account_balance * 100 / @user.goals.first.amount) / 100.00
+    @goal = @user.goals.build
+    @current_goal = Goal.find_by_user_id_and_active(@user.id, true)
+
+    if !@user.account_balance.nil? && @current_goal
+      @goal_percentage = (@user.account_balance * 100 / @current_goal.amount) / 100.00
+      if @goal_percentage >= 100
+
+        # If the user has hit 100% of their goal, mark it as completed and remove
+        @goal_complete_message = "Congrats! You've hit your goal of $#{@current_goal.amount}!!"
+        Goal.mark_as_completed(@current_goal)
+      end
     else
       @goal_percentage = 0
     end
 
     # Pull in the users transactions from the current week. The week starts on Sunday
-    @transactions = PlaidHelper.current_week_transactions(@user, @checking)
-    @total_pending = 0
-
-    @transactions.each{ |tr| @total_pending += tr[:roundup]  } if @transactions
+    set_pending_roundups
 
     # Show the latest 3 transfers
     @transfers = Transfer.where(user_id: @user.id).order('date ASC').limit(3)
 
+
+    flash[:success] = @goal_complete_message if @goal_complete_message
     # Redirect users to proper sign up page if not complete
     if (@user.invited && !@user.is_verified)
       redirect_to signup_phone_path
@@ -69,16 +76,16 @@ class HomeController < ApplicationController
   # ROUNDUPS ------------------------------------
   # ----------------------------------------------
   def roundups
+    # Completed goals
+    @completed_goals = Goal.where(user_id: @user.id, completed: true).count
     # Users account balance converted to dollars
     @account_balance = number_to_currency(@user.account_balance / 100.00, unit:"") if @user.account_balance
     # Transfers
     @transfers = Transfer.where(user_id: @user.id).all
     @transfer_total = @transfers.size
-    all_transfer_amounts = @transfers.map {|tr| tr.roundup_amount.to_f }
-    all_transfer_average= (all_transfer_amounts.inject{ |sum, el| sum + el }.to_f / all_transfer_amounts.size)
-    @transfer_avg = (all_transfer_average > 0) ? number_to_currency(all_transfer_average) : "$0.00"
+    set_transfer_average(@transfers)
     # Transactions
-    @transactions.each{ |tr| @total_pending += tr[:roundup]  } if @transactions
+    set_pending_roundups
     # Round Ups
     @trans = Transaction.where(user_id: @user.id).all
     @roundup_total = @trans.size
@@ -91,6 +98,27 @@ class HomeController < ApplicationController
   # PRIVATE ======================================
   # ==============================================
   private
+
+  # ----------------------------------------------
+  # SET-TRANSFER-AVERAGE --------------------------
+  # transfers: All the transfers associated with the user
+  # return: The average transfer amount
+  # ----------------------------------------------
+  def set_transfer_average(transfers)
+    all_transfer_amounts = transfers.map {|tr| tr.roundup_amount.to_f }
+    all_transfer_average= (all_transfer_amounts.inject{ |sum, el| sum + el }.to_f / all_transfer_amounts.size)
+    @transfer_avg = (all_transfer_average > 0) ? number_to_currency(all_transfer_average) : "$0.00"
+  end
+
+  # ----------------------------------------------
+  # SET-PENDING-ROUNDUPS --------------------------
+  # return: This weeks pending round ups and pending round up total
+  # ----------------------------------------------
+  def set_pending_roundups
+    @transactions = PlaidHelper.current_week_transactions(@user, @checking)
+    @total_pending = 0
+    @transactions.each{ |tr| @total_pending += tr[:roundup]  } if @transactions
+  end
 
   # ----------------------------------------------
   # REFERRAL-RANK --------------------------------
