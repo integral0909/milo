@@ -10,7 +10,7 @@
   border: 1px solid #DDE1E2;
   border-bottom-width: 2px;
   border-radius: 0;
-  margin: 0 0 32px;
+  margin: 0 0 24px;
   padding: 24px;
 
   @include breakpoint(l-three) {
@@ -22,20 +22,36 @@
     box-sizing: border-box;
     color: #4C3E70;
     font-size: 1.5em;
-    height: 36px;
-    line-height: 1;
+    height: auto;
+    line-height: 1.2;
     margin: 0 0 24px;
+    padding: 0 0 8px;
+
+    a.mc-edit {
+      color: #8B999F;
+      cursor: pointer;
+      float: right;
+      font-size: 0.644em;
+      line-height: 28px;
+      margin: 0 0 0 12px;
+
+      &:hover {
+        color: #4A90E2;
+      }
+    }
 
     span {
       color: #8B999F;
       float: right;
+      font-family: 'Futura Bold';
       font-size: 0.56em;
-      font-weight: 600;
       line-height: 28px;
+
       em {
         color: #1ABD7D;
         font-style: normal;
       }
+
       i.fa {
         margin: 0 0 0 4px;
       }

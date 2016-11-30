@@ -22,9 +22,11 @@
             <label>Description</label>
             <%= f.text_area :description, class: "form-control", value: @current_goal.description %>
           </fieldset>
-          <fieldset class="form-group">
-            <label>Completed</label>
-            <%= f.check_box :completed, class: "form-control", value: @current_goal.completed %>
+          <fieldset class="form-check">
+            <label class="form-check-label">
+              <%= f.check_box :completed, class: "form-check-input", value: @current_goal.completed %>
+              Goal Completed
+            </label>
           </fieldset>
         </div>
         <div class="modal-footer">
