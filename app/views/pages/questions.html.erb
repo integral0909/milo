@@ -1,0 +1,61 @@
+<% set_meta_tags :site => 'Questions • Milo',
+  :canonical => 'http://milosavings.com/questions',
+  :author => 'Milo',
+  :copyright => '&copy; 2016 Milo',
+  :description => "Questions about Milo, round ups and saving for important financial goals like college, wedding, vacation or a new home.",
+  :keywords => ['Milo', 'Milo Savings', 'faqs', 'questions', 'frequently asked questions', 'help', 'support', 'savings account', 'financials'],
+  :reverse => true,
+  :og => {
+    :title          => 'Questions • Milo',
+    :type           => 'website',
+    :url            => request.original_url,
+    :image          => asset_url('social-banner-milo.png'),
+    :description    => "Questions about Milo, round ups and saving for important financial goals like college, wedding, vacation or a new home.",
+    :site_name      => 'Milo',
+  },
+  :twitter => {
+    :card           => 'summary',
+    :site           => '@milosavings',
+    :title          => 'Questions • Milo',
+    :description    => "Questions about Milo, round ups and saving for important financial goals like college, wedding, vacation or a new home.",
+    :creator        => '@milosavings',
+    :image          => asset_url('social-banner-milo.png'),
+  }
+%>
+
+
+<header class="head-market -legal">
+  <div class="milo-pattern">
+    <div class="container-fluid">
+      <%= render :partial => 'layouts/market_navbar' %>
+      <section class="hero -legal">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <h1>Questions</h1>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</header>
+
+<div class="legal-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <h6>What is Milo?</h6>
+        <p>Milo is a savings application that easily helps you save for important financial goals through round ups. To learn more, check out <a href="/how-it-works">how it works</a>.</p>
+      </div>
+      <div class="col-md-6">
+        <h6>What are round ups?</h6>
+        <p>Round ups are triggered and calculated by transactions made with your checking account. For example, if you purchase a coffee for $4.25, Milo will round up the transaction to $5.00 and add the $0.75 to your savings.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h6>How much does it cost?</h6>
+        <p>Milo accounts pay a technology fee of only $1 per month.<p>
+      </div>
+    </div>
+  </div>
+</div>
