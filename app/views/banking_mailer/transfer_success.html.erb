@@ -1506,6 +1506,9 @@ body.outlook p {
                                 <th>
                                   <h2>Transfer Success!</h2>
                                   <p style="margin: 0 0 0 10px;">The amount of <b>$<%= @roundup_amount %></b> has been successfully transferred from <%= @funding_account.name %> to your Milo savings account.</p>
+                                  <% if @tech_fee_charged %>
+                                  <!-- TODO: add a message about the tech fee -->
+                                  <% end %>
                                   <table class="spacer" style="border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;">
                                     <tbody>
                                       <tr style="padding: 0;vertical-align: top;text-align: left;">

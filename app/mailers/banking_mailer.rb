@@ -44,11 +44,12 @@ class BankingMailer < ApplicationMailer
   # TRANSFER-SUCCESS -----------------------------
   # ----------------------------------------------
   # email to send user when the transfer was successful
-  def transfer_success(user, roundup_amount, funding_account)
+  def transfer_success(user, roundup_amount, funding_account, tech_fee_charged)
     puts "Round Up Success"
    @roundup_amount = roundup_amount
    @funding_account = find_account(funding_account)
    @user = user
+   @tech_fee_charged = tech_fee_charged
    mail(to: @user.email, subject: 'Success! You Just Saved Some Cash!')
   end
 
