@@ -51,7 +51,7 @@ class Account < ActiveRecord::Base
           account_number: acct.meta["number"],
           available_balance: acct.available_balance,
           current_balance: acct.current_balance,
-          institution_type: acct.institution,
+          institution_type: acct.institution.to_s,
           name: acct.name,
           numbers: acct.numbers,
           bank_account_number: acct.numbers[:account],
@@ -62,14 +62,14 @@ class Account < ActiveRecord::Base
           public_token_id: public_token.id
           )
       # ELSE, create account
-      else
+      elsif acct.subtype && acct.numbers && acct.meta
         Account.create(
           plaid_acct_id: acct.id,
           account_name: acct.meta["name"],
           account_number: acct.meta["number"],
           available_balance: acct.available_balance,
           current_balance: acct.current_balance,
-          institution_type: acct.institution,
+          institution_type: acct.institution.to_s,
           name: acct.name,
           numbers: acct.numbers,
           bank_account_number: acct.numbers[:account],
@@ -99,15 +99,15 @@ class Account < ActiveRecord::Base
       else
         account = Account.create(
           plaid_acct_id: acct._id,
-          account_name: acct.meta.name,
-          account_number: acct.meta.number,
+          account_name: acct.meta["name"],
+          account_number: acct.meta["number"],
           available_balance: acct.balance.available,
           current_balance: acct.balance.current,
           institution_type: acct.institution_type,
           name: acct.meta.name,
           numbers: acct.meta.number,
-          bank_account_number: acct.numbers['account'],
-          bank_routing_number: acct.numbers['routing'],
+          bank_account_number: acct.numbers[:account],
+          bank_routing_number: acct.numbers[:routing],
           acct_subtype: acct.subtype,
           acct_type: acct.type,
           user_id: milo_id,

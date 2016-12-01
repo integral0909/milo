@@ -10,6 +10,7 @@ class PlaidapiController < ApplicationController
   # ----------------------------------------------
   def add_account
     begin
+      # REF: https://github.com/plaid/plaid-ruby
       #1 generate a public token for the user
       public_token = PublicToken.find_or_create_by(token: params[:public_token])
 
@@ -22,12 +23,13 @@ class PlaidapiController < ApplicationController
       #4 add plaid access token for easy access when wanting to reconnect
       User.add_plaid_access_token(@user, exchange_token_response.access_token)
 
-      #5 Initialize a Plaid user with connect then save the transactions
-      connect_user = Plaid::User.load(:connect, @user.plaid_access_token)
+      #5 Load  Plaid user with connect product
+      plaid_user = Plaid::User.load(:connect, @user.plaid_access_token)
 
-      auth_user = connect_user.upgrade(:auth)
+      # Upgrade user to have auth product
+      plaid_user.upgrade(:auth)
 
-      Account.create_accounts(auth_user.accounts, public_token, @user.id)
+      Account.create_accounts(plaid_user.accounts, public_token, @user.id)
 
       #6 Set checking account
       accounts = Account.where(user_id: @user.id, acct_subtype: "checking")
@@ -42,7 +44,8 @@ class PlaidapiController < ApplicationController
     rescue => e
       # EMAIL: header=> Error while adding users account and transactions message=> @user was not able to add account through plaid. Error: e
       # puts e
-      redirect_to user_accounts_path(user_id: @user.id)
+      flash.now[:error] =  "Looks like your account need a bit of help before being set up. We are on it!"
+      redirect_to root_path
     end
   end
 
