@@ -5,7 +5,7 @@ desc "This task will calculate all users transactions for the past week and send
 task :weekly_roundup, [:user_id] => :environment do |t, args|
   day = Time.now
 
-  # if day.saturday?
+  if day.saturday?
     # for converting numbers to currency format
     include ActionView::Helpers::NumberHelper
 
@@ -27,7 +27,7 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
 
     puts "-"*40
     puts "emails sent"
-  # end
+  end
 end
 
 desc "This task will pull in all users transactions for the past week"
