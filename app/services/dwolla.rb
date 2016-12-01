@@ -136,7 +136,7 @@ module Dwolla
 
     BankingMailer.transfer_start(user, roundup_amount, funding_account).deliver_now
     begin
-      roundup_with_fee = roundup_amount + 1.00
+      roundup_with_fee = number_to_currency((roundup_amount.to_f + 1.00), unit:"")
 
       request_body = {
         :_links => {
