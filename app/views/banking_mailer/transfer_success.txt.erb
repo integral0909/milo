@@ -1,0 +1,7 @@
+Transfer Success!
+
+The amount of $<%= @roundup_amount %> has been successfully transferred from <%= @funding_account.name %> to your Milo savings account.
+
+<% if @tech_fee_charged %>
+The monthly technology fee of $1.00 has also been successfully transferred from <%= @funding_account.name %>.
+<% end %>
