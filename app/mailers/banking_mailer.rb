@@ -19,16 +19,6 @@ class BankingMailer < ApplicationMailer
   end
 
   # ----------------------------------------------
-  # ACCOUNT-ERROR-ON-ADD -------------------------
-  # ----------------------------------------------
-  # email to send user when the Dwolla transfer starts
-  def account_error_on_add(user, funding_account)
-   @funding_account = funding_account
-   @user = user
-   mail(to: @user.email, subject: 'Your Milo transfer has started.')
-  end
-
-  # ----------------------------------------------
   # TRANSFER-START -------------------------------
   # ----------------------------------------------
   # email to send user when the Dwolla transfer starts
