@@ -76,6 +76,15 @@ class BankingMailer < ApplicationMailer
   end
 
   # ----------------------------------------------
+  # TECH-FEE-CHARGED -----------------------------
+  # email to send when the tech fee is charged
+  # ----------------------------------------------
+  def tech_fee_charged(total_fees_collected)
+   @fees_collected = total_fees_collected
+   mail(to:'tom.wondra@milosavings.com', bcc: 'admin@milosavings.com', subject: 'Tech Fees Have Been Charged')
+  end
+
+  # ----------------------------------------------
   # TRANSFER-START-EMPLOYER ----------------------
   # ----------------------------------------------
   # TODO :: email to send employer when transfer has started for employees.

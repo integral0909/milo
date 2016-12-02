@@ -4,6 +4,10 @@ desc "This task will calculate all users transactions for the past week and send
 # For specific user:  rake weekly_roundup['USER_ID']
 task :weekly_roundup, [:user_id] => :environment do |t, args|
   day = Time.now
+  current_date = Date.today
+  # if the first round up of the month, count how many tech fees were collected
+  current_date.day <= 7 ? @charge_tech_fee = true : @charge_tech_fee = false
+  fees_charged = 0
 
   # if day.saturday?
     # for converting numbers to currency format
@@ -13,16 +17,34 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
     if !args.user_id.blank?
       # run weekly_roundup for the user
       user = User.find(args.user_id)
+
+      # increase the fees collected by 1
+      if !user.admin
+        fees_charged += 1
+      end
+
       ck  = Checking.find_by_user_id(user.id)
       Dwolla.weekly_roundup(user, ck)
     else
       Checking.all.each do |ck|
         user = User.find(ck.user_id)
+        # increase the fees collected by 1
+        if !user.admin
+          fees_charged += 1
+        end
+
         # run weekly_roundup for all users with checking accounts
         if user
           Dwolla.weekly_roundup(user, ck)
         end
       end
+
+      # Only send the mailer if we collected tech fees
+    end
+
+    # send an email letting us know how much in fees were collected
+    if fees_charged > 0
+      BankingMailer.tech_fee_charged(fees_charged).deliver_now
     end
 
     puts "-"*40

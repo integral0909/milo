@@ -131,11 +131,14 @@ module Dwolla
   # ----------------------------------------------
   # add the users funding source, our account number, and the total roundup amount
   def self.withdraw_roundups(user, roundup_amount, total_transactions, funding_account, current_date)
-    # if it's the first round up of the month, charge the tech fee.
-    current_date.day <= 7 ? @charge_tech_fee = true : @charge_tech_fee = false
+    @charge_tech_fee = false
+
+    # if it's the first round up of the month and the user is not an admin, charge the tech fee.
+    @charge_tech_fee = true  if ((current_date.day <= 7) && !user.admin)
 
     BankingMailer.transfer_start(user, roundup_amount, funding_account).deliver_now
     begin
+      # Add $1 for the tech fee
       roundup_with_fee = number_to_currency((roundup_amount.to_f + 1.00), unit:"")
 
       request_body = {
@@ -173,16 +176,16 @@ module Dwolla
       # add the roundup amount to the users balance
       User.add_account_balance(user, roundup_amount)
 
-        puts "$#{roundup_amount}"
+      puts "$#{roundup_amount}"
 
-        # Email the user that the round up was successfully withdrawn
-        BankingMailer.transfer_success(user, roundup_amount, funding_account, @charge_tech_fee).deliver_now
-      rescue => e
-        # Email the user that there was an issue when withdrawing the round up
-        BankingMailer.transfer_failed(user, roundup_amount, funding_account).deliver_now
-        # Email support that there was an issue when withdrawing the round up
-        SupportMailer.support_transfer_failed_notice(user, roundup_amount, e).deliver_now
-      end
+      # Email the user that the round up was successfully withdrawn
+      BankingMailer.transfer_success(user, roundup_amount, funding_account, @charge_tech_fee).deliver_now
+    rescue => e
+      # Email the user that there was an issue when withdrawing the round up
+      BankingMailer.transfer_failed(user, roundup_amount, funding_account).deliver_now
+      # Email support that there was an issue when withdrawing the round up
+      SupportMailer.support_transfer_failed_notice(user, roundup_amount, e).deliver_now
+    end
   end
 
 end
