@@ -179,12 +179,4 @@ module Dwolla
       end
   end
 
-  # ----------------------------------------------
-  # RECURRING-FEE --------------------------------
-  # ----------------------------------------------
-  # TODO: create recurring fee for $1 tech fee
-  # def self.monthly_tech_fee
-  #   request_body
-  # end
-
 end
