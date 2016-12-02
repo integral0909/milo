@@ -15,7 +15,7 @@ class BankingMailer < ApplicationMailer
   def account_added(user, funding_account)
    @funding_account = funding_account
    @user = user
-   mail(to: @user.email, subject: 'You Are Now Connected!')
+   mail(to: @user.email, subject: 'You are now connected with Milo!')
   end
 
   # ----------------------------------------------
@@ -25,19 +25,20 @@ class BankingMailer < ApplicationMailer
   def account_error_on_add(user, funding_account)
    @funding_account = funding_account
    @user = user
-   mail(to: @user.email, subject: 'Your Transfer Has Started')
+   mail(to: @user.email, subject: 'Your Milo transfer has started.')
   end
 
   # ----------------------------------------------
   # TRANSFER-START -------------------------------
   # ----------------------------------------------
   # email to send user when the Dwolla transfer starts
-  def transfer_start(user, roundup_amount, funding_account)
+  def transfer_start(user, roundup_amount, funding_account, tech_fee_charged)
     puts "transfer start"
    @roundup_amount = roundup_amount
    @funding_account = find_account(funding_account)
    @user = user
-   mail(to: @user.email, subject: 'Your Transfer Has Started')
+   @tech_fee_charged = tech_fee_charged
+   mail(to: @user.email, subject: 'Your Milo transfer has started.')
   end
 
   # ----------------------------------------------
@@ -50,7 +51,7 @@ class BankingMailer < ApplicationMailer
    @funding_account = find_account(funding_account)
    @user = user
    @tech_fee_charged = tech_fee_charged
-   mail(to: @user.email, subject: 'Success! You Just Saved Some Cash!')
+   mail(to: @user.email, subject: 'Success! You just saved some cash with Milo.')
   end
 
   # ----------------------------------------------
@@ -62,7 +63,7 @@ class BankingMailer < ApplicationMailer
    @roundup_amount = roundup_amount
    @funding_account = find_account(funding_account)
    @user = user
-   mail(to: @user.email, bcc: 'robert.schwartz@milosavings.com', subject: 'Transfer to Savings Failed')
+   mail(to: @user.email, bcc: 'dev@milosavings.com', subject: 'Transfer to Milo failed.')
   end
 
   # ----------------------------------------------
@@ -72,7 +73,7 @@ class BankingMailer < ApplicationMailer
   def bank_account_removed(user, funding_account)
    @user = user
    @funding_account = find_account(funding_account)
-   mail(to: @user.email, subject: 'Bank Account Successfully Removed')
+   mail(to: @user.email, subject: 'Bank account successfully removed from Milo.')
   end
 
   # ----------------------------------------------
@@ -81,7 +82,7 @@ class BankingMailer < ApplicationMailer
   # ----------------------------------------------
   def tech_fee_charged(total_fees_collected)
    @fees_collected = total_fees_collected
-   mail(to:'tom.wondra@milosavings.com', bcc: 'admin@milosavings.com', subject: 'Tech Fees Have Been Charged')
+   mail(to:'finance@milosavings.com', bcc: 'admin@milosavings.com', subject: 'Milo Technology Fees Report')
   end
 
   # ----------------------------------------------
