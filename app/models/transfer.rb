@@ -10,6 +10,7 @@
 #  status                           :string
 #  transfer_type                    :string
 #  date                             :string
+#  tech_fee_charged                 :boolean
 #
 
 # ================================================

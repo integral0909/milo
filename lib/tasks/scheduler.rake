@@ -7,7 +7,6 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
   current_date = Date.today
   # if the first round up of the month, count how many tech fees were collected
   current_date.day <= 7 ? @charge_tech_fee = true : @charge_tech_fee = false
-  fees_charged = 0
 
   if day.saturday?
     # for converting numbers to currency format
@@ -18,20 +17,11 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
       # run weekly_roundup for the user
       user = User.find(args.user_id)
 
-      # increase the fees collected by 1
-      if !user.admin
-        fees_charged += 1
-      end
-
       ck  = Checking.find_by_user_id(user.id)
       Dwolla.weekly_roundup(user, ck)
     else
       Checking.all.each do |ck|
         user = User.find(ck.user_id)
-        # increase the fees collected by 1
-        if !user.admin
-          fees_charged += 1
-        end
 
         # run weekly_roundup for all users with checking accounts
         if user
@@ -39,13 +29,14 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
         end
       end
 
-      # Only send the mailer if we collected tech fees
     end
 
+  if @charge_tech_fee
     # send an email letting us know how much in fees were collected
-    if fees_charged > 0
-      BankingMailer.tech_fee_charged(fees_charged).deliver_now
-    end
+    fee_transfers = Transfer.where(tech_fee_charged: true, date: current_date).count
+    admin_count = User.where(admin: true).count
+    BankingMailer.tech_fee_charged(fee_transfers - admin_count).deliver_now
+  end
 
     puts "-"*40
     puts "emails sent"

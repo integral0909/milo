@@ -136,7 +136,7 @@ module Dwolla
     # if it's the first round up of the month and the user is not an admin, charge the tech fee.
     @charge_tech_fee = true  if ((current_date.day <= 7) && !user.admin)
 
-    BankingMailer.transfer_start(user, roundup_amount, funding_account).deliver_now
+    BankingMailer.transfer_start(user, roundup_amount, funding_account, @charge_tech_fee).deliver_now
     begin
       # Add $1 for the tech fee
       roundup_with_fee = number_to_currency((roundup_amount.to_f + 1.00), unit:"")
