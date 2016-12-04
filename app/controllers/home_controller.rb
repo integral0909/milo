@@ -54,7 +54,7 @@ class HomeController < ApplicationController
     set_pending_roundups
 
     # Show the latest 3 transfers
-    @transfers = Transfer.where(user_id: @user.id).order(date: :asc).limit(3)
+    @transfers = Transfer.where(user_id: @user.id).order(date: :desc).limit(3)
 
 
     flash[:success] = @goal_complete_message if @goal_complete_message
@@ -69,7 +69,7 @@ class HomeController < ApplicationController
   # ----------------------------------------------
   # Page to see round up transfer history
   def history
-    @transfers = Transfer.where(user_id: @user.id).order(date: :asc)
+    @transfers = Transfer.where(user_id: @user.id).order(date: :desc)
   end
 
   # ----------------------------------------------
