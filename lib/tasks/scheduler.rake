@@ -19,6 +19,11 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
 
       ck  = Checking.find_by_user_id(user.id)
       Dwolla.weekly_roundup(user, ck)
+
+      if @charge_tech_fee && !user.admin
+        # send an email letting us know how much in fees were collected
+        BankingMailer.tech_fee_charged("1").deliver_now
+      end
     else
       Checking.all.each do |ck|
         user = User.find(ck.user_id)
@@ -27,16 +32,17 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
         if user
           Dwolla.weekly_roundup(user, ck)
         end
+
+      end
+
+      if @charge_tech_fee
+        # send an email letting us know how much in fees were collected
+        fee_transfers = Transfer.where(tech_fee_charged: true, date: current_date).count
+        admin_count = User.where(admin: true).count
+        BankingMailer.tech_fee_charged(fee_transfers - admin_count).deliver_now
       end
 
     end
-
-  if @charge_tech_fee
-    # send an email letting us know how much in fees were collected
-    fee_transfers = Transfer.where(tech_fee_charged: true, date: current_date).count
-    admin_count = User.where(admin: true).count
-    BankingMailer.tech_fee_charged(fee_transfers - admin_count).deliver_now
-  end
 
     puts "-"*40
     puts "emails sent"
