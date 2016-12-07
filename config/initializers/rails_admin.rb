@@ -39,4 +39,10 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  config.model User do
+    update do
+      exclude_fields :password, :password_confirmation
+    end
+  end
 end
