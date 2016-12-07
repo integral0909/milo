@@ -12,16 +12,18 @@
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
           <% end %>
           <section class="form-section">
-            <%= f.fields_for :business do |b| %>
-              <div class="row">
-                <div class="col-sm-12">
-                  <fieldset class="form-group">
-                    <label>Business</label>
-                    <%= b.text_field :name, autofocus: true, class: "form-control", placeholder: "Business", required: true %>
-                  </fieldset>
+            <% if current_user.business %>
+              <%= f.fields_for :business do |b| %>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <fieldset class="form-group">
+                      <label>Business</label>
+                      <%= b.text_field :name, autofocus: true, class: "form-control", placeholder: "Business", required: true %>
+                    </fieldset>
+                  </div>
                 </div>
-              </div>
-    	      <%end%>
+      	      <%end%>
+            <% end %>
             <div class="row">
               <div class="col-sm-12">
                 <fieldset class="form-group">
@@ -46,36 +48,34 @@
             </div>
           </section>
           <section class="form-section">
-            <%= f.fields_for :business do |b| %>
-              <div class="row">
-                <div class="col-sm-12">
-                  <fieldset class="form-group">
-                    <label>Address</label>
-                    <%= b.text_field :address, class: "form-control" %>
-                  </fieldset>
-                </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <fieldset class="form-group">
+                  <label>Address</label>
+                  <%= f.text_field :address, class: "form-control" %>
+                </fieldset>
               </div>
-              <div class="row">
-                <div class="col-sm-6">
-                  <fieldset class="form-group">
-                    <label>City</label>
-                    <%= b.text_field :city, class: "form-control" %>
-                  </fieldset>
-                </div>
-                <div class="col-sm-3">
-                  <fieldset class="form-group">
-                    <label>State</label>
-                    <%= b.text_field :state, class: "form-control" %>
-                  </fieldset>
-                </div>
-                <div class="col-sm-3">
-                  <fieldset class="form-group">
-                    <label>Postal Code</label>
-                    <%= b.text_field :zip, class: "form-control" %>
-                  </fieldset>
-                </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <fieldset class="form-group">
+                  <label>City</label>
+                  <%= f.text_field :city, class: "form-control" %>
+                </fieldset>
               </div>
-            <% end %>
+              <div class="col-sm-3">
+                <fieldset class="form-group">
+                  <label>State</label>
+                  <%= f.text_field :state, class: "form-control" %>
+                </fieldset>
+              </div>
+              <div class="col-sm-3">
+                <fieldset class="form-group">
+                  <label>Postal Code</label>
+                  <%= f.text_field :zip, class: "form-control" %>
+                </fieldset>
+              </div>
+            </div>
           </section>
           <section class="form-section">
             <div class="row">
