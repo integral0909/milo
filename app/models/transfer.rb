@@ -10,6 +10,7 @@
 #  status                           :string
 #  transfer_type                    :string
 #  date                             :string
+#  tech_fee_charged                 :boolean
 #
 
 # ================================================
@@ -21,7 +22,7 @@ class Transfer < ActiveRecord::Base
   # ----------------------------------------------
   # TRANSFER-CREATE ------------------------------
   # ----------------------------------------------
-  def self.create_transfers(user, transfer_url, transfer_status, roundup_amount, roundup_count, transfer_type, current_date)
+  def self.create_transfers(user, transfer_url, transfer_status, roundup_amount, roundup_count, transfer_type, current_date, tech_fee_charged)
     # creat transfer object on roundup deposit
     Transfer.create(
       user_id: user.id,
@@ -30,6 +31,7 @@ class Transfer < ActiveRecord::Base
       roundup_amount: roundup_amount,
       roundup_count: roundup_count,
       transfer_type: transfer_type,
+      tech_fee_charged: tech_fee_charged,
       date: current_date
     )
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123024627) do
+ActiveRecord::Schema.define(version: 20161201023707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,8 @@ ActiveRecord::Schema.define(version: 20161123024627) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active"
+    t.boolean  "completed"
   end
 
   add_index "goals", ["user_id", "created_at"], name: "index_goals_on_user_id_and_created_at", using: :btree
@@ -120,11 +122,12 @@ ActiveRecord::Schema.define(version: 20161123024627) do
     t.string   "user_id"
     t.string   "roundup_count"
     t.string   "status"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "transfer_type"
     t.string   "roundup_amount"
     t.string   "date"
+    t.boolean  "tech_fee_charged"
   end
 
   create_table "users", force: :cascade do |t|
@@ -145,11 +148,11 @@ ActiveRecord::Schema.define(version: 20161123024627) do
     t.string   "referral_code"
     t.string   "name"
     t.string   "zip"
-    t.string   "dwolla_id"
-    t.string   "dwolla_funding_source"
     t.string   "mobile_number"
     t.string   "verification_code"
     t.boolean  "is_verified"
+    t.string   "dwolla_id"
+    t.string   "dwolla_funding_source"
     t.boolean  "on_demand"
     t.boolean  "agreement"
     t.string   "address"

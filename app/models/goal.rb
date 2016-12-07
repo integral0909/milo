@@ -9,6 +9,8 @@
 #  user_id                          :integer
 #  created_at                       :date
 #  updated_at                       :date
+#  active                           :boolean
+#  completed                        :boolean
 #
 
 # ================================================
@@ -28,4 +30,13 @@ class Goal < ActiveRecord::Base
   validates :amount, presence: true
   validates :user_id, presence: true
 
+  # ----------------------------------------------
+  # MARK-AS-COMPLETED ----------------------------
+  # Change the goal to completed and inactive once the user's balance reaches the goal amount.
+  # ----------------------------------------------
+  def self.mark_as_completed(goal)
+    goal.completed = true
+    goal.active = false
+    goal.save!
+  end
 end

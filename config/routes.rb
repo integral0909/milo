@@ -22,6 +22,12 @@ Rails.application.routes.draw do
     get 'signup/employer', to: 'registrations#employer', as: :new_employer
   end
 
+  resource :user, only: [:edit] do
+    collection do
+      patch 'update_password'
+    end
+  end
+
   get 'history', to: 'home#history', as: :history
   get 'roundups', to: 'home#roundups', as: :roundups
 
@@ -41,7 +47,7 @@ Rails.application.routes.draw do
 
   resources :checkings, only: [:new, :create]
   resources :contacts, only: [:new, :create]
-  resources :goals, only: [:create, :destroy]
+  resources :goals
 
   # Pages for Marketing Site
   get '/*page' => 'pages#show'
