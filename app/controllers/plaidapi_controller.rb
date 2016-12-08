@@ -25,9 +25,11 @@ class PlaidapiController < ApplicationController
 
       #5 Load  Plaid user with connect product
       plaid_user = Plaid::User.load(:connect, @user.plaid_access_token)
+      plaid_user.transactions()
 
       # Upgrade user to have auth product
       plaid_user.upgrade(:auth)
+      plaid_user.auth()
 
       Account.create_accounts(plaid_user.accounts, public_token, @user.id)
 
