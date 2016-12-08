@@ -84,8 +84,14 @@ body.milo-signup {
       color: #292242;
       display: inline-block;
       font-family: 'Futura Bold';
-      line-height: 36px;
+      line-height: 1.2;
       vertical-align: middle;
+
+      em {
+        color: #8B999F;
+        font-size: 0.75em;
+        font-style: normal;
+      }
     }
   }
 }

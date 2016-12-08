@@ -26,6 +26,23 @@ class GoalsController < ApplicationController
   end
 
   # ----------------------------------------------
+  # EDIT ---------------------------------------
+  # ----------------------------------------------
+  def update
+    @goal = Goal.find(params[:id])
+    @goal.update(goal_params)
+    if @goal.save
+      if @goal.completed
+        Goal.mark_as_completed(@goal)
+      end
+      flash[:success] = "Goal Saved!"
+      redirect_to root_path
+    else
+      render 'home/index'
+    end
+  end
+
+  # ----------------------------------------------
   # DESTROY --------------------------------------
   # ----------------------------------------------
   def destroy
@@ -43,7 +60,7 @@ class GoalsController < ApplicationController
   # GOAL-PARAMS ----------------------------------
   # ----------------------------------------------
   def goal_params
-    params.require(:goal).permit(:name, :description, :amount)
+    params.require(:goal).permit(:name, :description, :amount, :completed, :active)
   end
 
 end

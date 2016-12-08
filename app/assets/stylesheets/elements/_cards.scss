@@ -10,7 +10,7 @@
   border: 1px solid #DDE1E2;
   border-bottom-width: 2px;
   border-radius: 0;
-  margin: 0 0 32px;
+  margin: 0 0 24px;
   padding: 24px;
 
   @include breakpoint(l-three) {
@@ -22,19 +22,36 @@
     box-sizing: border-box;
     color: #4C3E70;
     font-size: 1.5em;
-    height: 36px;
-    line-height: 1;
+    height: auto;
+    line-height: 1.2;
     margin: 0 0 24px;
+    padding: 0 0 8px;
+
+    a.mc-edit {
+      color: #8B999F;
+      cursor: pointer;
+      float: right;
+      font-size: 0.644em;
+      line-height: 28px;
+      margin: 0 0 0 12px;
+
+      &:hover {
+        color: #4A90E2;
+      }
+    }
+
     span {
       color: #8B999F;
       float: right;
+      font-family: 'Futura Bold';
       font-size: 0.56em;
-      font-weight: 600;
       line-height: 28px;
+
       em {
         color: #1ABD7D;
         font-style: normal;
       }
+
       i.fa {
         margin: 0 0 0 4px;
       }
@@ -61,8 +78,8 @@
       left: -1px;
       position: absolute;
       top: -1px;
-      width: 42%;
       z-index: 2;
+      max-width: 100%;
     }
     .bar {
       background: rgba(0,0,0,0.12);
@@ -100,14 +117,15 @@
 }
 
 // History Snapshot
-.milo-card.history {
+.milo-card.history, .milo-card.mobile-roundups {
+
   ul.recent-transactions {
     list-style: none;
     margin: 0 0 24px;
     padding: 0;
 
     li {
-      border-bottom: 2px solid #DDE1E2;
+      border-bottom: 1px solid #DDE1E2;
       color: #352D52;
       font-size: 1.25em;
       height: 54px;
@@ -119,9 +137,13 @@
         color: #8B999F;
         float: right;
         font-size: 0.5em;
-        line-height: 1;
+        line-height: 1.6;
+        overflow: hidden;
         text-align: right;
+        text-overflow: ellipsis;
         text-transform: uppercase;
+        white-space: nowrap;
+        width: 72%;
 
         strong {
           display: block;
@@ -135,14 +157,43 @@
 
   a {
     display: block;
-    font-weight: 600;
     margin: 0 0 6px;
     text-align: center;
   }
 }
 
+.milo-card.mobile-roundups {
+
+  ul.recent-transactions li {
+    height: auto;
+    line-height: 1.6;
+    padding: 12px 16px;
+
+    span {
+      display: block;
+      float: none;
+      text-align: left;
+      width: 100%;
+
+      strong {
+        display: inline;
+        margin: 0 12px 0 0;
+      }
+    }
+  }
+
+  p {
+    margin: 0;
+
+    &.align-center {
+      text-align: center;
+    }
+  }
+}
+
 // Savings
 .milo-card.quick-save, .milo-card.recurring {
+
   .amount {
     background: #F8FAFB;
     border: 1px solid #E5E8E9;
@@ -194,18 +245,19 @@
 // Round Up Stats
 .milo-card.round-up-stat {
   box-sizing: border-box;
-  color: #333A4E;
+  color: #292242;
+  font-family: 'Futura Bold';
   font-size: 2em;
-  font-weight: 600;
   height: 160px;
-  margin: 0 0 16px;
+  margin: 0 0 32px;
   padding: 40px 0 0;
   text-align: center;
+
   span {
     color: #8B999F;
     display: block;
+    font-family: 'Futura Light';
     font-size: 0.5em;
-    font-weight: normal;
   }
 }
 

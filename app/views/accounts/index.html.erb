@@ -7,7 +7,8 @@
     <div class="signup">
       <h1 class="marg-16"><span>Checking Account</span> Connect Your Bank</h1>
       <p>Select your bank account to begin saving.</p>
-      <%= plaid_link(name: current_user.email, action: "add_account", data: { longtail: true }) %>
+      <!-- Plaid Link form -->
+      <form id="plaid-link-form" method="POST" action="/users/<%= @user.id %>/add_account" ></form>
     </div>
   </div>
   <div class="col-md-4">
@@ -18,3 +19,14 @@
     </ul>
   </div>
 </div>
+
+<!-- Script to add Plaid Link Credentials -->
+<script
+  src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"
+  data-client-name="Milo"
+  data-form-id="plaid-link-form"
+  data-key="eebe6c05e95b82bc4bdb807baebc1f"
+  data-product="connect"
+  <% if Rails.env.production? %> data-env="production"<% else %>data-env="tartan"<% end %>
+  data-longtail="false">
+</script>

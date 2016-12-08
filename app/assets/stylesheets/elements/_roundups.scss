@@ -8,11 +8,13 @@
 // Pending Round-Ups
 .pending-roundups {
   margin: 0 0 24px;
+
   .pr-title {
     color: #4C3E70;
     margin: 0 0 8px;
     padding: 0 16px;
   }
+
   .pr-growth-hack {
     font-size: 1.5em;
     margin: 0 0 16px;
@@ -22,15 +24,18 @@
       color: #4C3E70;
     }
   }
+
   small {
     display: block;
     font-size: 0.72em;
-    padding: 0 16px;
+    padding: 16px;
   }
+
   ul.pr-list {
     list-style: none;
     margin: 0;
     padding: 0;
+
     li {
       border-bottom: 2px solid #EDF1F2;
       box-sizing: border-box;
@@ -40,6 +45,7 @@
       line-height: 1;
       padding: 13px 16px;
       width: 100%;
+
       span {
         color: #96A3A8;
         display: block;
@@ -48,7 +54,10 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        strong { margin: 0 4px 0 0; }
+
+        strong {
+          margin: 0 4px 0 0;
+        }
       }
     }
   }

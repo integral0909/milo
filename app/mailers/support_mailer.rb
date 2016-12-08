@@ -13,7 +13,7 @@ class SupportMailer < ApplicationMailer
    @roundup_amount = roundup_amount
    @error = error
    @user = user
-   mail(to: 'robert.schwartz@milosavings.com', subject: "Transfer Failed for #{@user.email}")
+   mail(to: 'dev@milosavings.com', subject: "Transfer Failed for #{@user.email}")
   end
 
   # ----------------------------------------------
@@ -25,7 +25,7 @@ class SupportMailer < ApplicationMailer
    @funding_account = funding_account
    @error = error
    @user = user
-   mail(to: 'robert.schwartz@milosavings.com', subject: "Dwolla Funding Source Failed for #{@user.email}")
+   mail(to: 'dev@milosavings.com', subject: "Dwolla Funding Source Failed for #{@user.email}")
   end
 
   # ----------------------------------------------
@@ -35,6 +35,6 @@ class SupportMailer < ApplicationMailer
   def add_dwolla_user_failed(user, error)
    @error = error
    @user = user
-   mail(to: 'robert.schwartz@milosavings.com', subject: "Dwolla Sign Up Failed for #{@user.email}")
+   mail(to: 'dev@milosavings.com', subject: "Dwolla Sign Up Failed for #{@user.email}")
   end
 end

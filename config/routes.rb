@@ -20,7 +20,14 @@ Rails.application.routes.draw do
     get 'signup/on_demand', to: 'registrations#on_demand', as: :signup_on_demand
   end
 
-  get 'history', to: 'home#history'
+  resource :user, only: [:edit] do
+    collection do
+      patch 'update_password'
+    end
+  end
+
+  get 'history', to: 'home#history', as: :history
+  get 'roundups', to: 'home#roundups', as: :roundups
 
   # Root, User Logged In
   authenticated :user do
@@ -41,7 +48,7 @@ Rails.application.routes.draw do
 
   resources :checkings, only: [:new, :create]
   resources :contacts, only: [:new, :create]
-  resources :goals, only: [:create, :destroy]
+  resources :goals
 
   # Pages for Marketing Site
   get '/*page' => 'pages#show'
