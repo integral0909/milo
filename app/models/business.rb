@@ -4,10 +4,6 @@
 #
 #  id                               :integer          not null, primary key
 #  name                             :string
-#  address                          :string
-#  city                             :string
-#  state                            :string
-#  zip                              :string
 #  contribution                     :decimal          precision, 2
 #
 

@@ -38,11 +38,7 @@
         <% end %>
       </div>
       <h5><%= current_user.business.name ? current_user.business.name : current_user.name %></h5>
-      <% if current_user.business %>
-        <span><%= current_user.business.city if current_user.business.city %><% if current_user.business.city? && current_user.business.state? %>, <% end %><%= current_user.business.state if current_user.business.state %></span>
-      <% else %>
-        <span><%= current_user.city if current_user.city %><% if current_user.city? && current_user.state? %>, <% end %><%= current_user.state if current_user.state %></span>
-      <% end %>
+      <span><%= current_user.city if current_user.city %><% if current_user.city? && current_user.state? %>, <% end %><%= current_user.state if current_user.state %></span>
     </div>
     <nav>
       <a href="/" class="<%= active_page_class?('/')%>"><i class="fa fa-home"></i> Overview</a>
