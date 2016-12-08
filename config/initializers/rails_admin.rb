@@ -5,6 +5,11 @@ RailsAdmin.config do |config|
     redirect_to main_app.root_path unless current_user && current_user.admin
   end
 
+  # Exclude password fields and unlock token related fields
+  config.model 'User' do
+    exclude_fields :password, :password_confirmation, :reset_password_token, :sign_in_count, :current_sign_in_ip, :last_sign_in_ip, :unlock_token
+  end
+
   ### Popular gems integration
 
   ## == Devise ==
@@ -40,9 +45,4 @@ RailsAdmin.config do |config|
     # history_show
   end
 
-  config.model User do
-    update do
-      exclude_fields :password, :password_confirmation
-    end
-  end
 end
