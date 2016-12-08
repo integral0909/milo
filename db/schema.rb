@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123024627) do
+ActiveRecord::Schema.define(version: 20161201023707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,17 +34,6 @@ ActiveRecord::Schema.define(version: 20161123024627) do
     t.integer  "checking_id"
     t.string   "bank_account_number"
     t.string   "bank_routing_number"
-  end
-
-  create_table "businesses", force: :cascade do |t|
-    t.string   "name"
-    t.string   "address"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
-    t.decimal  "contribution", precision: 2
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "checkings", force: :cascade do |t|
@@ -122,11 +111,12 @@ ActiveRecord::Schema.define(version: 20161123024627) do
     t.string   "user_id"
     t.string   "roundup_count"
     t.string   "status"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "transfer_type"
     t.string   "roundup_amount"
     t.string   "date"
+    t.boolean  "tech_fee_charged"
   end
 
   create_table "users", force: :cascade do |t|
@@ -166,10 +156,8 @@ ActiveRecord::Schema.define(version: 20161123024627) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "account_balance"
-    t.integer  "business_id"
   end
 
-  add_index "users", ["business_id"], name: "index_users_on_business_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
