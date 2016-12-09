@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords' }
     resources :users, :only => [:show] do
     resources :transactions, only: [:index, :show, :edit, :update]
-    resources :accounts, only: [:index, :new]
+    resources :accounts, only: [:index, :new, :update]
   end
 
   devise_scope :user do

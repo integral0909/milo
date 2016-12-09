@@ -27,17 +27,29 @@ class PlaidapiController < ApplicationController
       plaid_user = Plaid::User.load(:connect, @user.plaid_access_token)
       plaid_user.transactions()
 
-      # Upgrade user to have auth product
-      plaid_user.upgrade(:auth)
-      plaid_user.auth()
-
-      Account.create_accounts(plaid_user.accounts, public_token, @user.id)
+      # Upgrade user to have auth product if auth is available
+      begin
+        plaid_user.upgrade(:auth)
+        plaid_user.auth()
+        # create accounts with complete account info
+        Account.create_accounts(plaid_user.accounts, public_token, @user.id)
+      rescue => e # If auth is not available for the account used, send them to micro-deposit page
+        User.add_long_tail(@user)
+        # create accounts without acct and routing numbers for now
+        Account.create_long_tail_account(plaid_user.accounts, public_token, @user.id)
+      end
 
       #6 Set checking account
       accounts = Account.where(user_id: @user.id, acct_subtype: "checking")
       # IF, only one checking account connect automatically
       if accounts.size == 1
         Checking.create_checking(accounts)
+
+        # redirect to number form if user has long_tail account
+        if @user.long_tail
+          redirect_to signup_bank_verify_path and return
+        end
+
         redirect_to signup_on_demand_path
       # ELSE, allow user to select
       else
