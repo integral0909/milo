@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   # ----------------------------------------------
   # DEVISE ---------------------------------------
   # ----------------------------------------------
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :trackable, :validatable, :timeoutable, :lockable
 
   # ----------------------------------------------
