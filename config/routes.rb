@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   # Devise
-  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords' }
+  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords', :invitations => 'invitations' }
     resources :users, :only => [:show] do
     resources :transactions, only: [:index, :show, :edit, :update]
     resources :accounts, only: [:index]

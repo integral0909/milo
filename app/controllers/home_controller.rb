@@ -100,10 +100,10 @@ class HomeController < ApplicationController
   private
 
   # ----------------------------------------------
-  # SET-TRANSFER-AVERAGE --------------------------
+  # SET-TRANSFER-AVERAGE -------------------------
+  # ----------------------------------------------
   # transfers: All the transfers associated with the user
   # return: The average transfer amount
-  # ----------------------------------------------
   def set_transfer_average(transfers)
     all_transfer_amounts = transfers.map {|tr| tr.roundup_amount.to_f }
     all_transfer_average= (all_transfer_amounts.inject{ |sum, el| sum + el }.to_f / all_transfer_amounts.size)
@@ -111,9 +111,9 @@ class HomeController < ApplicationController
   end
 
   # ----------------------------------------------
-  # SET-PENDING-ROUNDUPS --------------------------
-  # return: This weeks pending round ups and pending round up total
+  # SET-PENDING-ROUNDUPS -------------------------
   # ----------------------------------------------
+  # return: This weeks pending round ups and pending round up total
   def set_pending_roundups
     @transactions = PlaidHelper.current_week_transactions(@user, @checking)
     @total_pending = 0

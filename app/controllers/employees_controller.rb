@@ -11,12 +11,7 @@ class EmployeesController < ApplicationController
   # INDEX ----------------------------------------
   # ----------------------------------------------
   def index
-  end
-
-  # ----------------------------------------------
-  # NEW ------------------------------------------
-  # ----------------------------------------------
-  def new
+    @employees = User.where(business_id: current_user.business_id).all
   end
 
 end
