@@ -11,11 +11,21 @@ class BankingMailer < ApplicationMailer
   # ----------------------------------------------
   # ACCOUNT-ADDED --------------------------------
   # ----------------------------------------------
-  # email to send user when the Dwolla transfer starts
+  # email to send user when the account is successfully added
   def account_added(user, funding_account)
    @funding_account = funding_account
    @user = user
    mail(to: @user.email, subject: 'You are now connected with Milo!')
+  end
+
+  # ----------------------------------------------
+  # LONGTAIL-ACCOUNT-ADDED --------------------------------
+  # ----------------------------------------------
+  # email to send user when the user connects an account that needs micro-deposit verification
+  def longtail_account_added(user, funding_account)
+   @funding_account = funding_account
+   @user = user
+   mail(to: @user.email, subject: 'You are almost connected with Milo!')
   end
 
   # ----------------------------------------------

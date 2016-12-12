@@ -24,6 +24,7 @@ class AccountsController < ApplicationController
     end
   end
 
+  # Account and Routing number form page on sign up process.
   def bank_verify
     # Find the checking account associated with the user
     @checking = Checking.find_by_user_id(@user.id)

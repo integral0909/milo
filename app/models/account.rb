@@ -38,6 +38,9 @@ class Account < ActiveRecord::Base
 
   has_many :transactions
 
+  validates :bank_routing_number, length: { is: 9 }, on: :update
+  validates :bank_account_number, length: { minimum: 4 }, on: :update
+
   # ----------------------------------------------
   # ACCOUNTS-CREATE ------------------------------
   # ----------------------------------------------

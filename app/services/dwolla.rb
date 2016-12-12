@@ -51,7 +51,8 @@ module Dwolla
         routingNumber: funding_account.bank_routing_number,
         accountNumber: funding_account.bank_account_number,
         type: funding_account.acct_subtype,
-        name: funding_account.name
+        name: funding_account.name,
+        verified: (user.long_tail ? false : true)
       }
 
       funding_source = TokenConcern.account_token.post "#{dwolla_customer_url}/funding-sources", request_body
@@ -61,9 +62,12 @@ module Dwolla
       user.dwolla_funding_source = funding_source.headers[:location]
       user.save!
 
-      BankingMailer.account_added(user, funding_account).deliver_now
+      if user.long_tail
+        Dwolla.init_micro_deposits(user, user_checking)
+      else
+        BankingMailer.account_added(user, funding_account).deliver_now
+      end
     rescue => e
-
       # EMAIL: send support the error from Dwolla
       SupportMailer.connect_funding_source_failed(user, user_checking, funding_account, e).deliver_now
     end
