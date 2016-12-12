@@ -100,6 +100,8 @@ module Dwolla
 
       # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
       TokenConcern.account_token.post "#{user.dwolla_funding_source}/micro-deposits", request_body
+
+      User.bank_verified(user)
     rescue =>  e
       puts "-" * 50
       puts e

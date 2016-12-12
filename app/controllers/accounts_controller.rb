@@ -45,7 +45,6 @@ class AccountsController < ApplicationController
       funding_account = Account.find_by_plaid_acct_id(user_checking.plaid_acct_id)
       BankingMailer.account_added(@user, funding_account)
 
-      User.bank_verified(@user)
       flash[:success] = "Congrats! Your account is now verified!"
       redirect_to :back
     rescue => e
