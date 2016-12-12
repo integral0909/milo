@@ -4,10 +4,32 @@
 
 <div class="page-content">
   <div class="container">
-    <h1>Employees</h1>
-    <%= link_to "Add Employee", new_user_invitation_path %>
-    <% @employees.each do |e| %>
-      <%= e.email %><br/>
-    <% end %>
+    <h6>
+      Employees
+      <%= link_to "Add Employee", new_user_invitation_path %>
+    </h6>
+
+    <table class="table">
+      <thead class="thead-default">
+        <tr>
+          <th>Name</th>
+          <th>Status</th>
+          <th>Avg. Transfer</th>
+          <th>Last Week</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @employees.each do |e| %>
+          <tr>
+            <th><%= e.name %> (<%= e.email %>)</th>
+            <td>Active / Inactive</td>
+            <td>-</td>
+            <td>-</td>
+            <td><a href="#">Remove</a>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
