@@ -192,4 +192,27 @@ module Dwolla
     end
   end
 
+  # Remove funding source from Dwolla
+  def self.remove_funding_source(user)
+    begin
+      request_body = {
+        :removed => true
+      }
+      TokenConcern.account_token.post user.dwolla_funding_source, request_body
+
+      d_user = User.find(user.id)
+      d_user.dwolla_funding_source = nil
+      d_user.save!
+
+      # Find the checking account associated with the user
+      user_checking = Checking.find_by_user_id(user.id)
+      # Get the info from the Account to add a funding source to Dwolla
+      funding_account = Account.find_by_plaid_acct_id(user_checking.plaid_acct_id)
+
+      BankingMailer.bank_account_removed(user, funding_account)
+    rescue =>  e
+    #  send account removal failure email
+    end
+  end
+
 end
