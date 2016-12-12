@@ -42,6 +42,7 @@ Rails.application.routes.draw do
 
   # Verify Bank Account
   get 'accounts/bank_verify', to: 'accounts#bank_verify', as: :signup_bank_verify
+  get 'accounts/verify_micro_deposits', to: 'accounts#verify_micro_deposits'
 
   # Remove Bank Accounts
   get 'accounts/remove', to: 'accounts#remove', as: :accounts_remove

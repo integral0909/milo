@@ -63,13 +63,46 @@ module Dwolla
       user.save!
 
       if user.long_tail
-        Dwolla.init_micro_deposits(user, user_checking)
+        Dwolla.init_micro_deposits(user, user_checking, funding_account)
       else
         BankingMailer.account_added(user, funding_account).deliver_now
       end
     rescue => e
       # EMAIL: send support the error from Dwolla
       SupportMailer.connect_funding_source_failed(user, user_checking, funding_account, e).deliver_now
+    end
+  end
+
+  def self.init_micro_deposits(user, user_checking, funding_account)
+    begin
+      TokenConcern.account_token.post "#{user.dwolla_funding_source}/micro-deposits"
+
+      BankingMailer.longtail_account_added(user, funding_account).deliver_now
+    rescue => e
+      # EMAIL: send support the error from Dwolla
+      SupportMailer.connect_funding_source_failed(user, user_checking, funding_account, e).deliver_now
+    end
+  end
+
+  # confirm micro-deposits for long_tail accounts
+  def self.confirm_micro_deposits(deposit1, deposit2, user)
+    begin
+      request_body = {
+        :amount1 => {
+          :value => deposit1,
+          :currency => "USD"
+        },
+        :amount2 => {
+          :value => deposit2,
+          :currency => "USD"
+        }
+      }
+
+      # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+      TokenConcern.account_token.post "#{user.dwolla_funding_source}/micro-deposits", request_body
+    rescue =>  e
+      puts "-" * 50
+      puts e
     end
   end
 
@@ -201,7 +234,7 @@ module Dwolla
       TokenConcern.account_token.post user.dwolla_funding_source, request_body
 
       d_user = User.find(user.id)
-      d_user.dwolla_funding_source = nil
+      d_user.dwolla_funding_source = ''
       d_user.save!
 
       # Find the checking account associated with the user
@@ -209,8 +242,9 @@ module Dwolla
       # Get the info from the Account to add a funding source to Dwolla
       funding_account = Account.find_by_plaid_acct_id(user_checking.plaid_acct_id)
 
-      BankingMailer.bank_account_removed(user, funding_account)
+      BankingMailer.bank_account_removed(user, funding_account).deliver_now
     rescue =>  e
+      puts e
     #  send account removal failure email
     end
   end

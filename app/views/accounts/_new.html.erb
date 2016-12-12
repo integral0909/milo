@@ -7,7 +7,7 @@
         </button>
         <h5 class="modal-title">Verify Bank Accounts</h5>
       </div>
-      <form>
+      <form action="/accounts/verify_micro_deposits" method="get">
         <div class="modal-body">
           <div class="row">
             <div class="col-md-12">
@@ -20,7 +20,7 @@
                 <label>Deposit 1</label>
                 <div class="input-group">
                   <span class="input-group-addon">$0.</span>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" name="deposit1">
                 </div>
               </fieldset>
             </div>
@@ -31,7 +31,7 @@
                 <label>Deposit 2</label>
                 <div class="input-group">
                   <span class="input-group-addon">$0.</span>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" name="deposit2">
                 </div>
               </fieldset>
             </div>

@@ -30,6 +30,8 @@
 #  state                            :string
 #  avater                           :attachment
 #  account_balance                  :integer
+#  long_tail                        :boolean
+#  bank_not_verified                :boolean
 #
 
 # ================================================
@@ -119,7 +121,17 @@ class User < ActiveRecord::Base
   # ----------------------------------------------
   # Set user as long-tail user
   def self.add_long_tail(user)
+    user.bank_not_verified = true
     user.long_tail = true
+    user.save!
+  end
+
+  # ----------------------------------------------
+  # LONG-TAIL-ACCOUNT ----------------------------
+  # ----------------------------------------------
+  # Set user as long-tail user
+  def self.bank_verified(user)
+    user.bank_not_verified = false
     user.save!
   end
 
