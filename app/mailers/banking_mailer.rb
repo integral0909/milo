@@ -25,7 +25,7 @@ class BankingMailer < ApplicationMailer
   def longtail_account_added(user, funding_account)
    @funding_account = funding_account
    @user = user
-   mail(to: @user.email, subject: 'You are almost connected with Milo!')
+   mail(to: @user.email, subject: 'Verify you bank account on Milo.')
   end
 
   # ----------------------------------------------
