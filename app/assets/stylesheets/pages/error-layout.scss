@@ -1,0 +1,52 @@
+body.milo-errors {
+  background: #352D52;
+
+  a.signup-logo {
+    color: #FFF;
+    display: block;
+    font-family: 'Futura Bold';
+    font-size: 2.625em;
+    margin: 32px 0 56px;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    @include breakpoint(l-one) {
+      margin: 16px auto;
+      text-align: center;
+    }
+  }
+}
+
+.error-img {
+  display: block;
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+.error-content {
+  margin: 0 0 0 24px;
+
+  @include breakpoint(l-one) {
+    margin: 48px 0;
+    text-align: center;
+  }
+
+  h1 {
+    color: #FFF;
+    font-family: 'Futura Bold';
+    font-size: 8em;
+    margin: 0;
+  }
+
+  p {
+    color: #FFF;
+    margin: 0 0 4px;
+  }
+
+  a:focus, a:hover {
+    color: #4A90E2;
+  }
+}
