@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  # Rails Admin
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   # Devise
@@ -50,6 +51,10 @@ Rails.application.routes.draw do
   resources :checkings, only: [:new, :create]
   resources :contacts, only: [:new, :create]
   resources :goals
+
+  # Error Pages
+  get "/404", to: "errors#not_found", via: :all
+  get "/500", to: "errors#internal_server_error", via: :all
 
   # Pages for Marketing Site
   get '/*page' => 'pages#show'
