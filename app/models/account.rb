@@ -158,4 +158,35 @@ class Account < ActiveRecord::Base
       end
     end
   end
+
+  # ----------------------------------------------
+  # MICRO-DEPOSIT-VERIFICATION-FAILED ------------
+  # Called when a user fails to enter the correct deposited amounts
+  # ----------------------------------------------
+  def self.micro_deposit_verification_failed(acct, user)
+    # Add 1 to the user's failed verification attempts count.
+    acct.failed_verification_attempt ? acct.failed_verification_attempt += 1 : acct.failed_verification_attempt = 1
+
+    acct.save!
+  end
+
+  # ----------------------------------------------
+  # REMOVE-ACCOUNTS ------------------------------
+  # Remove all accounts, checking, and fields related to users accounts
+  # ----------------------------------------------
+  def self.remove_accounts(user)
+    user = User.find(user.id)
+
+    accounts = Account.where(user_id: user.id)
+    accounts.destroy_all
+
+    checking = Checking.where(user_id: user.id)
+    checking.destroy_all
+
+    Dwolla.remove_funding_source(user)
+
+    user.on_demand = false
+    user.long_tail = false
+    user.save!
+  end
 end

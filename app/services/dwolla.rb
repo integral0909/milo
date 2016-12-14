@@ -85,7 +85,7 @@ module Dwolla
   end
 
   # confirm micro-deposits for long_tail accounts
-  def self.confirm_micro_deposits(deposit1, deposit2, user)
+  def self.confirm_micro_deposits(deposit1, deposit2, user, account)
     begin
       request_body = {
         :amount1 => {
@@ -103,6 +103,11 @@ module Dwolla
 
       User.bank_verified(user)
     rescue =>  e
+      # status will be 400 if the deposits are incorrect
+      if e.status == 400
+        # if user inputs wrong deposit amounts
+        Account.micro_deposit_verification_failed(account, user)
+      end
       puts "-" * 50
       puts e
     end
