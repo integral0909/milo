@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161210171927) do
+ActiveRecord::Schema.define(version: 20161212205459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,11 +144,11 @@ ActiveRecord::Schema.define(version: 20161210171927) do
     t.string   "referral_code"
     t.string   "name"
     t.string   "zip"
+    t.string   "dwolla_id"
+    t.string   "dwolla_funding_source"
     t.string   "mobile_number"
     t.string   "verification_code"
     t.boolean  "is_verified"
-    t.string   "dwolla_id"
-    t.string   "dwolla_funding_source"
     t.boolean  "on_demand"
     t.boolean  "agreement"
     t.string   "address"
@@ -163,6 +163,8 @@ ActiveRecord::Schema.define(version: 20161210171927) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "account_balance"
+    t.boolean  "long_tail"
+    t.boolean  "bank_not_verified"
     t.integer  "business_id"
     t.string   "invitation_token"
     t.datetime "invitation_created_at"
