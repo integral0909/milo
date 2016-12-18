@@ -83,6 +83,13 @@ class InvitationsController < Devise::InvitationsController
     end
   end
 
+  # ----------------------------------------------
+  # AFTER-INVITE-PATH ----------------------------
+  # ----------------------------------------------
+  def after_invite_path_for(resource)
+    employees_path
+  end
+
   # ==============================================
   # PRIVATE ======================================
   # ==============================================
