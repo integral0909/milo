@@ -9,6 +9,8 @@
         <h6>Add Employee</h6>
         <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
           <%= devise_error_messages! %>
+          <%= f.hidden_field :business_id, value: current_user.business_id %>
+          <%= f.hidden_field :invited, value: true %>
           <section class="form-section">
             <div class="row">
               <div class="col-md-12">
@@ -24,12 +26,6 @@
                   <label>Email</label>
                   <%= f.email_field :email, class: "form-control" %>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <fieldset class="form-group">
-                  <label>Phone</label>
-                  <%= f.text_field :mobile_number, class: "form-control" %>
-                </fieldset>
               </div>
             </div>
           </section>

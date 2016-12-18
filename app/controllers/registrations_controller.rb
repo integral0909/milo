@@ -9,7 +9,7 @@ class RegistrationsController < Devise::RegistrationsController
   layout "signup"
 
   # ----------------------------------------------
-  # FILTERS -------------------------------------
+  # FILTERS --------------------------------------
   # ----------------------------------------------
   prepend_before_action :require_no_authentication, only: [:new, :create, :cancel]
   prepend_before_action :authenticate_scope!, only: [:edit, :security, :update, :destroy]
