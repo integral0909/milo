@@ -5,6 +5,7 @@
 #  id                               :integer          not null, primary key
 #  name                             :string
 #  contribution                     :decimal          precision, 2
+#  frequency                        :string
 #
 
 # ================================================
