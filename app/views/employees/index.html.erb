@@ -6,7 +6,7 @@
   <div class="container">
     <%= render "layouts/messages" %>
     <h6>
-      Employees
+      <%= @employees.size %> Employees
       <%= link_to "Add Employee", new_user_invitation_path %>
     </h6>
 
