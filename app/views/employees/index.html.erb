@@ -27,7 +27,7 @@
             <td>Active / Inactive</td>
             <td>-</td>
             <td>-</td>
-            <td><a href="#">Remove</a>
+            <td><%= link_to "Remove", "/employees/#{e.id}", class: "-remove", method: :delete, data: {confirm: "Are you sure you want to remove #{e.name}?"}, remote: true %></td>
           </tr>
         <% end %>
       </tbody>

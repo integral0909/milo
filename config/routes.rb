@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :employees, only: [:index, :new]
+  resources :employees, only: [:index, :destroy]
 
   get 'history', to: 'home#history', as: :history
   get 'roundups', to: 'home#roundups', as: :roundups
