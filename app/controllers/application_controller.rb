@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   # HELPERS --------------------------------------
   # ----------------------------------------------
   helper ApplicationHelper
+  helper_method :current_business
 
   # ----------------------------------------------
   # FILTERS --------------------------------------

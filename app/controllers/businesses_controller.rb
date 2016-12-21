@@ -2,7 +2,7 @@ class BusinessesController < ApplicationController
   before_action :set_business, only: [:edit, :update]
 
   def edit
-    @business.current_user.business
+
   end
 
   def update
@@ -20,7 +20,7 @@ class BusinessesController < ApplicationController
   private
 
   def set_business
-    @business = current_user.business
+    @business = Business.find(@user.business_id)
   end
 
   def business_params
