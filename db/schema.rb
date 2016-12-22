@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161219005347) do
+ActiveRecord::Schema.define(version: 20161222160053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20161219005347) do
 
   create_table "businesses", force: :cascade do |t|
     t.string   "name"
-    t.decimal  "contribution", precision: 2
+    t.decimal  "contribution", precision: 8, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "frequency"
@@ -176,8 +176,6 @@ ActiveRecord::Schema.define(version: 20161219005347) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.integer  "invitations_count",      default: 0
-    t.boolean  "long_tail"
-    t.boolean  "bank_not_verified"
   end
 
   add_index "users", ["business_id"], name: "index_users_on_business_id", using: :btree

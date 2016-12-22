@@ -15,8 +15,6 @@ Rails.application.routes.draw do
     get 'settings', to: 'registrations#edit', as: :settings
     get 'settings/accounts', to: 'registrations#accounts', as: :settings_accounts
     get 'settings/security', to: 'registrations#security', as: :settings_security
-    # Business Settings
-    get 'settings/business', to: 'businesses#edit', as: :settings_business
     # User Sign Up
     get 'signup/phone', to: 'registrations#phone', as: :signup_phone
     get 'signup/phone_confirm', to: 'registrations#phone_confirm', as: :signup_phone_confirm
@@ -31,6 +29,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :businesses, only: [:edit, :update]
   resources :employees, only: [:index, :destroy]
 
   get 'history', to: 'home#history', as: :history

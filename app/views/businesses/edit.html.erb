@@ -8,32 +8,31 @@
         <%= render "layouts/messages" %>
         <h6>Set Contributions</h6>
         <p>Match 100% of employee savings or set a max contribution limit. Setting a max contribution will limit an employer contribution per employee to the amount set below.</p>
-
-        <%= form_for(@business, url: settings_business_path) do |f| %>
+        <%= form_for (@business), :url => {:controller => "businesses", :action => "update", id: @business.id}, :html => { :method => :put} do |f| %>
           <%= form_errors @business %>
           <section class="form-section">
             <div class="row">
               <div class="col-sm-6">
                 <fieldset class="form-group">
                   <label>Max Contribution</label>
-                  <%= f.text_field :contribution, class: "form-control" %>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                    <%= f.text_field :contribution, class: "form-control", :value => (number_with_precision(f.object.contribution, :precision => 2) || 0) %>
+                  </div>
                 </fieldset>
               </div>
               <div class="col-sm-6">
                 <fieldset class="form-group">
                   <label>Frequency</label>
-                  <%= f.text_field :frequency, class: "form-control" %>
+                  <%= f.select(:frequency, [ "Weekly", "Monthly", "Quarterly", "Yearly" ], {}, { class: "form-control" }) %>
                 </fieldset>
               </div>
             </div>
           </section>
-
-
           <div class="actions">
-            <%= f.submit %>
+            <%= f.submit "Save", class: "button -blue" %>
           </div>
         <% end %>
-
       </div>
     </div>
   </div>

@@ -4,7 +4,7 @@
 #
 #  id                               :integer          not null, primary key
 #  name                             :string
-#  contribution                     :decimal          precision, 2
+#  contribution                     :decimal          precision 8, scale 2
 #  frequency                        :string
 #
 
