@@ -18,11 +18,11 @@ module PlaidHelper
     sunday = set_sunday
     begin
       # Pull in plaid connect user
-      connect_user = Argyle.plaid_client.set_user(user.plaid_access_token, ['connect'])
+      connect_user = Plaid::User.load(:connect, user.plaid_access_token)
       user_transactions = connect_user.transactions()
 
       # filter transactions to the ones that match the users checking and this past week
-      current_transactions = user_transactions.select{|a| (a.account == checking.plaid_acct_id) && (a.date.to_date >= sunday)}
+      current_transactions = user_transactions.select{|a| (a.account_id == checking.plaid_acct_id) && (a.date.to_date >= sunday)}
 
       # create the transactions
       Transaction.create_transactions(current_transactions, checking.plaid_acct_id, user.id)
@@ -46,11 +46,11 @@ module PlaidHelper
 
       # Pull in plaid connect user
       # upgrade to connect_user = Plaid::User.load(:connect, user.plaid_access_token) when upgrading to the most recent API
-      connect_user = Argyle.plaid_client.set_user(user.plaid_access_token, ['connect'])
+      connect_user = Plaid::User.load(:connect, user.plaid_access_token)
       user_transactions = connect_user.transactions()
 
       # filter transactions to the ones that match the users checking and are only from the current week
-      current_transactions = user_transactions.select{|a| (a.account == checking.plaid_acct_id) && (a.date.to_date >= sunday)}
+      current_transactions = user_transactions.select{|a| (a.account_id == checking.plaid_acct_id) && (a.date.to_date >= sunday)}
 
       # create transaction objects for the view
       transactions_for_view = current_transactions.map { |tr| {roundup: round_transaction(tr.amount), trans_name: tr.name, amount: tr.amount} }

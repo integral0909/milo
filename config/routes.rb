@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
+  # Rails Admin
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   # Devise
   devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords', :invitations => 'invitations' }
     resources :users, :only => [:show] do
     resources :transactions, only: [:index, :show, :edit, :update]
-    resources :accounts, only: [:index]
+    resources :accounts, only: [:index, :new, :update]
   end
 
   devise_scope :user do
@@ -46,12 +47,20 @@ Rails.application.routes.draw do
   post 'verifications' => 'verifications#create'
   patch 'verifications' => 'verifications#verify'
 
+  # Verify Bank Account
+  get 'accounts/bank_verify', to: 'accounts#bank_verify', as: :signup_bank_verify
+  get 'accounts/verify_micro_deposits', to: 'accounts#verify_micro_deposits'
+
   # Remove Bank Accounts
   get 'accounts/remove', to: 'accounts#remove', as: :accounts_remove
 
   resources :checkings, only: [:new, :create]
   resources :contacts, only: [:new, :create]
   resources :goals
+
+  # Error Pages
+  get "/404", to: "errors#not_found", via: :all
+  get "/500", to: "errors#internal_server_error", via: :all
 
   # Pages for Marketing Site
   get '/*page' => 'pages#show'

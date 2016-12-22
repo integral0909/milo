@@ -7517,7 +7517,7 @@ a.ssb.ssb-linkedin:hover {
   border: 1px solid #DDE1E2;
   border-bottom-width: 2px;
   border-radius: 0;
-  margin: 0 0 32px;
+  margin: 0 0 24px;
   padding: 24px;
 }
 @media (max-width: 767px) {
@@ -7532,33 +7532,47 @@ a.ssb.ssb-linkedin:hover {
   box-sizing: border-box;
   color: #4C3E70;
   font-size: 1.5em;
-  height: 36px;
-  line-height: 1;
+  height: auto;
+  line-height: 1.2;
   margin: 0 0 24px;
+  padding: 0 0 8px;
 }
-/* line 29, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 30, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+.milo-card .mc-title a.mc-edit {
+  color: #8B999F;
+  cursor: pointer;
+  float: right;
+  font-size: 0.644em;
+  line-height: 28px;
+  margin: 0 0 0 12px;
+}
+/* line 38, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+.milo-card .mc-title a.mc-edit:hover {
+  color: #4A90E2;
+}
+/* line 43, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card .mc-title span {
   color: #8B999F;
   float: right;
+  font-family: 'Futura Bold';
   font-size: 0.56em;
-  font-weight: 600;
   line-height: 28px;
 }
-/* line 35, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 50, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card .mc-title span em {
   color: #1ABD7D;
   font-style: normal;
 }
-/* line 39, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 55, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card .mc-title span i.fa {
   margin: 0 0 0 4px;
 }
 
-/* line 47, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 63, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress {
   height: auto;
 }
-/* line 49, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 65, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar {
   background: #F8FAFB;
   border: 1px solid #E5E8E9;
@@ -7567,7 +7581,7 @@ a.ssb.ssb-linkedin:hover {
   position: relative;
   z-index: 1;
 }
-/* line 57, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 73, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .current-progress {
   background: #2BC38A;
   border: 1px solid #2B906C;
@@ -7577,8 +7591,9 @@ a.ssb.ssb-linkedin:hover {
   position: absolute;
   top: -1px;
   z-index: 2;
+  max-width: 100%;
 }
-/* line 67, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 84, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .bar {
   background: rgba(0, 0, 0, 0.12);
   height: 38px;
@@ -7587,56 +7602,56 @@ a.ssb.ssb-linkedin:hover {
   width: 1px;
   z-index: 3;
 }
-/* line 74, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 91, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .bar.one {
   left: 12.5%;
 }
-/* line 75, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 92, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .bar.two {
   left: 25%;
 }
-/* line 76, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 93, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .bar.three {
   left: 37.5%;
 }
-/* line 77, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 94, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .bar.four {
   left: 50%;
 }
-/* line 78, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 95, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .bar.five {
   left: 62.5%;
 }
-/* line 79, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 96, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .bar.six {
   left: 75%;
 }
-/* line 80, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 97, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.progress .progress-bar .bar.seven {
   left: 87.5%;
 }
 
-/* line 88, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 105, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.account-value .av-total {
   color: #292242;
   font-family: 'Futura Bold';
   font-size: 3.5em;
   line-height: 1;
 }
-/* line 94, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 111, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.account-value .av-total span {
   color: #1ABD7D;
   float: right;
   font-size: 0.32em;
 }
 
-/* line 105, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 122, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.history ul.recent-transactions, .milo-card.mobile-roundups ul.recent-transactions {
   list-style: none;
   margin: 0 0 24px;
   padding: 0;
 }
-/* line 110, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 127, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.history ul.recent-transactions li, .milo-card.mobile-roundups ul.recent-transactions li {
   border-bottom: 1px solid #DDE1E2;
   color: #352D52;
@@ -7646,7 +7661,7 @@ a.ssb.ssb-linkedin:hover {
   padding: 11px 16px;
   width: 100%;
 }
-/* line 119, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 136, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.history ul.recent-transactions li span, .milo-card.mobile-roundups ul.recent-transactions li span {
   color: #8B999F;
   float: right;
@@ -7659,48 +7674,48 @@ a.ssb.ssb-linkedin:hover {
   white-space: nowrap;
   width: 72%;
 }
-/* line 131, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 148, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.history ul.recent-transactions li span strong, .milo-card.mobile-roundups ul.recent-transactions li span strong {
   display: block;
   font-family: 'Futura Bold';
   font-size: 1.25em;
   line-height: 1.2;
 }
-/* line 141, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 158, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.history a, .milo-card.mobile-roundups a {
   display: block;
   margin: 0 0 6px;
   text-align: center;
 }
 
-/* line 150, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 167, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.mobile-roundups ul.recent-transactions li {
   height: auto;
   line-height: 1.6;
   padding: 12px 16px;
 }
-/* line 155, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 172, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.mobile-roundups ul.recent-transactions li span {
   display: block;
   float: none;
   text-align: left;
   width: 100%;
 }
-/* line 161, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 178, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.mobile-roundups ul.recent-transactions li span strong {
   display: inline;
   margin: 0 12px 0 0;
 }
-/* line 168, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 185, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.mobile-roundups p {
   margin: 0;
 }
-/* line 171, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 188, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.mobile-roundups p.align-center {
   text-align: center;
 }
 
-/* line 180, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 197, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.quick-save .amount, .milo-card.recurring .amount {
   background: #F8FAFB;
   border: 1px solid #E5E8E9;
@@ -7713,18 +7728,18 @@ a.ssb.ssb-linkedin:hover {
   padding: 54px 0;
   text-align: center;
 }
-/* line 191, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 208, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.quick-save .amount.-schedule, .milo-card.recurring .amount.-schedule {
   padding: 36px 0 0;
 }
-/* line 194, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 211, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.quick-save .amount ul.ac-options, .milo-card.recurring .amount ul.ac-options {
   border-top: 1px solid #E5E8E9;
   list-style: none;
   margin: 33px 0 0;
   padding: 0;
 }
-/* line 200, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 217, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.quick-save .amount ul.ac-options li, .milo-card.recurring .amount ul.ac-options li {
   border-right: 1px solid #E5E8E9;
   color: #96A3A8;
@@ -7738,22 +7753,22 @@ a.ssb.ssb-linkedin:hover {
   text-transform: uppercase;
   width: 33.33%;
 }
-/* line 212, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 229, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.quick-save .amount ul.ac-options li:last-child, .milo-card.recurring .amount ul.ac-options li:last-child {
   border-right: 0;
 }
-/* line 215, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 232, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.quick-save .amount ul.ac-options li.active, .milo-card.quick-save .amount ul.ac-options li.active:hover, .milo-card.recurring .amount ul.ac-options li.active, .milo-card.recurring .amount ul.ac-options li.active:hover {
   background: #FFF;
   color: #3B4357;
 }
-/* line 219, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 236, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.quick-save .amount ul.ac-options li:hover, .milo-card.recurring .amount ul.ac-options li:hover {
   background: #FAFAFA;
   color: #4C3E70;
 }
 
-/* line 229, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 246, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.round-up-stat {
   box-sizing: border-box;
   color: #292242;
@@ -7764,7 +7779,7 @@ a.ssb.ssb-linkedin:hover {
   padding: 40px 0 0;
   text-align: center;
 }
-/* line 239, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 256, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.round-up-stat span {
   color: #8B999F;
   display: block;
@@ -7772,15 +7787,15 @@ a.ssb.ssb-linkedin:hover {
   font-size: 0.5em;
 }
 
-/* line 250, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 267, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.full-history .mc-title.no-marg {
   margin: 0;
 }
-/* line 254, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 271, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.full-history table.table {
   margin: 0;
 }
-/* line 257, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 274, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.full-history table.table th {
   background: #F9FBFB;
   border-top: 0;
@@ -7790,29 +7805,29 @@ a.ssb.ssb-linkedin:hover {
   text-transform: uppercase;
 }
 
-/* line 269, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 286, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.growth-hack {
   padding: 40px;
   text-align: center;
 }
 @media (max-width: 767px) {
-  /* line 269, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+  /* line 286, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
   .milo-card.growth-hack {
     padding: 20px 16px;
   }
 }
-/* line 277, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 294, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.growth-hack h4 {
   margin: 0 0 16px;
 }
 @media (max-width: 767px) {
-  /* line 281, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+  /* line 298, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
   .milo-card.growth-hack p {
     font-size: 1em;
     margin: 0 0 16px;
   }
 }
-/* line 288, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+/* line 305, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
 .milo-card.growth-hack .gh-link {
   background: #F1F3F6;
   border-radius: 4px;
@@ -7822,7 +7837,7 @@ a.ssb.ssb-linkedin:hover {
   padding: 16px 24px;
 }
 @media (max-width: 767px) {
-  /* line 288, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
+  /* line 305, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_cards.scss */
   .milo-card.growth-hack .gh-link {
     font-size: 1em;
   }
@@ -7893,6 +7908,11 @@ a.ssb.ssb-linkedin:hover {
   color: #FFF;
   font-size: 1.5em;
   line-height: 1.2;
+}
+
+/* line 28, /Users/Pudge/Desktop/milo/app/assets/stylesheets/elements/_modals.scss */
+#plaid-link-button {
+  border: 10px solid pink;
 }
 
 /*
@@ -9758,7 +9778,7 @@ header.head-market.-works {
   }
 }
 
-/* line 4, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 4, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-icon {
   background-position: center center;
   background-repeat: no-repeat;
@@ -9767,104 +9787,108 @@ header.head-market.-works {
   height: 18px;
   width: 18px;
 }
-/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-twitter {
   background-image: url(/assets/social-share-button/twitter-7b64ce0117a85c5d52ed45c27707af61d9b0e0d590284baa287cfe87867b9ae1.svg);
 }
-/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-facebook {
   background-image: url(/assets/social-share-button/facebook-03210e1663ee772e93ed5d344cdb36657b68342821aaebe982f2f984915990b3.svg);
 }
-/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-google_bookmark {
   background-image: url(/assets/social-share-button/google_bookmark-bb4c960c0421cb7dce602d10e744692bcc1c54f323410f4965d508f96e2255ce.svg);
 }
-/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-google_plus {
   background-image: url(/assets/social-share-button/google_plus-50c049fbb29cd3346f1bf9349017b644bcd00a53b56bd156728850f57bd85c0a.svg);
 }
-/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-weibo {
   background-image: url(/assets/social-share-button/weibo-a345a6ca554e6f388da9eb35746bb0425cb018c16408ba82852c66d375245d6f.svg);
 }
-/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-qq {
   background-image: url(/assets/social-share-button/qq-4dbae8223fc7823f6d73bc7fbe113eb894f4c174ec3ae93103ca382c78a2bf67.svg);
 }
-/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-delicious {
   background-image: url(/assets/social-share-button/delicious-0c55f72f821aae5352691f13eb64bf3435573e2169d0720477ed367b2f1ed28e.svg);
 }
-/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-linkedin {
   background-image: url(/assets/social-share-button/linkedin-b7fd42895b291003c444a9c2acf867ea813671e0b725a5d7c05dbb13f5c0fdd3.svg);
 }
-/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-tumblr {
   background-image: url(/assets/social-share-button/tumblr-330a37f93cce7c27a750188d0bfdbed3a22f566b807e64d21131dcdc94e08ec3.svg);
 }
-/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-pinterest {
   background-image: url(/assets/social-share-button/pinterest-86203d156197cce4087fee058b920d275c535df5fd59d8caa83da0ef41d1ec7f.svg);
 }
-/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-douban {
   background-image: url(/assets/social-share-button/douban-46298c27e3bc6d59951c0bbc464339a5ba1b44e3b25b571874f1baacd7af2495.svg);
 }
-/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-wechat {
   background-image: url(/assets/social-share-button/wechat-d8852cc3396a7a53eba39595d2e9f638c93a34ab1a0f41bae4ff391b63815f56.svg);
 }
-/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-vkontakte {
   background-image: url(/assets/social-share-button/vkontakte-0c2b68277fade991d74efcbdb6f7b359a35e65156cbada9625a3fe8f73151c14.svg);
 }
-/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-xing {
   background-image: url(/assets/social-share-button/xing-0ebccb4042c8c7220e471c4f569df2bf27da227db425525819b6848c86a1603e.svg);
 }
-/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-email {
   background-image: url(/assets/social-share-button/email-7067143cbe69d9d8cf25e67fda1a315d133c2b79074a09088bd712cc5c81135d.svg);
 }
-/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-reddit {
   background-image: url(/assets/social-share-button/reddit-f5fc462f44dbeff78983b3b64cb69b6c777a22906767bdb0b283014ac79b37de.svg);
 }
-/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-hacker_news {
   background-image: url(/assets/social-share-button/hacker_news-d89b13fec49355a787389a776f2e03a0a38314abf93777b8865f8c5f146eaf8d.svg);
 }
 
-/* line 22, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 22, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .ss-wechat-dialog {
-  width: 270px;
-  height: 300px;
+  width: 300px;
   position: fixed;
   background: #fff;
-  padding: 10px;
-  border: solid 1px #ddd;
+  padding: 15px;
+  border-radius: 3px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
   z-index: 11001;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.2em;
 }
-/* line 33, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 33, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
+.ss-wechat-dialog .wechat-popup-header {
+  font-weight: bold;
+}
+/* line 37, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .ss-wechat-dialog .wechat-dialog-qr {
   text-align: center;
-  margin: 10px 0px;
+  margin: 25px 0px;
 }
-/* line 38, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 42, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .ss-wechat-dialog .wechat-popup-close {
   width: 16px;
   height: 16px;
   position: absolute;
-  right: 0px;
+  right: 10px;
   top: 10px;
   color: #999;
   text-decoration: none;
   font-size: 16px;
 }
-/* line 49, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 53, /Users/Pudge/.rvm/gems/ruby-2.2.2/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .ss-wechat-dialog .wechat-popup-footer {
   text-align: left;
   line-height: 22px;
