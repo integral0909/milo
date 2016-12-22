@@ -23,7 +23,7 @@
             <div class="col-md-12">
               <%= render "layouts/messages" %>
               <% if @checking.present? && @user.bank_not_verified %>
-                <div class="home-verify-message">Looks like we still need you to verify your account. If you've already recieved the micro-deposits, click <a class="verify-link" href="/settings/accounts">here</a> to get connected!.</div>
+                <div class="home-verify-message">Looks like we still need you to verify your account. If you've already recieved the micro-deposits, click <a class="verify-link" href="/settings/accounts">here</a> to get connected!</div>
               <% end %>
               <div class="milo-card progress">
                 <% if (@current_goal) %>
