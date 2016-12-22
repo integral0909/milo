@@ -46,51 +46,6 @@ class Transaction < ActiveRecord::Base
   before_save :round_transaction, :roundup
 
   # ----------------------------------------------
-  # ACCOUNTS-CREATE ------------------------------
-  # ----------------------------------------------
-  def self.create_accounts(plaid_user_accounts, public_token, user_id)
-    plaid_user_accounts.each do |acct|
-      account = Account.find_by(plaid_acct_id: acct.id)
-      # IF, account exists update
-      if account
-        account.update(
-          account_name: acct.meta["name"],
-          account_number: acct.meta["number"],
-          available_balance: acct.available_balance,
-          current_balance: acct.current_balance,
-          institution_type: acct.institution_type,
-          name: acct.name,
-          numbers: acct.numbers,
-          bank_account_number: acct.numbers['account'],
-          bank_routing_number: acct.numbers['routing'],
-          acct_subtype: acct.subtype,
-          acct_type: acct.type,
-          user_id: user_id,
-          public_token_id: public_token.id
-          )
-      # ELSE, create account
-      else
-        Account.create(
-          plaid_acct_id: acct.id,
-          account_name: acct.meta["name"],
-          account_number: acct.meta["number"],
-          available_balance: acct.available_balance,
-          current_balance: acct.current_balance,
-          institution_type: acct.institution_type,
-          name: acct.name,
-          numbers: acct.numbers,
-          bank_account_number: acct.numbers['account'],
-          bank_routing_number: acct.numbers['routing'],
-          acct_subtype: acct.subtype,
-          acct_type: acct.type,
-          user_id: user_id,
-          public_token_id: public_token.id
-          )
-      end
-    end
-  end
-
-  # ----------------------------------------------
   # TRANSACTIONS-CREATE --------------------------
   # ----------------------------------------------
   def self.create_transactions(plaid_user_transactions, plaid_checking_id, user_id)
@@ -100,9 +55,9 @@ class Transaction < ActiveRecord::Base
     plaid_user_transactions.each do |transaction|
       # only save positive transactions and that are within a week old
 
-      # TODO :: DWOLLA TESTING
-      #if (transaction.amount > 0)
-      if (transaction.amount > 0) && (transaction.date.to_date > last_week_date)
+      # TODO :: TESTING
+      if (transaction.amount > 0)
+      # if (transaction.amount > 0) && (transaction.date.to_date > last_week_date)
         newtrans = Transaction.find_by(plaid_trans_id: transaction.id)
 
         vendor_address = transaction.location["address"]
@@ -121,11 +76,11 @@ class Transaction < ActiveRecord::Base
         if newtrans
           newtrans.update(
             plaid_trans_id: transaction.id,
-            account_id: transaction.account,
+            account_id: transaction.account_id,
             amount: transaction.amount,
             trans_name: transaction.name,
             plaid_cat_id: transaction.category_id.to_i,
-            plaid_cat_type: transaction.type["primary"],
+            plaid_cat_type: transaction.type[:primary].to_s,
             date: transaction.date.to_date,
 
             vendor_address: vendor_address,
@@ -136,19 +91,18 @@ class Transaction < ActiveRecord::Base
             vendor_lon: vendor_lon,
 
             pending: transaction.pending,
-            pending_transaction: transaction.pending_transaction,
-            name_score: transaction.score["name"],
+            name_score: transaction.score[:name],
             )
         # ELSE, create transaction
         else
-          if transaction.account == plaid_checking_id
+          if transaction.account_id == plaid_checking_id
             newtrans = Transaction.create(
               plaid_trans_id: transaction.id,
-              account_id: transaction.account,
+              account_id: transaction.account_id,
               amount: transaction.amount,
               trans_name: transaction.name,
               plaid_cat_id: transaction.category_id.to_i,
-              plaid_cat_type: transaction.type["primary"],
+              plaid_cat_type: transaction.type[:primary].to_s,
               date: transaction.date.to_date,
 
               vendor_address: vendor_address,
@@ -159,8 +113,7 @@ class Transaction < ActiveRecord::Base
               vendor_lon: vendor_lon,
 
               pending: transaction.pending,
-              pending_transaction: transaction.pending_transaction,
-              name_score: transaction.score["name"],
+              name_score: transaction.score[:name],
               user_id: user_id
               )
           end
@@ -174,40 +127,6 @@ class Transaction < ActiveRecord::Base
             newtrans.save
           end
         end
-      end
-    end
-  end
-
-  # ----------------------------------------------
-  # ACCOUNTS-UPDATE ------------------------------
-  # ----------------------------------------------
-  def self.update_accounts(user_id, public_token, milo_id)
-    user_accounts = Account.where(user_id: user_id).all
-    user_accounts.each do |acct|
-      account = Account.find_by(plaid_acct_id: acct._id)
-      if account
-        account.update(
-          available_balance: acct.balance.available,
-          current_balance: acct.balance.current,
-          name: acct.meta.name
-          )
-      else
-        account = Account.create(
-          plaid_acct_id: acct._id,
-          account_name: acct.meta.name,
-          account_number: acct.meta.number,
-          available_balance: acct.balance.available,
-          current_balance: acct.balance.current,
-          institution_type: acct.institution_type,
-          name: acct.meta.name,
-          numbers: acct.meta.number,
-          bank_account_number: acct.numbers['account'],
-          bank_routing_number: acct.numbers['routing'],
-          acct_subtype: acct.subtype,
-          acct_type: acct.type,
-          user_id: milo_id,
-          public_token_id: public_token.id
-          )
       end
     end
   end
@@ -231,7 +150,7 @@ class Transaction < ActiveRecord::Base
           amount: transaction.amount,
           trans_name: transaction.name,
           plaid_cat_id: transaction.category_id.to_i,
-          plaid_cat_type: transaction.type.primary,
+          plaid_cat_type: transaction.type[:primary].to_s,
           date: transaction.date.to_date,
 
           vendor_address: transaction.meta.location.address,
@@ -242,8 +161,7 @@ class Transaction < ActiveRecord::Base
           vendor_lon: vendor_lon,
 
           pending: transaction.pending,
-          pending_transaction: transaction.pending_transaction,
-          name_score: transaction.score.name,
+          name_score: transaction.score[:name],
           user_id: user_id
           )
       end

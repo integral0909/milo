@@ -44,8 +44,6 @@ class RegistrationsController < Devise::RegistrationsController
               notifier.ping "#{current_user.name} (#{current_user.email}) just signed up! Milo currently has #{user_count} users!"
             end
           end
-          # add user to Dwolla
-          Dwolla.create_user(current_user)
 
           # send welcome email
           if current_user.invited.nil?

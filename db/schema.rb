@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207165608) do
+ActiveRecord::Schema.define(version: 20161213130526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,12 +28,13 @@ ActiveRecord::Schema.define(version: 20161207165608) do
     t.string   "acct_subtype"
     t.string   "acct_type"
     t.integer  "user_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "public_token_id"
     t.integer  "checking_id"
     t.string   "bank_account_number"
     t.string   "bank_routing_number"
+    t.integer  "failed_verification_attempt"
   end
 
   create_table "businesses", force: :cascade do |t|
@@ -164,6 +165,8 @@ ActiveRecord::Schema.define(version: 20161207165608) do
     t.datetime "avatar_updated_at"
     t.integer  "account_balance"
     t.integer  "business_id"
+    t.boolean  "long_tail"
+    t.boolean  "bank_not_verified"
   end
 
   add_index "users", ["business_id"], name: "index_users_on_business_id", using: :btree

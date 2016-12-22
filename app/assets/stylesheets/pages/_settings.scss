@@ -54,13 +54,22 @@ nav.setting-subheader {
     font-size: 0.75em;
   }
 
+  a.ca-verify {
+    float: right;
+    font-family: 'Futura Bold';
+    font-size: 0.75em;
+    line-height: 1;
+    margin: 18px 32px 18px 0;
+    text-transform: uppercase;
+  }
+
   a.ca-remove {
     color: #8B999F;
     float: right;
     font-family: 'Futura Bold';
     font-size: 0.75em;
     line-height: 1;
-    padding: 16px 0;
+    margin: 16px 0;
     text-transform: uppercase;
 
     i.fa {
@@ -72,5 +81,15 @@ nav.setting-subheader {
       color: #FF5455;
       text-decoration: none;
     }
+  }
+
+  .ca-verify-message {
+    background: #4A90E2;
+    border-radius: 4px;
+    color: #FFF;
+    font-size: 0.875em;
+    line-height: 1.4;
+    margin: 16px 0 0;
+    padding: 12px;
   }
 }
