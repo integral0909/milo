@@ -40,7 +40,7 @@ class TokenData < ActiveRecord::Base
   def to_fresh_token
     if expired?
       # if the token data is expired either refresh the token (account token) or get a new token (app token)
-      account_id? ? $dwolla.auths.refresh(self) : $dwolla.auths.client
+      $dwolla.auths.client
     else
       # if the token is not expired just convert it to a DwollaV2::Token
       $dwolla.tokens.new(self)

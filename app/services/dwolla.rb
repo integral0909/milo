@@ -21,8 +21,8 @@ module Dwolla
         :email => user.email
       }
 
-      # Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-      dwolla_customer_url = TokenConcern.account_token.post "customers", request_body
+      Dwolla.set_dwolla_token
+      dwolla_customer_url = @dwolla_app_token.post "customers", request_body
 
       # Add dwolla customer URL to the user
       user = User.find(user.id)
@@ -54,8 +54,8 @@ module Dwolla
         name: funding_account.name,
         verified: (user.long_tail ? false : true)
       }
-
-      funding_source = TokenConcern.account_token.post "#{dwolla_customer_url}/funding-sources", request_body
+      Dwolla.set_dwolla_token
+      funding_source = @dwolla_app_token.post "#{dwolla_customer_url}/funding-sources", request_body
 
       # Add the funding source to the user
       user = User.find(user.id)
@@ -75,7 +75,8 @@ module Dwolla
 
   def self.init_micro_deposits(user, user_checking, funding_account)
     begin
-      TokenConcern.account_token.post "#{user.dwolla_funding_source}/micro-deposits"
+      Dwolla.set_dwolla_token
+      @dwolla_app_token.post "#{user.dwolla_funding_source}/micro-deposits"
 
       BankingMailer.longtail_account_added(user, funding_account).deliver_now
     rescue => e
@@ -99,7 +100,8 @@ module Dwolla
       }
 
       # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
-      TokenConcern.account_token.post "#{user.dwolla_funding_source}/micro-deposits", request_body
+      Dwolla.set_dwolla_token
+      @dwolla_app_token.post "#{user.dwolla_funding_source}/micro-deposits", request_body
 
       User.bank_verified(user)
     rescue =>  e
@@ -206,12 +208,13 @@ module Dwolla
           :tech_fee_charged => @charge_tech_fee
         }
       }
-
-      transfer = TokenConcern.account_token.post "transfers", request_body
+      Dwolla.set_dwolla_token
+      transfer = @dwolla_app_token.post "transfers", request_body
       current_transfer_url = transfer.headers[:location]
 
       # Get the status of the current transfer
-      transfer_status = TokenConcern.account_token.get current_transfer_url
+      Dwolla.set_dwolla_token
+      transfer_status = @dwolla_app_token.get current_transfer_url
       current_transfer_status = transfer_status.status
 
       # Save transfer data
@@ -238,7 +241,8 @@ module Dwolla
       request_body = {
         :removed => true
       }
-      TokenConcern.account_token.post user.dwolla_funding_source, request_body
+      Dwolla.set_dwolla_token
+      @dwolla_app_token.post user.dwolla_funding_source, request_body
 
       d_user = User.find(user.id)
       d_user.dwolla_funding_source = ''
@@ -254,6 +258,11 @@ module Dwolla
       puts e
     #  send account removal failure email
     end
+  end
+
+  # reset the dwolla app token
+  def self.set_dwolla_token
+    @dwolla_app_token.nil? ? @dwolla_app_token = $dwolla.auths.client : @dwolla_app_token
   end
 
 end
