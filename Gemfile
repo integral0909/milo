@@ -52,9 +52,7 @@ gem 'phonelib'
 
 # Intercom
 gem 'intercom-rails'
-
-# Argyle for Plaid API
-gem 'argyle'
+# Plaid API wrapper
 gem 'plaid'
 
 gem 'pry-rails'

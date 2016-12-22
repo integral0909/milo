@@ -25,6 +25,12 @@ class CheckingsController < ApplicationController
 
     respond_to do |format|
       if @checking.save
+
+        # redirect to number form if user has long_tail account
+        if @user.long_tail
+          redirect_to signup_bank_verify_path and return
+        end
+
         format.html { redirect_to signup_on_demand_path, notice: 'Checking was successfully created.' }
         format.json { render :show, status: :created, location: @checking }
       else

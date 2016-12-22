@@ -21,8 +21,8 @@ module Dwolla
         :email => user.email
       }
 
-      # Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-      dwolla_customer_url = TokenConcern.account_token.post "customers", request_body
+      Dwolla.set_dwolla_token
+      dwolla_customer_url = @dwolla_app_token.post "customers", request_body
 
       # Add dwolla customer URL to the user
       user = User.find(user.id)
@@ -51,21 +51,67 @@ module Dwolla
         routingNumber: funding_account.bank_routing_number,
         accountNumber: funding_account.bank_account_number,
         type: funding_account.acct_subtype,
-        name: funding_account.name
+        name: funding_account.name,
+        verified: (user.long_tail ? false : true)
       }
-
-      funding_source = TokenConcern.account_token.post "#{dwolla_customer_url}/funding-sources", request_body
+      Dwolla.set_dwolla_token
+      funding_source = @dwolla_app_token.post "#{dwolla_customer_url}/funding-sources", request_body
 
       # Add the funding source to the user
       user = User.find(user.id)
       user.dwolla_funding_source = funding_source.headers[:location]
       user.save!
 
-      BankingMailer.account_added(user, funding_account).deliver_now
+      if user.long_tail
+        Dwolla.init_micro_deposits(user, user_checking, funding_account)
+      else
+        BankingMailer.account_added(user, funding_account).deliver_now
+      end
     rescue => e
-
       # EMAIL: send support the error from Dwolla
       SupportMailer.connect_funding_source_failed(user, user_checking, funding_account, e).deliver_now
+    end
+  end
+
+  def self.init_micro_deposits(user, user_checking, funding_account)
+    begin
+      Dwolla.set_dwolla_token
+      @dwolla_app_token.post "#{user.dwolla_funding_source}/micro-deposits"
+
+      BankingMailer.longtail_account_added(user, funding_account).deliver_now
+    rescue => e
+      # EMAIL: send support the error from Dwolla
+      SupportMailer.connect_funding_source_failed(user, user_checking, funding_account, e).deliver_now
+    end
+  end
+
+  # confirm micro-deposits for long_tail accounts
+  def self.confirm_micro_deposits(deposit1, deposit2, user, account)
+    begin
+      request_body = {
+        :amount1 => {
+          :value => deposit1,
+          :currency => "USD"
+        },
+        :amount2 => {
+          :value => deposit2,
+          :currency => "USD"
+        }
+      }
+
+      # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby
+      Dwolla.set_dwolla_token
+      @dwolla_app_token.post "#{user.dwolla_funding_source}/micro-deposits", request_body
+
+      User.bank_verified(user)
+    rescue =>  e
+      # status will be 400 if the deposits are incorrect
+      if e.status == 400
+        # if user inputs wrong deposit amounts
+        Account.micro_deposit_verification_failed(account, user)
+      end
+      puts "-" * 50
+      puts e
     end
   end
 
@@ -162,12 +208,13 @@ module Dwolla
           :tech_fee_charged => @charge_tech_fee
         }
       }
-
-      transfer = TokenConcern.account_token.post "transfers", request_body
+      Dwolla.set_dwolla_token
+      transfer = @dwolla_app_token.post "transfers", request_body
       current_transfer_url = transfer.headers[:location]
 
       # Get the status of the current transfer
-      transfer_status = TokenConcern.account_token.get current_transfer_url
+      Dwolla.set_dwolla_token
+      transfer_status = @dwolla_app_token.get current_transfer_url
       current_transfer_status = transfer_status.status
 
       # Save transfer data
@@ -186,6 +233,36 @@ module Dwolla
       # Email support that there was an issue when withdrawing the round up
       SupportMailer.support_transfer_failed_notice(user, roundup_amount, e).deliver_now
     end
+  end
+
+  # Remove funding source from Dwolla
+  def self.remove_funding_source(user)
+    begin
+      request_body = {
+        :removed => true
+      }
+      Dwolla.set_dwolla_token
+      @dwolla_app_token.post user.dwolla_funding_source, request_body
+
+      d_user = User.find(user.id)
+      d_user.dwolla_funding_source = ''
+      d_user.save!
+
+      # Find the checking account associated with the user
+      user_checking = Checking.find_by_user_id(user.id)
+      # Get the info from the Account to add a funding source to Dwolla
+      funding_account = Account.find_by_plaid_acct_id(user_checking.plaid_acct_id)
+
+      BankingMailer.bank_account_removed(user, funding_account).deliver_now
+    rescue =>  e
+      puts e
+    #  send account removal failure email
+    end
+  end
+
+  # reset the dwolla app token
+  def self.set_dwolla_token
+    @dwolla_app_token.nil? ? @dwolla_app_token = $dwolla.auths.client : @dwolla_app_token
   end
 
 end
