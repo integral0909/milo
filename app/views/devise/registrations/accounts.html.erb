@@ -16,7 +16,7 @@
               <%= link_to "Verify", new_user_account_path(user_id: current_user.id), class: "ca-verify", remote: true %>
             <% end %>
             <div class="ca-name"><%= @account.account_name %></div>
-            <div class="ca-number">XXXXXX <%= @account.bank_account_number.last(4) %></div>
+            <% if @account.bank_account_number %><div class="ca-number">XXXXXX <%= @account.bank_account_number.last(4) %></div><% end %>
             <% if @user.bank_not_verified %>
               <div class="ca-verify-message">In 1-3 business days, we'll make two deposits, under 10¢, into the account you provided. Please note the amounts, return to this page, and click "Verify" to enter the two amounts and finish connecting your account.</div>
             <% end %>

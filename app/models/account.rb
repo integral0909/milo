@@ -65,7 +65,7 @@ class Account < ActiveRecord::Base
           public_token_id: public_token.id
           )
       # ELSE, create account
-      elsif acct.subtype && acct.numbers && acct.meta
+      elsif acct.subtype && acct.numbers && !acct.numbers.empty?  && acct.meta
         Account.create(
           plaid_acct_id: acct.id,
           account_name: acct.meta["name"],
