@@ -62,5 +62,6 @@ Rails.application.routes.draw do
   # Plaid Link to Connect Bank Account
   post '/users/:id/add_account', to: 'plaidapi#add_account'
   patch '/users/:id/update_accounts', to: 'plaidapi#update_accounts'
+  patch '/users/withdraw_funds', to: 'user#withdraw_funds'
 
 end

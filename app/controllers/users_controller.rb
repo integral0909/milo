@@ -34,6 +34,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def withdraw_funds
+    # Check if user has the amount requested_amount
+    
+    begin
+      # initiate transfer of funds to user
+      Dwolla.send_funds_to_user(@user, params['requested_amount'])
+      # decrease the requested amount from the user's account balance
+      @user.decrease_account_balance(params['requested_amount'])
+    rescue => e
+      flash[:alert] = e
+      redirect_to :back
+    end
+  end
+
   private
 
   def user_params

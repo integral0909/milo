@@ -260,6 +260,35 @@ module Dwolla
     end
   end
 
+  def self.send_funds_to_user(user, requested_amount)
+    begin
+      transfer_request = {
+        :_links => {
+          :source => {
+            :href => "https://api-uat.dwolla.com/accounts/#{ENV["DWOLLA_ACCOUNT_ID"]}"
+          },
+          :destination => {
+            :href => user.dwolla_id
+          }
+        },
+        :amount => {
+          :currency => "USD",
+          :value => requested_amount
+        },
+        :metadata => {
+          :customerId => user.id,
+        }
+      }
+
+      Dwolla.set_dwolla_token
+      # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
+      transfer = account_token.post "transfers", transfer_request
+      # send email to user about funds being transfered to their account.
+    rescue
+
+    end
+  end
+
   # reset the dwolla app token
   def self.set_dwolla_token
     @dwolla_app_token.nil? ? @dwolla_app_token = $dwolla.auths.client : @dwolla_app_token

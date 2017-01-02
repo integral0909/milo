@@ -1,0 +1,25 @@
+<div class="modal fade" id="withdrawFunds" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Create Goal</h4>
+      </div>
+      <%= form_for (@user), :url => {:controller => "user", :action => "withdraw_funds"}, :html => { :method => :patch} do |f| %>
+        <div class="modal-body">
+          <%= form_errors @user %>
+          <fieldset class="form-group">
+            <label>Amount</label>
+            <%= f.number_field :requested_amount, class: "form-control", placeholder: "$", require: true, min: 1, max:"#{@account_balance}", step:"any" %>
+          </fieldset>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="button -small -inline" data-dismiss="modal">Close</button>
+          <%= f.submit "Withdraw", class: "button -blue -small -inline" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
