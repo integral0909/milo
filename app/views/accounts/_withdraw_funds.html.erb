@@ -5,14 +5,15 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Create Goal</h4>
+        <h4 class="modal-title" id="myModalLabel">Withdraw Savings</h4>
       </div>
-      <%= form_for (@user), :url => {:controller => "user", :action => "withdraw_funds"}, :html => { :method => :patch} do |f| %>
+      <%= form_for (@user), :url => {:controller => "users", :action => "withdraw_funds"}, :html => { :method => :patch} do |f| %>
         <div class="modal-body">
           <%= form_errors @user %>
           <fieldset class="form-group">
             <label>Amount</label>
             <%= f.number_field :requested_amount, class: "form-control", placeholder: "$", require: true, min: 1, max:"#{@account_balance}", step:"any" %>
+            <div>Max Available: $<%= @account_balance %></div>
           </fieldset>
         </div>
         <div class="modal-footer">

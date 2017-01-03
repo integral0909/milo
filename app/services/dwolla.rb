@@ -73,6 +73,10 @@ module Dwolla
     end
   end
 
+  # ----------------------------------------------
+  # INIT-MICRO-DEPOSITS --------------------------
+  # ----------------------------------------------
+  # send micro-deposits to the user for account confirmation
   def self.init_micro_deposits(user, user_checking, funding_account)
     begin
       Dwolla.set_dwolla_token
@@ -85,6 +89,9 @@ module Dwolla
     end
   end
 
+  # ----------------------------------------------
+  # CONFIRM-MICRO-DEPOSITS -----------------------
+  # ----------------------------------------------
   # confirm micro-deposits for long_tail accounts
   def self.confirm_micro_deposits(deposit1, deposit2, user, account)
     begin
@@ -235,6 +242,9 @@ module Dwolla
     end
   end
 
+  # ----------------------------------------------
+  # REMOVE-FUNDING-SOURCE ------------------------
+  # ----------------------------------------------
   # Remove funding source from Dwolla
   def self.remove_funding_source(user)
     begin
@@ -260,12 +270,16 @@ module Dwolla
     end
   end
 
+  # ----------------------------------------------
+  # SEND-FUNDS-TO-USER ---------------------------
+  # ----------------------------------------------
+  # send funds the user requested to withdraw
   def self.send_funds_to_user(user, requested_amount)
     begin
       transfer_request = {
         :_links => {
           :source => {
-            :href => "https://api-uat.dwolla.com/accounts/#{ENV["DWOLLA_ACCOUNT_ID"]}"
+            :href => "https://api-uat.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE"]}"
           },
           :destination => {
             :href => user.dwolla_id
@@ -276,16 +290,15 @@ module Dwolla
           :value => requested_amount
         },
         :metadata => {
-          :customerId => user.id,
+          :customerId => user.id
         }
       }
-
       Dwolla.set_dwolla_token
       # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
-      transfer = account_token.post "transfers", transfer_request
+      @dwolla_app_token.post "transfers", transfer_request
       # send email to user about funds being transfered to their account.
-    rescue
-
+    rescue => e
+      # send email to dev team about failed transfer to user
     end
   end
 

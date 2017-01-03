@@ -4,6 +4,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
+  # for changing input string to currency
+  include ActionView::Helpers::NumberHelper
 
   # ==============================================
   # ACTIONS ======================================
@@ -35,15 +37,23 @@ class UsersController < ApplicationController
   end
 
   def withdraw_funds
+    # convert amount requested to cents
+    @withdraw_amount = (params[:user][:requested_amount].to_f * 100).round(0)
     # Check if user has the amount requested_amount
-    
-    begin
-      # initiate transfer of funds to user
-      Dwolla.send_funds_to_user(@user, params['requested_amount'])
-      # decrease the requested amount from the user's account balance
-      @user.decrease_account_balance(params['requested_amount'])
-    rescue => e
-      flash[:alert] = e
+    if @withdraw_amount <= @user.account_balance
+      begin
+        # initiate transfer of funds to user
+        Dwolla.send_funds_to_user(@user, number_to_currency(params[:user][:requested_amount], unit:""))
+        # decrease the requested amount from the user's account balance
+        # @user.decrease_account_balance(params['requested_amount'])
+        flash[:success] = "Your savings are on thier way!"
+        redirect_to root_path
+      rescue => e
+        flash[:alert] = e
+        redirect_to :back
+      end
+    else
+      flash[:alert] = "Looks like the amount requested was more than your account balance."
       redirect_to :back
     end
   end
