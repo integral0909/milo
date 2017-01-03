@@ -29,7 +29,7 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
         user = User.find(ck.user_id)
 
         # run weekly_roundup for all users with checking accounts
-        if user
+        if user && !user.pause_savings
           Dwolla.weekly_roundup(user, ck)
         end
 
