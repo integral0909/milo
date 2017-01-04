@@ -276,6 +276,8 @@ module Dwolla
   # send funds the user requested to withdraw
   def self.send_funds_to_user(user, requested_amount)
     begin
+      current_date = Date.today
+
       transfer_request = {
         :_links => {
           :source => {
@@ -295,7 +297,21 @@ module Dwolla
       }
       Dwolla.set_dwolla_token
       # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
-      @dwolla_app_token.post "transfers", transfer_request
+      transfer = @dwolla_app_token.post "transfers", transfer_request
+
+      current_transfer_url = transfer.headers[:location]
+
+      # Get the status of the current transfer
+      Dwolla.set_dwolla_token
+      transfer_status = @dwolla_app_token.get current_transfer_url
+      current_transfer_status = transfer_status.status
+
+      # Save the withdraw as a transfer. Params are the user, transfer_url, transfer_status, roundup_amount, roundup_count, transfer_type, current_date, tech_fee_charged
+      Transfer.create_transfers(user, current_transfer_url, current_transfer_status, requested_amount, "", "withdraw", current_date, false)
+
+      # decrease the requested amount from the user's account balance
+      User.decrease_account_balance(user, requested_amount)
+
       # send email to user about funds being transfered to their account.
     rescue => e
       # send email to dev team about failed transfer to user

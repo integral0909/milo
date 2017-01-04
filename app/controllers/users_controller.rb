@@ -44,8 +44,7 @@ class UsersController < ApplicationController
       begin
         # initiate transfer of funds to user
         Dwolla.send_funds_to_user(@user, number_to_currency(params[:user][:requested_amount], unit:""))
-        # decrease the requested amount from the user's account balance
-        # @user.decrease_account_balance(params['requested_amount'])
+        
         flash[:success] = "Your savings are on thier way!"
         redirect_to root_path
       rescue => e
