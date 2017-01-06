@@ -6,6 +6,7 @@
 #  name                             :string
 #  contribution                     :decimal          precision 8, scale 2
 #  frequency                        :string
+#  owner                            :integer
 #
 
 # ================================================
@@ -22,5 +23,12 @@ class Business < ActiveRecord::Base
   # VALIDATIONS ----------------------------------
   # ----------------------------------------------
   validates :name, presence: true
+
+  def self.add_business_owner(user, business_id)
+    biz = Business.find(business_id)
+    biz.owner = user.id
+
+    biz.save!
+  end
 
 end

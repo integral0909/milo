@@ -32,6 +32,10 @@ class RegistrationsController < Devise::RegistrationsController
         if resource.active_for_authentication?
           # set_flash_message! :notice, :signed_up
           sign_up(resource_name, resource)
+          # add user_id as business owner
+          if resource.business_id
+            Business.add_business_owner(current_user, resource.business_id)
+          end
           # Slack Notification for Sign Up
           if Rails.env == "production"
             if current_user.business
