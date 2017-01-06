@@ -37,6 +37,14 @@ ActiveRecord::Schema.define(version: 20170102182501) do
     t.integer  "failed_verification_attempt"
   end
 
+  create_table "businesses", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "contribution", precision: 8, scale: 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "frequency"
+  end
+
   create_table "checkings", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "plaid_acct_id"
@@ -159,10 +167,23 @@ ActiveRecord::Schema.define(version: 20170102182501) do
     t.integer  "account_balance"
     t.boolean  "long_tail"
     t.boolean  "bank_not_verified"
+    t.integer  "business_id"
+    t.string   "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit"
+    t.integer  "invited_by_id"
+    t.string   "invited_by_type"
+    t.integer  "invitations_count",      default: 0
     t.boolean  "pause_savings"
   end
 
+  add_index "users", ["business_id"], name: "index_users_on_business_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
+  add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
+  add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 

@@ -44,15 +44,15 @@ class UsersController < ApplicationController
       begin
         # initiate transfer of funds to user
         Dwolla.send_funds_to_user(@user, number_to_currency(params[:user][:requested_amount], unit:""))
-        
-        flash[:success] = "Your savings are on thier way!"
+
+        flash[:success] = "Your savings are on the way!"
         redirect_to root_path
       rescue => e
         flash[:alert] = e
         redirect_to :back
       end
     else
-      flash[:alert] = "Looks like the amount requested was more than your account balance."
+      flash[:alert] = "The amount requested was more than your account balance."
       redirect_to :back
     end
   end
