@@ -55,7 +55,13 @@
           <div class="row">
             <div class="col-md-12">
               <div class="milo-card account-value">
-                <div class="mc-title">Account Value</div>
+                <div class="mc-title">Account Value
+                  <span style="float:right">
+                    <% if @account_balance %>
+                        <a class="mc-edit" data-toggle="modal" data-target="#withdrawFunds">Withdraw</a>
+                    <% end %>
+                  </span>
+                </div>
                 <div class="av-total">$<%= @account_balance ? @account_balance : "0.00" %></div>
               </div>
             </div>
@@ -147,4 +153,6 @@
   <% if @current_goal %>
     <%= render 'goals/modal_edit_goal' %>
   <% end %>
+  <!-- load withdraw funds modal -->
+  <%= render 'accounts/withdraw_funds' %>
 <% end %>

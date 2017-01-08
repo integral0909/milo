@@ -42,6 +42,18 @@ class BankingMailer < ApplicationMailer
   end
 
   # ----------------------------------------------
+  # WITHDRAW-START -------------------------------
+  # ----------------------------------------------
+  # email to send user when the Dwolla transfer starts
+  def withdraw_start(user, roundup_amount, funding_account)
+    puts "withdraw started"
+   @roundup_amount = roundup_amount
+   @funding_account = find_account(funding_account)
+   @user = user
+   mail(to: @user.email, subject: 'Your Milo withdrawal has started.')
+  end
+
+  # ----------------------------------------------
   # TRANSFER-SUCCESS -----------------------------
   # ----------------------------------------------
   # email to send user when the transfer was successful

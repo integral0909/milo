@@ -17,6 +17,17 @@ class SupportMailer < ApplicationMailer
   end
 
   # ----------------------------------------------
+  # USER-WITHDRAW-FAILED -------------------------
+  # ----------------------------------------------
+  # email to send support when the transfer fails
+  def user_withdraw_failed(user, roundup_amount, error)
+   @roundup_amount = roundup_amount
+   @error = error
+   @user = user
+   mail(to: 'dev@milosavings.com', subject: "User Withdraw Failed for #{@user.email}")
+  end
+
+  # ----------------------------------------------
   # SUPPORT-DWOLLA-FAILED-NOTICE ---------------
   # ----------------------------------------------
   # email to send support when the transfer fails
