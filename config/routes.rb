@@ -4,18 +4,24 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   # Devise
-  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords' }
+  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords' }, :skip => [:sessions, :registrations]
     resources :users, :only => [:show] do
     resources :transactions, only: [:index, :show, :edit, :update]
     resources :accounts, only: [:index, :new, :update]
   end
 
   devise_scope :user do
+    # User Sessions
+    get 'login', to: "sessions#new", as: :new_user_session
+    post 'login', to: "sessions#create", as: :user_session
+    delete 'logout', to: "sessions#destroy", as: :destroy_user_session
     # User Settings
     get 'settings', to: 'registrations#edit', as: :settings
     get 'settings/accounts', to: 'registrations#accounts', as: :settings_accounts
     get 'settings/security', to: 'registrations#security', as: :settings_security
     # User Sign Up
+    get 'signup', to: "registrations#new", as: :new_user_registration
+    post 'signup', to: "registrations#create", as: :user_registration
     get 'signup/phone', to: 'registrations#phone', as: :signup_phone
     get 'signup/phone_confirm', to: 'registrations#phone_confirm', as: :signup_phone_confirm
     get 'signup/on_demand', to: 'registrations#on_demand', as: :signup_on_demand
