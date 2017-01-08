@@ -179,8 +179,8 @@ module Dwolla
   def self.withdraw_roundups(user, roundup_amount, total_transactions, funding_account, current_date)
     @charge_tech_fee = false
 
-    # if it's the first round up of the month and the user is not an admin, charge the tech fee.
-    @charge_tech_fee = true  if ((current_date.day <= 7) && !user.admin)
+    # if it's the first round up of the month, the user is not an admin and the user is not associated with a business, charge the tech fee.
+    @charge_tech_fee = true  if ((current_date.day <= 7) && !user.admin && user.business_id.nil? )
 
     BankingMailer.transfer_start(user, roundup_amount, funding_account, @charge_tech_fee).deliver_now
     begin
