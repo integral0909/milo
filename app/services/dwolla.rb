@@ -73,6 +73,10 @@ module Dwolla
     end
   end
 
+  # ----------------------------------------------
+  # INIT-MICRO-DEPOSITS --------------------------
+  # ----------------------------------------------
+  # send micro-deposits to the user for account confirmation
   def self.init_micro_deposits(user, user_checking, funding_account)
     begin
       Dwolla.set_dwolla_token
@@ -85,6 +89,9 @@ module Dwolla
     end
   end
 
+  # ----------------------------------------------
+  # CONFIRM-MICRO-DEPOSITS -----------------------
+  # ----------------------------------------------
   # confirm micro-deposits for long_tail accounts
   def self.confirm_micro_deposits(deposit1, deposit2, user, account)
     begin
@@ -235,6 +242,9 @@ module Dwolla
     end
   end
 
+  # ----------------------------------------------
+  # REMOVE-FUNDING-SOURCE ------------------------
+  # ----------------------------------------------
   # Remove funding source from Dwolla
   def self.remove_funding_source(user)
     begin
@@ -257,6 +267,56 @@ module Dwolla
     rescue =>  e
       puts e
     #  send account removal failure email
+    end
+  end
+
+  # ----------------------------------------------
+  # SEND-FUNDS-TO-USER ---------------------------
+  # ----------------------------------------------
+  # send funds the user requested to withdraw
+  def self.send_funds_to_user(user, requested_amount)
+    begin
+      current_date = Date.today
+
+      transfer_request = {
+        :_links => {
+          :source => {
+            :href => "https://api-uat.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE"]}"
+          },
+          :destination => {
+            :href => user.dwolla_id
+          }
+        },
+        :amount => {
+          :currency => "USD",
+          :value => requested_amount
+        },
+        :metadata => {
+          :customerId => user.id
+        }
+      }
+      Dwolla.set_dwolla_token
+      # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
+      transfer = @dwolla_app_token.post "transfers", transfer_request
+
+      current_transfer_url = transfer.headers[:location]
+
+      # Get the status of the current transfer
+      Dwolla.set_dwolla_token
+      transfer_status = @dwolla_app_token.get current_transfer_url
+      current_transfer_status = transfer_status.status
+
+      # Save the withdraw as a transfer. Params are the user, transfer_url, transfer_status, roundup_amount, roundup_count, transfer_type, current_date, tech_fee_charged
+      Transfer.create_transfers(user, current_transfer_url, current_transfer_status, requested_amount, "", "withdraw", current_date, false)
+
+      # decrease the requested amount from the user's account balance
+      User.decrease_account_balance(user, requested_amount)
+      # send email to user about funds being transfered to their account.
+      funding_account  = Checking.find_by_user_id(user.id)
+      BankingMailer.withdraw_start(user, requested_amount, funding_account).deliver_now
+    rescue => e
+      # send email to dev team about failed transfer to user
+      SupportMailer.user_withdraw_failed(user, requested_amount, e).deliver_now
     end
   end
 
