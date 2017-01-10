@@ -1,5 +1,4 @@
 desc "This task will calculate all users transactions for the past week and send an email"
-# TODO: Add ability to run task for 1 user
 # For all users: rake weekly_roundup
 # For specific user:  rake weekly_roundup['USER_ID']
 task :weekly_roundup, [:user_id] => :environment do |t, args|
@@ -75,4 +74,39 @@ task :create_weekly_transactions, [:user_id] => :environment do |t, args|
     puts "-"*40
     puts "update complete"
   end
+end
+
+desc "This task will charge businesses the monthly tech fee"
+# For all users: rake charge_biz_tech_fee
+# For specific user:  rake charge_biz_tech_fee['BUSINESS_ID']
+task :charge_biz_tech_fee, [:biz_id] => :environment do |t, args|
+  current_date = Date.today
+  # if the first round up of the month, count how many tech fees were collected
+  day = Time.now
+
+  # if day.saturday? && (current_date.day <= 7)
+    include ActionView::Helpers::NumberHelper
+
+    puts "Charging monthly fee for businesses..."
+    if !args.biz_id.blank?
+      # run weekly_roundup for the user
+      biz = Business.find(args.biz_id)
+      user = User.find(biz.owner)
+      ck = Checking.find_by_user_id(user.id)
+      # Charge biz tech fee for all linked employees
+      Dwolla.charge_biz_tech_fee(biz, user, ck)
+    else
+      Business.all.each do |biz|
+        user = User.find(biz.owner)
+        ck = Checking.find_by_user_id(user.id)
+        # run create_weekly_transactions for all users with checking accounts
+        if user && ck
+          Dwolla.charge_biz_tech_fee(biz, user, ck)
+        end
+      end
+    end
+
+    puts "-"*40
+    puts "Charge complete"
+  # end
 end

@@ -265,4 +265,51 @@ module Dwolla
     @dwolla_app_token.nil? ? @dwolla_app_token = $dwolla.auths.client : @dwolla_app_token
   end
 
+  def self.charge_biz_tech_fee(biz, user, checking)
+    employee_count = User.where(business_id: biz.id).count
+    fee_amount = number_to_currency((employee_count * 3), unit:"")
+
+    begin
+      request_body = {
+        :_links => {
+          :source => {
+            # :href => user.dwolla_funding_source
+          },
+          :destination => {
+            :href => "https://api-uat.dwolla.com/accounts/#{ENV["DWOLLA_ACCOUNT_ID"]}"
+          }
+        },
+        :amount => {
+          :currency => "USD",
+          :value => fee_amount
+        },
+        :metadata => {
+          :biz_id => biz.id,
+        }
+      }
+
+      # Create Dwolla token and make the transfer request
+      Dwolla.set_dwolla_token
+      transfer = @dwolla_app_token.post "transfers", request_body
+      current_transfer_url = transfer.headers[:location]
+
+      # Get the status of the current transfer
+      Dwolla.set_dwolla_token
+      transfer_status = @dwolla_app_token.get current_transfer_url
+      current_transfer_status = transfer_status.status
+
+      # Save transfer data
+      Transfer.create_transfers(user, current_transfer_url, current_transfer_status, fee_amount, "", "deposit", Date.today, true)
+
+      puts "$#{fee_amount}"
+
+      # Email the user that the tech fee was successfully charged
+      BankingMailer.biz_tech_fee_success(user, fee_amount).deliver_now
+    rescue => e
+      # Email the user that there was an issue when withdrawing the round up
+      BankingMailer.biz_tech_fee_failed(user, fee_amount).deliver_now
+      # Email support that there was an issue when withdrawing the round up
+      SupportMailer.support_transfer_failed_notice(user, fee_amount, e).deliver_now
+    end
+  end
 end
