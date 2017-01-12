@@ -86,6 +86,28 @@ class BankingMailer < ApplicationMailer
   end
 
   # ----------------------------------------------
+  # BIZ-TECH-FEE-SUCCESS -------------------------
+  # ----------------------------------------------
+  # email to send user when the transfer was successful
+  def biz_tech_fee_success(user, fee_charged)
+    puts "Biz tech fee charged"
+   @fee_charged = fee_charged
+   @user = user
+   mail(to: @user.email, subject: 'Automatic Transfer Successful for Milo')
+  end
+
+  # ----------------------------------------------
+  # BIZ-TECH-FEE-FAILED -------------------------
+  # ----------------------------------------------
+  # email to send user when the transfer was successful
+  def biz_tech_fee_failed(user, fee_charged)
+    puts "Biz tech fee charged"
+   @fee_charged = fee_charged
+   @user = user
+   mail(to: @user.email, subject: 'Automatic Transfer Successful for Milo')
+  end
+
+  # ----------------------------------------------
   # TRANSFER-START-EMPLOYER ----------------------
   # ----------------------------------------------
   # TODO :: email to send employer when transfer has started for employees.

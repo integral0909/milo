@@ -20,7 +20,8 @@ class EmployeesController < ApplicationController
   def destroy
     @employee = User.find(params[:id])
     @employee.business_id = nil
-    @employee.save
+    # skip validations incase there is an issue on the user object (ex: they haven't fully signed up)
+    @employee.save(validate: false)
 
     respond_to do |format|
       format.js
