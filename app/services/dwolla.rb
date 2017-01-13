@@ -208,6 +208,8 @@ module Dwolla
           :tech_fee_charged => @charge_tech_fee
         }
       }
+
+
       Dwolla.set_dwolla_token
       transfer = @dwolla_app_token.post "transfers", request_body
       current_transfer_url = transfer.headers[:location]

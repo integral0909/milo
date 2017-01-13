@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: businesses
 #
 #  id                               :integer          not null, primary key
 #  name                             :string
