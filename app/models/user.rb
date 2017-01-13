@@ -32,6 +32,7 @@
 #  account_balance                  :integer
 #  long_tail                        :boolean
 #  bank_not_verified                :boolean
+#  employer_contribution            :integer
 #
 
 # ================================================
@@ -112,13 +113,18 @@ class User < ActiveRecord::Base
     # Save the roundup amount in cents
     # Check if the user is associated with a business
     if !user.business_id.nil?
-      add_contribution(user, amount)
+      self.add_employer_contribution(user, amount)
 
       if !user.account_balance.nil?
+        # This will change based on employer contribution settings
         user.account_balance += (amount.to_f * 200).round(0)
       else
         user.account_balance = (amount.to_f * 200).round(0)
       end
+
+      # Add employer contribution amount to the user
+      !user.employer_contribution.nil? ? user.employer_contribution += (amount.to_f * 100).round(0) : user.employer_contribution = (amount.to_f * 100).round(0)
+
     else
       !user.account_balance.nil? ? user.account_balance += (amount.to_f * 100).round(0) : user.account_balance = (amount.to_f * 100).round(0)
     end
@@ -159,7 +165,13 @@ class User < ActiveRecord::Base
   private
 
   # NOTE: this will get much more complex based on contribution max and frequency. Will probably move to Contribution Module.
-  def add_employer_contribution(user, amount)
+
+  # ----------------------------------------------
+  # add employer contribution to business
+  # user: object
+  # amount: integer
+  # ----------------------------------------------
+  def self.add_employer_contribution(user, amount)
     biz = Business.find(user.business_id)
 
     # add amount to current_contribution to pull when all round ups are finished

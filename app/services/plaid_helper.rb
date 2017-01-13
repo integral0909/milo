@@ -41,6 +41,7 @@ module PlaidHelper
   # return : array of transaction objects for the view
   def self.current_week_transactions(user, checking)
     if user && checking
+      begin
       # set date to beginning of the week
       sunday = set_sunday
 
@@ -56,6 +57,9 @@ module PlaidHelper
       transactions_for_view = current_transactions.map { |tr| {roundup: round_transaction(tr.amount), trans_name: tr.name, amount: tr.amount} }
 
       return transactions_for_view
+    rescue
+      
+    end
     end
   end
 
