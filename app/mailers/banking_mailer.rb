@@ -127,7 +127,7 @@ class BankingMailer < ApplicationMailer
   end
 
   # ----------------------------------------------
-  # Email for successful business contribution withdraw
+  # Email for failed business contribution withdraw
   # ----------------------------------------------
   def biz_contributions_failed(biz, contribution)
    @biz = biz
