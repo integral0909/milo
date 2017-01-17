@@ -262,11 +262,7 @@ module Dwolla
     end
   end
 
-  # reset the dwolla app token
-  def self.set_dwolla_token
-    @dwolla_app_token.nil? ? @dwolla_app_token = $dwolla.auths.client : @dwolla_app_token
-  end
-
+  # Charge tech fee for all employees associated with the business
   def self.charge_biz_tech_fee(biz, user, checking)
     employee_count = User.where(business_id: biz.id).count
     fee_amount = number_to_currency((employee_count * 3), unit:"")
@@ -275,7 +271,7 @@ module Dwolla
       request_body = {
         :_links => {
           :source => {
-            # :href => user.dwolla_funding_source
+            :href => user.dwolla_funding_source
           },
           :destination => {
             :href => "https://api-uat.dwolla.com/accounts/#{ENV["DWOLLA_ACCOUNT_ID"]}"
@@ -313,5 +309,63 @@ module Dwolla
       # Email support that there was an issue when withdrawing the round up
       SupportMailer.support_transfer_failed_notice(user, fee_amount, e).deliver_now
     end
+  end
+
+  # Charge tech fee for all employees associated with the business
+  def self.withdraw_employer_contribution
+    Business.all.each do |biz|
+      biz_idowner = User.find(biz.owner)
+      ck = Checking.find_by_user_id(user.id)
+
+      contribution = number_to_currency((biz.current_contribution), unit:"")
+
+      begin
+        request_body = {
+          :_links => {
+            :source => {
+              :href => biz_owner.dwolla_funding_source
+            },
+            :destination => {
+              :href => "https://api-uat.dwolla.com/accounts/#{ENV["DWOLLA_ACCOUNT_ID"]}"
+            }
+          },
+          :amount => {
+            :currency => "USD",
+            :value => contribution
+          },
+          :metadata => {
+            :biz_id => biz.id,
+          }
+        }
+
+        # Create Dwolla token and make the transfer request
+        Dwolla.set_dwolla_token
+        transfer = @dwolla_app_token.post "transfers", request_body
+        current_transfer_url = transfer.headers[:location]
+
+        # Get the status of the current transfer
+        Dwolla.set_dwolla_token
+        transfer_status = @dwolla_app_token.get current_transfer_url
+        current_transfer_status = transfer_status.status
+
+        # Save transfer data
+        Transfer.create_transfers(user, current_transfer_url, current_transfer_status, contribution, "", "deposit", Date.today, true)
+
+        puts "Employer contribution: $#{contribution}"
+
+        # Email the user that the tech fee was successfully charged
+        BankingMailer.biz_contributions_successful(biz, contribution).deliver_now
+      rescue => e
+        # Email the user that there was an issue when withdrawing the round up
+        BankingMailer.biz_contributions_failed(user, contribution).deliver_now
+        # Email support that there was an issue when withdrawing the round up
+        SupportMailer.support_biz_contributions_failed(biz, contribution, e).deliver_now
+      end
+    end
+  end
+
+  # reset the dwolla app token
+  def self.set_dwolla_token
+    @dwolla_app_token.nil? ? @dwolla_app_token = $dwolla.auths.client : @dwolla_app_token
   end
 end

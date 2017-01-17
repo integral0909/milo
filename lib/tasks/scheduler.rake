@@ -41,6 +41,9 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
         BankingMailer.tech_fee_charged(fee_transfers - admin_count).deliver_now
       end
 
+      # Withdraw the total
+      Dwolla.withdraw_employer_contribution
+
     end
 
     puts "-"*40
