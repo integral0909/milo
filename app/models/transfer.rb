@@ -22,10 +22,11 @@ class Transfer < ActiveRecord::Base
   # ----------------------------------------------
   # TRANSFER-CREATE ------------------------------
   # ----------------------------------------------
-  def self.create_transfers(user, transfer_url, transfer_status, roundup_amount, roundup_count, transfer_type, current_date, tech_fee_charged)
+  def self.create_transfers(user, biz_id, transfer_url, transfer_status, roundup_amount, roundup_count, transfer_type, current_date, tech_fee_charged)
     # creat transfer object on roundup deposit
     Transfer.create(
       user_id: user.id,
+      business_id: biz_id,
       dwolla_url: transfer_url,
       status: transfer_status,
       roundup_amount: roundup_amount,

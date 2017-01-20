@@ -7,7 +7,7 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
   # if the first round up of the month, count how many tech fees were collected
   current_date.day <= 7 ? @charge_tech_fee = true : @charge_tech_fee = false
 
-  if day.saturday?
+  # if day.saturday?
     # for converting numbers to currency format
     include ActionView::Helpers::NumberHelper
 
@@ -27,8 +27,12 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
       Checking.all.each do |ck|
         user = User.find(ck.user_id)
 
+        # check if the checking account is associated with a business
+        biz_owner = biz_account(user)
+
         # run weekly_roundup for all users with checking accounts
-        if user
+        if user && biz_owner.nil?
+          puts "pulled roundups for #{user.email}"
           Dwolla.weekly_roundup(user, ck)
         end
 
@@ -48,7 +52,7 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
 
     puts "-"*40
     puts "emails sent"
-  end
+  # end
 end
 
 desc "This task will pull in all users transactions for the past week"
@@ -67,8 +71,13 @@ task :create_weekly_transactions, [:user_id] => :environment do |t, args|
     else
       Checking.all.each do |ck|
         user = User.find(ck.user_id)
+
+        # check if the checking account is associated with a business
+        biz_owner = biz_account(user)
+
         # run create_weekly_transactions for all users with checking accounts
-        if user
+        if user && biz_owner.nil?
+          puts "pulled transactions for #{user.email}"
           PlaidHelper.create_weekly_transactions(user, ck)
         end
       end
@@ -87,7 +96,7 @@ task :charge_biz_tech_fee, [:biz_id] => :environment do |t, args|
   # if the first round up of the month, count how many tech fees were collected
   day = Time.now
 
-  # if day.saturday? && (current_date.day <= 7)
+  if day.saturday? && (current_date.day <= 7)
     include ActionView::Helpers::NumberHelper
 
     puts "Charging monthly fee for businesses..."
@@ -111,5 +120,9 @@ task :charge_biz_tech_fee, [:biz_id] => :environment do |t, args|
 
     puts "-"*40
     puts "Charge complete"
-  # end
+  end
+end
+
+def biz_account(user)
+  Business.find_by_owner(user.id)
 end
