@@ -129,11 +129,10 @@ class BankingMailer < ApplicationMailer
   # ----------------------------------------------
   # Email for failed business contribution withdraw
   # ----------------------------------------------
-  def biz_contributions_failed(biz, biz_owner,contribution, e)
+  def biz_contributions_failed(biz, biz_owner, contribution)
    @biz = biz
    @contribution = contribution
    @owner = biz_owner
-   @error = e
    mail(to: @owner.email, subject: 'Emplyoee Contributions Failed for Milo!')
   end
 
