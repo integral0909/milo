@@ -119,21 +119,22 @@ class BankingMailer < ApplicationMailer
   # ----------------------------------------------
   # Email for successful business contribution withdraw
   # ----------------------------------------------
-  def biz_contributions_successful(biz, contribution)
+  def biz_contributions_successful(biz, biz_owner, contribution)
    @biz = biz
    @contribution = contribution
-   @user = User.find(biz.owner)
-   mail(to: @user.email, subject: 'Contributions have been sent!')
+   @owner = biz_owner
+   mail(to: @owner.email, subject: 'Contributions have been sent!')
   end
 
   # ----------------------------------------------
   # Email for failed business contribution withdraw
   # ----------------------------------------------
-  def biz_contributions_failed(biz, contribution)
+  def biz_contributions_failed(biz, biz_owner,contribution, e)
    @biz = biz
    @contribution = contribution
-   @user = User.find(biz.owner)
-   mail(to: @user.email, subject: 'Emplyoee Contributions Failed for Milo!')
+   @owner = biz_owner
+   @error = e
+   mail(to: @owner.email, subject: 'Emplyoee Contributions Failed for Milo!')
   end
 
   # ----------------------------------------------

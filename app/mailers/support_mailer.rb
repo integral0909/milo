@@ -42,7 +42,7 @@ class SupportMailer < ApplicationMailer
   # ADD-DWOLLA-USER-FAILED -----------------------
   # ----------------------------------------------
   # email to send support when adding a user to Dwolla fails
-  def support_biz_contributions_failed(biz, contribution error)
+  def support_biz_contributions_failed(biz, contribution, error)
     @error = error
     @biz = biz
     @contribution = contribution

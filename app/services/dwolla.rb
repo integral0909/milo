@@ -332,7 +332,7 @@ module Dwolla
             },
             :amount => {
               :currency => "USD",
-              :value => "4,000.00"
+              :value => contribution
             },
             :metadata => {
               :biz_id => biz.id,
@@ -355,12 +355,12 @@ module Dwolla
           puts "Employer contribution: $#{contribution}"
 
           # Email the user that the tech fee was successfully charged
-          BankingMailer.biz_contributions_successful(biz, contribution).deliver_now
+          BankingMailer.biz_contributions_successful(biz, biz_owner, contribution).deliver_now
           # reset current_contribution to nil.
           Business.reset_current_contribution(biz.id)
         rescue => e
           # Email the user that there was an issue when withdrawing the round up
-          BankingMailer.biz_contributions_failed(biz_owner, contribution).deliver_now
+          BankingMailer.biz_contributions_failed(biz, biz_owner, contribution).deliver_now
           # Email support that there was an issue when withdrawing the round up
           SupportMailer.support_biz_contributions_failed(biz, contribution, e).deliver_now
         end

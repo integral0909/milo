@@ -7,7 +7,7 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
   # if the first round up of the month, count how many tech fees were collected
   current_date.day <= 7 ? @charge_tech_fee = true : @charge_tech_fee = false
 
-  # if day.saturday?
+  if day.saturday?
     # for converting numbers to currency format
     include ActionView::Helpers::NumberHelper
 
@@ -52,7 +52,7 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
 
     puts "-"*40
     puts "emails sent"
-  # end
+  end
 end
 
 desc "This task will pull in all users transactions for the past week"
