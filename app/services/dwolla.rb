@@ -322,7 +322,7 @@ module Dwolla
 
   # reset the dwolla app token
   def self.set_dwolla_token
-    @dwolla_app_token.nil? ? @dwolla_app_token = $dwolla.auths.client : @dwolla_app_token
+    @dwolla_app_token = $dwolla.auths.client
   end
 
 end
