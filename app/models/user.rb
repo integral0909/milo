@@ -32,6 +32,7 @@
 #  account_balance                  :integer
 #  long_tail                        :boolean
 #  bank_not_verified                :boolean
+#  employer_contribution            :integer
 #
 
 # ================================================
@@ -110,7 +111,23 @@ class User < ActiveRecord::Base
   # Add round up amount to the users account balance
   def self.add_account_balance(user, amount)
     # Save the roundup amount in cents
-    !user.account_balance.nil? ? user.account_balance += (amount.to_f * 100).round(0) : user.account_balance = (amount.to_f * 100).round(0)
+    # Check if the user is associated with a business
+    if !user.business_id.nil?
+      self.add_employer_contribution(user, amount)
+
+      if !user.account_balance.nil?
+        # This will change based on employer contribution settings
+        user.account_balance += (amount.to_f * 200).round(0)
+      else
+        user.account_balance = (amount.to_f * 200).round(0)
+      end
+
+      # Add employer contribution amount to the user
+      !user.employer_contribution.nil? ? user.employer_contribution += (amount.to_f * 100).round(0) : user.employer_contribution = (amount.to_f * 100).round(0)
+
+    else
+      !user.account_balance.nil? ? user.account_balance += (amount.to_f * 100).round(0) : user.account_balance = (amount.to_f * 100).round(0)
+    end
     user.save!
   end
 
@@ -146,6 +163,25 @@ class User < ActiveRecord::Base
   # PRIVATE ======================================
   # ==============================================
   private
+
+  # NOTE: this will get much more complex based on contribution max and frequency. Will probably move to Contribution Module.
+
+  # ----------------------------------------------
+  # add employer contribution to business
+  # user: object
+  # amount: integer
+  # ----------------------------------------------
+  def self.add_employer_contribution(user, amount)
+    biz = Business.find(user.business_id)
+
+    # add amount to current_contribution to pull when all round ups are finished
+    !biz.current_contribution.nil? ? biz.current_contribution += (amount.to_f * 100).round(0) : biz.current_contribution = (amount.to_f * 100).round(0)
+
+    # add amount to total contribution
+    !biz.total_contribution.nil? ? biz.total_contribution += (amount.to_f * 100).round(0) : biz.total_contribution = (amount.to_f * 100).round(0)
+
+    biz.save!
+  end
 
   # ----------------------------------------------
   # EMAIL-UNIQUE ---------------------------------

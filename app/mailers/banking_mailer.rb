@@ -104,7 +104,7 @@ class BankingMailer < ApplicationMailer
     puts "Biz tech fee charged"
    @fee_charged = fee_charged
    @user = user
-   mail(to: @user.email, subject: 'Automatic Transfer Successful for Milo')
+   mail(to: @user.email, subject: 'Automatic Transfer Failed for Milo')
   end
 
   # ----------------------------------------------
@@ -114,6 +114,26 @@ class BankingMailer < ApplicationMailer
   def transfer_start_employer(user)
    @user = user
    mail(to: @user.email, subject: 'Welcome to Milo!')
+  end
+
+  # ----------------------------------------------
+  # Email for successful business contribution withdraw
+  # ----------------------------------------------
+  def biz_contributions_successful(biz, biz_owner, contribution)
+   @biz = biz
+   @contribution = contribution
+   @owner = biz_owner
+   mail(to: @owner.email, subject: 'Contributions have been sent!')
+  end
+
+  # ----------------------------------------------
+  # Email for failed business contribution withdraw
+  # ----------------------------------------------
+  def biz_contributions_failed(biz, biz_owner, contribution)
+   @biz = biz
+   @contribution = contribution
+   @owner = biz_owner
+   mail(to: @owner.email, subject: 'Emplyoee Contributions Failed for Milo!')
   end
 
   # ----------------------------------------------
