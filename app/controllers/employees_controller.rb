@@ -40,11 +40,11 @@ class EmployeesController < ApplicationController
       emp['name'] = e.name
       emp['email'] = e.email
       emp['id'] = e.id
-      transfers = Transfer.where(user_id: e.id)
+      emp['total_contrib'] = set_total_contribution(e)
 
+      transfers = Transfer.where(user_id: e.id)
       if !transfers.empty?
-        emp['avg_transfer'] = set_transfer_average(transfers)
-        emp['last_transfer'] = transfers.last.roundup_amount
+        emp['last_contrib'] = transfers.last.roundup_amount
       end
       @emp_data << emp
     end
@@ -60,6 +60,12 @@ class EmployeesController < ApplicationController
     all_transfer_amounts = transfers.map {|tr| tr.roundup_amount.to_f }
     all_transfer_average = (all_transfer_amounts.inject{ |sum, el| sum + el }.to_f / all_transfer_amounts.size)
     @transfer_avg = (all_transfer_average > 0) ? number_to_currency(all_transfer_average) : "$0.00"
+  end
+
+  def set_total_contribution(e)
+    if e.employer_contribution
+      return number_to_currency((e.employer_contribution / 100))
+    end
   end
 
 end
