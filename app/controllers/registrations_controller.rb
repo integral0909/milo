@@ -9,7 +9,7 @@ class RegistrationsController < Devise::RegistrationsController
   layout "signup"
 
   # ----------------------------------------------
-  # FILTERS -------------------------------------
+  # FILTERS --------------------------------------
   # ----------------------------------------------
   prepend_before_action :require_no_authentication, only: [:new, :create, :cancel]
   prepend_before_action :authenticate_scope!, only: [:edit, :security, :update, :destroy]
@@ -148,7 +148,7 @@ class RegistrationsController < Devise::RegistrationsController
     if current_user.invited
       signup_phone_path
     else
-      root_path
+      authenticated_root_path
     end
   end
 
@@ -157,7 +157,7 @@ class RegistrationsController < Devise::RegistrationsController
   # ----------------------------------------------
   # Route to direct user after profile update
   def after_update_path_for(resource)
-    root_path
+    authenticated_root_path
   end
 
   # ==============================================

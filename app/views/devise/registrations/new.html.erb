@@ -50,12 +50,10 @@
         <fieldset class="checkbox">
           <label>
             <%= f.check_box :agreement, required: true %>
-            I agree to Milo's <a href="/privacy" target="_blank">Privacy Policy</a> and <a href="/terms" target="_blank">Terms of Service</a>. I also agree to Dwolla's <a href="https://www.dwolla.com/legal/tos?whitelabel" target="_blank">Privacy Policy</a> and <a href="https://www.dwolla.com/legal/privacy?whitelabel" target="_blank">Terms of Service</a>.
+            I agree to Milo's <a href="https://www.shiftsavings.com/privacy" target="_blank">Privacy Policy</a> and <a href="https://www.shiftsavings.com/terms" target="_blank">Terms of Service</a>. I also agree to Dwolla's <a href="https://www.dwolla.com/legal/tos?whitelabel" target="_blank">Privacy Policy</a> and <a href="https://www.dwolla.com/legal/privacy?whitelabel" target="_blank">Terms of Service</a>.
           </label>
         </fieldset>
-        <% if params[:access] == "early" %>
-          <%= f.hidden_field :invited, value: true %>
-        <% end %>
+        <%= f.hidden_field :invited, value: true %>
         <%= f.hidden_field :referral_code, value: session[:referral] %>
         <button type="submit" class="button -full -blue">Sign Up</button>
       <% end %>
