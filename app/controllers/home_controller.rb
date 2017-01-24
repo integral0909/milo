@@ -62,6 +62,12 @@ class HomeController < ApplicationController
     if (@user.invited && !@user.is_verified)
       redirect_to signup_phone_path
     end
+
+    # emplyer home page info
+    if @biz
+      @total_contrib = number_to_currency(@biz.total_contribution / 100.00, unit:"") if @biz.total_contribution
+      @total_employees = User.where(business_id: @biz.id).count
+    end
   end
 
   # ----------------------------------------------

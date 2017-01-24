@@ -7,6 +7,8 @@
 #  contribution                     :decimal          precision 8, scale 2
 #  frequency                        :string
 #  owner                            :integer
+#  current_contribution             :integer
+#  total_contribution               :integer
 #
 
 # ================================================
