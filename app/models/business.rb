@@ -4,8 +4,9 @@
 #
 #  id                               :integer          not null, primary key
 #  name                             :string
-#  contribution                     :decimal          precision 8, scale 2
 #  frequency                        :string
+#  max_contribution                 :integer
+#  match_percent                    :integer
 #  owner                            :integer
 #  current_contribution             :integer
 #  total_contribution               :integer

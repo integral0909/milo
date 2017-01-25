@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170117133300) do
+ActiveRecord::Schema.define(version: 20170125030441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,13 +39,14 @@ ActiveRecord::Schema.define(version: 20170117133300) do
 
   create_table "businesses", force: :cascade do |t|
     t.string   "name"
-    t.decimal  "contribution",         precision: 8, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "frequency"
     t.integer  "owner"
     t.integer  "current_contribution"
     t.integer  "total_contribution"
+    t.integer  "max_contribution"
+    t.integer  "match_percent"
   end
 
   create_table "checkings", force: :cascade do |t|
