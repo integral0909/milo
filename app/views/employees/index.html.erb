@@ -15,19 +15,19 @@
         <tr>
           <th>Name</th>
           <th>Status</th>
-          <th>Avg. Transfer</th>
-          <th>Last Week</th>
+          <th>Contribution Total</th>
+          <th>Last Contribution</th>
           <th>&nbsp;</th>
         </tr>
       </thead>
       <tbody>
-        <% @employees.each do |e| %>
+        <% @emp_data.each do |e| %>
           <tr>
-            <th><%= e.name %> (<%= e.email %>)</th>
+            <th><%= e['name'] %> (<%= e['email'] %>)</th>
             <td>Active / Inactive</td>
-            <td>-</td>
-            <td>-</td>
-            <td><%= link_to "Remove", "/employees/#{e.id}", class: "-remove", method: :delete, data: {confirm: "Are you sure you want to remove #{e.name}?"}, remote: true %></td>
+            <td><%= e['total_contrib'] ? e['total_contrib'] : '-' %></td>
+            <td><%= e['last_contrib'] ? "$#{e['last_contrib']}" : '-' %></td>
+            <td><%= link_to "Remove", "/employees/#{e['id']}", class: "-remove", method: :delete, data: {confirm: "Are you sure you want to remove #{e['name']}?"}, remote: true %></td>
           </tr>
         <% end %>
       </tbody>

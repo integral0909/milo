@@ -1,4 +1,4 @@
-<% if instance.errors.any? %>
+<% if instance && instance.errors.any? %>
   <ul class="form-errors">
     <% instance.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>

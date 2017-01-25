@@ -1,30 +1,41 @@
-<% set_meta_tags :site => 'Business • Settings • Milo' %>
+<% set_meta_tags :site => 'Contributions • Settings • Milo' %>
 
 <div class="page-content">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <%= render :partial => 'devise/shared/subheader' %>
+        <%= render :partial => '/devise/shared/subheader' %>
         <%= render "layouts/messages" %>
         <h6>Set Contributions</h6>
         <p>Match 100% of employee savings or set a max contribution limit. Setting a max contribution will limit an employer contribution per employee to the amount set below.</p>
-        <%= form_for (@business), :url => {:controller => "businesses", :action => "update", id: @business.id}, :html => { :method => :put} do |f| %>
-          <%= form_errors @business %>
+        <%= form_for (@biz), :url => {:controller => "businesses", :action => "update", id: @biz.id}, :html => { :method => :put} do |f| %>
+          <%= form_errors @biz %>
           <section class="form-section">
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-4">
                 <fieldset class="form-group">
                   <label>Max Contribution</label>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-                    <%= f.text_field :contribution, class: "form-control", :value => (number_with_precision(f.object.contribution, :precision => 2) || 0) %>
+                    <%= f.number_field :max_contribution, class: "form-control", placeholder: "200", min:200, require: true %>
                   </div>
                 </fieldset>
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-4">
+                <fieldset class="form-group">
+                  <label>Match Percent</label>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-percent"></i></span>
+                    <%= f.number_field :match_percent, class: "form-control", placeholder: "100", min:25, max:100 %>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="col-sm-4">
                 <fieldset class="form-group">
                   <label>Frequency</label>
-                  <%= f.select(:frequency, [ "Weekly", "Monthly", "Quarterly", "Yearly" ], {}, { class: "form-control" }) %>
+                  <div class="input-group">
+                    <%= f.select :frequency, @frequency_options, class: "form-control" %>
+                  </div>
                 </fieldset>
               </div>
             </div>

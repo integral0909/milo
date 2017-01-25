@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     get 'signup/on_demand', to: 'registrations#on_demand', as: :signup_on_demand
     # Employer Sign Up
     get 'signup/employer', to: 'registrations#employer', as: :new_employer
+    # Employer Contributions Settings
+    get 'settings/contributions', to: 'businesses#edit', as: :settings_contributions
   end
 
   resource :user, only: [:edit] do
