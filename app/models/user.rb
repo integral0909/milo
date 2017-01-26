@@ -114,13 +114,14 @@ class User < ActiveRecord::Base
     # roundup amount converted to cents
     amount_in_cents = (amount.to_f * 100).round(0)
 
+    # Add current roundups
+    self.add_roundup(user, amount_in_cents)
+
     # Check if the user is associated with a business
     if !user.business_id.nil?
       Contribution.run_employer_contribution(user, amount_in_cents)
     end
 
-    # if all else fails, run the normal round up for the user
-    self.add_roundup(user, amount_in_cents)
     user.save!
   end
 
