@@ -27,7 +27,7 @@ class VerificationsController < ApplicationController
       @twilio_client.account.sms.messages.create(
         :from => ENV['TWILIO_PHONE_NUMBER'],
         :to => to,
-        :body => "#{current_user.verification_code} is your Milo phone verification code."
+        :body => "#{current_user.verification_code} is your Shift phone verification code."
       )
       # Redirect back to the edit profile page
       redirect_to signup_phone_confirm_path

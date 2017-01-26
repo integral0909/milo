@@ -1,4 +1,4 @@
-<% set_meta_tags :site => 'Overview • Milo' %>
+<% set_meta_tags :site => 'Overview • Shift' %>
 
 <% if current_user.invited %>
   <% if @accounts.present? || (@transactions && !@transactions.empty?) %>
@@ -9,7 +9,7 @@
             <div class="col-md-12">
               <div class="milo-card">
                 <div class="mc-title">Checking Account</div>
-                <p>Now that we have connected with your account/s we need to confirm the checking account that you would like to use with Milo.</p>
+                <p>Now that we have connected with your account/s we need to confirm the checking account that you would like to use with Shift.</p>
                 <a href="/checkings/new" class="button -blue">Confirm</a>
               </div>
             </div>
@@ -137,7 +137,7 @@
         <div class="row">
           <div class="col-md-12">
             <h6>Connect Bank Account</h6>
-            <p>Before you can begin using Milo we need to connect a bank account that we can track, calculate round ups and transfer funds to and from your Milo savings account.</p>
+            <p>Before you can begin using Shift we need to connect a bank account that we can track, calculate round ups and transfer funds to and from your Shift savings account.</p>
             <a href="/users/<%= current_user.id %>/accounts" class="button -blue">Connect Account</a>
           </div>
         </div>

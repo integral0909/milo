@@ -6,12 +6,12 @@ class UserMailer < ApplicationMailer
   # ----------------------------------------------
   # VARIABLES ------------------------------------
   # ----------------------------------------------
-  BASE_URL = "http://milosavings.com?referral="
+  BASE_URL = "https://bank.shiftsavings.com?referral="
 
   # ----------------------------------------------
   # DEFAULT SETTINGS -----------------------------
   # ----------------------------------------------
-  default from: 'noreply@milosavings.com'
+  default from: 'noreply@shiftsavings.com'
 
   # ----------------------------------------------
   # WELCOME-EMAIL --------------------------------
@@ -19,7 +19,7 @@ class UserMailer < ApplicationMailer
   def welcome_email(user)
     @referral_link = Bitly.client.shorten(BASE_URL + user.id.to_s).short_url
     @user = user
-    @url  = 'https://milosavings.com'
-    mail(to: @user.email, subject: 'Welcome to Milo!')
+    @url  = 'https://bank.shiftsavings.com'
+    mail(to: @user.email, subject: 'Welcome to Shift!')
   end
 end

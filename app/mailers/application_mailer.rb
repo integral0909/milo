@@ -6,11 +6,11 @@ class ApplicationMailer < ActionMailer::Base
   # ----------------------------------------------
   # DEFAULT SETTINGS -----------------------------
   # ----------------------------------------------
-  default from: "noreply@milosavings.com"
+  default from: "noreply@shiftsavings.com"
 
   # ----------------------------------------------
   # LAYOUT ---------------------------------------
   # ----------------------------------------------
   layout 'mailer'
-  
+
 end

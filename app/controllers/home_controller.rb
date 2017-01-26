@@ -11,7 +11,7 @@ class HomeController < ApplicationController
   # ----------------------------------------------
   # VARIABLES ------------------------------------
   # ----------------------------------------------
-  BASE_URL = "http://milosavings.com?referral="
+  BASE_URL = "https://bank.shiftsavings.com?referral="
 
   # ----------------------------------------------
   # FILTERS --------------------------------------

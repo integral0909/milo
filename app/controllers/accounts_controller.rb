@@ -48,14 +48,14 @@ class AccountsController < ApplicationController
         flash[:alert] = "Looks the deposits did not match. Only #{3 - funding_account.failed_verification_attempt} attempts left."
       elsif funding_account.failed_verification_attempt && funding_account.failed_verification_attempt >= 3
         Account.remove_accounts(@user)
-        flash[:alert] = "You have exceeded the amount of tries to verify your account. Your banking account has been temporarily removed. Please reach out to dev@milosavings.com for assistance."
+        flash[:alert] = "You have exceeded the amount of tries to verify your account. Your banking account has been temporarily removed. Please reach out to dev@shiftsavings.com for assistance."
       else
         BankingMailer.account_added(@user, funding_account)
         flash[:success] = "Congrats! Your account is now verified!"
       end
       redirect_to :back
     rescue
-      flash[:alert] = "Looks like there was an error when verifying your account. Please reach out to dev@milosavings for more help."
+      flash[:alert] = "Looks like there was an error when verifying your account. Please reach out to dev@shiftsavings for more help."
 
       redirect_to :back
     end
