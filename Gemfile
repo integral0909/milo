@@ -87,6 +87,9 @@ gem "brakeman", :require => false
 # Store sessions in Active Record instead of cookies
 gem 'activerecord-session_store'
 
+# helper to determain the week of the month
+gem 'week_of_month'
+
 group :production, :staging do
   gem 'rails_12factor'
 end
