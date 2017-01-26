@@ -110,14 +110,16 @@ class User < ActiveRecord::Base
   # ----------------------------------------------
   # Add round up amount to the users account balance
   def self.add_account_balance(user, amount)
-    # Save the roundup amount in cents
+    # roundup amount converted to cents
+    amount_in_cents = (amount.to_f * 100).round(0)
+
     # Check if the user is associated with a business
     if !user.business_id.nil?
       @employer = Business.find(user.business_id)
 
-      # check to make sure the max employer contribution (in cents) is less than already contributed to the employee
+      # check to make sure the max employer contribution (in cents) is less than already contributed to the employee. Also need to check pending contributions
       if @employer.max_contribution && ((@employer.max_contribution * 100) >= user.employer_contribution)
-        amount_in_cents = (amount.to_f * 100).round(0)
+        # employer contribution amount
         contribution_amount = (amount_in_cents * @employer.match_percent/100).round(0)
 
         # add the pending_contribution to the user
@@ -126,11 +128,9 @@ class User < ActiveRecord::Base
         # Check if the date coincides with the contribution frequency
         if contribution_due?
 
-          # take current_roundup and multiply by employer match percent
           total_amount = amount_in_cents + user.pending_contribution
 
           if !user.account_balance.nil?
-            # This will change based on employer contribution settings
             user.account_balance += total_amount
           else
             user.account_balance = total_amount
@@ -216,8 +216,8 @@ class User < ActiveRecord::Base
         # Will always return true
         true
       when 'Bi-Monthly'
-        # Check if the week includes the 1st or the 15th of the month.
-
+        # Check if the week is the 1st or 3rd weekend.
+        
       when 'Monthly'
         # Check if it's the first week of the month
         Date.today.day <= 7
