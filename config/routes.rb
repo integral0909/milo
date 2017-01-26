@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     # User Sign Up
     get 'signup', to: "registrations#new", as: :new_user_registration
     post 'signup', to: "registrations#create", as: :user_registration
+    patch 'signup', to: "registrations#update"
+    put 'signup', to: "registrations#update"
     get 'signup/phone', to: 'registrations#phone', as: :signup_phone
     get 'signup/phone_confirm', to: 'registrations#phone_confirm', as: :signup_phone_confirm
     get 'signup/on_demand', to: 'registrations#on_demand', as: :signup_on_demand
