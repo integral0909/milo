@@ -113,21 +113,40 @@ class User < ActiveRecord::Base
     # Save the roundup amount in cents
     # Check if the user is associated with a business
     if !user.business_id.nil?
-      self.add_employer_contribution(user, amount)
+      @employer = Business.find(user.business_id)
 
-      if !user.account_balance.nil?
-        # This will change based on employer contribution settings
-        user.account_balance += (amount.to_f * 200).round(0)
-      else
-        user.account_balance = (amount.to_f * 200).round(0)
+      # check to make sure the max employer contribution (in cents) is less than already contributed to the employee
+      if @employer.max_contribution && ((@employer.max_contribution * 100) >= user.employer_contribution)
+        amount_in_cents = (amount.to_f * 100).round(0)
+        contribution_amount = (amount_in_cents * @employer.match_percent/100).round(0)
+
+        # add the pending_contribution to the user
+        !user.pending_contribution.nil? ? user.pending_contribution += contribution_amount : user.pending_contribution = contribution_amount
+
+        # Check if the date coincides with the contribution frequency
+        if contribution_due?
+
+          # take current_roundup and multiply by employer match percent
+          total_amount = amount_in_cents + user.pending_contribution
+
+          if !user.account_balance.nil?
+            # This will change based on employer contribution settings
+            user.account_balance += total_amount
+          else
+            user.account_balance = total_amount
+          end
+
+          # Add employer contribution amount to the user
+          !user.employer_contribution.nil? ? user.employer_contribution += (amount.to_f * 100).round(0) : user.employer_contribution = (amount.to_f * 100).round(0)
+
+          # reset pending contributions
+          user.pending_contribution = nil
+        end
       end
-
-      # Add employer contribution amount to the user
-      !user.employer_contribution.nil? ? user.employer_contribution += (amount.to_f * 100).round(0) : user.employer_contribution = (amount.to_f * 100).round(0)
-
-    else
-      !user.account_balance.nil? ? user.account_balance += (amount.to_f * 100).round(0) : user.account_balance = (amount.to_f * 100).round(0)
     end
+
+    # if all else fails, run the normal round up for the user
+    self.add_roundup(user, amount_in_cents)
     user.save!
   end
 
@@ -181,6 +200,36 @@ class User < ActiveRecord::Base
     !biz.total_contribution.nil? ? biz.total_contribution += (amount.to_f * 100).round(0) : biz.total_contribution = (amount.to_f * 100).round(0)
 
     biz.save!
+  end
+
+  def self.add_roundup(user, amount)
+    !user.account_balance.nil? ? user.account_balance += amount : user.account_balance = amount
+  end
+
+  def max_contribution_not_met
+
+  end
+
+  def contribution_due?
+    case @employer.frequency
+      when 'Weekly'
+        # Will always return true
+        true
+      when 'Bi-Monthly'
+        # Check if the week includes the 1st or the 15th of the month.
+
+      when 'Monthly'
+        # Check if it's the first week of the month
+        Date.today.day <= 7
+      when 'Quarterly'
+
+      when 'Yearly'
+        # Check if current date is past the Employers sign up date (NOTE: change to match frequency_set_date once implemented)
+        Date.today.next_year <= @employer.created_at
+      else
+        # don't run contribution if frequency setting breaks
+        false
+    end
   end
 
   # ----------------------------------------------

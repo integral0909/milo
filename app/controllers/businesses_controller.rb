@@ -17,7 +17,7 @@ class BusinessesController < ApplicationController
   # ----------------------------------------------
   def edit
     if @biz
-      @frequency_options = ["Weekly", "Bi-Monthly", "Monthly", "Quarterly", "Yearly"]
+      @frequency_options = ["-","Weekly", "Bi-Monthly", "Monthly", "Quarterly", "Yearly"]
     else
       flash[:alert] = "Oops, looks like you don't have access to that page."
       redirect_to root_path
