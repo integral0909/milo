@@ -25,7 +25,7 @@ module Contribution
         else
           @user.account_balance = @user.pending_contribution
         end
-byebug
+
         # Add employer contribution amount to the user
         !@user.employer_contribution.nil? ? @user.employer_contribution += @user.pending_contribution : @user.employer_contribution = @user.pending_contribution
 
