@@ -1,24 +1,24 @@
-<% set_meta_tags :site => 'Sign Up • Milo',
-  :canonical => 'http://milosavings.com/users/sign_up',
-  :author => 'Milo',
-  :copyright => '&copy; 2016 Milo',
-  :description => "Sign up and join Milo today to begin saving towards important financials goals.",
-  :keywords => ['Milo', 'Milo Savings', 'round', 'roundups', 'round-ups', 'savings', 'financial', 'savings account', 'goals', 'financial goal', 'college savings', 'sign up', 'join', 'registrer'],
+<% set_meta_tags :site => 'Sign Up • Shift',
+  :canonical => 'http://bank.shiftsavings.com/login',
+  :author => 'Shift',
+  :copyright => '&copy; 2016 Shift',
+  :description => "Sign up and join Shift today to begin saving towards important financials goals.",
+  :keywords => ['Shift', 'Shift Savings', 'round', 'roundups', 'round-ups', 'savings', 'financial', 'savings account', 'goals', 'financial goal', 'college savings', 'sign up', 'join', 'registrer'],
   :reverse => true,
   :og => {
-    :title          => 'Sign Up • Milo',
+    :title          => 'Sign Up • Shift',
     :type           => 'website',
     :url            => request.original_url,
     :image          => asset_url('social-banner-milo.png'),
-    :description    => "Sign up and join Milo today to begin saving towards important financials goals.",
-    :site_name      => 'Milo',
+    :description    => "Sign up and join Shift today to begin saving towards important financials goals.",
+    :site_name      => 'Shift',
   },
   :twitter => {
     :card           => 'summary',
-    :site           => '@milosavings',
-    :title          => 'Sign Up • Milo',
-    :description    => "Sign up and join Milo today to begin saving towards important financials goals.",
-    :creator        => '@milosavings',
+    :site           => '@shiftsavings',
+    :title          => 'Sign Up • Shift',
+    :description    => "Sign up and join Shift today to begin saving towards important financials goals.",
+    :creator        => '@shiftsavings',
     :image          => asset_url('social-banner-milo.png'),
   }
 %>
@@ -50,12 +50,10 @@
         <fieldset class="checkbox">
           <label>
             <%= f.check_box :agreement, required: true %>
-            I agree to Milo's <a href="/privacy" target="_blank">Privacy Policy</a> and <a href="/terms" target="_blank">Terms of Service</a>. I also agree to Dwolla's <a href="https://www.dwolla.com/legal/tos?whitelabel" target="_blank">Privacy Policay</a> and <a href="https://www.dwolla.com/legal/privacy?whitelabel" target="_blank">Terms of Service</a>.
+            I agree to Shift's <a href="https://www.shiftsavings.com/privacy" target="_blank">Privacy Policy</a> and <a href="https://www.shiftsavings.com/terms" target="_blank">Terms of Service</a>. I also agree to Dwolla's <a href="https://www.dwolla.com/legal/tos?whitelabel" target="_blank">Privacy Policy</a> and <a href="https://www.dwolla.com/legal/privacy?whitelabel" target="_blank">Terms of Service</a>.
           </label>
         </fieldset>
-        <% if params[:access] == "early" %>
-          <%= f.hidden_field :invited, value: true %>
-        <% end %>
+        <%= f.hidden_field :invited, value: true %>
         <%= f.hidden_field :referral_code, value: session[:referral] %>
         <button type="submit" class="button -full -blue">Sign Up</button>
       <% end %>
