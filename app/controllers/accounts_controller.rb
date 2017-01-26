@@ -72,7 +72,7 @@ class AccountsController < ApplicationController
         redirect_to signup_on_demand_path and return
       end
 
-      redirect_to root_path
+      redirect_to authenticated_root_path
     else
       flash[:alert] = @account.errors.full_messages.join(", ")
       redirect_to :back
