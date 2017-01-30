@@ -1,11 +1,6 @@
-GIT
-  remote: git://github.com/kobaltz/week-of-month.git
-  revision: 9530c44936e56c1e189d7aa4ca2b4c1a17fc55f8
-  specs:
-    week_of_month (1.2.3.4)
-
 GEM
   remote: https://rubygems.org/
+  remote: https://www.github.com/kobaltz/week-of-month/
   specs:
     actionmailer (4.2.7.1)
       actionpack (= 4.2.7.1)
@@ -289,6 +284,7 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    week_of_month (1.2.3.4)
 
 PLATFORMS
   ruby

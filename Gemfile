@@ -88,7 +88,7 @@ gem "brakeman", :require => false
 gem 'activerecord-session_store'
 
 # helper to determain the week of the month, specific fork to resolve `beginning_of_week` conflict with gem
-gem 'week_of_month', github: 'kobaltz/week-of-month'
+gem 'week_of_month', :source => 'https://www.github.com/kobaltz/week-of-month'
 
 group :production, :staging do
   gem 'rails_12factor'
