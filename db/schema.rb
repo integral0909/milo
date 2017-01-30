@@ -47,10 +47,6 @@ ActiveRecord::Schema.define(version: 20170126032526) do
     t.integer  "total_contribution"
     t.integer  "max_contribution"
     t.integer  "match_percent"
-    t.decimal  "contribution", precision: 8, scale: 2
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "frequency"
   end
 
   create_table "checkings", force: :cascade do |t|
@@ -179,7 +175,6 @@ ActiveRecord::Schema.define(version: 20170126032526) do
     t.boolean  "long_tail"
     t.boolean  "bank_not_verified"
     t.boolean  "pause_savings"
-
     t.integer  "business_id"
     t.string   "invitation_token"
     t.datetime "invitation_created_at"
@@ -191,7 +186,6 @@ ActiveRecord::Schema.define(version: 20170126032526) do
     t.integer  "invitations_count",      default: 0
     t.integer  "employer_contribution"
     t.integer  "pending_contribution"
-    t.boolean  "pause_savings"
   end
 
   add_index "users", ["business_id"], name: "index_users_on_business_id", using: :btree
