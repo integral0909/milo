@@ -27,6 +27,10 @@ Rails.application.routes.draw do
     get 'signup/phone', to: 'registrations#phone', as: :signup_phone
     get 'signup/phone_confirm', to: 'registrations#phone_confirm', as: :signup_phone_confirm
     get 'signup/on_demand', to: 'registrations#on_demand', as: :signup_on_demand
+
+    # Employer Sign Up
+    get 'signup/employer', to: 'registrations#employer', as: :new_employer
+
     # Root, User Logged In
     authenticated :user do
       root 'home#index', as: :authenticated_root
