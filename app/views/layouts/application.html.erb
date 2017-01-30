@@ -42,7 +42,7 @@
     <% end %>
     <nav>
       <a href="/" class="<%= active_page_class?('/')%>"><i class="fa fa-home"></i> Overview</a>
-      <% if current_user.business %>
+      <% if @biz_owner %>
         <a href="/employees" class="<%= active_page_class?('/employees')%>"><i class="fa fa-user"></i> Employees</a>
       <% else %>
         <a href="/roundups" class="<%= active_page_class?('/roundups')%>"><i class="fa fa-circle-o"></i> Round Ups <!--<span>8</span>--></a>

@@ -68,6 +68,9 @@ class HomeController < ApplicationController
       @total_contrib = number_to_currency(@biz.total_contribution / 100.00, unit:"") if @biz.total_contribution
       @total_employees = User.where(business_id: @biz.id).count
     end
+
+    @employer_contrib = number_to_currency(@user.employer_contribution / 100.00, unit:"") if @user.employer_contribution
+    @pending_contrib = number_to_currency(@user.pending_contribution / 100.00, unit:"") if @user.pending_contribution
   end
 
   # ----------------------------------------------

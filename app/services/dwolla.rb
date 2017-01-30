@@ -319,7 +319,7 @@ module Dwolla
         biz_owner = User.find(biz.owner)
         ck = Checking.find_by_user_id(biz_owner.id)
         # convert to dollars since we save in cents
-        contribution = number_to_currency((biz.current_contribution / 100), unit:"")
+        contribution = number_to_currency((biz.current_contribution.to_f / 100), unit:"")
         begin
           request_body = {
             :_links => {

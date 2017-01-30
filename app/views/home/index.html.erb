@@ -62,7 +62,7 @@
                   <div class="av-total">$<%= @total_contrib ? @total_contrib : "0.00" %></div>
                 <% else %>
                   <div class="mc-title">Account Value
-                    <span style="float:right">
+                    <span class="pull-right">
                       <% if @account_balance %>
                           <a class="mc-edit" data-toggle="modal" data-target="#withdrawFunds">Withdraw</a>
                       <% end %>
@@ -71,6 +71,19 @@
                   <div class="av-total">$<%= @account_balance ? @account_balance : "0.00" %></div>
                 <% end %>
               </div>
+              <% if @user.business_id && !@biz %>
+                <div class="milo-card account-value">
+                    <div class="mc-title">Employer Contributions</div>
+                    <span>
+                      <p>Total Contributions:
+                        <span class="pull-right">Pending Contributions:<span>
+                        </p>
+                      <div class="av-total">$<%= @employer_contrib ? @employer_contrib : "0.00" %>
+                        <span class="pull-right">$<%= @pending_contrib ? @pending_contrib : "0.00" %></span>
+                      </div>
+                    </span>
+                </div>
+              <% end %>
             </div>
           </div>
           <div id="mobile" class="row">
