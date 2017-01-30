@@ -26,21 +26,19 @@
 <body class="milo-app">
 
   <header>
-    <a class="logo" href="/">Milo</a>
-    <% if current_user %>
-      <div class="milo-user">
-        <div class="mu-img">
-          <% if current_user.avatar? %>
-            <%= image_tag current_user.avatar.url(:medium) %>
-          <% else %>
-            <%= link_to settings_path, class: "add-avatar" do %>
-              <%= image_tag("img-add-avatar.png", alt: "Add avatar") %>
-            <% end %>
-          <% end %>
-        </div>
-        <h5><%= current_user.business && current_user.business.name ? current_user.business.name : current_user.name %></h5>
-        <span><%= current_user.city if current_user.city %><% if current_user.city? && current_user.state? %>, <% end %><%= current_user.state if current_user.state %></span>
+    <a class="logo" href="/">Shift</a>
+    <div class="milo-user">
+      <div class="mu-img">
+        <% if current_user.avatar? %>
+          <%= image_tag current_user.avatar.url(:medium) %>
+        <% else %>
+          <%= link_to settings_path, class: "add-avatar" do %>
+            <%= image_tag("img-add-avatar.png", alt: "Add avatar") %>
+        <% end %>
       </div>
+      <h5><%= current_user.business && current_user.business.name ? current_user.business.name : current_user.name %></h5>
+      <span><%= current_user.city if current_user.city %><% if current_user.city? && current_user.state? %>, <% end %><%= current_user.state if current_user.state %></span>
+    </div>
     <% end %>
     <nav>
       <a href="/" class="<%= active_page_class?('/')%>"><i class="fa fa-home"></i> Overview</a>

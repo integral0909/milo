@@ -4,6 +4,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
+  # for changing input string to currency
+  include ActionView::Helpers::NumberHelper
 
   # ==============================================
   # ACTIONS ======================================
@@ -27,10 +29,31 @@ class UsersController < ApplicationController
       # Sign in the user by passing validation in case their password changed
       bypass_sign_in(@user)
       flash[:notice] = "Password Updated"
-      redirect_to root_path
+      redirect_to authenticated_root_path
     else
       flash[:alert] = @user.errors.full_messages.join(", ")
       redirect_to settings_security_path
+    end
+  end
+
+  def withdraw_funds
+    # convert amount requested to cents
+    @withdraw_amount = (params[:user][:requested_amount].to_f * 100).round(0)
+    # Check if user has the amount requested_amount
+    if @withdraw_amount <= @user.account_balance
+      begin
+        # initiate transfer of funds to user
+        Dwolla.send_funds_to_user(@user, number_to_currency(params[:user][:requested_amount], unit:""))
+
+        flash[:success] = "Your savings are on the way!"
+        redirect_to authenticated_root_path
+      rescue => e
+        flash[:alert] = e
+        redirect_to :back
+      end
+    else
+      flash[:alert] = "The amount requested was more than your account balance."
+      redirect_to :back
     end
   end
 

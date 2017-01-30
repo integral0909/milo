@@ -40,6 +40,7 @@
 # RUBY->MODEL->USER ==============================
 # ================================================
 class User < ActiveRecord::Base
+  attr_accessor :requested_amount
 
   # ----------------------------------------------
   # DEVISE ---------------------------------------
@@ -130,7 +131,7 @@ class User < ActiveRecord::Base
   # ----------------------------------------------
   # Decrease withdrawn amount from the users account balance
   def self.decrease_account_balance(user, amount)
-    user.account_balance -= amount
+    user.account_balance -= (amount.to_f * 100).round(0)
     user.save!
   end
 

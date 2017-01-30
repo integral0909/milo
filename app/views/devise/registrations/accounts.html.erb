@@ -1,4 +1,4 @@
-<% set_meta_tags :site => 'Bank Account • Settings • Milo' %>
+<% set_meta_tags :site => 'Bank Account • Settings • Shift' %>
 
 <div class="page-content">
   <div class="container">
@@ -10,20 +10,20 @@
         <% if @checking.present? %>
           <div class="connected-account">
             <%= link_to accounts_remove_path, data: { confirm: "Are you sure you want to remove this bank account?" }, remote: true, class: "ca-remove" do %>
-              Remove <i class="fa fa-question helper" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>Remove Account</strong>Removing your account will disable the automatic saving and transfer of funds from your checking into your Milo savings account."></i>
+              Remove <i class="fa fa-question helper" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>Remove Account</strong>Removing your account will disable the automatic saving and transfer of funds from your checking into your Shift savings account."></i>
             <% end %>
             <% if @user.bank_not_verified %>
               <%= link_to "Verify", new_user_account_path(user_id: current_user.id), class: "ca-verify", remote: true %>
             <% end %>
             <div class="ca-name"><%= @account.account_name %></div>
-            <div class="ca-number">XXXXXX <%= @account.bank_account_number.last(4) %></div>
+            <% if @account.bank_account_number %><div class="ca-number">XXXXXX <%= @account.bank_account_number.last(4) %></div><% end %>
             <% if @user.bank_not_verified %>
               <div class="ca-verify-message">In 1-3 business days, we'll make two deposits, under 10¢, into the account you provided. Please note the amounts, return to this page, and click "Verify" to enter the two amounts and finish connecting your account.</div>
             <% end %>
           </div>
         <% else %>
           <% if @accounts.present? %>
-            <p>Confirm the checking account that you would like to use with Milo.</p>
+            <p>Confirm the checking account that you would like to use with Shift.</p>
             <a href="/checkings/new" class="button -blue">Confirm</a>
             <div class="spacer -space-32"></div>
           <% else %>
@@ -35,7 +35,7 @@
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
           <%= devise_error_messages! %>
           <h6>On-Demand Transfers</h6>
-          <p>In order to save automatically and transfer funds from your checking into your Milo savings account we need your authorization. You may disable On-Demand Transfers, but doing so will disable transfers from your checking account to your Milo savings account until you re-enable.</p>
+          <p>In order to save automatically and transfer funds from your checking into your Shift savings account we need your authorization. You may disable On-Demand Transfers, but doing so will disable transfers from your checking account to your Shift savings account until you re-enable.</p>
           <fieldset class="checkbox">
             <label>
               <%= f.check_box :on_demand %>

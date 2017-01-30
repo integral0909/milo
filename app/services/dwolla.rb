@@ -13,11 +13,11 @@ module Dwolla
   # ----------------------------------------------
   def self.create_user(user)
     begin
-      # We don't save name in 2 seperate fields so append -Milo to the name
+      # We don't save name in 2 seperate fields so append -Shift to the name
       # TODO: add :ip_address => to customer creation with request.remote_ip
       request_body = {
         :firstName => user.name,
-        :lastName => '-Milo',
+        :lastName => '-Shift',
         :email => user.email
       }
 

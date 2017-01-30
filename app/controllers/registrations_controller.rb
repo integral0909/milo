@@ -41,11 +41,11 @@ class RegistrationsController < Devise::RegistrationsController
             if current_user.business
               notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", channel: '#signups', username: 'Milo Works', icon_emoji: ':moneybag:'
               user_count = User.where.not(business_id: nil).count
-              notifier.ping "#{current_user.business.name} (#{current_user.email}) just signed up! Milo currently has #{user_count} businesses!"
+              notifier.ping "#{current_user.business.name} (#{current_user.email}) just signed up! Shift currently has #{user_count} businesses!"
             else
               notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", channel: '#signups', username: 'Milo', icon_emoji: ':moneybag:'
               user_count = User.all.count
-              notifier.ping "#{current_user.name} (#{current_user.email}) just signed up! Milo currently has #{user_count} users!"
+              notifier.ping "#{current_user.email} just signed up! Shift currently has #{user_count} users!"
             end
           end
 
@@ -166,7 +166,7 @@ class RegistrationsController < Devise::RegistrationsController
     if current_user.invited
       signup_phone_path
     else
-      root_path
+      authenticated_root_path
     end
   end
 
@@ -175,7 +175,7 @@ class RegistrationsController < Devise::RegistrationsController
   # ----------------------------------------------
   # Route to direct user after profile update
   def after_update_path_for(resource)
-    root_path
+    authenticated_root_path
   end
 
   # ==============================================

@@ -7279,7 +7279,7 @@ img {
 * milosavings.com
 */
 /* line 9, /Users/justinseidl/Sites/milo/app/assets/stylesheets/utilities/_visible.scss */
-.milo-card.progress .progress-bar:after, .milo-card.quick-save .amount ul.ac-options:after, .milo-card.recurring .amount ul.ac-options:after, body.milo-app header nav:after, .hm-navbar:after, .hm-navbar nav.hm-nav:after, footer ul:after, .signup form.new_checking:after, section.section-goals .goal-icons:after, nav.setting-subheader:after, .timeline-wrapper:after {
+.milo-card.progress .progress-bar:after, .milo-card.quick-save .amount ul.ac-options:after, .milo-card.recurring .amount ul.ac-options:after, body.milo-app header nav:after, .signup form.new_checking:after, nav.setting-subheader:after {
   content: "";
   display: table;
   clear: both;
@@ -7910,6 +7910,11 @@ a.ssb.ssb-linkedin:hover {
   line-height: 1.2;
 }
 
+/* line 28, /Users/justinseidl/Sites/milo/app/assets/stylesheets/elements/_modals.scss */
+#plaid-link-button {
+  border: 10px solid pink;
+}
+
 /*
 * Milo
 * Copyright Milo 2016
@@ -8018,7 +8023,7 @@ a.ssb.ssb-linkedin:hover {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
   color: #8B999F;
   font-size: 0.875em;
-  padding: 24px;
+  padding: 16px;
   text-align: left;
 }
 /* line 27, /Users/justinseidl/Sites/milo/app/assets/stylesheets/elements/_tooltips.scss */
@@ -8336,412 +8341,6 @@ body.milo-app p {
 * Copyright Milo 2016
 * milosavings.com
 */
-/* line 8, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-body.milo-market {
-  background: #FFF;
-  overflow: hidden;
-  overflow-y: scroll;
-}
-
-/* line 14, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.container-fluid {
-  padding-right: 4rem;
-  padding-left: 4rem;
-}
-@media (max-width: 767px) {
-  /* line 14, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  .container-fluid {
-    padding-right: 0.9375rem;
-    padding-left: 0.9375rem;
-  }
-}
-/* line 23, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.container-fluid.-padding-120 {
-  padding-top: 120px;
-  padding-bottom: 120px;
-}
-@media (max-width: 767px) {
-  /* line 23, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  .container-fluid.-padding-120 {
-    padding-top: 64px;
-    padding-bottom: 64px;
-  }
-}
-@media (max-width: 479px) {
-  /* line 23, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  .container-fluid.-padding-120 {
-    padding-top: 32px;
-    padding-bottom: 32px;
-  }
-}
-
-/* line 40, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.hm-navbar {
-  background: inherit;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  box-sizing: border-box;
-  height: 80px;
-  padding: 20px 16px;
-  width: 100%;
-}
-/* line 49, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.hm-navbar a.logo-market {
-  color: #FFF;
-  float: left;
-  font-family: 'Futura Bold';
-  font-size: 2em;
-  line-height: 40px;
-  margin: 0 48px 0 0;
-  text-decoration: none;
-}
-/* line 59, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.hm-navbar nav.hm-nav {
-  float: left;
-}
-/* line 63, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.hm-navbar nav.hm-nav.hm-nav-right {
-  float: right;
-}
-/* line 66, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.hm-navbar nav.hm-nav.hm-nav-right a {
-  margin: 8px 0 8px 32px;
-}
-/* line 71, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.hm-navbar nav.hm-nav a {
-  color: #FFF;
-  display: block;
-  float: left;
-  line-height: 24px;
-  margin: 8px 32px 8px 0;
-  text-decoration: none;
-}
-/* line 79, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.hm-navbar nav.hm-nav a:hover, .hm-navbar nav.hm-nav a:focus, .hm-navbar nav.hm-nav a.active {
-  color: #4A90E2;
-}
-
-@media (max-width: 767px) {
-  /* line 87, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  section {
-    text-align: center;
-  }
-}
-/* line 93, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-section.feature {
-  padding: 120px 0;
-}
-@media (max-width: 767px) {
-  /* line 93, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  section.feature {
-    padding: 64px 0;
-  }
-}
-@media (max-width: 479px) {
-  /* line 93, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  section.feature {
-    padding: 32px 0;
-  }
-}
-/* line 105, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-section.-center {
-  text-align: center;
-}
-/* line 109, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-section p {
-  font-size: 1.5em;
-}
-@media (max-width: 767px) {
-  /* line 109, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  section p {
-    font-size: 1.25em;
-    margin: 0 0 32px;
-  }
-}
-@media (max-width: 479px) {
-  /* line 109, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  section p {
-    font-size: 1.125em;
-    margin: 0 0 16px;
-  }
-}
-/* line 123, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-section.-purple {
-  background-image: radial-gradient(circle farthest-side at bottom right, #4C3E70, #352D52);
-  padding: 0;
-}
-@media (max-width: 767px) {
-  /* line 123, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  section.-purple {
-    padding: 0;
-  }
-}
-@media (max-width: 479px) {
-  /* line 123, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  section.-purple {
-    padding: 0;
-  }
-}
-/* line 135, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-section.-purple h2, section.-purple p {
-  color: #FFF;
-}
-
-/* line 142, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-footer {
-  background: #FFF;
-  border-top: 1px solid #DDE1E2;
-  padding: 40px 0 40px;
-}
-@media (max-width: 767px) {
-  /* line 142, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  footer {
-    padding: 32px 0 20px;
-    -webkit-transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    -webkit-transition-property: -webkit-transform;
-    -moz-transition-property: -moz-transform;
-    transition-property: transform;
-    -webkit-transition-duration: 0.4s;
-    -moz-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-  }
-}
-@media (max-width: 479px) {
-  /* line 142, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  footer {
-    padding: 16px 0;
-  }
-}
-/* line 163, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-footer ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-/* line 169, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-footer ul li {
-  box-sizing: border-box;
-  float: left;
-  padding: 0 6% 0 0;
-  width: 33%;
-}
-@media (max-width: 767px) {
-  /* line 169, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  footer ul li {
-    float: none;
-    padding: 0;
-    width: 100%;
-  }
-}
-/* line 181, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-footer ul li span {
-  color: #292242;
-  display: block;
-  font-size: 1.25em;
-  margin: 0 0 24px;
-}
-@media (max-width: 767px) {
-  /* line 181, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  footer ul li span {
-    background: #FAFAFA;
-    border-radius: 4px;
-    margin: 8px 0 0;
-    padding: 8px 16px;
-  }
-}
-/* line 194, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-footer ul li span:hover, footer ul li span:focus {
-  color: #4C3E70;
-  outline: none;
-  text-decoration: none;
-}
-@media (max-width: 767px) {
-  /* line 202, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  footer ul ul {
-    background: #FAFAFA;
-    border-radius: 0 0 4px 4px;
-    display: none;
-    margin: -4px 0 0;
-    padding: 0 0 8px;
-  }
-}
-/* line 212, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-footer ul ul li {
-  float: none;
-  margin: 0 0 12px;
-  padding: 0;
-  width: auto;
-}
-@media (max-width: 767px) {
-  /* line 212, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  footer ul ul li {
-    margin: 0;
-  }
-  /* line 221, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  footer ul ul li:last-child a {
-    border-radius: 0 0 4px 4px;
-  }
-}
-/* line 226, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-footer ul ul li a {
-  color: #8B999F;
-  display: inline;
-  font-size: 1em;
-  margin: 0;
-}
-@media (max-width: 767px) {
-  /* line 226, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  footer ul ul li a {
-    border-radius: 0;
-    padding: 4px 16px;
-  }
-}
-/* line 237, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-footer ul ul li a:hover, footer ul ul li a:focus, footer ul ul li a.active {
-  color: #4A90E2;
-  text-decoration: none;
-}
-/* line 246, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-footer .footer-app span {
-  color: #292242;
-  display: block;
-  font-size: 1.25em;
-  margin: 0 0 24px;
-}
-@media (max-width: 479px) {
-  /* line 246, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  footer .footer-app span {
-    margin: 24px 0 8px;
-  }
-}
-/* line 257, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-footer .footer-app p strong {
-  font-size: 0.875em;
-}
-/* line 261, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-footer .footer-app img {
-  display: inline-block;
-  max-width: 140px;
-}
-@media (max-width: 479px) {
-  /* line 261, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  footer .footer-app img {
-    max-width: 136px;
-  }
-}
-/* line 269, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-footer .footer-app img.badge-app-store {
-  margin: 0 12px 0 0;
-}
-
-/* line 276, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.bottom-bar {
-  background: #FFF;
-  border-top: 1px solid #DDE1E2;
-  height: 60px;
-  padding: 10px 0;
-}
-@media (max-width: 767px) {
-  /* line 276, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  .bottom-bar {
-    -webkit-transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    -webkit-transition-property: -webkit-transform;
-    -moz-transition-property: -moz-transform;
-    transition-property: transform;
-    -webkit-transition-duration: 0.4s;
-    -moz-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-  }
-}
-@media (max-width: 479px) {
-  /* line 276, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  .bottom-bar {
-    height: auto;
-    padding: 16px 0;
-    text-align: center;
-  }
-}
-/* line 299, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.bottom-bar .copyright {
-  color: #8B999F;
-  float: left;
-  line-height: 40px;
-}
-@media (max-width: 479px) {
-  /* line 299, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  .bottom-bar .copyright {
-    font-size: 0.875em;
-  }
-}
-/* line 309, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.bottom-bar nav.social-footer-nav {
-  float: right;
-  margin: 0 0 0 20px;
-  padding: 8px 0;
-}
-@media (max-width: 479px) {
-  /* line 309, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  .bottom-bar nav.social-footer-nav {
-    margin: 0 0 8px;
-    padding: 8px 0;
-  }
-}
-/* line 317, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.bottom-bar nav.social-footer-nav a {
-  background: #BBC5C7;
-  border-radius: 4px;
-  color: #FFF;
-  display: inline-block;
-  font-size: 0.875em;
-  height: 24px;
-  line-height: 24px;
-  margin: 0 4px 0 0;
-  text-align: center;
-  width: 24px;
-}
-/* line 329, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.bottom-bar nav.social-footer-nav a:hover, .bottom-bar nav.social-footer-nav a:focus {
-  color: #FFF;
-  text-decoration: none;
-}
-/* line 334, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.bottom-bar nav.social-footer-nav a.sfn-facebook:hover {
-  background: #3B5998;
-}
-/* line 337, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.bottom-bar nav.social-footer-nav a.sfn-twitter:hover {
-  background: #55ACEE;
-}
-/* line 340, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.bottom-bar nav.social-footer-nav a.sfn-instagram:hover {
-  background: #517FA4;
-}
-/* line 343, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.bottom-bar nav.social-footer-nav a.sfn-angellist:hover {
-  background: #222;
-}
-/* line 348, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-.bottom-bar .footer-phone {
-  color: #CCC;
-  float: right;
-  font-size: 0.875em;
-  font-weight: 700;
-  line-height: 40px;
-}
-@media (max-width: 479px) {
-  /* line 348, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_market-layout.scss */
-  .bottom-bar .footer-phone {
-    float: none;
-    line-height: 1.6;
-  }
-}
-
-/*
-* Milo
-* Copyright Milo 2016
-* milosavings.com
-*/
 /* line 8, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_signup-layout.scss */
 body.milo-signup {
   background: #FAFAFA;
@@ -8990,559 +8589,64 @@ ul.signup-steps li span {
   text-decoration: none;
 }
 
-/*
-* Milo
-* Copyright Milo 2016
-* milosavings.com
-*/
-/* line 9, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_about.scss */
-header.head-market.-about {
-  height: auto;
-  min-height: auto;
+/* line 1, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/error-layout.scss */
+body.milo-errors {
+  background: #352D52;
 }
-
-/* line 14, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_about.scss */
-.about-img {
-  border-radius: 80px;
-  height: 160px;
-  margin: 0 auto 32px;
-  overflow: hidden;
-  width: 160px;
-}
-
-/*
-* Milo
-* Copyright Milo 2016
-* milosavings.com
-*/
-/* line 9, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_contact.scss */
-section.contact {
-  padding: 120px 0;
-}
-
-/*
-* Milo
-* Copyright Milo 2016
-* milosavings.com
-*/
-/* line 8, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-header.head-market {
-  background-image: radial-gradient(circle farthest-side at bottom right, #4C3E70, #352D52);
-  position: relative;
-  min-height: 640px;
-}
-/* line 13, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-header.head-market.-legal {
-  min-height: auto;
-}
-@media (max-width: 767px) {
-  /* line 8, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  header.head-market {
-    min-height: 88vh;
-  }
-}
-@media (max-width: 479px) {
-  /* line 8, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  header.head-market {
-    min-height: 92vh;
-  }
-}
-
-/* line 26, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-.milo-pattern {
-  background-image: url(/assets/bg-milo-pattern-f8d35d4ebd48710085005cc2845b9f9cada69caa72b4dd6e14eaa8db70ca6adc.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  bottom: 0;
-  left: 0;
-  position: relative;
-  right: 0;
-  top: 0;
-}
-
-/* line 38, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.hero.-home {
-  padding: 96px 0 160px;
-  text-align: center;
-}
-@media (max-width: 767px) {
-  /* line 38, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.hero.-home {
-    padding: 48px 0 64px;
-  }
-}
-/* line 46, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.hero.-home h1 {
+/* line 4, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/error-layout.scss */
+body.milo-errors a.signup-logo {
   color: #FFF;
+  display: block;
+  font-family: 'Futura Bold';
+  font-size: 2.625em;
+  margin: 32px 0 56px;
+  text-decoration: none;
 }
-/* line 50, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.hero.-home p {
-  color: #FFF;
-  font-size: 1.5em;
-  margin: 0 0 48px;
-}
-@media (max-width: 767px) {
-  /* line 50, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.hero.-home p {
-    font-size: 1.25em;
-    margin: 0 0 32px;
-  }
+/* line 12, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/error-layout.scss */
+body.milo-errors a.signup-logo:hover {
+  text-decoration: none;
 }
 @media (max-width: 479px) {
-  /* line 50, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.hero.-home p {
-    font-size: 1.125em;
-    margin: 0 0 16px;
-  }
-}
-
-/* line 67, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.section-roundups, section.section-progress {
-  min-height: 520px;
-  padding: 64px 0 80px;
-  position: relative;
-}
-@media (max-width: 767px) {
-  /* line 67, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.section-roundups, section.section-progress {
-    min-height: 0;
-    padding: 48px 0;
-  }
-}
-/* line 77, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.section-roundups img.round-ups-image, section.section-roundups img.progress-image, section.section-progress img.round-ups-image, section.section-progress img.progress-image {
-  height: auto;
-  left: -160px;
-  position: absolute;
-  top: -80px;
-  width: 700px;
-}
-@media (max-width: 767px) {
-  /* line 77, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.section-roundups img.round-ups-image, section.section-roundups img.progress-image, section.section-progress img.round-ups-image, section.section-progress img.progress-image {
-    display: block;
-    left: initial;
-    margin: 0 auto -54px;
-    position: relative;
-    top: -88px;
-    width: 88%;
-  }
-}
-/* line 94, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.section-roundups img.progress-image, section.section-progress img.progress-image {
-  left: initial;
-  right: -160px;
-}
-@media (max-width: 767px) {
-  /* line 94, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.section-roundups img.progress-image, section.section-progress img.progress-image {
-    right: initial;
-  }
-}
-/* line 103, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.section-roundups p, section.section-progress p {
-  margin: 0 0 40px;
-}
-@media (max-width: 767px) {
-  /* line 103, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.section-roundups p, section.section-progress p {
-    margin: 0 0 32px;
-  }
-}
-@media (max-width: 479px) {
-  /* line 103, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.section-roundups p, section.section-progress p {
-    margin: 0 0 16px;
-  }
-}
-
-/* line 116, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.section-goals {
-  background-image: radial-gradient(circle farthest-side at bottom right, #4C3E70, #352D52);
-  padding: 0;
-  text-align: center;
-}
-/* line 121, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.section-goals h2 {
-  color: #FFF;
-  margin: 0 0 32px;
-}
-/* line 126, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.section-goals .goal-icons {
-  margin: 0 0 32px;
-}
-/* line 130, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.section-goals .goal-icons img {
-  margin: 0 64px 0 0;
-  vertical-align: middle;
-  width: 80px;
-}
-@media (max-width: 767px) {
-  /* line 130, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.section-goals .goal-icons img {
-    margin: 0 24px 0 0;
-    width: 48px;
-  }
-  /* line 139, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.section-goals .goal-icons img.gi-car {
-    margin: 0;
-  }
-}
-/* line 144, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.section-goals .goal-icons img.gi-large {
-  width: 104px;
-}
-@media (max-width: 767px) {
-  /* line 144, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.section-goals .goal-icons img.gi-large {
-    width: 80px;
-  }
-}
-/* line 154, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.section-goals p {
-  color: #FFF;
-  margin: 0 0 64px;
-}
-@media (max-width: 767px) {
-  /* line 154, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.section-goals p {
-    margin: 0 0 32px;
-  }
-}
-@media (max-width: 479px) {
-  /* line 154, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.section-goals p {
-    margin: 0 0 16px;
-  }
-}
-
-/* line 168, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.section-manage {
-  padding: 120px 0 0;
-  text-align: center;
-}
-@media (max-width: 767px) {
-  /* line 168, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.section-manage {
-    padding: 0;
-  }
-}
-/* line 176, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.section-manage p {
-  margin: 0 0 80px;
-}
-@media (max-width: 767px) {
-  /* line 176, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.section-manage p {
-    margin: 0 0 40px;
-  }
-}
-@media (max-width: 479px) {
-  /* line 176, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.section-manage p {
-    margin: 0 0 24px;
-  }
-}
-
-/* line 189, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.section-get-started, section.section-security {
-  background-image: radial-gradient(circle farthest-side at bottom right, #4C3E70, #352D52);
-  padding: 0;
-  text-align: center;
-}
-/* line 194, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.section-get-started h2, section.section-get-started h3, section.section-security h2, section.section-security h3 {
-  color: #FFF;
-}
-/* line 198, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.section-get-started p, section.section-security p {
-  color: #FFF;
-  margin: 0 0 40px;
-}
-@media (max-width: 767px) {
-  /* line 198, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.section-get-started p, section.section-security p {
-    margin: 0 0 32px;
-  }
-}
-@media (max-width: 479px) {
-  /* line 198, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.section-get-started p, section.section-security p {
-    margin: 0 0 16px;
-  }
-}
-
-/* line 212, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.section-security {
-  text-align: left;
-}
-@media (max-width: 479px) {
-  /* line 212, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.section-security {
+  /* line 4, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/error-layout.scss */
+  body.milo-errors a.signup-logo {
+    margin: 16px auto;
     text-align: center;
   }
 }
-/* line 219, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-section.section-security img {
+
+/* line 23, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/error-layout.scss */
+.error-img {
   display: block;
-  margin: 64px auto 0;
-  max-width: 200px;
-}
-@media (max-width: 767px) {
-  /* line 219, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_home.scss */
-  section.section-security img {
-    margin: 0 auto 24px;
-    max-width: 120px;
-  }
-}
-
-/*
-* Milo
-* Copyright Milo 2016
-* milosavings.com
-*/
-/* line 9, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_legals.scss */
-section.hero.-legal {
-  padding: 64px 0;
-  text-align: center;
-}
-@media (max-width: 767px) {
-  /* line 9, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_legals.scss */
-  section.hero.-legal {
-    padding: 48px 0 64px;
-  }
-}
-/* line 17, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_legals.scss */
-section.hero.-legal h1 {
-  color: #FFF;
-}
-/* line 21, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_legals.scss */
-section.hero.-legal p {
-  color: #FFF;
-  font-size: 1.25em;
-  margin: 0 0 48px;
-}
-@media (max-width: 767px) {
-  /* line 21, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_legals.scss */
-  section.hero.-legal p {
-    font-size: 1.25em;
-    margin: 0 0 32px;
-  }
-}
-
-/* line 33, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_legals.scss */
-.legal-container {
-  padding: 80px 0;
-}
-
-/*
-* Milo
-* Copyright Milo 2016
-* milosavings.com
-*/
-/* line 9, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-section.hero.-security {
-  min-height: auto;
-  padding: 80px 0 0;
-  text-align: center;
-}
-@media (max-width: 479px) {
-  /* line 9, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-  section.hero.-security {
-    padding: 48px 0 0;
-  }
-}
-/* line 18, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-section.hero.-security span {
-  color: #FFF;
-  display: block;
-  font-size: 1em;
-  margin: 0 0 8px;
-}
-/* line 25, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-section.hero.-security h1 {
-  color: #FFF;
-}
-/* line 29, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-section.hero.-security p {
-  color: #FFF;
-}
-/* line 33, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-section.hero.-security .secure-highlights {
-  padding: 120px 0;
-}
-@media (max-width: 767px) {
-  /* line 33, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-  section.hero.-security .secure-highlights {
-    padding: 64px 0;
-  }
-}
-@media (max-width: 479px) {
-  /* line 33, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-  section.hero.-security .secure-highlights {
-    padding: 40px 0;
-  }
-}
-/* line 44, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-section.hero.-security .secure-highlights .secure-highlight {
-  padding: 0 8%;
-}
-/* line 47, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-section.hero.-security .secure-highlights .secure-highlight h6 {
-  color: #FFF;
-}
-/* line 51, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-section.hero.-security .secure-highlights .secure-highlight p {
-  color: #BBC5C7;
-  font-size: 1em;
-}
-
-/* line 59, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-.feature-circle {
-  background: #BBC5C7;
-  border-radius: 160px;
-  height: 320px;
   margin: 0 auto;
-  text-align: center;
-  width: 320px;
-}
-@media (max-width: 959px) {
-  /* line 59, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-  .feature-circle {
-    height: 240px;
-    width: 240px;
-  }
-  @-ms-viewport {
-    /* line 59, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-    .feature-circle {
-      width: 960px;
-    }
-  }
-}
-@media (max-width: 767px) {
-  /* line 59, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-  .feature-circle {
-    margin: 0 auto 24px;
-  }
-}
-/* line 76, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-.feature-circle img {
-  max-width: 160px;
-}
-@media (max-width: 959px) {
-  /* line 76, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-  .feature-circle img {
-    max-width: 120px;
-  }
-  @-ms-viewport {
-    /* line 76, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-    .feature-circle img {
-      width: 960px;
-    }
-  }
-}
-/* line 84, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-.feature-circle.-blue {
-  background: #4A90E2;
-  padding: 72px 0 0;
-}
-@media (max-width: 959px) {
-  /* line 84, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-  .feature-circle.-blue {
-    padding: 54px 0 0;
-  }
-  @-ms-viewport {
-    /* line 84, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-    .feature-circle.-blue {
-      width: 960px;
-    }
-  }
-}
-/* line 93, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-.feature-circle.-green {
-  background: #1ABD7D;
-  padding: 102px 0 0;
-}
-@media (max-width: 959px) {
-  /* line 93, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-  .feature-circle.-green {
-    padding: 76px 0 0;
-  }
-  @-ms-viewport {
-    /* line 93, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-    .feature-circle.-green {
-      width: 960px;
-    }
-  }
-}
-/* line 102, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-.feature-circle.-red {
-  background: #FF5455;
-  padding: 80px 0 0;
-}
-/* line 106, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-.feature-circle.-red img {
-  max-height: 160px;
-}
-@media (max-width: 959px) {
-  /* line 102, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-  .feature-circle.-red {
-    padding: 60px 0 0;
-  }
-  /* line 113, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-  .feature-circle.-red img {
-    max-height: 120px;
-  }
-  @-ms-viewport {
-    /* line 102, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-    .feature-circle.-red {
-      width: 960px;
-    }
-  }
+  max-width: 400px;
 }
 
-/* line 120, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-section.fine-print {
-  padding: 80px 0 160px;
-}
-@media (max-width: 767px) {
-  /* line 120, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-  section.fine-print {
-    padding: 40px 0 80px;
-  }
+/* line 29, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/error-layout.scss */
+.error-content {
+  margin: 0 0 0 24px;
 }
 @media (max-width: 479px) {
-  /* line 120, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-  section.fine-print {
-    padding: 24px 0 48px;
+  /* line 29, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/error-layout.scss */
+  .error-content {
+    margin: 48px 0;
+    text-align: center;
   }
 }
-/* line 131, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-section.fine-print p {
-  margin: 0 0 48px;
+/* line 37, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/error-layout.scss */
+.error-content h1 {
+  color: #FFF;
+  font-family: 'Futura Bold';
+  font-size: 8em;
+  margin: 0;
 }
-@media (max-width: 767px) {
-  /* line 131, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-  section.fine-print p {
-    margin: 0 0 32px;
-  }
+/* line 44, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/error-layout.scss */
+.error-content p {
+  color: #FFF;
+  margin: 0 0 4px;
 }
-@media (max-width: 479px) {
-  /* line 131, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-  section.fine-print p {
-    margin: 0 0 16px;
-  }
-}
-/* line 143, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-section.fine-print a:last-child {
-  margin: 0 0 0 20px;
-}
-@media (max-width: 479px) {
-  /* line 143, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_security.scss */
-  section.fine-print a:last-child {
-    margin: 8px 0 0 0;
-  }
+/* line 49, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/error-layout.scss */
+.error-content a:focus, .error-content a:hover {
+  color: #4A90E2;
 }
 
 /*
@@ -9599,181 +8703,46 @@ nav.setting-subheader a:hover, nav.setting-subheader a:focus {
   font-size: 0.75em;
 }
 /* line 57, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_settings.scss */
+.connected-account a.ca-verify {
+  float: right;
+  font-family: 'Futura Bold';
+  font-size: 0.75em;
+  line-height: 1;
+  margin: 18px 32px 18px 0;
+  text-transform: uppercase;
+}
+/* line 66, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_settings.scss */
 .connected-account a.ca-remove {
   color: #8B999F;
   float: right;
   font-family: 'Futura Bold';
   font-size: 0.75em;
   line-height: 1;
-  padding: 16px 0;
+  margin: 16px 0;
   text-transform: uppercase;
 }
-/* line 66, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_settings.scss */
+/* line 75, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_settings.scss */
 .connected-account a.ca-remove i.fa {
   font-size: 1em;
   margin: 0 0 0 4px;
 }
-/* line 71, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_settings.scss */
+/* line 80, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_settings.scss */
 .connected-account a.ca-remove:focus, .connected-account a.ca-remove:hover {
   color: #FF5455;
   text-decoration: none;
 }
-
-/*
-* Milo
-* Copyright Milo 2016
-* milosavings.com
-*/
-/* line 9, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-header.head-market.-works {
-  height: auto;
-  min-height: auto;
+/* line 86, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_settings.scss */
+.connected-account .ca-verify-message {
+  background: #4A90E2;
+  border-radius: 4px;
+  color: #FFF;
+  font-size: 0.875em;
+  line-height: 1.4;
+  margin: 16px 0 0;
+  padding: 12px;
 }
 
-/* line 15, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-.timeline-title {
-  margin: 0 0 64px;
-  text-align: center;
-}
-@media (max-width: 479px) {
-  /* line 15, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-  .timeline-title {
-    margin: 0 0 32px;
-    text-align: left;
-  }
-  /* line 23, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-  .timeline-title h2 {
-    margin: 0;
-  }
-}
-
-/* line 29, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-.timeline-wrapper {
-  margin: 0 0 80px;
-}
-@media (max-width: 479px) {
-  /* line 29, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-  .timeline-wrapper {
-    margin: 0 0 16px;
-  }
-}
-/* line 37, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-.timeline-wrapper .tw-item {
-  box-sizing: border-box;
-  float: left;
-  margin: 0 0 4px;
-  padding: 0 16% 0 4%;
-  position: relative;
-  text-align: left;
-  width: calc(50% + 12px);
-}
-@media (max-width: 479px) {
-  /* line 37, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-  .timeline-wrapper .tw-item {
-    float: right;
-    padding: 0 0 0 16%;
-    width: 100%;
-  }
-}
-/* line 52, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-.timeline-wrapper .tw-item p {
-  font-size: 1em;
-}
-/* line 56, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-.timeline-wrapper .tw-item.-right {
-  float: right;
-  padding: 0 4% 0 16%;
-}
-/* line 60, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-.timeline-wrapper .tw-item.-right .tw-point {
-  left: 0;
-  right: initial;
-}
-/* line 65, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-.timeline-wrapper .tw-item.-right .tw-bar {
-  left: 10px;
-  right: initial;
-}
-/* line 70, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-.timeline-wrapper .tw-item.-right .tw-dash {
-  left: 28px;
-  right: initial;
-}
-/* line 76, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-.timeline-wrapper .tw-item .tw-point {
-  border: 3px solid #352D52;
-  border-radius: 24px;
-  box-sizing: border-box;
-  height: 24px;
-  margin: 0 0 4px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 24px;
-}
-@media (max-width: 479px) {
-  /* line 76, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-  .timeline-wrapper .tw-item .tw-point {
-    left: 0;
-    right: initial;
-  }
-}
-/* line 93, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-.timeline-wrapper .tw-item .tw-bar {
-  background: #F1F3F6;
-  bottom: 0;
-  height: calc(100% - 28px);
-  position: absolute;
-  right: 10px;
-  width: 4px;
-}
-@media (max-width: 479px) {
-  /* line 93, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-  .timeline-wrapper .tw-item .tw-bar {
-    left: 10px;
-    right: initial;
-  }
-}
-/* line 107, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-.timeline-wrapper .tw-item .tw-dash {
-  border: 2px dashed #F1F3F6;
-  position: absolute;
-  right: 28px;
-  top: 10px;
-  width: 16%;
-}
-@media (max-width: 479px) {
-  /* line 107, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-  .timeline-wrapper .tw-item .tw-dash {
-    display: none;
-    visibility: hidden;
-  }
-}
-
-/* line 122, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-.timeline-actions {
-  margin: 0 0 120px;
-  text-align: center;
-}
-@media (max-width: 479px) {
-  /* line 122, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-  .timeline-actions {
-    margin: 0 0 40px;
-  }
-}
-/* line 130, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-.timeline-actions a.-blue {
-  margin: 0 0 0 20px;
-}
-@media (max-width: 479px) {
-  /* line 130, /Users/justinseidl/Sites/milo/app/assets/stylesheets/pages/_works.scss */
-  .timeline-actions a.-blue {
-    display: none;
-    visibility: hidden;
-  }
-}
-
-/* line 4, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 4, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-icon {
   background-position: center center;
   background-repeat: no-repeat;
@@ -9782,104 +8751,108 @@ header.head-market.-works {
   height: 18px;
   width: 18px;
 }
-/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-twitter {
   background-image: url(/assets/social-share-button/twitter-7b64ce0117a85c5d52ed45c27707af61d9b0e0d590284baa287cfe87867b9ae1.svg);
 }
-/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-facebook {
   background-image: url(/assets/social-share-button/facebook-03210e1663ee772e93ed5d344cdb36657b68342821aaebe982f2f984915990b3.svg);
 }
-/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-google_bookmark {
   background-image: url(/assets/social-share-button/google_bookmark-bb4c960c0421cb7dce602d10e744692bcc1c54f323410f4965d508f96e2255ce.svg);
 }
-/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-google_plus {
   background-image: url(/assets/social-share-button/google_plus-50c049fbb29cd3346f1bf9349017b644bcd00a53b56bd156728850f57bd85c0a.svg);
 }
-/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-weibo {
   background-image: url(/assets/social-share-button/weibo-a345a6ca554e6f388da9eb35746bb0425cb018c16408ba82852c66d375245d6f.svg);
 }
-/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-qq {
   background-image: url(/assets/social-share-button/qq-4dbae8223fc7823f6d73bc7fbe113eb894f4c174ec3ae93103ca382c78a2bf67.svg);
 }
-/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-delicious {
   background-image: url(/assets/social-share-button/delicious-0c55f72f821aae5352691f13eb64bf3435573e2169d0720477ed367b2f1ed28e.svg);
 }
-/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-linkedin {
   background-image: url(/assets/social-share-button/linkedin-b7fd42895b291003c444a9c2acf867ea813671e0b725a5d7c05dbb13f5c0fdd3.svg);
 }
-/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-tumblr {
   background-image: url(/assets/social-share-button/tumblr-330a37f93cce7c27a750188d0bfdbed3a22f566b807e64d21131dcdc94e08ec3.svg);
 }
-/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-pinterest {
   background-image: url(/assets/social-share-button/pinterest-86203d156197cce4087fee058b920d275c535df5fd59d8caa83da0ef41d1ec7f.svg);
 }
-/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-douban {
   background-image: url(/assets/social-share-button/douban-46298c27e3bc6d59951c0bbc464339a5ba1b44e3b25b571874f1baacd7af2495.svg);
 }
-/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-wechat {
   background-image: url(/assets/social-share-button/wechat-d8852cc3396a7a53eba39595d2e9f638c93a34ab1a0f41bae4ff391b63815f56.svg);
 }
-/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-vkontakte {
   background-image: url(/assets/social-share-button/vkontakte-0c2b68277fade991d74efcbdb6f7b359a35e65156cbada9625a3fe8f73151c14.svg);
 }
-/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-xing {
   background-image: url(/assets/social-share-button/xing-0ebccb4042c8c7220e471c4f569df2bf27da227db425525819b6848c86a1603e.svg);
 }
-/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-email {
   background-image: url(/assets/social-share-button/email-7067143cbe69d9d8cf25e67fda1a315d133c2b79074a09088bd712cc5c81135d.svg);
 }
-/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-reddit {
   background-image: url(/assets/social-share-button/reddit-f5fc462f44dbeff78983b3b64cb69b6c777a22906767bdb0b283014ac79b37de.svg);
 }
-/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 16, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .social-share-button .ssb-hacker_news {
   background-image: url(/assets/social-share-button/hacker_news-d89b13fec49355a787389a776f2e03a0a38314abf93777b8865f8c5f146eaf8d.svg);
 }
 
-/* line 22, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 22, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .ss-wechat-dialog {
-  width: 270px;
-  height: 300px;
+  width: 300px;
   position: fixed;
   background: #fff;
-  padding: 10px;
-  border: solid 1px #ddd;
+  padding: 15px;
+  border-radius: 3px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
   z-index: 11001;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.2em;
 }
-/* line 33, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 33, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
+.ss-wechat-dialog .wechat-popup-header {
+  font-weight: bold;
+}
+/* line 37, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .ss-wechat-dialog .wechat-dialog-qr {
   text-align: center;
-  margin: 10px 0px;
+  margin: 25px 0px;
 }
-/* line 38, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 42, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .ss-wechat-dialog .wechat-popup-close {
   width: 16px;
   height: 16px;
   position: absolute;
-  right: 0px;
+  right: 10px;
   top: 10px;
   color: #999;
   text-decoration: none;
   font-size: 16px;
 }
-/* line 49, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.1/app/assets/stylesheets/social-share-button.scss */
+/* line 53, /Users/justinseidl/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/social-share-button-0.8.5/app/assets/stylesheets/social-share-button.scss */
 .ss-wechat-dialog .wechat-popup-footer {
   text-align: left;
   line-height: 22px;

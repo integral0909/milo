@@ -19,7 +19,7 @@ class GoalsController < ApplicationController
     @goal = current_user.goals.build(goal_params)
     if @goal.save
       flash[:success] = "Goal created!"
-      redirect_to root_path
+      redirect_to authenticated_root_path
     else
       render 'home/index'
     end
@@ -36,7 +36,7 @@ class GoalsController < ApplicationController
         Goal.mark_as_completed(@goal)
       end
       flash[:success] = "Goal Saved!"
-      redirect_to root_path
+      redirect_to authenticated_root_path
     else
       render 'home/index'
     end
@@ -48,7 +48,7 @@ class GoalsController < ApplicationController
   def destroy
     @goal.destroy
     flash[:success] = "Goal deleted"
-    redirect_to request.referrer || root_path
+    redirect_to request.referrer || authenticated_root_path
   end
 
   # ==============================================

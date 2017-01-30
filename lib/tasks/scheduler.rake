@@ -31,8 +31,10 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
         biz_owner = biz_account(user)
 
         # run weekly_roundup for all users with checking accounts
-        if user && biz_owner.nil?
+        if user && biz_owner.nil? && !user.pause_savings && !user.bank_not_verified
           puts "pulled roundups for #{user.email}"
+
+        # run weekly_roundup for all users with checking accounts that are verified
           Dwolla.weekly_roundup(user, ck)
         end
 
@@ -76,8 +78,10 @@ task :create_weekly_transactions, [:user_id] => :environment do |t, args|
         biz_owner = biz_account(user)
 
         # run create_weekly_transactions for all users with checking accounts
-        if user && biz_owner.nil?
+
+        if user && biz_owner.nil? && !user.bank_not_verified
           puts "pulled transactions for #{user.email}"
+
           PlaidHelper.create_weekly_transactions(user, ck)
         end
       end

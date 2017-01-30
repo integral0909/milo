@@ -1,4 +1,4 @@
-<% set_meta_tags :site => 'Overview • Milo' %>
+<% set_meta_tags :site => 'Overview • Shift' %>
 
 <% if current_user.invited %>
   <% if @accounts.present? || (@transactions && !@transactions.empty?) %>
@@ -9,7 +9,7 @@
             <div class="col-md-12">
               <div class="milo-card">
                 <div class="mc-title">Checking Account</div>
-                <p>Now that we have connected with your account/s we need to confirm the checking account that you would like to use with Milo.</p>
+                <p>Now that we have connected with your account/s we need to confirm the checking account that you would like to use with Shift.</p>
                 <a href="/checkings/new" class="button -blue">Confirm</a>
               </div>
             </div>
@@ -23,7 +23,7 @@
             <div class="col-md-12">
               <%= render "layouts/messages" %>
               <% if @checking.present? && @user.bank_not_verified %>
-                <div class="home-verify-message">Looks like we still need you to verify your account. If you've already recieved the micro-deposits, click <a class="verify-link" href="/settings/accounts">here</a> to get connected!.</div>
+                <div class="home-verify-message">Looks like we still need you to verify your account. If you've already recieved the micro-deposits, click <a class="verify-link" href="/settings/accounts">here</a> to get connected!</div>
               <% end %>
               <% if !@biz %>
                 <div class="milo-card progress">
@@ -61,7 +61,13 @@
                   <div class="mc-title">Contributions</div>
                   <div class="av-total">$<%= @total_contrib ? @total_contrib : "0.00" %></div>
                 <% else %>
-                  <div class="mc-title">Account Value</div>
+                  <div class="mc-title">Account Value
+                    <span style="float:right">
+                      <% if @account_balance %>
+                          <a class="mc-edit" data-toggle="modal" data-target="#withdrawFunds">Withdraw</a>
+                      <% end %>
+                    </span>
+                  </div>
                   <div class="av-total">$<%= @account_balance ? @account_balance : "0.00" %></div>
                 <% end %>
               </div>
@@ -148,7 +154,7 @@
         <div class="row">
           <div class="col-md-12">
             <h6>Connect Bank Account</h6>
-            <p>Before you can begin using Milo we need to connect a bank account that we can track, calculate round ups and transfer funds to and from your Milo savings account.</p>
+            <p>Before you can begin using Shift we need to connect a bank account that we can track, calculate round ups and transfer funds to and from your Shift savings account.</p>
             <a href="/users/<%= current_user.id %>/accounts" class="button -blue">Connect Account</a>
           </div>
         </div>
@@ -164,4 +170,6 @@
   <% if @current_goal %>
     <%= render 'goals/modal_edit_goal' %>
   <% end %>
+  <!-- load withdraw funds modal -->
+  <%= render 'accounts/withdraw_funds' %>
 <% end %>

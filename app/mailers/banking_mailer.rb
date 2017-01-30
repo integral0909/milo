@@ -6,7 +6,7 @@ class BankingMailer < ApplicationMailer
   # ----------------------------------------------
   # DEFAULT SETTINGS -----------------------------
   # ----------------------------------------------
-  default from: 'noreply@milosavings.com'
+  default from: 'noreply@shiftsavings.com'
 
   # ----------------------------------------------
   # ACCOUNT-ADDED --------------------------------
@@ -15,7 +15,7 @@ class BankingMailer < ApplicationMailer
   def account_added(user, funding_account)
    @funding_account = funding_account
    @user = user
-   mail(to: @user.email, subject: 'You are now connected with Milo!')
+   mail(to: @user.email, subject: 'You are now connected with Shift!')
   end
 
   # ----------------------------------------------
@@ -25,7 +25,7 @@ class BankingMailer < ApplicationMailer
   def longtail_account_added(user, funding_account)
    @funding_account = funding_account
    @user = user
-   mail(to: @user.email, subject: 'Verify you bank account on Milo.')
+   mail(to: @user.email, subject: 'Verify you bank account on Shift.')
   end
 
   # ----------------------------------------------
@@ -38,7 +38,19 @@ class BankingMailer < ApplicationMailer
    @funding_account = find_account(funding_account)
    @user = user
    @tech_fee_charged = tech_fee_charged
-   mail(to: @user.email, subject: 'Your Milo transfer has started.')
+   mail(to: @user.email, subject: 'Your Shift transfer has started.')
+  end
+
+  # ----------------------------------------------
+  # WITHDRAW-START -------------------------------
+  # ----------------------------------------------
+  # email to send user when the Dwolla transfer starts
+  def withdraw_start(user, roundup_amount, funding_account)
+    puts "withdraw started"
+   @roundup_amount = roundup_amount
+   @funding_account = find_account(funding_account)
+   @user = user
+   mail(to: @user.email, subject: 'Your Shift withdrawal has started.')
   end
 
   # ----------------------------------------------
@@ -51,7 +63,7 @@ class BankingMailer < ApplicationMailer
    @funding_account = find_account(funding_account)
    @user = user
    @tech_fee_charged = tech_fee_charged
-   mail(to: @user.email, subject: 'Success! You just saved some cash with Milo.')
+   mail(to: @user.email, subject: 'Success! You just saved some cash with Shift.')
   end
 
   # ----------------------------------------------
@@ -63,7 +75,7 @@ class BankingMailer < ApplicationMailer
    @roundup_amount = roundup_amount
    @funding_account = find_account(funding_account)
    @user = user
-   mail(to: @user.email, bcc: 'dev@milosavings.com', subject: 'Transfer to Milo failed.')
+   mail(to: @user.email, bcc: 'dev@shiftsavings.com', subject: 'Transfer to Shift failed.')
   end
 
   # ----------------------------------------------
@@ -73,7 +85,7 @@ class BankingMailer < ApplicationMailer
   def bank_account_removed(user, funding_account)
    @user = user
    @funding_account = find_account(funding_account)
-   mail(to: @user.email, subject: 'Bank account successfully removed from Milo.')
+   mail(to: @user.email, subject: 'Bank account successfully removed from Shift.')
   end
 
   # ----------------------------------------------
@@ -82,7 +94,7 @@ class BankingMailer < ApplicationMailer
   # ----------------------------------------------
   def tech_fee_charged(total_fees_collected)
    @fees_collected = total_fees_collected
-   mail(to:'finance@milosavings.com', bcc: 'admin@milosavings.com', subject: 'Milo Technology Fees Report')
+   mail(to:'finance@shiftsavings.com', bcc: 'admin@shiftsavings.com', subject: 'Shift Technology Fees Report')
   end
 
   # ----------------------------------------------
@@ -113,7 +125,7 @@ class BankingMailer < ApplicationMailer
   # TODO :: email to send employer when transfer has started for employees.
   def transfer_start_employer(user)
    @user = user
-   mail(to: @user.email, subject: 'Welcome to Milo!')
+   mail(to: @user.email, subject: 'Welcome to Shift!')
   end
 
   # ----------------------------------------------
