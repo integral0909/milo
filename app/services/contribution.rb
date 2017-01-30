@@ -16,6 +16,8 @@ module Contribution
       # add the pending_contribution to the user
       !@user.pending_contribution.nil? ? @user.pending_contribution += @contribution_amount : @user.pending_contribution = @contribution_amount
 
+      Contribution.add_employer_contribution
+
       # Check if the date coincides with the contribution frequency
       if Contribution.contribution_due?
 
@@ -29,7 +31,6 @@ module Contribution
         # Add employer contribution amount to the user
         !@user.employer_contribution.nil? ? @user.employer_contribution += @user.pending_contribution : @user.employer_contribution = @user.pending_contribution
 
-        Contribution.add_employer_contribution
 
         # reset pending contributions
         @user.pending_contribution = nil
@@ -39,7 +40,6 @@ module Contribution
 
   # Increase contribution total to the business
   def self.add_employer_contribution
-    byebug
     # add amount to current_contribution to pull when all round ups are finished
     !@employer.current_contribution.nil? ? @employer.current_contribution += @contribution_amount : @employer.current_contribution = @contribution_amount
 

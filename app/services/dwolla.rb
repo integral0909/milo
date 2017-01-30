@@ -180,7 +180,7 @@ module Dwolla
     @charge_tech_fee = false
 
     # if it's the first round up of the month, the user is not an admin and the user is not associated with a business, charge the tech fee.
-    @charge_tech_fee = true  if ((current_date.day <= 7) && !user.admin && user.business_id.nil? )
+    @charge_tech_fee = true if ((current_date.day <= 7) && !user.admin && user.business_id.nil? )
 
     BankingMailer.transfer_start(user, roundup_amount, funding_account, @charge_tech_fee).deliver_now
     begin
@@ -220,7 +220,7 @@ module Dwolla
       current_transfer_status = transfer_status.status
 
       # Save transfer data
-      Transfer.create_transfers(user, nil, current_transfer_url, current_transfer_status, roundup_amount, total_transactions, "deposit", current_date, @charge_tech_fee)
+      Transfer.create_transfers(user, "", current_transfer_url, current_transfer_status, roundup_amount, total_transactions, "deposit", current_date, @charge_tech_fee)
 
       # add the roundup amount to the users balance
       User.add_account_balance(user, roundup_amount)

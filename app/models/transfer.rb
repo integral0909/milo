@@ -5,6 +5,7 @@
 #  id                               :integer          not null, primary key
 #  dwolla_url                       :string
 #  user_id                          :string
+#  business_id                      :string
 #  roundup_count                    :string
 #  roundup_amount                   :string
 #  status                           :string
