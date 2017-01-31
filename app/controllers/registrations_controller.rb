@@ -71,7 +71,7 @@ class RegistrationsController < Devise::RegistrationsController
       if session[:referral]
         redirect_to new_user_registration_path(referral: session[:referral]), :flash => {:alert => resource.errors.full_messages.join(", ")}
       else
-        redirect_to new_user_registration_path, :flash => {:alert => resource.errors.full_messages.join(", ")}
+        redirect_to :back, :flash => {:alert => resource.errors.full_messages.join(", ")}
       end
     end
   end
