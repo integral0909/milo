@@ -174,7 +174,6 @@ ActiveRecord::Schema.define(version: 20170126032526) do
     t.integer  "account_balance"
     t.boolean  "long_tail"
     t.boolean  "bank_not_verified"
-    t.boolean  "pause_savings"
     t.integer  "business_id"
     t.string   "invitation_token"
     t.datetime "invitation_created_at"
@@ -184,6 +183,7 @@ ActiveRecord::Schema.define(version: 20170126032526) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.integer  "invitations_count",      default: 0
+    t.boolean  "pause_savings"
     t.integer  "employer_contribution"
     t.integer  "pending_contribution"
   end

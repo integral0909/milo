@@ -34,12 +34,12 @@
         <% else %>
           <%= link_to settings_path, class: "add-avatar" do %>
             <%= image_tag("img-add-avatar.png", alt: "Add avatar") %>
+          <% end %>
         <% end %>
       </div>
       <h5><%= current_user.business && current_user.business.name ? current_user.business.name : current_user.name %></h5>
       <span><%= current_user.city if current_user.city %><% if current_user.city? && current_user.state? %>, <% end %><%= current_user.state if current_user.state %></span>
     </div>
-    <% end %>
     <nav>
       <a href="/" class="<%= active_page_class?('/')%>"><i class="fa fa-home"></i> Overview</a>
       <% if @biz_owner %>
