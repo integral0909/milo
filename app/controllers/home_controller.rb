@@ -66,7 +66,7 @@ class HomeController < ApplicationController
     # emplyer home page info
     if @biz
       @total_contrib = number_to_currency(@biz.total_contribution / 100.00, unit:"") if @biz.total_contribution
-      @total_employees = User.where(business_id: @biz.id).count
+      @total_employees = User.where(business_id: @biz.id).count - 1
     end
 
     @employer_contrib = number_to_currency(@user.employer_contribution / 100.00, unit:"") if @user.employer_contribution

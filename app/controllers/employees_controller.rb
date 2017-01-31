@@ -12,7 +12,7 @@ class EmployeesController < ApplicationController
   # INDEX ----------------------------------------
   # ----------------------------------------------
   def index
-    @employees = User.where(business_id: current_user.business_id).all.order(id: :desc)
+    @employees = User.where(business_id: @biz.id).all.order(id: :desc)
 
     set_employee_data
   end
