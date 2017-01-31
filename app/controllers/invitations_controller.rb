@@ -54,7 +54,7 @@ class InvitationsController < Devise::InvitationsController
   def edit
     set_minimum_password_length
     resource.invitation_token = params[:invitation_token]
-    render :edit
+    render :edit, layout: "signup"
   end
 
   # ----------------------------------------------

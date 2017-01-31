@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # Devise
 
-  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords' }, :skip => [:sessions, :registrations]
+  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords', invitations: 'invitations' }, :skip => [:sessions, :registrations]
 
     resources :users, :only => [:show] do
     resources :transactions, only: [:index, :show, :edit, :update]

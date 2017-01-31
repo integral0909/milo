@@ -1,6 +1,6 @@
 <%= t("devise.mailer.invitation_instructions.hello", name: @resource.name) %>
 
-<%= t("devise.mailer.invitation_instructions.someone_invited_you", url: root_url) %>
+<%= t("devise.mailer.invitation_instructions.someone_invited_you", url: unauthenticated_root_url) %>
 
 <%= accept_invitation_url(@resource, :invitation_token => @token) %>
 
