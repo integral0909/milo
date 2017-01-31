@@ -62,6 +62,15 @@ class HomeController < ApplicationController
     if (@user.invited && !@user.is_verified)
       redirect_to signup_phone_path
     end
+
+    # emplyer home page info
+    if @biz
+      @total_contrib = number_to_currency(@biz.total_contribution / 100.00, unit:"") if @biz.total_contribution
+      @total_employees = User.where(business_id: @biz.id).count - 1
+    end
+
+    @employer_contrib = number_to_currency(@user.employer_contribution / 100.00, unit:"") if @user.employer_contribution
+    @pending_contrib = number_to_currency(@user.pending_contribution / 100.00, unit:"") if @user.pending_contribution
   end
 
   # ----------------------------------------------
@@ -100,10 +109,10 @@ class HomeController < ApplicationController
   private
 
   # ----------------------------------------------
-  # SET-TRANSFER-AVERAGE --------------------------
+  # SET-TRANSFER-AVERAGE -------------------------
+  # ----------------------------------------------
   # transfers: All the transfers associated with the user
   # return: The average transfer amount
-  # ----------------------------------------------
   def set_transfer_average(transfers)
     all_transfer_amounts = transfers.map {|tr| tr.roundup_amount.to_f }
     all_transfer_average= (all_transfer_amounts.inject{ |sum, el| sum + el }.to_f / all_transfer_amounts.size)
@@ -111,9 +120,9 @@ class HomeController < ApplicationController
   end
 
   # ----------------------------------------------
-  # SET-PENDING-ROUNDUPS --------------------------
-  # return: This weeks pending round ups and pending round up total
+  # SET-PENDING-ROUNDUPS -------------------------
   # ----------------------------------------------
+  # return: This weeks pending round ups and pending round up total
   def set_pending_roundups
     @transactions = PlaidHelper.current_week_transactions(@user, @checking)
     @total_pending = 0

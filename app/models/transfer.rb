@@ -5,6 +5,7 @@
 #  id                               :integer          not null, primary key
 #  dwolla_url                       :string
 #  user_id                          :string
+#  business_id                      :string
 #  roundup_count                    :string
 #  roundup_amount                   :string
 #  status                           :string
@@ -17,15 +18,16 @@
 # RUBY->MODEL->TRANSFER ==========================
 # ================================================
 class Transfer < ActiveRecord::Base
-
+  belongs_to :business
 
   # ----------------------------------------------
   # TRANSFER-CREATE ------------------------------
   # ----------------------------------------------
-  def self.create_transfers(user, transfer_url, transfer_status, roundup_amount, roundup_count, transfer_type, current_date, tech_fee_charged)
+  def self.create_transfers(user, biz_id, transfer_url, transfer_status, roundup_amount, roundup_count, transfer_type, current_date, tech_fee_charged)
     # creat transfer object on roundup deposit
     Transfer.create(
       user_id: user.id,
+      business_id: biz_id,
       dwolla_url: transfer_url,
       status: transfer_status,
       roundup_amount: roundup_amount,

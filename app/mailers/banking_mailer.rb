@@ -98,12 +98,54 @@ class BankingMailer < ApplicationMailer
   end
 
   # ----------------------------------------------
+  # BIZ-TECH-FEE-SUCCESS -------------------------
+  # ----------------------------------------------
+  # email to send user when the transfer was successful
+  def biz_tech_fee_success(user, fee_charged)
+    puts "Biz tech fee charged"
+   @fee_charged = fee_charged
+   @user = user
+   mail(to: @user.email, subject: 'Automatic Transfer Successful for Milo')
+  end
+
+  # ----------------------------------------------
+  # BIZ-TECH-FEE-FAILED -------------------------
+  # ----------------------------------------------
+  # email to send user when the transfer was successful
+  def biz_tech_fee_failed(user, fee_charged)
+    puts "Biz tech fee charged"
+   @fee_charged = fee_charged
+   @user = user
+   mail(to: @user.email, subject: 'Automatic Transfer Failed for Milo')
+  end
+
+  # ----------------------------------------------
   # TRANSFER-START-EMPLOYER ----------------------
   # ----------------------------------------------
   # TODO :: email to send employer when transfer has started for employees.
   def transfer_start_employer(user)
    @user = user
    mail(to: @user.email, subject: 'Welcome to Shift!')
+  end
+
+  # ----------------------------------------------
+  # Email for successful business contribution withdraw
+  # ----------------------------------------------
+  def biz_contributions_successful(biz, biz_owner, contribution)
+   @biz = biz
+   @contribution = contribution
+   @owner = biz_owner
+   mail(to: @owner.email, subject: 'Contributions have been sent!')
+  end
+
+  # ----------------------------------------------
+  # Email for failed business contribution withdraw
+  # ----------------------------------------------
+  def biz_contributions_failed(biz, biz_owner, contribution)
+   @biz = biz
+   @contribution = contribution
+   @owner = biz_owner
+   mail(to: @owner.email, subject: 'Emplyoee Contributions Failed for Milo!')
   end
 
   # ----------------------------------------------

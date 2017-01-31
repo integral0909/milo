@@ -37,14 +37,16 @@
           <% end %>
         <% end %>
       </div>
-      <% if current_user.name %>
-        <h5><%= current_user.name %></h5>
-      <% end %>
+      <h5><%= current_user.business && current_user.business.name ? current_user.business.name : current_user.name %></h5>
       <span><%= current_user.city if current_user.city %><% if current_user.city? && current_user.state? %>, <% end %><%= current_user.state if current_user.state %></span>
     </div>
     <nav>
       <a href="/" class="<%= active_page_class?('/')%>"><i class="fa fa-home"></i> Overview</a>
-      <a href="/roundups" class="<%= active_page_class?('/roundups')%>"><i class="fa fa-circle-o"></i> Round Ups <!--<span>8</span>--></a>
+      <% if @biz_owner %>
+        <a href="/employees" class="<%= active_page_class?('/employees')%>"><i class="fa fa-user"></i> Employees</a>
+      <% else %>
+        <a href="/roundups" class="<%= active_page_class?('/roundups')%>"><i class="fa fa-circle-o"></i> Round Ups <!--<span>8</span>--></a>
+      <% end %>
       <!--<a href="#"><i class="fa fa-exchange"></i> Transfer</a>-->
       <a href="/history" class="<%= active_page_class?('/history')%>"><i class="fa fa-clock-o"></i> History</a>
       <a href="/settings" class="<%= active_control_class?('registrations') %>"><i class="fa fa-gear"></i> Settings</a>

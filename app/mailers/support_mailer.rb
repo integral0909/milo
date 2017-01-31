@@ -44,8 +44,20 @@ class SupportMailer < ApplicationMailer
   # ----------------------------------------------
   # email to send support when adding a user to Dwolla fails
   def add_dwolla_user_failed(user, error)
-   @error = error
-   @user = user
-   mail(to: 'dev@shiftsavings.com', subject: "Dwolla Sign Up Failed for #{@user.email}")
+    @error = error
+    @user = user
+    mail(to: 'dev@shiftsavings.com', subject: "Dwolla Sign Up Failed for #{@user.email}")
+  end
+
+  # ----------------------------------------------
+  # ADD-DWOLLA-USER-FAILED -----------------------
+  # ----------------------------------------------
+  # email to send support when adding a user to Dwolla fails
+  def support_biz_contributions_failed(biz, contribution, error)
+    @error = error
+    @biz = biz
+    @contribution = contribution
+    @user = User.find(biz.owner)
+    mail(to: 'dev@shiftsavings.com', subject: "Contributions failed for #{@biz.name}")
   end
 end

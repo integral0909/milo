@@ -32,6 +32,8 @@
 #  account_balance                  :integer
 #  long_tail                        :boolean
 #  bank_not_verified                :boolean
+#  employer_contribution            :integer
+#  pending_contribution             :integer
 #
 
 # ================================================
@@ -43,18 +45,25 @@ class User < ActiveRecord::Base
   # ----------------------------------------------
   # DEVISE ---------------------------------------
   # ----------------------------------------------
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :trackable, :validatable, :timeoutable, :lockable
 
   # ----------------------------------------------
   # RELATIONS ------------------------------------
   # ----------------------------------------------
+  belongs_to :business
+
   has_one  :checking
 
   has_many :accounts
   has_many :goals, dependent: :destroy
   has_many :public_tokens
   has_many :transactions
+
+  # ----------------------------------------------
+  # NESTED-ATTRIBUTES ----------------------------
+  # ----------------------------------------------
+  accepts_nested_attributes_for :business
 
   # ----------------------------------------------
   # VALIDATIONS ----------------------------------
@@ -103,8 +112,17 @@ class User < ActiveRecord::Base
   # ----------------------------------------------
   # Add round up amount to the users account balance
   def self.add_account_balance(user, amount)
-    # Save the roundup amount in cents
-    !user.account_balance.nil? ? user.account_balance += (amount.to_f * 100).round(0) : user.account_balance = (amount.to_f * 100).round(0)
+    # roundup amount converted to cents
+    amount_in_cents = (amount.to_f * 100).round(0)
+
+    # Add current roundups
+    self.add_roundup(user, amount_in_cents)
+
+    # Check if the user is associated with a business
+    if !user.business_id.nil?
+      Contribution.run_employer_contribution(user, amount_in_cents)
+    end
+
     user.save!
   end
 
@@ -140,6 +158,10 @@ class User < ActiveRecord::Base
   # PRIVATE ======================================
   # ==============================================
   private
+
+  def self.add_roundup(user, amount)
+    !user.account_balance.nil? ? user.account_balance += amount : user.account_balance = amount
+  end
 
   # ----------------------------------------------
   # EMAIL-UNIQUE ---------------------------------

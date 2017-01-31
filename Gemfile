@@ -40,7 +40,8 @@ gem 'social-share-button'
 # gem 'capistrano-rails', group: :development
 
 # User Accounts with Devise
-gem 'devise'
+gem 'devise', '~> 4.2'
+gem 'devise_invitable', '~> 1.7.0'
 
 # Upload Images
 gem 'paperclip'
@@ -85,6 +86,9 @@ gem "brakeman", :require => false
 
 # Store sessions in Active Record instead of cookies
 gem 'activerecord-session_store'
+
+# helper to determain the week of the month, specific fork to resolve `beginning_of_week` conflict with gem
+gem 'week_of_month', :git => 'https://github.com/kobaltz/week-of-month.git'
 
 group :production, :staging do
   gem 'rails_12factor'

@@ -73,10 +73,6 @@ module Dwolla
     end
   end
 
-  # ----------------------------------------------
-  # INIT-MICRO-DEPOSITS --------------------------
-  # ----------------------------------------------
-  # send micro-deposits to the user for account confirmation
   def self.init_micro_deposits(user, user_checking, funding_account)
     begin
       Dwolla.set_dwolla_token
@@ -89,9 +85,6 @@ module Dwolla
     end
   end
 
-  # ----------------------------------------------
-  # CONFIRM-MICRO-DEPOSITS -----------------------
-  # ----------------------------------------------
   # confirm micro-deposits for long_tail accounts
   def self.confirm_micro_deposits(deposit1, deposit2, user, account)
     begin
@@ -186,8 +179,8 @@ module Dwolla
   def self.withdraw_roundups(user, roundup_amount, total_transactions, funding_account, current_date)
     @charge_tech_fee = false
 
-    # if it's the first round up of the month and the user is not an admin, charge the tech fee.
-    @charge_tech_fee = true  if ((current_date.day <= 7) && !user.admin)
+    # if it's the first round up of the month, the user is not an admin and the user is not associated with a business, charge the tech fee.
+    @charge_tech_fee = true if ((current_date.day <= 7) && !user.admin && user.business_id.nil? )
 
     BankingMailer.transfer_start(user, roundup_amount, funding_account, @charge_tech_fee).deliver_now
     begin
@@ -215,6 +208,8 @@ module Dwolla
           :tech_fee_charged => @charge_tech_fee
         }
       }
+
+
       Dwolla.set_dwolla_token
       transfer = @dwolla_app_token.post "transfers", request_body
       current_transfer_url = transfer.headers[:location]
@@ -225,7 +220,7 @@ module Dwolla
       current_transfer_status = transfer_status.status
 
       # Save transfer data
-      Transfer.create_transfers(user, current_transfer_url, current_transfer_status, roundup_amount, total_transactions, "deposit", current_date, @charge_tech_fee)
+      Transfer.create_transfers(user, "", current_transfer_url, current_transfer_status, roundup_amount, total_transactions, "deposit", current_date, @charge_tech_fee)
 
       # add the roundup amount to the users balance
       User.add_account_balance(user, roundup_amount)
@@ -242,9 +237,6 @@ module Dwolla
     end
   end
 
-  # ----------------------------------------------
-  # REMOVE-FUNDING-SOURCE ------------------------
-  # ----------------------------------------------
   # Remove funding source from Dwolla
   def self.remove_funding_source(user)
     begin
@@ -270,35 +262,33 @@ module Dwolla
     end
   end
 
-  # ----------------------------------------------
-  # SEND-FUNDS-TO-USER ---------------------------
-  # ----------------------------------------------
-  # send funds the user requested to withdraw
-  def self.send_funds_to_user(user, requested_amount)
-    begin
-      current_date = Date.today
+  # Charge tech fee for all employees associated with the business
+  def self.charge_biz_tech_fee(biz, user, checking)
+    employee_count = User.where(business_id: biz.id).count
+    fee_amount = number_to_currency((employee_count * 3), unit:"")
 
-      transfer_request = {
+    begin
+      request_body = {
         :_links => {
           :source => {
-            :href => "https://api-uat.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE"]}"
+            :href => user.dwolla_funding_source
           },
           :destination => {
-            :href => user.dwolla_id
+            :href => "https://api-uat.dwolla.com/accounts/#{ENV["DWOLLA_ACCOUNT_ID"]}"
           }
         },
         :amount => {
           :currency => "USD",
-          :value => requested_amount
+          :value => fee_amount
         },
         :metadata => {
-          :customerId => user.id
+          :biz_id => biz.id,
         }
       }
-      Dwolla.set_dwolla_token
-      # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
-      transfer = @dwolla_app_token.post "transfers", transfer_request
 
+      # Create Dwolla token and make the transfer request
+      Dwolla.set_dwolla_token
+      transfer = @dwolla_app_token.post "transfers", request_body
       current_transfer_url = transfer.headers[:location]
 
       # Get the status of the current transfer
@@ -306,23 +296,80 @@ module Dwolla
       transfer_status = @dwolla_app_token.get current_transfer_url
       current_transfer_status = transfer_status.status
 
-      # Save the withdraw as a transfer. Params are the user, transfer_url, transfer_status, roundup_amount, roundup_count, transfer_type, current_date, tech_fee_charged
-      Transfer.create_transfers(user, current_transfer_url, current_transfer_status, requested_amount, "", "withdraw", current_date, false)
+      # Save transfer data
+      Transfer.create_transfers(user, biz.id, current_transfer_url, current_transfer_status, fee_amount, "", "deposit", Date.today, true)
 
-      # decrease the requested amount from the user's account balance
-      User.decrease_account_balance(user, requested_amount)
-      # send email to user about funds being transfered to their account.
-      funding_account  = Checking.find_by_user_id(user.id)
-      BankingMailer.withdraw_start(user, requested_amount, funding_account).deliver_now
+      puts "$#{fee_amount}"
+
+      # Email the user that the tech fee was successfully charged
+      BankingMailer.biz_tech_fee_success(user, fee_amount).deliver_now
     rescue => e
-      # send email to dev team about failed transfer to user
-      SupportMailer.user_withdraw_failed(user, requested_amount, e).deliver_now
+      # Email the user that there was an issue when withdrawing the round up
+      BankingMailer.biz_tech_fee_failed(user, fee_amount).deliver_now
+      # Email support that there was an issue when withdrawing the round up
+      SupportMailer.support_transfer_failed_notice(user, fee_amount, e).deliver_now
+    end
+  end
+
+  # Charge tech fee for all employees associated with the business
+  def self.withdraw_employer_contribution
+    Business.all.each do |biz|
+      # only run withdraw if employer has contributions
+      if biz.current_contribution
+        biz_owner = User.find(biz.owner)
+        ck = Checking.find_by_user_id(biz_owner.id)
+        # convert to dollars since we save in cents
+        contribution = number_to_currency((biz.current_contribution.to_f / 100), unit:"")
+        begin
+          request_body = {
+            :_links => {
+              :source => {
+                :href => biz_owner.dwolla_funding_source
+              },
+              :destination => {
+                :href => "https://api-uat.dwolla.com/accounts/#{ENV["DWOLLA_ACCOUNT_ID"]}"
+              }
+            },
+            :amount => {
+              :currency => "USD",
+              :value => contribution
+            },
+            :metadata => {
+              :biz_id => biz.id,
+            }
+          }
+
+          # Create Dwolla token and make the transfer request
+          Dwolla.set_dwolla_token
+          transfer = @dwolla_app_token.post "transfers", request_body
+          current_transfer_url = transfer.headers[:location]
+
+          # Get the status of the current transfer
+          Dwolla.set_dwolla_token
+          transfer_status = @dwolla_app_token.get current_transfer_url
+          current_transfer_status = transfer_status.status
+
+          # Save transfer data
+          Transfer.create_transfers(biz_owner, biz.id, current_transfer_url, current_transfer_status, contribution, "", "deposit", Date.today, true)
+
+          puts "Employer contribution: $#{contribution}"
+
+          # Email the user that the tech fee was successfully charged
+          BankingMailer.biz_contributions_successful(biz, biz_owner, contribution).deliver_now
+          # reset current_contribution to nil.
+          Business.reset_current_contribution(biz.id)
+        rescue => e
+          # Email the user that there was an issue when withdrawing the round up
+          BankingMailer.biz_contributions_failed(biz, biz_owner, contribution).deliver_now
+          # Email support that there was an issue when withdrawing the round up
+          SupportMailer.support_biz_contributions_failed(biz, contribution, e).deliver_now
+        end
+      end
     end
   end
 
   # reset the dwolla app token
   def self.set_dwolla_token
-    @dwolla_app_token = $dwolla.auths.client
+    @dwolla_app_token.nil? ? @dwolla_app_token = $dwolla.auths.client : @dwolla_app_token
   end
-
 end

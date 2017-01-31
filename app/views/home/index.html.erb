@@ -25,29 +25,31 @@
               <% if @checking.present? && @user.bank_not_verified %>
                 <div class="home-verify-message">Looks like we still need you to verify your account. If you've already recieved the micro-deposits, click <a class="verify-link" href="/settings/accounts">here</a> to get connected!</div>
               <% end %>
-              <div class="milo-card progress">
-                <% if (@current_goal) %>
-                  <div class="mc-title">
-                    <a class="mc-edit" data-toggle="modal" data-target="#editGoal"><i class="fa fa-pencil"></i></a>
-                    <span><em><%= @user.account_balance ? number_to_currency(@user.account_balance / 100.00) : "0" %></em> / $<%= @current_goal.amount %></span>
-                    <%= @current_goal.name %>
-                  </div>
-                  <div class="progress-bar">
-                    <% unless @goal_percentage == 0 %>
-                      <div class="current-progress" style="width: <%= @goal_percentage %>%"></div>
-                    <% end %>
-                    <div class="bar one"></div>
-                    <div class="bar two"></div>
-                    <div class="bar three"></div>
-                    <div class="bar four"></div>
-                    <div class="bar five"></div>
-                    <div class="bar six"></div>
-                    <div class="bar seven"></div>
-                  </div>
-                <% else %>
-                  <div class="mc-title">Create a Goal</div>
-                  <p>Make a bigger impact and set a goal to motivate yourself to save for an important financial goal like a college education, new home or vacation.</p>
-                  <button type="button" class="button -blue" data-toggle="modal" data-target="#setGoal">Set Goal</button>
+              <% if !@biz %>
+                <div class="milo-card progress">
+                  <% if @current_goal %>
+                    <div class="mc-title">
+                      <a class="mc-edit" data-toggle="modal" data-target="#editGoal"><i class="fa fa-pencil"></i></a>
+                      <span><em><%= @user.account_balance ? number_to_currency(@user.account_balance / 100.00) : "0" %></em> / $<%= @current_goal.amount %></span>
+                      <%= @current_goal.name %>
+                    </div>
+                    <div class="progress-bar">
+                      <% unless @goal_percentage == 0 %>
+                        <div class="current-progress" style="width: <%= @goal_percentage %>%"></div>
+                      <% end %>
+                      <div class="bar one"></div>
+                      <div class="bar two"></div>
+                      <div class="bar three"></div>
+                      <div class="bar four"></div>
+                      <div class="bar five"></div>
+                      <div class="bar six"></div>
+                      <div class="bar seven"></div>
+                    </div>
+                  <% else %>
+                    <div class="mc-title">Create a Goal</div>
+                    <p>Make a bigger impact and set a goal to motivate yourself to save for an important financial goal like a college education, new home or vacation.</p>
+                    <button type="button" class="button -blue" data-toggle="modal" data-target="#setGoal">Set Goal</button>
+                  <% end %>
                 <% end %>
               </div>
             </div>
@@ -55,15 +57,33 @@
           <div class="row">
             <div class="col-md-12">
               <div class="milo-card account-value">
-                <div class="mc-title">Account Value
-                  <span style="float:right">
-                    <% if @account_balance %>
-                        <a class="mc-edit" data-toggle="modal" data-target="#withdrawFunds">Withdraw</a>
-                    <% end %>
-                  </span>
-                </div>
-                <div class="av-total">$<%= @account_balance ? @account_balance : "0.00" %></div>
+                <% if @biz_owner %>
+                  <div class="mc-title">Contributions</div>
+                  <div class="av-total">$<%= @total_contrib ? @total_contrib : "0.00" %></div>
+                <% else %>
+                  <div class="mc-title">Account Value
+                    <span class="pull-right">
+                      <% if @account_balance %>
+                          <a class="mc-edit" data-toggle="modal" data-target="#withdrawFunds">Withdraw</a>
+                      <% end %>
+                    </span>
+                  </div>
+                  <div class="av-total">$<%= @account_balance ? @account_balance : "0.00" %></div>
+                <% end %>
               </div>
+              <% if @user.business_id && !@biz %>
+                <div class="milo-card account-value">
+                    <div class="mc-title">Employer Contributions</div>
+                    <span>
+                      <p>Total Contributions:
+                        <span class="pull-right">Pending Contributions:<span>
+                        </p>
+                      <div class="av-total">$<%= @employer_contrib ? @employer_contrib : "0.00" %>
+                        <span class="pull-right">$<%= @pending_contrib ? @pending_contrib : "0.00" %></span>
+                      </div>
+                    </span>
+                </div>
+              <% end %>
             </div>
           </div>
           <div id="mobile" class="row">
@@ -101,35 +121,45 @@
                 <a href="/history">View History</a>
               </div>
             </div>
-            <!--
-            <div class="col-md-6">
-              <div class="milo-card quick-save">
-                <div class="mc-title">Quick Save</div>
-                <div class="amount">+$20.00</div>
-                <button class="button -full -green">Save</button>
+            <% if @biz %>
+              <div class="col-md-6">
+                <div class="milo-card quick-save">
+                  <div class="mc-title">Employees</div>
+                  <div class="amount"><%= @total_employees %></div>
+                  <a href="/employees" class="button -blue -full">Manage</a>
+                </div>
               </div>
-            </div>
-            -->
+            <% else %>
+              <!-- <div class="col-md-6">
+                <div class="milo-card quick-save">
+                  <div class="mc-title">Quick Save</div>
+                  <div class="amount">+$20.00</div>
+                  <button class="button -full -green">Save</button>
+                </div>
+              </div> -->
+            <% end %>
           </div>
         </div>
       </div>
-      <div class="sidebar">
-        <div class="pending-roundups">
-          <div class="pr-title">Pending Round Ups</div>
-          <% if @transactions.present? %>
-            <ul class="pr-list">
-              <% @transactions.each do |t| %>
-                <% if t[:amount] > 0 %>
-                  <li>+ <%= number_to_currency(t[:roundup].round(2)) %><span><strong><%= number_to_currency(t[:amount].round(2)) %></strong> <%= t[:trans_name] %></span></li>
+      <% if !@biz %>
+        <div class="sidebar">
+          <div class="pending-roundups">
+            <div class="pr-title">Pending Round Ups</div>
+            <% if @transactions.present? %>
+              <ul class="pr-list">
+                <% @transactions.each do |t| %>
+                  <% if t[:amount] > 0 %>
+                    <li>+ <%= number_to_currency(t[:roundup].round(2)) %><span><strong><%= number_to_currency(t[:amount].round(2)) %></strong> <%= t[:trans_name] %></span></li>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </ul>
-            <small>Total: <strong><%= number_to_currency(@total_pending.round(2)) %></strong></small>
-          <% else %>
-            <small>No current roundups available.</small>
-          <% end %>
+              </ul>
+              <small>Total: <strong><%= number_to_currency(@total_pending.round(2)) %></strong></small>
+            <% else %>
+              <small>No current roundups available.</small>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   <% else %>
     <div class="page-content">

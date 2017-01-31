@@ -32,11 +32,21 @@ class RegistrationsController < Devise::RegistrationsController
         if resource.active_for_authentication?
           # set_flash_message! :notice, :signed_up
           sign_up(resource_name, resource)
+          # add user_id as business owner
+          if resource.business_id
+            Business.add_business_owner(current_user, resource.business_id)
+          end
           # Slack Notification for Sign Up
           if Rails.env == "production"
-            notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", channel: '#signups', username: 'Milo', icon_emoji: ':moneybag:'
-            user_count = User.all.count
-            notifier.ping "#{current_user.email} just signed up! Shift currently has #{user_count} users!"
+            if current_user.business
+              notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", channel: '#signups', username: 'Milo Works', icon_emoji: ':moneybag:'
+              user_count = User.where.not(business_id: nil).count
+              notifier.ping "#{current_user.business.name} (#{current_user.email}) just signed up! Shift currently has #{user_count} businesses!"
+            else
+              notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", channel: '#signups', username: 'Milo', icon_emoji: ':moneybag:'
+              user_count = User.all.count
+              notifier.ping "#{current_user.email} just signed up! Shift currently has #{user_count} users!"
+            end
           end
 
           # send welcome email
@@ -177,14 +187,14 @@ class RegistrationsController < Devise::RegistrationsController
   # SIGN-UP-PARAMS -------------------------------
   # ----------------------------------------------
   def sign_up_params
-    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :invited, :agreement, :mobile_number, :is_verified, :on_demand)
+    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :invited, :agreement, :mobile_number, :is_verified, :on_demand, business_attributes: [:name, :address, :city, :state, :zip])
   end
 
   # ----------------------------------------------
   # ACCOUNT-UPDATE-PARAMS ------------------------
   # ----------------------------------------------
   def account_update_params
-    params.require(:user).permit(:referral_code, :name, :address, :city, :state, :zip, :email, :password, :password_confirmation, :current_password, :invited, :agreement, :mobile_number, :is_verified, :on_demand, :avatar)
+    params.require(:user).permit(:referral_code, :name, :address, :city, :state, :zip, :email, :password, :password_confirmation, :current_password, :invited, :agreement, :mobile_number, :is_verified, :on_demand, :avatar, business_attributes: [:id, :name, :address, :city, :state, :zip])
   end
 
 end

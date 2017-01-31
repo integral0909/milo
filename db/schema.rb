@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170102182501) do
+ActiveRecord::Schema.define(version: 20170126032526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,10 +39,14 @@ ActiveRecord::Schema.define(version: 20170102182501) do
 
   create_table "businesses", force: :cascade do |t|
     t.string   "name"
-    t.decimal  "contribution", precision: 8, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "frequency"
+    t.integer  "owner"
+    t.integer  "current_contribution"
+    t.integer  "total_contribution"
+    t.integer  "max_contribution"
+    t.integer  "match_percent"
   end
 
   create_table "checkings", force: :cascade do |t|
@@ -126,7 +130,10 @@ ActiveRecord::Schema.define(version: 20170102182501) do
     t.string   "roundup_amount"
     t.string   "date"
     t.boolean  "tech_fee_charged"
+    t.integer  "business_id"
   end
+
+  add_index "transfers", ["business_id"], name: "index_transfers_on_business_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -177,6 +184,8 @@ ActiveRecord::Schema.define(version: 20170102182501) do
     t.string   "invited_by_type"
     t.integer  "invitations_count",      default: 0
     t.boolean  "pause_savings"
+    t.integer  "employer_contribution"
+    t.integer  "pending_contribution"
   end
 
   add_index "users", ["business_id"], name: "index_users_on_business_id", using: :btree
@@ -188,4 +197,5 @@ ActiveRecord::Schema.define(version: 20170102182501) do
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   add_foreign_key "goals", "users"
+  add_foreign_key "transfers", "businesses"
 end
