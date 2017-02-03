@@ -64,7 +64,7 @@ class EmployeesController < ApplicationController
 
   def set_total_contribution(e)
     if e.employer_contribution
-      return number_to_currency((e.employer_contribution / 100))
+      number_to_currency(e.employer_contribution.round(2) / 100)
     end
   end
 
