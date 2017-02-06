@@ -14,7 +14,7 @@ body.milo-signup {
     font-family: 'Brandon Black';
     font-size: 3em;
     letter-spacing: -1px;
-    margin: 32px 0 64px;
+    margin: 40px 0;
     text-decoration: none;
 
     &:hover {
@@ -93,6 +93,10 @@ form.email-signup {
   .button {
     margin: 0 0 24px;
   }
+}
+
+h6.help-header {
+  margin-top: 24px;
 }
 
 // Help Links
