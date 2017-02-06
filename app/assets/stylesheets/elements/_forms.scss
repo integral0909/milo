@@ -11,7 +11,7 @@
 
   label {
     color: #BBC5C7;
-    font-family: 'Futura Bold';
+    font-family: 'Brandon Black';
     font-size: 0.688em;
     margin: 0 0 4px;
     text-transform: uppercase;
@@ -32,6 +32,11 @@
 // Checkboxes
 .checkbox {
   margin: 0 0 32px;
+
+  label {
+    font-size: 0.875em;
+    line-height: 1.6;
+  }
 }
 
 .form-section {

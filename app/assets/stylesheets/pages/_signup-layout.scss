@@ -6,14 +6,15 @@
 
 
 body.milo-signup {
-  background: #FAFAFA;
+  background: #F8FAFB;
 
   a.signup-logo {
     color: #352D52;
     display: block;
-    font-family: 'Futura Bold';
-    font-size: 2.625em;
-    margin: 32px 0 56px;
+    font-family: 'Brandon Black';
+    font-size: 3em;
+    letter-spacing: -1px;
+    margin: 32px 0 64px;
     text-decoration: none;
 
     &:hover {
@@ -30,49 +31,13 @@ body.milo-signup {
 // Sign Up Form
 .signup {
   background: #FFF;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0, 0.16);
   margin: 0 0 24px;
   padding: 40px;
 
   @include breakpoint(l-one) {
     margin: 0 0 20px;
     padding: 24px 12px;
-  }
-
-  h1 {
-    color: #292242;
-    font-family: 'Futura Bold';
-    font-size: 2em;
-    margin: 0 0 40px;
-    text-align: center;
-
-    &.marg-16 {
-      margin: 0 0 16px;
-    }
-
-    @include breakpoint(l-three) {
-      font-size: 1.625em;
-      margin: 0 0 16px;
-    }
-
-    span {
-      color: #BBC5C7;
-      display: block;
-      font-family: 'Futura Bold';
-      font-size: 0.48em;
-      margin: 0 0 12px;
-      text-transform: uppercase;
-    }
-  }
-
-  p {
-    font-size: 1em;
-    margin: 0 0 24px;
-    padding: 0;
-    text-align: center;
-
-    &.on-demand {
-      text-align: left;
-    }
   }
 
   form.new_checking {
@@ -130,87 +95,26 @@ form.email-signup {
   }
 }
 
-.social-signup {
-  margin: 24px 0 0;
+// Help Links
+a.help-link {
+  color: #292242;
+  display: block;
+  line-height: 24px;
+  margin: 8px 0 24px 16px;
 
-  a.btn-social {
-    background: #666;
-    border-radius: 4px;
-    box-sizing: border-box;
-    color: #FFF;
-    display: block;
-    font-size: 1.2em;
-    height: 48px;
-    line-height: 48px;
-    margin: 0 0 8px;
-    padding: 0 16px;
-    width: 100%;
+  &:focus, &:hover {
+    text-decoration: underline;
+  }
 
-    &.-facebook {
-      background: #3B5998;
-
-      &:hover { background: #30497E; }
-    }
-
-    &.-twitter {
-      background: #55ACEE;
-
-      &:hover { background: #4690C8; }
-    }
-
-    &.-google {
-      background: #4885ED;
-      margin: 0 0 24px;
-
-      &:hover { background: #3D73CD; }
-    }
-
-    &:hover, &:focus {
-      text-decoration: none;
-    }
-
-    i.fa {
-      margin: 0 12px 0 0;
-      width: 16px;
-    }
+  i.fa {
+    font-size: 1.25em;
+    margin: 0 8px 0 0;
+    vertical-align: middle;
   }
 }
 
-// Sign Up Steps
-ul.signup-steps {
-  list-style: none;
-  margin: 32px 0 0 24px;
-  padding: 0;
-
-  @include breakpoint(l-three) {
-    display: none;
-    visibility: hidden;
-  }
-
-  li {
-    color: #BBC5C7;
-    height: 16px;
-    line-height: 16px;
-    margin: 0 0 20px;
-
-    &.active {
-      color: #4C3E70;
-
-      span {
-        background: #4C3E70;
-      }
-    }
-
-    span {
-      background: #DDE1E2;
-      border-radius: 8px;
-      display: inline-block;
-      height: 16px;
-      margin: 0 12px 0 0;
-      vertical-align: top;
-      width: 16px;
-    }
-  }
+p.additional-help {
+  font-size: 0.875em;
 }
 
 // Plaid Link Button
@@ -221,10 +125,10 @@ ul.signup-steps {
   box-sizing: border-box;
   color: #4A90E2;
   display: block;
-  font-family: 'Futura Bold';
+  font-family: 'Brandon Black';
   font-size: 1.125em;
-  height: 50px;
-  line-height: 46px;
+  height: 48px;
+  line-height: 44px;
   padding: 0;
   text-align: center;
   width: 100%;
