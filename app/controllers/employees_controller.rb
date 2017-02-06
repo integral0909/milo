@@ -44,7 +44,8 @@ class EmployeesController < ApplicationController
 
       transfers = Transfer.where(user_id: e.id)
       if !transfers.empty?
-        emp['last_contrib'] = transfers.last.roundup_amount
+        amount = (transfers.last.roundup_amount.to_f)
+        emp['last_contrib'] = Contribution.employer_contribution(amount, @biz)
       end
       @emp_data << emp
     end
