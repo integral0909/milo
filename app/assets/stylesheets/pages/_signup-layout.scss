@@ -10,7 +10,7 @@ body.milo-signup {
 
   a.signup-logo {
     color: #352D52;
-    display: block;
+    display: inline-block;
     font-family: 'Brandon Black';
     font-size: 3em;
     letter-spacing: -1px;
@@ -57,32 +57,6 @@ body.milo-signup {
         font-size: 0.75em;
         font-style: normal;
       }
-    }
-  }
-}
-
-.shared-links {
-  margin: 0 0 64px;
-  padding: 24px 0 0;
-  text-align: center;
-
-  a.shared-link {
-    border-right: 1px solid #DDE1E2;
-    color: #BBC5C7;
-    display: inline-block;
-    padding: 0 20px 0 12px;
-
-    &:focus, &:hover {
-      color: #4A90E2;
-    }
-
-    &.-first {
-      padding-left: 0;
-    }
-
-    &.-last {
-      border-right: 0;
-      padding-right: 0;
     }
   }
 }
@@ -135,6 +109,7 @@ p.additional-help {
   line-height: 44px;
   padding: 0;
   text-align: center;
+  text-transform: uppercase;
   width: 100%;
 
   &:hover, &:focus {

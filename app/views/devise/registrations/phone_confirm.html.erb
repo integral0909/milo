@@ -3,26 +3,26 @@
 %>
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-2">
+  <div class="col-md-6 col-md-offset-1">
     <div class="signup">
-      <h1 class="marg-16"><span>Mobile Number</span> Confirm Number</h1>
-      <p>Please submit the 6-digit code we just sent to:<br/><strong><%= @user.mobile_number %></strong></p>
+      <h5>Confirm Identity</h5>
       <%= render "layouts/messages" %>
       <%= form_tag(verifications_path, method: "patch") %>
         <fieldset class="form-group">
           <label>Confirmation Code</label>
-          <%= text_field_tag('verification_code', "", class: "form-control") %>
+          <%= number_field_tag('verification_code', "", class: "form-control") %>
         </fieldset>
         <div class="spacer -space-16"></div>
-        <button type="submit" class="button -full -blue">Continue</button>
+        <button type="submit" class="button -full -blue">Confirm</button>
       </form>
     </div>
   </div>
   <div class="col-md-4">
-    <ul class="signup-steps">
-      <li><span></span> Basic Info</li>
-      <li class="active"><span></span> Mobile Number</li>
-      <li><span></span> Checking Account</li>
-    </ul>
+    <h6 class="help-header">Confirm Your Number</h6>
+    <p>To confirm your identity submit the 6-digit code we just sent to:</p>
+    <p><strong>+1 <%= @user.mobile_number %></strong></p>
+    <p>Use our <a href="http://support.shiftsavings.com/" target="_blank">support center</a> if you have any questions regarding your sign up.</p>
+    <a href="http://support.shiftsavings.com/signing-up/phone-confirmation" target="_blank" class="help-link"><i class="fa fa-question"></i> Support: Phone Confirmation</a>
+    <p class="additional-help">Need additional help? Chat with us below or <a href="https://www.shiftsavings.com/contact" target="_blank">send us an email</a> with your question.</p>
   </div>
 </div>

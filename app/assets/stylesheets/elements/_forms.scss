@@ -1,7 +1,7 @@
 /*
-* Milo
-* Copyright Milo 2016
-* milosavings.com
+* Shift
+* Copyright Shift 2017
+* bank.shiftsavings.com
 */
 
 
@@ -22,11 +22,30 @@
     padding: 12px 16px;
   }
 
+  .input-group-addon {
+    background: #F8FAFB;
+    border: 1px solid #DDE1E2;
+    color: #606B6F;
+    font-weight: 700;
+
+    &:first-child {
+      border-right: 0;
+    }
+  }
+
   small {
     color: #BBC5C7;
     font-size: 100%;
     line-height: 2.4;
   }
+}
+
+p label {
+  color: #BBC5C7;
+  font-family: 'Brandon Black';
+  font-size: 0.688em;
+  margin: 0 8px 4px 0;
+  text-transform: uppercase;
 }
 
 // Checkboxes

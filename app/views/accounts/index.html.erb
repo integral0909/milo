@@ -3,20 +3,21 @@
 %>
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-2">
+  <div class="col-md-6 col-md-offset-1">
     <div class="signup">
-      <h1 class="marg-16"><span>Checking Account</span> Connect Your Bank</h1>
-      <p>Select your bank account to begin saving.</p>
-      <!-- Plaid Link form -->
+      <h5>Bank Account</h5>
+      <p>To begin saving securely connect a primary checking account. This allows Shift to transfer round ups from your bank account to your Shift savings account.</p>
+      <p><label>Checking Accounts Only</label><i class="fa fa-question helper" data-toggle="tooltip" data-placement="top" data-html="true" title="<h6>Checking Account</h6><p>Shift currently only supports the monitoring of checking accounts. We are working on the ability to connect credit cards and should be available shortly."></i></p>
+      <div class="spacer -space-16"></div>
       <form id="plaid-link-form" method="POST" action="/users/<%= @user.id %>/add_account" ></form>
     </div>
   </div>
   <div class="col-md-4">
-    <ul class="signup-steps">
-      <li><span></span> Basic Info</li>
-      <li><span></span> Mobile Number</li>
-      <li class="active"><span></span> Checking Account</li>
-    </ul>
+    <h6 class="help-header">Safe and Safe</h6>
+    <p>We partner with <a href="https://plaid.com/security/" target="_blank">Plaid</a> to provide an industry leading, safe and secure way to connect your bank account with Shift.</p>
+    <p>All funds transferred into your Shift savings account are FDIC Insured. Use our <a href="http://support.shiftsavings.com/" target="_blank">support center</a> if you have any questions regarding your sign up.</p>
+    <a href="http://support.shiftsavings.com/signing-up/connect-bank" target="_blank" class="help-link"><i class="fa fa-question"></i> Support: Connect Bank</a>
+    <p class="additional-help">Need additional help? Chat with us below or <a href="https://www.shiftsavings.com/contact" target="_blank">send us an email</a> with your question.</p>
   </div>
 </div>
 

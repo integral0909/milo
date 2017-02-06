@@ -10,7 +10,10 @@
       <%= form_tag(verifications_path, method: "post" ) %>
         <fieldset class="form-group">
           <label>Mobile Phone</label>
-          <%= text_field_tag(:mobile_number, "", class: "form-control") %>
+          <div class="input-group">
+            <span class="input-group-addon">+1</span>
+            <%= telephone_field_tag(:mobile_number, "", class: "form-control", placeholder: "(xxx) xxx-xxxx") %>
+          </div>
         </fieldset>
         <div class="spacer -space-16"></div>
         <%=button_tag('Continue', type: "submit", class: "button -full -blue")%>
@@ -20,7 +23,7 @@
   <div class="col-md-4">
     <h6>What's Your Number?</h6>
     <p>For added security verify your identity by associating a mobile phone number with your account. Use our <a href="http://support.shiftsavings.com" target="_blank">support center</a> if you have any questions regarding your sign up.</p>
-    <a href="#" target="_blank" class="help-link"><i class="fa fa-question"></i> Support: Phone Verification</a>
+    <a href="http://support.shiftsavings.com/signing-up/phone-verification" target="_blank" class="help-link"><i class="fa fa-question"></i> Support: Phone Verification</a>
     <p class="additional-help">Need additional help? Chat with us below or <a href="https://www.shiftsavings.com/contact" target="_blank">send us an email</a> with your question.</p>
   </div>
 </div>
