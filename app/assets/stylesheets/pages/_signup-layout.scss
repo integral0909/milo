@@ -33,7 +33,7 @@ body.milo-signup {
   background: #FFF;
   box-shadow: 0 1px 4px 0 rgba(0,0,0, 0.16);
   margin: 0 0 24px;
-  padding: 40px;
+  padding: 40px 40px 48px;
 
   @include breakpoint(l-one) {
     margin: 0 0 20px;
@@ -41,20 +41,23 @@ body.milo-signup {
   }
 
   form.new_checking {
-    border-bottom: 1px solid #DDE1E2;
-    padding: 16px;
+    border-bottom: 1px solid #F1F3F6;
+    padding: 12px 8px;
     @extend %clear;
 
     span.checking-name {
       color: #292242;
       display: inline-block;
-      font-family: 'Futura Bold';
+      font-family: 'Brandon Black';
+      font-size: 0.875em;
       line-height: 1.2;
+      margin: 4px 0 0;
+      text-transform: uppercase;
       vertical-align: middle;
 
       em {
-        color: #8B999F;
-        font-size: 0.75em;
+        color: #BBC5C7;
+        font-size: 0.875em;
         font-style: normal;
       }
     }
