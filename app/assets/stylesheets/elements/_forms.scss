@@ -56,6 +56,18 @@ p label {
     font-size: 0.875em;
     line-height: 1.6;
   }
+
+  &.-on-demand {
+    padding: 8px 0 0 16px;
+
+    label {
+      color: #BBC5C7;
+      font-family: 'Brandon Black';
+      font-size: 0.875em;
+      margin: 0 0 4px;
+      text-transform: uppercase;
+    }
+  }
 }
 
 .form-section {
