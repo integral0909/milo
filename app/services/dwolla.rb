@@ -194,7 +194,7 @@ module Dwolla
             :href => user.dwolla_funding_source
           },
           :destination => {
-            :href => "https://api-uat.dwolla.com/accounts/#{ENV["DWOLLA_ACCOUNT_ID"]}"
+            :href => "https://api-uat.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_FBO"]}"
           }
         },
         :amount => {
@@ -274,7 +274,7 @@ module Dwolla
             :href => user.dwolla_funding_source
           },
           :destination => {
-            :href => "https://api-uat.dwolla.com/accounts/#{ENV["DWOLLA_ACCOUNT_ID"]}"
+            :href => "https://api-uat.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_CORP"]}"
           }
         },
         :amount => {
@@ -327,7 +327,7 @@ module Dwolla
                 :href => biz_owner.dwolla_funding_source
               },
               :destination => {
-                :href => "https://api-uat.dwolla.com/accounts/#{ENV["DWOLLA_ACCOUNT_ID"]}"
+                :href => "https://api-uat.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_FBO"]}"
               }
             },
             :amount => {
@@ -379,7 +379,7 @@ module Dwolla
        transfer_request = {
          :_links => {
            :source => {
-             :href => "https://api-uat.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE"]}"
+             :href => "https://api-uat.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_FBO"]}"
            },
            :destination => {
              :href => user.dwolla_id
@@ -405,7 +405,7 @@ module Dwolla
        current_transfer_status = transfer_status.status
 
        # Save the withdraw as a transfer. Params are the user, transfer_url, transfer_status, roundup_amount, roundup_count, transfer_type, current_date, tech_fee_charged
-       Transfer.create_transfers(user, current_transfer_url, current_transfer_status, requested_amount, "", "withdraw", current_date, false)
+       Transfer.create_transfers(user,"", current_transfer_url, current_transfer_status, requested_amount, "", "withdraw", current_date, false)
 
        # decrease the requested amount from the user's account balance
        User.decrease_account_balance(user, requested_amount)
