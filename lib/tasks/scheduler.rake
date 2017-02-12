@@ -42,7 +42,7 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
         end
       end
 
-      if !@charge_tech_fee
+      if @charge_tech_fee
         # send an email letting us know how much in fees were collected
         fee_transfers = Transfer.where(tech_fee_charged: true, date: current_date).count
         admin_count = User.where(admin: true).count
