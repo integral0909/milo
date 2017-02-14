@@ -121,3 +121,21 @@ p.additional-help {
     text-decoration: none;
   }
 }
+
+// Shared Links
+.shared-links {
+  padding: 16px 0 48px;
+  text-align: center;
+
+  a {
+    color: #8B999F;
+
+    &:last-child {
+      margin: 0 0 0 24px;
+    }
+
+    &:focus, &:hover {
+      color: #4A90E2;
+    }
+  }
+}
