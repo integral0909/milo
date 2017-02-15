@@ -39,6 +39,15 @@ gem 'social-share-button'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# API
+gem 'rack-cors', :require => 'rack/cors'
+gem 'active_hash_relation', github: 'kollegorna/active_hash_relation'
+gem 'pundit', '~> 0.3.0'
+gem 'active_model_serializers', '0.9.2'
+
+gem 'kaminari', '~> 0.17.0'
+gem 'redis-throttle', git: 'git://github.com/andreareginato/redis-throttle.git'
+
 # User Accounts with Devise
 gem 'devise', '~> 4.2'
 gem 'devise_invitable', '~> 1.7.0'
@@ -53,6 +62,7 @@ gem 'phonelib'
 
 # Intercom
 gem 'intercom-rails'
+
 # Plaid API wrapper
 gem 'plaid'
 

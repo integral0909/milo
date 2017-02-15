@@ -81,4 +81,11 @@ Rails.application.routes.draw do
   patch '/users/:id/update_accounts', to: 'plaidapi#update_accounts'
   patch '/users/withdraw_funds', to: 'users#withdraw_funds'
 
+  # API
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [:index, :create, :show, :update, :destroy]
+    end
+  end
+
 end

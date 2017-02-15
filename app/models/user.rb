@@ -61,6 +61,11 @@ class User < ActiveRecord::Base
   has_many :transactions
 
   # ----------------------------------------------
+  # CALLBACKS ------------------------------------
+  # ----------------------------------------------
+  before_create :generate_authentication_token
+
+  # ----------------------------------------------
   # NESTED-ATTRIBUTES ----------------------------
   # ----------------------------------------------
   accepts_nested_attributes_for :business
@@ -180,6 +185,16 @@ class User < ActiveRecord::Base
   def password_strength
     if password.present? and not password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)./)
       errors.add :password, "must include at least one lowercase letter, one uppercase letter, and one number."
+    end
+  end
+
+  # ----------------------------------------------
+  # GENERATE-AUTHENTICATION-TOKEN ----------------
+  # ----------------------------------------------
+  def generate_authentication_token
+    loop do
+      self.authentication_token = SecureRandom.base64(64)
+      break unless User.find_by(authentication_token: authentication_token)
     end
   end
 
