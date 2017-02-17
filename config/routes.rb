@@ -70,6 +70,7 @@ Rails.application.routes.draw do
   get 'accounts/remove', to: 'accounts#remove', as: :accounts_remove
 
   resources :checkings, only: [:new, :create]
+  get 'quick-save', to:'checkings#quick_save'
   resources :goals
 
   # Error Pages
