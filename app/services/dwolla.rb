@@ -488,12 +488,12 @@ module Dwolla
       # add the quick save amount from the user's account balance
       User.add_account_balance(user, amount, true)
       # send email to user about funds being transfered to their account.
-      # funding_account = Checking.find_by_user_id(user.id)
-      # BankingMailer.user_deposit_start(user, amount, funding_account).deliver_now
+
+      BankingMailer.quick_save_success(user, amount).deliver_now
     rescue => e
       p e
       # send email to dev team about failed transfer to user
-      # SupportMailer.user_deposit_failed(user, amount, e).deliver_now
+      SupportMailer.quick_save_failed(user, amount, e).deliver_now
     end
   end
 

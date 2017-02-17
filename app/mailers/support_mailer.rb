@@ -60,4 +60,15 @@ class SupportMailer < ApplicationMailer
     @user = User.find(biz.owner)
     mail(to: 'dev@shiftsavings.com', subject: "Contributions failed for #{@biz.name}")
   end
+
+  # ----------------------------------------------
+  # Quick save failed ----------------------------
+  # ----------------------------------------------
+  # email to send support when adding a user to Dwolla fails
+  def quick_save_failed(user, amount, error)
+    @error = error
+    @amount = amount
+    @user = user
+    mail(to: 'dev@shiftsavings.com', subject: "Quick Save failed for #{@user.email}")
+  end
 end

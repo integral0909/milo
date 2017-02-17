@@ -44,11 +44,14 @@ class CheckingsController < ApplicationController
 
   def quick_save
 
-    amount = params[:amount]
+    # amount = params[:amount]
     amount = '20.00'
-    Dwolla.quick_save(@user, number_to_currency(amount, unit:""))
-
-    flash[:success] = "Congrats! You just saved $#{amount}. Keep it up!"
+    begin
+      Dwolla.quick_save(@user, number_to_currency(amount, unit:""))
+      flash[:success] = "Congrats! You just saved $#{amount}. Keep it up!"
+    rescue
+      flash[:alert] = "Oops, looks like something went wrong. Please reach out to our support team for help"
+    end
 
     redirect_to authenticated_root_path
   end
