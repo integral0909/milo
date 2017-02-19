@@ -11,7 +11,7 @@ module Contribution
     # check to make sure the max employer contribution (in cents) is less than already contributed to the employee. Also need to check pending contributions
     if Contribution.max_contribution_not_met
       # employer contribution amount
-      @contribution_amount = Contribution.employer_contribution
+      @contribution_amount = Contribution.employer_contribution(@amount, @employer)
 
       # add the pending_contribution to the user
       !@user.pending_contribution.nil? ? @user.pending_contribution += @contribution_amount : @user.pending_contribution = @contribution_amount
@@ -50,8 +50,8 @@ module Contribution
   end
 
   # How much the employer contribution is for the current week
-  def self.employer_contribution
-    (@amount * @employer.match_percent/100).round(0)
+  def self.employer_contribution(amount, employer)
+    (amount * employer.match_percent/100).round(2)
   end
 
   # Check if the max contribution has been met by the employee

@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
   # ADD-BALANCE ----------------------------------
   # ----------------------------------------------
   # Add round up amount to the users account balance
-  def self.add_account_balance(user, amount)
+  def self.add_account_balance(user, amount, quick_save=nil)
     # roundup amount converted to cents
     amount_in_cents = (amount.to_f * 100).round(0)
 
@@ -119,7 +119,7 @@ class User < ActiveRecord::Base
     self.add_roundup(user, amount_in_cents)
 
     # Check if the user is associated with a business
-    if !user.business_id.nil?
+    if !user.business_id.nil? && quick_save.nil?
       Contribution.run_employer_contribution(user, amount_in_cents)
     end
 

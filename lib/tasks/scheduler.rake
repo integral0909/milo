@@ -40,13 +40,15 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
         # run weekly_roundup for all users with checking accounts that are verified
           Dwolla.weekly_roundup(user, ck)
         end
+      end
 
-        if @charge_tech_fee
-          # send an email letting us know how much in fees were collected
-          fee_transfers = Transfer.where(tech_fee_charged: true, date: current_date).count
-          admin_count = User.where(admin: true).count
-          BankingMailer.tech_fee_charged(fee_transfers - admin_count).deliver_now
-        end
+      if @charge_tech_fee
+        # send an email letting us know how much in fees were collected
+        fee_transfers = Transfer.where(tech_fee_charged: true, date: current_date).count
+        admin_count = User.where(admin: true).count
+        fee_count = fee_transfers - admin_count
+        # Dwolla.transfer_tech_fee_to_corp(fee_count)
+        BankingMailer.tech_fee_charged(fee_count).deliver_now
       end
       # Withdraw the current contribution per employer
       Dwolla.withdraw_employer_contribution
