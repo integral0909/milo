@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <div class="signup">
-      <h1><span>Log In</span> Make Change Happen</h1>
+      <h5>Log In</h5>
       <%= render "layouts/messages" %>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "email-signup") do |f| %>
         <fieldset class="form-group">
@@ -17,7 +17,7 @@
       <% end %>
     </div>
     <div class="shared-links">
-      <%= link_to "Forgot Password", new_password_path(resource_name), class: "shared-link -first" %>
+      <%= link_to "Forgot your password?", new_password_path(resource_name), class: "shared-link -first" %>
       <%= link_to "Sign Up", new_registration_path(resource_name), class: "shared-link -last" %>
     </div>
   </div>

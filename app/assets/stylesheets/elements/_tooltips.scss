@@ -24,9 +24,9 @@
     padding: 16px;
     text-align: left;
 
-    strong {
+    h6 {
       display: block;
-      font-family: 'Futura Bold';
+      font-size: 1.125em;
       margin: 0 0 8px;
       min-width: 264px;
     }
@@ -35,6 +35,10 @@
       margin: 0 0 0 8px;
       min-width: 264px;
       padding: 0 0 0 8px;
+    }
+
+    p {
+      margin: 0;
     }
   }
 

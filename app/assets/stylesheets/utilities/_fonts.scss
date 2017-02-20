@@ -1,11 +1,28 @@
 /*
-* Milo
-* Copyright Milo 2016
-* milosavings.com
+* Shift
+* Copyright Shift 2017
+* bank.shiftsavings.com
 */
 
 
 // Fonts
+@font-face {
+  font-family: 'Brandon Black';
+  src: url(asset_path('bfont.woff2')) format('woff2'),
+       url(asset_path('bfont.woff')) format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Brandon Black Italic';
+  src: url(asset_path('bfonti.woff2')) format('woff2'),
+       url(asset_path('bfonti.woff')) format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 @font-face {
   font-family: 'Futura Light';
   src: asset-url('futura-light-webfont.woff2') format('woff2'),

@@ -105,7 +105,7 @@ class BankingMailer < ApplicationMailer
     puts "Biz tech fee charged"
    @fee_charged = fee_charged
    @user = user
-   mail(to: @user.email, subject: 'Automatic Transfer Successful for Milo')
+   mail(to: @user.email, subject: 'Automatic Transfer Successful for Shift')
   end
 
   # ----------------------------------------------
@@ -116,7 +116,7 @@ class BankingMailer < ApplicationMailer
     puts "Biz tech fee charged"
    @fee_charged = fee_charged
    @user = user
-   mail(to: @user.email, subject: 'Automatic Transfer Failed for Milo')
+   mail(to: @user.email, subject: 'Automatic Transfer Failed for Shift')
   end
 
   # ----------------------------------------------
@@ -145,7 +145,15 @@ class BankingMailer < ApplicationMailer
    @biz = biz
    @contribution = contribution
    @owner = biz_owner
-   mail(to: @owner.email, subject: 'Emplyoee Contributions Failed for Milo!')
+   mail(to: @owner.email, subject: 'Emplyoee Contributions Failed for Shift')
+  end
+
+  # Email for failed business contribution withdraw
+  # ----------------------------------------------
+  def quick_save_success(user, amount)
+   @user = user
+   @amount = amount
+   mail(to: @user.email, subject: 'You just saved some money with Shift!')
   end
 
   # ----------------------------------------------

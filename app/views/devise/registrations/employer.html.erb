@@ -1,34 +1,33 @@
-<% set_meta_tags :site => 'Employer Sign Up • Milo',
-  :canonical => '-',
-  :author => 'Milo',
-  :copyright => '&copy; 2016 Milo',
+<% set_meta_tags :site => 'Employer Sign Up • Shift',
+  :canonical => 'http://bank.shiftsavings.com/signup/employer',
+  :author => 'Shift',
+  :copyright => '&copy; 2016 Shift',
   :description => "-",
-  :keywords => ['Milo', 'Milo Savings', 'employer', 'benefits', 'employee', 'contributions', 'financial', 'matching', 'savings', 'sign up', 'join', 'registrer'],
+  :keywords => ['Shift', 'Shift Savings', 'employer', 'benefits', 'employee', 'contributions', 'financial', 'matching', 'savings', 'sign up', 'join', 'registrer'],
   :reverse => true,
   :og => {
-    :title          => 'Employer Sign Up • Milo',
+    :title          => 'Employer Sign Up • Shift',
     :type           => 'website',
     :url            => request.original_url,
     :image          => asset_url('social-banner-milo.png'),
     :description    => "-",
-    :site_name      => 'Milo',
+    :site_name      => 'Shift',
   },
   :twitter => {
     :card           => 'summary',
-    :site           => '@milosavings',
-    :title          => 'Employer Sign Up • Milo',
+    :site           => '@shiftsavings',
+    :title          => 'Employer Sign Up • Shift',
     :description    => "-",
-    :creator        => '@milosavings',
+    :creator        => '@shiftsavings',
     :image          => asset_url('social-banner-milo.png'),
   }
 %>
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-2">
+  <div class="col-md-6 col-md-offset-1">
     <div class="signup">
-      <h1><span>Sign Up</span> Employer</h1>
+      <h5>Employer Sign Up</h5>
       <%= render "layouts/messages" %>
-
       <%= form_for(@user, as: :user, url: registration_path(:user), class: "email-signup") do |f| %>
         <%= devise_error_messages! %>
         <%= f.fields_for :business do |b| %>
@@ -57,22 +56,19 @@
         <fieldset class="checkbox">
           <label>
             <%= f.check_box :agreement, required: true %>
-            I agree to Milo's <a href="/privacy" target="_blank">Privacy Policy</a> and <a href="/terms" target="_blank">Terms of Service</a>. I also agree to Dwolla's <a href="https://www.dwolla.com/legal/tos?whitelabel" target="_blank">Privacy Policay</a> and <a href="https://www.dwolla.com/legal/privacy?whitelabel" target="_blank">Terms of Service</a>.
+            I agree to Shift's <a href="/privacy" target="_blank">Privacy Policy</a> and <a href="/terms" target="_blank">Terms of Service</a>. I also agree to Dwolla's <a href="https://www.dwolla.com/legal/tos?whitelabel" target="_blank">Privacy Policay</a> and <a href="https://www.dwolla.com/legal/privacy?whitelabel" target="_blank">Terms of Service</a>.
           </label>
         </fieldset>
-        <% if params[:access] == "early" %>
-          <%= f.hidden_field :invited, value: true %>
-        <% end %>
+        <%= f.hidden_field :invited, value: true %>
         <%= f.hidden_field :referral_code, value: session[:referral] %>
         <button type="submit" class="button -full -blue">Sign Up</button>
       <% end %>
     </div>
   </div>
   <div class="col-md-4">
-    <ul class="signup-steps">
-      <li class="active"><span></span> Basic Info</li>
-      <li><span></span> Mobile Number</li>
-      <li><span></span> Checking Account</li>
-    </ul>
+    <h6 class="help-header">Relieve Financial Stress</h6>
+    <p>Interested in helping contribute to your employee's financial well-being?</p>
+    <p>Fill out the form with your basic information to help us verify your identity.</p>
+    <p class="additional-help">Need additional help? Chat with us below or <a href="https://www.shiftsavings.com/contact" target="_blank">send us an email</a> with your question.</p>
   </div>
 </div>

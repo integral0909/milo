@@ -2,6 +2,8 @@
 # RUBY->CONTROLLER->CHECKINGS-CONTROLLER =========
 # ================================================
 class CheckingsController < ApplicationController
+  include ActionView::Helpers::NumberHelper
+
 
   # ==============================================
   # ACTIONS ======================================
@@ -38,6 +40,20 @@ class CheckingsController < ApplicationController
         format.json { render json: @checking.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def quick_save
+
+    # amount = params[:amount]
+    amount = '20.00'
+    begin
+      Dwolla.quick_save(@user, number_to_currency(amount, unit:""))
+      flash[:success] = "Congrats! You just saved $#{amount}. Keep it up!"
+    rescue
+      flash[:alert] = "Oops, looks like something went wrong. Please reach out to our support team for help"
+    end
+
+    redirect_to authenticated_root_path
   end
 
   # ==============================================

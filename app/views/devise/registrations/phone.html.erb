@@ -3,15 +3,17 @@
 %>
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-2">
+  <div class="col-md-6 col-md-offset-1">
     <div class="signup">
-      <h1 class="marg-16"><span>Mobile Number</span> What's Your Number?</h1>
-      <p>For security please add your phone.</p>
+      <h5>Verify Identity</h5>
       <%= render "layouts/messages" %>
       <%= form_tag(verifications_path, method: "post" ) %>
         <fieldset class="form-group">
-          <label>Phone</label>
-          <%= text_field_tag(:mobile_number, "", class: "form-control") %>
+          <label>Mobile Phone</label>
+          <div class="input-group">
+            <span class="input-group-addon">+1</span>
+            <%= telephone_field_tag(:mobile_number, "", class: "form-control", placeholder: "(xxx) xxx-xxxx") %>
+          </div>
         </fieldset>
         <div class="spacer -space-16"></div>
         <%=button_tag('Continue', type: "submit", class: "button -full -blue")%>
@@ -19,10 +21,9 @@
     </div>
   </div>
   <div class="col-md-4">
-    <ul class="signup-steps">
-      <li><span></span> Basic Info</li>
-      <li class="active"><span></span> Mobile Number</li>
-      <li><span></span> Checking Account</li>
-    </ul>
+    <h6>What's Your Number?</h6>
+    <p>For added security verify your identity by associating a mobile phone number with your account. Use our <a href="http://support.shiftsavings.com" target="_blank">support center</a> if you have any questions regarding your sign up.</p>
+    <a href="http://support.shiftsavings.com/signing-up/phone-verification" target="_blank" class="help-link"><i class="fa fa-question"></i> Support: Phone Verification</a>
+    <p class="additional-help">Need additional help? Chat with us below or <a href="https://www.shiftsavings.com/contact" target="_blank">send us an email</a> with your question.</p>
   </div>
 </div>

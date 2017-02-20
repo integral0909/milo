@@ -13,12 +13,13 @@
   box-sizing: border-box;
   color: #BBC5C7;
   display: block;
-  font-family: 'Futura Bold';
+  font-family: 'Brandon Black';
   font-size: 1.125em;
-  height: 50px;
-  line-height: 46px;
+  height: 48px;
+  line-height: 44px;
   padding: 0 24px;
   text-align: center;
+  text-transform: uppercase;
 
   @include breakpoint(l-one) {
     width: 100%;

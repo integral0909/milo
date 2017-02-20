@@ -26,7 +26,7 @@ body.milo-app {
     a.logo {
       color: #FFF;
       display: block;
-      font-family: 'Futura Bold';
+      font-family: 'Brandon Black';
       font-size: 2em;
       margin: 16px 0 24px;
       text-align: center;
@@ -82,6 +82,7 @@ body.milo-app {
         font-size: 1.5em;
         line-height: 1.4;
         margin: 0;
+        text-transform: none;
       }
 
       span {
@@ -121,7 +122,6 @@ body.milo-app {
 
         &.active {
           color: #FFF;
-          font-family: 'Futura Book';
           text-decoration: none;
         }
 
