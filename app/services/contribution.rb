@@ -13,8 +13,24 @@ module Contribution
       # employer contribution amount
       @contribution_amount = Contribution.employer_contribution(@amount, @employer)
 
-      # add the pending_contribution to the user
-      !@user.pending_contribution.nil? ? @user.pending_contribution += @contribution_amount : @user.pending_contribution = @contribution_amount
+      # if the pending contribution + current week's contribution amount is higher than the max contribution, set contribution_amount to the remaining contribution needed to hit the max and set pending to the max amount.
+      employer_max_in_cents = @employer.max_contribution * 100
+      if !@user.pending_contribution.nil?
+        if !@employer.max_contribution.nil? && ((@user.pending_contribution + @contribution_amount) > employer_max_in_cents)
+          # set contribution_amount to the remaing amout of the max_contribution
+          @contribution_amount = employer_max_in_cents - @user.pending_contribution
+        end
+        # add contribution_amount to pending_contributions
+        @user.pending_contribution += @contribution_amount
+      else
+        # convert max_contribution to cents
+        if !@employer.max_contribution.nil? && (@contribution_amount > employer_max_in_cents)
+          # set contribution_amount to the remaing amout of the max_contribution
+          @contribution_amount = employer_max_in_cents
+        end
+        # set pending_contribution to contribution_amount
+        @user.pending_contribution = @contribution_amount
+      end
 
       Contribution.add_employer_contribution
 
@@ -56,7 +72,7 @@ module Contribution
 
   # Check if the max contribution has been met by the employee
   def self.max_contribution_not_met
-    @user.employer_contribution.nil? || @employer.max_contribution.nil? || ((@employer.max_contribution * 100) >= @user.employer_contribution)
+    @user.pending_contribution.nil? || @employer.max_contribution.nil? || ((@employer.max_contribution * 100) >= @user.pending_contribution)
   end
 
   # Check if the employer contribution is due on the current round up week
