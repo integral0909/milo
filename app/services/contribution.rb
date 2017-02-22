@@ -91,7 +91,7 @@ module Contribution
         (Date.today.month == 1 || Date.today.month == 4 || Date.today.month == 7 || Date.today.month == 10) && Date.today.first_week?
       when 'Yearly'
         # Check if current date is past the Employers sign up date (NOTE: change to match frequency_set_date once implemented)
-        Date.today.next_year <= @employer.created_at
+        Date.today.next_year <= @user.created_at
       else
         # If frequency not set, then run add contributions
         true
