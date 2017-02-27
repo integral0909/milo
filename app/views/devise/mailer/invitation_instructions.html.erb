@@ -1,11 +1,20 @@
-<p><%= t("devise.mailer.invitation_instructions.hello", name: @resource.name) %></p>
+<p>Congratulations <%= @resource.name %>!</p>
 
-<p><%= t("devise.mailer.invitation_instructions.someone_invited_you", url: unauthenticated_root_url) %></p>
+<p>Your employer, <%= @resource.business.name %>, has invited you to join <%= unauthenticated_root_url %>. They have partnered with Shift to help you build savings through the power of a Shift savings account, along with providing matching funds into your savings account.</p>
 
-<p><%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, :invitation_token => @token, :subdomain => "bank") %></p>
+<p>You can accept the invitation from <%= @resource.business.name %> by clicking the following link:</p>
+
+<p><%= link_to "Accept invitation", accept_invitation_url(@resource, :invitation_token => @token, :subdomain => "bank") %></p>
 
 <% if @resource.invitation_due_at %>
   <p><%= t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format')) %></p>
 <% end %>
 
-<p><%= t("devise.mailer.invitation_instructions.ignore").html_safe %></p>
+<p>If you prefer not to take advantage of this generous employee benefit, simply ignore this email.</p>
+
+<p>If you have any questions talk to your benefits administrator.</p>
+
+<p><strong>Welcome to Shift!</strong></p>
+
+<p><a href="mailto:support@shiftsavings.com">support@shiftsavings.com</a><br/>
+<a href="http://support.shiftsavings.com/" target="_blank">support.shiftsavings.com</a></p>

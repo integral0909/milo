@@ -1,6 +1,8 @@
-<%= t("devise.mailer.invitation_instructions.hello", name: @resource.name) %>
+Congratulations <%= @resource.name %>!
 
-<%= t("devise.mailer.invitation_instructions.someone_invited_you", url: unauthenticated_root_url) %>
+Your employer, <%= @resource.business.name %>, has invited you to join <%= unauthenticated_root_url %>. They have partnered with Shift to help you build savings through the power of a Shift savings account, along with providing matching funds into your savings account.
+
+You can accept the invitation from <%= @resource.business.name %> by clicking the following link:
 
 <%= accept_invitation_url(@resource, :invitation_token => @token, :subdomain => "bank") %>
 
@@ -8,4 +10,13 @@
   <%= t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format')) %>
 <% end %>
 
-<%= strip_tags t("devise.mailer.invitation_instructions.ignore") %>
+If you prefer not to take advantage of this generous employee benefit, simply ignore this email.
+
+If you have any questions talk to your benefits administrator.
+
+
+Welcome to Shift!
+==========================
+
+support@shiftsavings.com
+support.shiftsavings.com
