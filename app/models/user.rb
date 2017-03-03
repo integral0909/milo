@@ -34,6 +34,8 @@
 #  bank_not_verified                :boolean
 #  employer_contribution            :integer
 #  pending_contribution             :integer
+#  first_name                       :string
+#  last_name                        :string
 #
 
 # ================================================
@@ -79,10 +81,33 @@ class User < ActiveRecord::Base
   validates :mobile_number, phone: { possible: false, allow_blank: true, types: [:mobile] }
 
   # ----------------------------------------------
+  # CALLBACKS ------------------------------------
+  # ----------------------------------------------
+  before_save :set_first_name
+  before_save :set_last_name
+  after_create :subscribe_user_to_mailing_list
+
+  # ----------------------------------------------
   # AVATAR ---------------------------------------
   # ----------------------------------------------
   has_attached_file :avatar, styles: { large: "512x512", medium: "300x300", thumb: "100x100" }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
+  # ----------------------------------------------
+  # SET-FIRST-NAME -------------------------------
+  # ----------------------------------------------
+  def set_first_name
+    self.first_name = name.split.first
+  end
+
+  # ----------------------------------------------
+  # SET-LAST-NAME --------------------------------
+  # ----------------------------------------------
+  def set_last_name
+    if name.split.count > 1
+      self.last_name = name.split[1..-1].join(' ')
+    end
+  end
 
   # ----------------------------------------------
   # MOBILE-NUMBER-VERIFY -------------------------
@@ -159,6 +184,9 @@ class User < ActiveRecord::Base
   # ==============================================
   private
 
+  # ----------------------------------------------
+  # ADD-ROUNDUP ----------------------------------
+  # ----------------------------------------------
   def self.add_roundup(user, amount)
     !user.account_balance.nil? ? user.account_balance += amount : user.account_balance = amount
   end
@@ -180,6 +208,16 @@ class User < ActiveRecord::Base
   def password_strength
     if password.present? and not password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)./)
       errors.add :password, "must include at least one lowercase letter, one uppercase letter, and one number."
+    end
+  end
+
+  # ----------------------------------------------
+  # SUBSCRIBE-USER-NEWSLETTER --------------------
+  # ----------------------------------------------
+  # only add new users from production
+  def subscribe_user_to_mailing_list
+    if Rails.env.production?
+      SubscribeUserToMailingListJob.perform_later(self)
     end
   end
 
