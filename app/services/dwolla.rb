@@ -1,3 +1,5 @@
+require 'resque'
+
 # ================================================
 # RUBY->DWOLLA-SERVICE ===========================
 # ================================================
@@ -12,6 +14,7 @@ module Dwolla
   # CREATE-DWOLLA-USER ---------------------------
   # ----------------------------------------------
   def self.create_user(user)
+    p "create user"
     begin
       # We don't save name in 2 seperate fields so append -Shift to the name
       # TODO: add :ip_address => to customer creation with request.remote_ip
@@ -29,7 +32,7 @@ module Dwolla
       user.dwolla_id = dwolla_customer_url.headers[:location]
       user.save!
     rescue => e
-      # EMAIL: send support the error from
+      p "error creting user"
       SupportMailer.add_dwolla_user_failed(user, e).deliver_now
       return
     end
