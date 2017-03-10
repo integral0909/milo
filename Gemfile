@@ -104,6 +104,10 @@ group :development, :test, :staging do
   # ENV variables
   gem 'dotenv-rails'
 
+  # for testing
+  gem 'rspec-rails', '~> 3.5'
+  gem 'simplecov', :require => false
+
 end
 
 group :development do

@@ -32,3 +32,5 @@ Thumbs.db
 # DotENV Environment Files #
 ############################
 .env
+
+coverage
