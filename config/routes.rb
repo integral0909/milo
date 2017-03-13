@@ -4,9 +4,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   # Devise
-
   devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords', invitations: 'invitations' }, :skip => [:sessions, :registrations]
-
     resources :users, :only => [:show] do
     resources :transactions, only: [:index, :show, :edit, :update]
     resources :accounts, only: [:index, :new, :update]
@@ -29,12 +27,10 @@ Rails.application.routes.draw do
     get 'signup/phone', to: 'registrations#phone', as: :signup_phone
     get 'signup/phone_confirm', to: 'registrations#phone_confirm', as: :signup_phone_confirm
     get 'signup/on_demand', to: 'registrations#on_demand', as: :signup_on_demand
-
     # Employer Sign Up
     get 'signup/employer', to: 'registrations#employer', as: :new_employer
     # Employer Contributions Settings
     get 'settings/contributions', to: 'businesses#edit', as: :settings_contributions
-
     # Root, User Logged In
     authenticated :user do
       root 'home#index', as: :authenticated_root
@@ -43,7 +39,6 @@ Rails.application.routes.draw do
     unauthenticated do
       root 'sessions#new', as: :unauthenticated_root
     end
-
   end
 
   resource :user, only: [:edit] do
@@ -53,6 +48,7 @@ Rails.application.routes.draw do
   end
 
   resources :businesses, only: [:edit, :update]
+  resources :debts
   resources :employees, only: [:index, :destroy]
 
   get 'history', to: 'home#history', as: :history

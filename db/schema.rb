@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303001215) do
+ActiveRecord::Schema.define(version: 20170313125244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,21 @@ ActiveRecord::Schema.define(version: 20170303001215) do
     t.string   "plaid_acct_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "debts", force: :cascade do |t|
+    t.string   "account_name"
+    t.string   "account_number"
+    t.string   "debt_type"
+    t.decimal  "begin_balance"
+    t.decimal  "current_balance"
+    t.decimal  "minimum_payment"
+    t.decimal  "credit_limit"
+    t.decimal  "apr"
+    t.date     "due_date"
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "goals", force: :cascade do |t|

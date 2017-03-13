@@ -1,0 +1,45 @@
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Debts</h1>
+
+<table class="table table-responsive">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Balance</th>
+      <th>Interest Rate</th>
+      <th>Payment</th>
+      <th>Monthly Interest</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @debts.each do |debt| %>
+      <tr>
+        <th><%= debt.account_name %></th>
+        <th>$<%= debt.current_balance %></th>
+        <th><%= debt.percentage %>%</th>
+        <th>$<%= debt.minimum_payment %></th>
+        <th><%= number_to_currency(debt.monthly_interest) %></th>
+        <td><%= link_to 'Show', debt %></td>
+        <td><%= link_to 'Edit', edit_debt_path(debt) %></td>
+        <td><%= link_to 'Destroy', debt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Debt', new_debt_path %>
+
+</div>
+</div>
+</div>
+</div>

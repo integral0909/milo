@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: goals
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  description :text
+#  amount      :integer
+#  user_id     :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  active      :boolean
+#  completed   :boolean
+#
+
 require 'test_helper'
 
 class GoalTest < ActiveSupport::TestCase

@@ -2,9 +2,9 @@
 #
 # Table name: public_tokens
 #
-#  id                               :integer          not null, primary key
-#  token                            :string
-#  user_id                          :string
+#  id      :integer          not null, primary key
+#  token   :string
+#  user_id :string
 #
 
 # ================================================

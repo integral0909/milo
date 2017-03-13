@@ -2,21 +2,24 @@
 #
 # Table name: accounts
 #
-#  plaid_acct_id                    :string          primary key
-#  account_name                     :string
-#  account_number                   :string
-#  available_balance                :float
-#  current_balance                  :float
-#  institution_type                 :string
-#  name                             :string
-#  numbers                          :string
-#  acct_subtype                     :string
-#  acct_type                        :string
-#  user_id                          :integer
-#  public_token_id                  :integer
-#  checking_id                      :integer
-#  bank_account_number              :sting
-#  bank_routing_number              :string
+#  plaid_acct_id               :string           primary key
+#  account_name                :string
+#  account_number              :string
+#  available_balance           :float
+#  current_balance             :float
+#  institution_type            :string
+#  name                        :string
+#  numbers                     :string
+#  acct_subtype                :string
+#  acct_type                   :string
+#  user_id                     :integer
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  public_token_id             :integer
+#  checking_id                 :integer
+#  bank_account_number         :string
+#  bank_routing_number         :string
+#  failed_verification_attempt :integer
 #
 
 # ================================================

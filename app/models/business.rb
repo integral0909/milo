@@ -2,14 +2,16 @@
 #
 # Table name: businesses
 #
-#  id                               :integer          not null, primary key
-#  name                             :string
-#  frequency                        :string
-#  max_contribution                 :integer
-#  match_percent                    :integer
-#  owner                            :integer
-#  current_contribution             :integer
-#  total_contribution               :integer
+#  id                   :integer          not null, primary key
+#  name                 :string
+#  created_at           :datetime
+#  updated_at           :datetime
+#  frequency            :string
+#  owner                :integer
+#  current_contribution :integer
+#  total_contribution   :integer
+#  max_contribution     :integer
+#  match_percent        :integer
 #
 
 # ================================================
