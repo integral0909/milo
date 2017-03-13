@@ -100,6 +100,7 @@ class DebtsController < ApplicationController
     # DEBT-PARAMS --------------------------------
     # --------------------------------------------
     def debt_params
-      params.require(:debt).permit(:user_id, :account_name, :account_number, :debt_type, :begin_balance, :current_balance, :minimum_payment, :credit_limit, :percentage, :user_id, :created_at, :updated_at, :due_date)
+      params.require(:debt).permit(:user_id, :account_name, :account_number, :debt_type, :begin_balance, :current_balance, :minimum_payment, :credit_limit, :apr, :user_id, :created_at, :updated_at, :due_date)
     end
+
 end
