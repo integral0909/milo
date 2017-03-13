@@ -14,7 +14,6 @@ module Dwolla
   # CREATE-DWOLLA-USER ---------------------------
   # ----------------------------------------------
   def self.create_user(user)
-    p "create user"
     begin
       # We don't save name in 2 seperate fields so append -Shift to the name
       # TODO: add :ip_address => to customer creation with request.remote_ip
@@ -23,16 +22,13 @@ module Dwolla
         :lastName => '-Shift',
         :email => user.email
       }
-
       Dwolla.set_dwolla_token
       dwolla_customer_url = @dwolla_app_token.post "customers", request_body
-
       # Add dwolla customer URL to the user
       user = User.find(user.id)
       user.dwolla_id = dwolla_customer_url.headers[:location]
       user.save!
     rescue => e
-      p "error creting user"
       SupportMailer.add_dwolla_user_failed(user, e).deliver_now
       return
     end
@@ -80,8 +76,8 @@ module Dwolla
     begin
       Dwolla.set_dwolla_token
       @dwolla_app_token.post "#{user.dwolla_funding_source}/micro-deposits"
-
       BankingMailer.longtail_account_added(user, funding_account).deliver_now
+      user.queue_longtail_drip_emails(user, funding_account)
     rescue => e
       # EMAIL: send support the error from Dwolla
       SupportMailer.connect_funding_source_failed(user, user_checking, funding_account, e).deliver_now

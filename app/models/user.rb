@@ -154,6 +154,16 @@ class User < ActiveRecord::Base
     user.save!
   end
 
+  # ----------------------------------------------
+  # EMAILS ---------------------------------------
+  # ----------------------------------------------
+  def queue_longtail_drip_emails(user, funding_account)
+    Resque.enqueue_at(3.days.from_now, SendLongtailDripEmail, user.id, funding_account.id, 1)
+    Resque.enqueue_at(5.days.from_now, SendLongtailDripEmail, user.id, funding_account.id, 2)
+    Resque.enqueue_at(7.days.from_now, SendLongtailDripEmail, user.id, funding_account.id, 3)
+    Resque.enqueue_at(12.days.from_now, SendLongtailDripEmail, user.id, funding_account.id, 4)
+  end
+
   # ==============================================
   # PRIVATE ======================================
   # ==============================================

@@ -48,11 +48,8 @@ class RegistrationsController < Devise::RegistrationsController
               notifier.ping "#{current_user.email} just signed up! Shift currently has #{user_count} users!"
             end
           end
-
           # send welcome email
-          if current_user.invited.nil?
-            UserMailer.welcome_email(current_user).deliver_now
-          end
+          UserMailer.welcome_email(current_user).deliver_now
           # Response After Sign Up
           respond_with resource, location: after_sign_up_path_for(resource)
         else
