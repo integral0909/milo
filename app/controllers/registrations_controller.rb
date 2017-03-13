@@ -49,7 +49,9 @@ class RegistrationsController < Devise::RegistrationsController
             end
           end
           # send welcome email
-          UserMailer.welcome_email(current_user).deliver_now
+          if current_user.invited.nil?
+            UserMailer.welcome_email(current_user).deliver_now
+          end
           # Response After Sign Up
           respond_with resource, location: after_sign_up_path_for(resource)
         else
