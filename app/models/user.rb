@@ -159,15 +159,12 @@ class User < ActiveRecord::Base
   def self.add_account_balance(user, amount, quick_save=nil)
     # roundup amount converted to cents
     amount_in_cents = (amount.to_f * 100).round(0)
-
     # Add current roundups
     self.add_roundup(user, amount_in_cents)
-
     # Check if the user is associated with a business
     if !user.business_id.nil? && quick_save.nil?
       Contribution.run_employer_contribution(user, amount_in_cents)
     end
-
     user.save!
   end
 
@@ -181,7 +178,7 @@ class User < ActiveRecord::Base
   end
 
   # ----------------------------------------------
-  # LONG-TAIL-ACCOUNT ----------------------------
+  # ADD-LONG-TAIL --------------------------------
   # ----------------------------------------------
   # Set user as long-tail user
   def self.add_long_tail(user)
@@ -191,12 +188,30 @@ class User < ActiveRecord::Base
   end
 
   # ----------------------------------------------
-  # LONG-TAIL-ACCOUNT ----------------------------
+  # BANK-VERIFIED --------------------------------
   # ----------------------------------------------
   # Set user as long-tail user
   def self.bank_verified(user)
     user.bank_not_verified = false
     user.save!
+  end
+
+  # ----------------------------------------------
+  # MINIMUM-PAYMENTS -----------------------------
+  # ----------------------------------------------
+  def minimum_payments
+    minimum = 0.00
+    debts = Debt.where(user_id: self.id).each do |d|
+      minimum += d.minimum_payment
+    end
+    minimum
+  end
+
+  # ----------------------------------------------
+  # SNOWBALL-AMOUNT ------------------------------
+  # ----------------------------------------------
+  def extra_payment
+    extra = budget - minimum_payments
   end
 
   # ==============================================

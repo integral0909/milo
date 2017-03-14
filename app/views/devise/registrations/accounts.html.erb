@@ -42,6 +42,12 @@
               On-Demand Transfer Authorization
             </label>
           </fieldset>
+          <div class="spacer -space-16"></div>
+          <h6>Monthly Budget</h6>
+          <fieldset class="form-group">
+            <label>Budget</label>
+            <%= f.number_field :budget, class: "form-control", placeholder: "$", step: 2 %>
+          </fieldset>
           <%= f.submit "Update Account", class: "button -blue" %>
         <% end %>
       </div>

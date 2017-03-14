@@ -19,7 +19,7 @@ class DebtsController < ApplicationController
   # INDEX ----------------------------------------
   # ----------------------------------------------
   def index
-    @debts = Debt.all
+    @debts = Debt.where(user_id: current_user.id).all
   end
 
   # ----------------------------------------------
@@ -90,7 +90,7 @@ class DebtsController < ApplicationController
   private
 
     # --------------------------------------------
-    # INDEX --------------------------------------
+    # SET-DEBT -----------------------------------
     # --------------------------------------------
     def set_debt
       @debt = Debt.find(params[:id])

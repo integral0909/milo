@@ -3,9 +3,32 @@
     <div class="row">
       <div class="col-md-12">
 
-<p id="notice"><%= notice %></p>
+<table class="table table-responsive">
+  <thead>
+    <tr>
+      <th>Active Debts</th>
+      <th>Monthly Budget</th>
+      <th>Min. Payments</th>
+      <th>Extra Payment</th>
+      <th>Payments Made</th>
+      <th>Overall Progress</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><%= @debts.size %></th>
+      <th><%= number_to_currency(current_user.budget) %></th>
+      <th><%= number_to_currency(current_user.minimum_payments) %></th>
+      <th><%= number_to_currency(current_user.extra_payment) %></th>
+      <th>-</th>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
 
-<h1>Listing Debts</h1>
+<hr/>
+
+<h3>Debts</h3>
 
 <table class="table table-responsive">
   <thead>
@@ -18,7 +41,6 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @debts.each do |debt| %>
       <tr>
