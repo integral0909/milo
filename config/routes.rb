@@ -54,6 +54,11 @@ Rails.application.routes.draw do
   get 'history', to: 'home#history', as: :history
   get 'roundups', to: 'home#roundups', as: :roundups
 
+  # Zero
+  get '/zero', to: 'zero#index', as: :zero_overview
+  get '/zero/progress', to: 'zero#progress', as: :zero_progress
+  get '/zero/payments', to: 'zero#payments', as: :zero_payments
+
   # Mobile Phone Verification
   post 'verifications' => 'verifications#create'
   patch 'verifications' => 'verifications#verify'
