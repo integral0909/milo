@@ -31,7 +31,7 @@ class Debt < ActiveRecord::Base
   # MONTHLY-INTEREST -----------------------------
   # ----------------------------------------------
   def monthly_interest
-    monthly_interest = current_balance * percentage / 36500 * 30
+    monthly_interest = current_balance * apr / 36500 * 30
   end
 
 end

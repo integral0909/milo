@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313125244) do
+ActiveRecord::Schema.define(version: 20170314021744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,20 +151,20 @@ ActiveRecord::Schema.define(version: 20170313125244) do
   add_index "transfers", ["business_id"], name: "index_transfers_on_business_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "email",                                          default: "",    null: false
+    t.string   "encrypted_password",                             default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",                                  default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.boolean  "invited",                default: false
-    t.boolean  "admin",                  default: false
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
+    t.boolean  "invited",                                        default: false
+    t.boolean  "admin",                                          default: false
     t.string   "referral_code"
     t.string   "name"
     t.string   "zip"
@@ -179,7 +179,7 @@ ActiveRecord::Schema.define(version: 20170313125244) do
     t.string   "city"
     t.string   "state"
     t.string   "plaid_access_token"
-    t.integer  "failed_attempts",        default: 0,     null: false
+    t.integer  "failed_attempts",                                default: 0,     null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "avatar_file_name"
@@ -196,13 +196,14 @@ ActiveRecord::Schema.define(version: 20170313125244) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
-    t.integer  "invitations_count",      default: 0
+    t.integer  "invitations_count",                              default: 0
     t.boolean  "bank_not_verified"
     t.boolean  "pause_savings"
     t.integer  "employer_contribution"
     t.integer  "pending_contribution"
     t.string   "first_name"
     t.string   "last_name"
+    t.decimal  "budget",                 precision: 8, scale: 2
   end
 
   add_index "users", ["business_id"], name: "index_users_on_business_id", using: :btree

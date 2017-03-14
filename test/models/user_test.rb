@@ -55,6 +55,7 @@
 #  pending_contribution   :integer
 #  first_name             :string
 #  last_name              :string
+#  budget                 :decimal(8, 2)
 #
 
 require 'test_helper'

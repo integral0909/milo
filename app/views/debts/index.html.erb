@@ -23,9 +23,9 @@
     <% @debts.each do |debt| %>
       <tr>
         <th><%= debt.account_name %></th>
-        <th>$<%= debt.current_balance %></th>
-        <th><%= debt.percentage %>%</th>
-        <th>$<%= debt.minimum_payment %></th>
+        <th><%= number_to_currency(debt.current_balance) %></th>
+        <th><%= number_to_percentage(debt.apr) %></th>
+        <th><%= number_to_currency(debt.minimum_payment) %></th>
         <th><%= number_to_currency(debt.monthly_interest) %></th>
         <td><%= link_to 'Show', debt %></td>
         <td><%= link_to 'Edit', edit_debt_path(debt) %></td>
