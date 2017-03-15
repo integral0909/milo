@@ -194,13 +194,13 @@ class User < ActiveRecord::Base
   # ----------------------------------------------
   # EMAIL-UNIQUE ---------------------------------
   # ----------------------------------------------
-  def email_is_unique
-    # Don't validate email if errors are already present
-    return false unless self.errors[:email].empty?
-    unless User.find_by_email(email).nil?
-      errors.add(:email, "is already taken by another account")
-    end
-  end
+  # def email_is_unique
+  #   # Don't validate email if errors are already present
+  #   return false unless self.errors[:email].empty?
+  #   unless User.find_by_email(email).nil?
+  #     errors.add(:email, "is already taken by another account")
+  #   end
+  # end
 
   # ----------------------------------------------
   # STRONG-PASSWORD ------------------------------
