@@ -44,10 +44,6 @@ class Debt < ActiveRecord::Base
     percentage = inverse / limit * 100
   end
 
-  # ==============================================
-  # DEBT-CURRENT-GOAL ============================
-  # ==============================================
-
   # ----------------------------------------------
   # SUGGESTED-PAYMENT ----------------------------
   # ----------------------------------------------
@@ -60,6 +56,23 @@ class Debt < ActiveRecord::Base
   end
 
   # ----------------------------------------------
+  # NEXT-PAYMENT-DUE -----------------------------
+  # ----------------------------------------------
+  # is the next payment due this or next month?
+  def next_payment_due
+    day_due = due_date.strftime("%-d").to_i
+    current = DateTime.now.to_date
+    today = current.strftime("%-d").to_i
+    month = current.strftime("%-m").to_i
+    # Check to see if the due date is past today
+    if day_due > today
+      payment = current.change(day: day_due)
+    else
+      payment = current.change(month: month += 1, day: day_due)
+    end
+  end
+
+  # ----------------------------------------------
   # MONTHS-TO-ZERO -------------------------------
   # ----------------------------------------------
   # the number of months until the debt is paid off
@@ -67,6 +80,15 @@ class Debt < ActiveRecord::Base
     months = current_balance / suggested_payment(user_id)
     # round up to the nearest month
     months.ceil
+  end
+
+  # ----------------------------------------------
+  # PAYOFF-DATE ----------------------------------
+  # ----------------------------------------------
+  # the date the debt is paid off
+  def payoff_date(user_id)
+    month = next_payment_due.strftime("%-m").to_i + months_to_zero(user_id)
+    payoff = next_payment_due.change(month: month)
   end
 
 end

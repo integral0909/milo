@@ -13,8 +13,8 @@
           <ul>
             <li>Balance: <%= number_to_currency(@current_debt.current_balance) %></li>
             <li>Interest: <%= number_to_percentage(@current_debt.apr) %></li>
-            <li>%MONTH% Payment: <%= number_to_currency(@current_debt.suggested_payment(current_user.id)) %></li>
-            <li>Paid Off: - (<%= @current_debt.months_to_zero(current_user.id) %> months)</li>
+            <li><%= @current_debt.next_payment_due.strftime("%B") %> Payment: <%= number_to_currency(@current_debt.suggested_payment(current_user.id)) %></li>
+            <li>Paid Off: <%= @current_debt.payoff_date(current_user.id) %> (<%= @current_debt.months_to_zero(current_user.id) %> months)</li>
           </ul>
         </div>
       </div>
