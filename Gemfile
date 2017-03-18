@@ -25,6 +25,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap', '4.0.0.alpha3'
 # Tooltips and popovers depend on tether
 gem 'rails-assets-tether', '>= 1.1.0'
+# Date/Time Picker
+gem 'pickadate-rails'
 
 # SEO
 gem 'meta-tags'

@@ -72,10 +72,14 @@ class Debt < ActiveRecord::Base
     end
   end
 
+  # ==============================================
+  # INDIVIDUL-DEBT ===============================
+  # ==============================================
+
   # ----------------------------------------------
   # MONTHS-TO-ZERO -------------------------------
   # ----------------------------------------------
-  # the number of months until the debt is paid off
+  # the number of months until an individual debt is paid off
   def months_to_zero(user_id)
     months = current_balance / suggested_payment(user_id)
     # round up to the nearest month
@@ -85,7 +89,7 @@ class Debt < ActiveRecord::Base
   # ----------------------------------------------
   # PAYOFF-DATE ----------------------------------
   # ----------------------------------------------
-  # the date the debt is paid off
+  # the date an individual debt is paid off
   def payoff_date(user_id)
     month = next_payment_due.strftime("%-m").to_i + months_to_zero(user_id)
     payoff = next_payment_due.change(month: month)

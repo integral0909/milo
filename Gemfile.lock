@@ -189,6 +189,8 @@ GEM
       mimemagic (~> 0.3.0)
     pg (0.19.0)
     phonelib (0.6.9)
+    pickadate-rails (3.5.6.0)
+      railties (>= 3.1.0)
     plaid (3.0.0)
       multi_json (~> 1.0)
     pry (0.10.4)
@@ -325,6 +327,7 @@ DEPENDENCIES
   paperclip
   pg
   phonelib
+  pickadate-rails
   plaid
   pry-rails
   rails (= 4.2.7.1)
