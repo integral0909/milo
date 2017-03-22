@@ -61,8 +61,9 @@ gem 'json'
 gem 'httparty'
 gem 'hashie'
 
-# Mail Form
+# Email
 gem 'mail_form'
+gem 'gibbon' # Mailchimp API Wrapper
 
 # Slack Hooks
 gem 'slack-notifier'

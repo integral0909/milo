@@ -186,14 +186,14 @@ class RegistrationsController < Devise::RegistrationsController
   # SIGN-UP-PARAMS -------------------------------
   # ----------------------------------------------
   def sign_up_params
-    params.require(:user).permit(:referral_code, :name, :zip, :email, :password, :invited, :agreement, :mobile_number, :is_verified, :on_demand, business_attributes: [:name, :address, :city, :state, :zip])
+    params.require(:user).permit(:referral_code, :name, :first_name, :last_name, :zip, :email, :password, :invited, :agreement, :mobile_number, :is_verified, :on_demand, business_attributes: [:name, :address, :city, :state, :zip])
   end
 
   # ----------------------------------------------
   # ACCOUNT-UPDATE-PARAMS ------------------------
   # ----------------------------------------------
   def account_update_params
-    params.require(:user).permit(:referral_code, :name, :address, :city, :state, :zip, :email, :password, :password_confirmation, :current_password, :invited, :agreement, :mobile_number, :is_verified, :on_demand, :avatar, business_attributes: [:id, :name, :address, :city, :state, :zip])
+    params.require(:user).permit(:referral_code, :name, :first_name, :last_name, :address, :city, :state, :zip, :email, :password, :password_confirmation, :current_password, :invited, :agreement, :mobile_number, :is_verified, :on_demand, :avatar, business_attributes: [:id, :name, :address, :city, :state, :zip])
   end
 
 end
