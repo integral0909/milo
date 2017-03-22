@@ -52,6 +52,8 @@ class RegistrationsController < Devise::RegistrationsController
           if current_user.invited.nil?
             UserMailer.welcome_email(current_user).deliver_now
           end
+          # Create first goal
+          Goal.first_goal(current_user.id)
           # Response After Sign Up
           respond_with resource, location: after_sign_up_path_for(resource)
         else
