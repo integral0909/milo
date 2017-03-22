@@ -91,6 +91,12 @@ gem 'activerecord-session_store'
 # helper to determain the week of the month, specific fork to resolve `beginning_of_week` conflict with gem
 gem 'week_of_month', :git => 'https://github.com/kobaltz/week-of-month.git'
 
+# for background jobs
+gem 'redis'
+gem 'resque'
+gem 'resque-scheduler'
+gem 'resque_mailer'
+
 group :production, :staging do
   gem 'rails_12factor'
 end
@@ -107,6 +113,9 @@ group :development, :test, :staging do
   # for testing
   gem 'rspec-rails', '~> 3.5'
   gem 'simplecov', :require => false
+
+  # startup with procfile
+  gem 'foreman'
 
 end
 
