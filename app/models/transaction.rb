@@ -134,39 +134,39 @@ class Transaction < ActiveRecord::Base
   # ----------------------------------------------
   # TRANSACTIONS-UPDATE --------------------------
   # ----------------------------------------------
-  def self.update_transactions(user_transactions, user_id)
-    user_transactions.each do |transaction|
-      trans = Transaction.find_by(plaid_trans_id: transaction._id)
-      vendor_lat = nil
-      vendor_lon = nil
-      if transaction.meta.location.coordinates
-        vendor_lat = transaction.meta.location.coordinates.lat
-        vendor_lon = transaction.meta.location.coordinates.lon
-      end
-      if trans == nil
-        trans = Transaction.create(
-          plaid_trans_id: transaction._id,
-          account_id: transaction._account,
-          amount: transaction.amount,
-          trans_name: transaction.name,
-          plaid_cat_id: transaction.category_id.to_i,
-          plaid_cat_type: transaction.type[:primary].to_s,
-          date: transaction.date.to_date,
-
-          vendor_address: transaction.meta.location.address,
-          vendor_city: transaction.meta.location.city,
-          vendor_state: transaction.meta.location.state,
-          vendor_zip: transaction.meta.location.zip,
-          vendor_lat: vendor_lat,
-          vendor_lon: vendor_lon,
-
-          pending: transaction.pending,
-          name_score: transaction.score[:name],
-          user_id: user_id
-          )
-      end
-    end
-  end
+  # def self.update_transactions(user_transactions, user_id)
+  #   user_transactions.each do |transaction|
+  #     trans = Transaction.find_by(plaid_trans_id: transaction._id)
+  #     vendor_lat = nil
+  #     vendor_lon = nil
+  #     if transaction.meta.location.coordinates
+  #       vendor_lat = transaction.meta.location.coordinates.lat
+  #       vendor_lon = transaction.meta.location.coordinates.lon
+  #     end
+  #     if trans == nil
+  #       trans = Transaction.create(
+  #         plaid_trans_id: transaction._id,
+  #         account_id: transaction._account,
+  #         amount: transaction.amount,
+  #         trans_name: transaction.name,
+  #         plaid_cat_id: transaction.category_id.to_i,
+  #         plaid_cat_type: transaction.type[:primary].to_s,
+  #         date: transaction.date.to_date,
+  #
+  #         vendor_address: transaction.meta.location.address,
+  #         vendor_city: transaction.meta.location.city,
+  #         vendor_state: transaction.meta.location.state,
+  #         vendor_zip: transaction.meta.location.zip,
+  #         vendor_lat: vendor_lat,
+  #         vendor_lon: vendor_lon,
+  #
+  #         pending: transaction.pending,
+  #         name_score: transaction.score[:name],
+  #         user_id: user_id
+  #         )
+  #     end
+  #   end
+  # end
 
   # ----------------------------------------------
   # TRANSACTION-ROUNDUP --------------------------

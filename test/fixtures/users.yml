@@ -1,5 +1,0 @@
-orville:
-  name: Orville Oinkington
-  zip: 55555
-  email: orville@milosavings.com
-  password_digest: <%= User.digest('password') %>
