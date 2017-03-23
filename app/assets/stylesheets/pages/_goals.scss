@@ -1,0 +1,93 @@
+/*
+* Shift
+* Copyright Shift 2017
+* shiftsavings.com
+*/
+
+
+// Goals
+
+// Goals Card
+.card-goals {
+
+  .mc-title .title-add-goal {
+    color: #4A90E2;
+    cursor: pointer;
+    float: right;
+    font-size: 0.7em;
+    line-height: 20px;
+    text-align: right;
+  }
+
+  .goal-item {
+    margin: 0 0 20px;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+
+  .gi-title {
+    color: #4A90E2;
+    font-family: 'Brandon Black';
+    font-size: 0.875em;
+    margin: 0 0 4px;
+    text-transform: uppercase;
+
+    .gi-edit, span {
+      color: #606B6F;
+      float: right;
+    }
+
+    .gi-edit {
+      cursor: pointer;
+      font-size: 0.9em;
+      margin: 0 0 0 8px;
+    }
+
+    span {
+      font-family: 'Brandon';
+    }
+  }
+
+  .gi-progress-bar {
+    background: #F5F7FA;
+    border: 1px solid #DDE1E2;
+    border-radius: 4px;
+    height: 40px;
+    position: relative;
+    z-index: 1;
+    @extend %clear;
+
+    .current-progress {
+      background: rgba(74,144,226,0.48);
+      border: 1px solid #4A90E2;
+      border-radius: 4px;
+      height: 40px;
+      left: -1px;
+      max-width: 100%;
+      position: absolute;
+      top: -1px;
+      z-index: 2;
+    }
+
+    .bar {
+      background: rgba(0,0,0,0.12);
+      height: 38px;
+      position: absolute;
+      top: 0;
+      width: 1px;
+      z-index: 3;
+
+      &.-b1 { left: 10%; }
+      &.-b2 { left: 20%; }
+      &.-b3 { left: 30%; }
+      &.-b4 { left: 40%; }
+      &.-b5 { left: 50%; }
+      &.-b6 { left: 60%; }
+      &.-b7 { left: 70%; }
+      &.-b8 { left: 80%; }
+      &.-b9 { left: 90%; }
+    }
+  }
+}

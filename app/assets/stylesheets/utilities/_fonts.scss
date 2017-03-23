@@ -7,17 +7,33 @@
 
 // Fonts
 @font-face {
+  font-family: 'Brandon';
+  src: url(asset_path('b-reg.woff2')) format('woff2'),
+       url(asset_path('b-reg.woff')) format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Brandon Italic';
+  src: url(asset_path('b-reg-it.woff2')) format('woff2'),
+       url(asset_path('b-reg-it.woff')) format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Brandon Black';
-  src: url(asset_path('bfont.woff2')) format('woff2'),
-       url(asset_path('bfont.woff')) format('woff');
+  src: url(asset_path('b-black.woff2')) format('woff2'),
+       url(asset_path('b-black.woff')) format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Brandon Black Italic';
-  src: url(asset_path('bfonti.woff2')) format('woff2'),
-       url(asset_path('bfonti.woff')) format('woff');
+  src: url(asset_path('b-black-it.woff2')) format('woff2'),
+       url(asset_path('b-black-it.woff')) format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -27,46 +43,6 @@
   font-family: 'Futura Light';
   src: asset-url('futura-light-webfont.woff2') format('woff2'),
        asset-url('futura-light-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Futura Light Italic';
-  src: asset-url('futura-light-italic-webfont.woff2') format('woff2'),
-       asset-url('futura-light-italic-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Futura Book';
-  src: asset-url('futura-book-webfont.woff2') format('woff2'),
-       asset-url('futura-book-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Futura Book Italic';
-  src: asset-url('futura-book-italic-webfont.woff2') format('woff2'),
-       asset-url('futura-book-italic-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Futura Bold';
-  src: asset-url('futura-bold-webfont.woff2') format('woff2'),
-       asset-url('futura-bold-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Futura Bold Italic';
-  src: asset-url('fututa-bold-italic-webfont.woff2') format('woff2'),
-       asset-url('fututa-bold-italic-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }

@@ -29,26 +29,25 @@ class HomeController < ApplicationController
   # ----------------------------------------------
   def index
     # Users account balance converted to dollars
-    @account_balance = number_to_currency(@user.account_balance / 100.00, unit:"") if @user.account_balance
-
+    @account_balance = number_to_currency(@user.account_balance / 100.00, unit: "") if @user.account_balance
     # Users unique referral link
     @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
-
-
+    # Build a new goal
     @goal = @user.goals.build
-    @current_goal = Goal.find_by_user_id_and_active(@user.id, true)
+    # Active Goals
+    @goals = Goal.where(user_id: @user.id, active: true)
 
-    if !@user.account_balance.nil? && @current_goal
-      @goal_percentage = (@user.account_balance * 100 / @current_goal.amount) / 100.00
-      if @goal_percentage >= 100
-
-        # If the user has hit 100% of their goal, mark it as completed and remove
-        @goal_complete_message = "Congrats! You've hit your goal of $#{@current_goal.amount}!!"
-        Goal.mark_as_completed(@current_goal)
-      end
-    else
-      @goal_percentage = 0
-    end
+    # if !@user.account_balance.nil? && @current_goal
+    #   @goal_percentage = (@user.account_balance * 100 / @current_goal.amount) / 100.00
+    #   if @goal_percentage >= 100
+    #
+    #     # If the user has hit 100% of their goal, mark it as completed and remove
+    #     @goal_complete_message = "Congrats! You've hit your goal of $#{@current_goal.amount}!!"
+    #     Goal.mark_as_completed(@current_goal)
+    #   end
+    # else
+    #   @goal_percentage = 0
+    # end
 
     # Pull in the users transactions from the current week. The week starts on Sunday
     set_pending_roundups
