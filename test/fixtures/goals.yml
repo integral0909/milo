@@ -1,6 +1,0 @@
-goal:
-  name: "Wedding"
-  description: "Saving up for the wedding expenses."
-  amount: 25000
-  created_at: <%= 3.years.ago %>
-  user: orville

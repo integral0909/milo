@@ -1,7 +1,13 @@
+require 'resque/server'
+require 'resque-scheduler'
+require 'resque/scheduler/server'
+
 Rails.application.routes.draw do
 
   # Rails Admin
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  # Resque admin
+  mount Resque::Server.new, :at => "/resque"
 
   # Devise
 

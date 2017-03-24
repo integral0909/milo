@@ -19,13 +19,13 @@ class BankingMailer < ApplicationMailer
   end
 
   # ----------------------------------------------
-  # LONGTAIL-ACCOUNT-ADDED --------------------------------
+  # LONGTAIL-ACCOUNT-ADDED -----------------------
   # ----------------------------------------------
   # email to send user when the user connects an account that needs micro-deposit verification
   def longtail_account_added(user, funding_account)
    @funding_account = funding_account
    @user = user
-   mail(to: @user.email, subject: 'Verify you bank account on Shift.')
+   mail(to: @user.email, subject: 'Verify your bank account on Shift.')
   end
 
   # ----------------------------------------------

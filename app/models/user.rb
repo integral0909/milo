@@ -34,6 +34,8 @@
 #  bank_not_verified                :boolean
 #  employer_contribution            :integer
 #  pending_contribution             :integer
+#  first_name                       :string
+#  last_name                        :string
 #
 
 # ================================================
@@ -84,10 +86,33 @@ class User < ActiveRecord::Base
   validates :mobile_number, phone: { possible: false, allow_blank: true, types: [:mobile] }
 
   # ----------------------------------------------
+  # CALLBACKS ------------------------------------
+  # ----------------------------------------------
+  before_save :set_first_name
+  before_save :set_last_name
+  after_create :subscribe_user_to_mailing_list
+
+  # ----------------------------------------------
   # AVATAR ---------------------------------------
   # ----------------------------------------------
   has_attached_file :avatar, styles: { large: "512x512", medium: "300x300", thumb: "100x100" }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
+  # ----------------------------------------------
+  # SET-FIRST-NAME -------------------------------
+  # ----------------------------------------------
+  def set_first_name
+    self.first_name = name.split.first
+  end
+
+  # ----------------------------------------------
+  # SET-LAST-NAME --------------------------------
+  # ----------------------------------------------
+  def set_last_name
+    if name.split.count > 1
+      self.last_name = name.split[1..-1].join(' ')
+    end
+  end
 
   # ----------------------------------------------
   # MOBILE-NUMBER-VERIFY -------------------------
@@ -159,11 +184,24 @@ class User < ActiveRecord::Base
     user.save!
   end
 
+  # ----------------------------------------------
+  # EMAILS ---------------------------------------
+  # ----------------------------------------------
+  def queue_longtail_drip_emails(user, funding_account)
+    Resque.enqueue_at(3.days.from_now, SendLongtailDripEmail, user.id, funding_account.id, 1)
+    Resque.enqueue_at(5.days.from_now, SendLongtailDripEmail, user.id, funding_account.id, 2)
+    Resque.enqueue_at(7.days.from_now, SendLongtailDripEmail, user.id, funding_account.id, 3)
+    Resque.enqueue_at(12.days.from_now, SendLongtailDripEmail, user.id, funding_account.id, 4)
+  end
+
   # ==============================================
   # PRIVATE ======================================
   # ==============================================
   private
 
+  # ----------------------------------------------
+  # ADD-ROUNDUP ----------------------------------
+  # ----------------------------------------------
   def self.add_roundup(user, amount)
     !user.account_balance.nil? ? user.account_balance += amount : user.account_balance = amount
   end
@@ -171,13 +209,13 @@ class User < ActiveRecord::Base
   # ----------------------------------------------
   # EMAIL-UNIQUE ---------------------------------
   # ----------------------------------------------
-  def email_is_unique
-    # Don't validate email if errors are already present
-    return false unless self.errors[:email].empty?
-    unless User.find_by_email(email).nil?
-      errors.add(:email, "is already taken by another account")
-    end
-  end
+  # def email_is_unique
+  #   # Don't validate email if errors are already present
+  #   return false unless self.errors[:email].empty?
+  #   unless User.find_by_email(email).nil?
+  #     errors.add(:email, "is already taken by another account")
+  #   end
+  # end
 
   # ----------------------------------------------
   # STRONG-PASSWORD ------------------------------
@@ -189,12 +227,12 @@ class User < ActiveRecord::Base
   end
 
   # ----------------------------------------------
-  # GENERATE-AUTHENTICATION-TOKEN ----------------
+  # SUBSCRIBE-USER-NEWSLETTER --------------------
   # ----------------------------------------------
-  def generate_authentication_token
-    loop do
-      self.authentication_token = SecureRandom.base64(64)
-      break unless User.find_by(authentication_token: authentication_token)
+  # only add new users from production
+  def subscribe_user_to_mailing_list
+    if Rails.env.production?
+      SubscribeUserToMailingListJob.perform_later(self)
     end
   end
 

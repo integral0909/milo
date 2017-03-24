@@ -1,9 +1,11 @@
 class SupportMailer < ApplicationMailer
+  
+  include Resque::Mailer
+
   # ----------------------------------------------
   # DEFAULT SETTINGS -----------------------------
   # ----------------------------------------------
   default from: 'noreply@shiftsavings.com'
-
 
   # ----------------------------------------------
   # SUPPORT-TRANSFER-FAILED-NOTICE ---------------
