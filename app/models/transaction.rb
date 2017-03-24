@@ -2,25 +2,27 @@
 #
 # Table name: transactions
 #
-#  plaid_trans_id                   :integer          primary key
-#  account_id                       :string
-#  amount                           :float
-#  trans_name                       :string
-#  plaid_cat_id                     :integer
-#  plaid_cat_type                   :string
-#  date                             :date
-#  vendor_address                   :string
-#  vendor_city                      :string
-#  vendor_state                     :string
-#  vendor_zip                       :string
-#  vendor_lat                       :float
-#  vendor_lon                       :float
-#  pending                          :boolean
-#  pending_transaction              :string
-#  name_score                       :integer
-#  new_amount                       :float            scale: 2
-#  roundup                          :float            scale: 2
-#  user_id                          :integer
+#  plaid_trans_id      :string           primary key
+#  account_id          :string
+#  amount              :float
+#  trans_name          :string
+#  plaid_cat_id        :integer
+#  plaid_cat_type      :string
+#  date                :date
+#  vendor_address      :string
+#  vendor_city         :string
+#  vendor_state        :string
+#  vendor_zip          :string
+#  vendor_lat          :float
+#  vendor_lon          :float
+#  pending             :boolean
+#  pending_transaction :string
+#  name_score          :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  new_amount          :float
+#  roundup             :float
+#  user_id             :integer
 #
 
 # ================================================

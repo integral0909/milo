@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303001215) do
+ActiveRecord::Schema.define(version: 20170324165240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,11 +153,11 @@ ActiveRecord::Schema.define(version: 20170303001215) do
     t.string   "referral_code"
     t.string   "name"
     t.string   "zip"
-    t.string   "dwolla_id"
-    t.string   "dwolla_funding_source"
     t.string   "mobile_number"
     t.string   "verification_code"
     t.boolean  "is_verified"
+    t.string   "dwolla_id"
+    t.string   "dwolla_funding_source"
     t.boolean  "on_demand"
     t.boolean  "agreement"
     t.string   "address"
@@ -172,10 +172,8 @@ ActiveRecord::Schema.define(version: 20170303001215) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "account_balance"
-    t.boolean  "long_tail"
-    t.boolean  "bank_not_verified"
-    t.boolean  "pause_savings"
     t.integer  "business_id"
+    t.boolean  "long_tail"
     t.string   "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
@@ -184,12 +182,16 @@ ActiveRecord::Schema.define(version: 20170303001215) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.integer  "invitations_count",      default: 0
+    t.boolean  "bank_not_verified"
+    t.boolean  "pause_savings"
     t.integer  "employer_contribution"
     t.integer  "pending_contribution"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "auth_token",             default: ""
   end
 
+  add_index "users", ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
   add_index "users", ["business_id"], name: "index_users_on_business_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree

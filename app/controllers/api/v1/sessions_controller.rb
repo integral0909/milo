@@ -3,25 +3,43 @@
 # ================================================
 class Api::V1::SessionsController < Api::V1::BaseController
 
+  respond_to :json
+
   # ==============================================
   # ACTIONS ======================================
   # ==============================================
 
   # ----------------------------------------------
-  # INDEX ----------------------------------------
+  # CREATE ---------------------------------------
   # ----------------------------------------------
   def create
-    user = User.find_by(email: create_params[:email])
-    if user && user.authenticate(create_params[:password])
-      self.current_user = user
-      render(
-        json: Api::V1::SessionSerializer.new(user, root: false).to_json,
-        status: 201
-      )
-    else
-      return api_error(status: 401)
-    end
-  end
+	  user_password = params["session"]["session[password]"]
+	  user_email	= params["session"]["session[email]"].presence
+	  user = user_email && User.find_by(email: user_email)
+
+	  if user && user.valid_password?(user_password)
+	  	sign_in user, store: false
+	  	user.generate_authentication_token!
+	  	user.save
+	  	render json: { auth_token: user.auth_token, id: user.id, email: user.email, name: user.name, avatar_url: user.avatar_url }, status: 200, location: [:api, user]
+	  else
+	  	render json: { errors: "Invalid email or password" }, status: 422
+	  end
+	end
+
+  # ----------------------------------------------
+  # DESTROY --------------------------------------
+  # ----------------------------------------------
+  def destroy
+	  user = User.find_by(auth_token: params[:id])
+	  if user
+			user.generate_authentication_token!
+			user.save
+			render json: { auth_token: user.auth_token, id: user.id, email: user.email, name: user.name, avatar_url: user.avatar_url }, status: 200, location: [:api, user]
+	  else
+	  	render json: { errors: "Expired authentication token" }, status: 422
+	  end
+	end
 
   # ==============================================
   # PRIVATE ======================================

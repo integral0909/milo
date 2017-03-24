@@ -1,16 +1,16 @@
 # == Schema Information
 #
-# Table name: accounts
+# Table name: goals
 #
-#  id                               :integer          not null, primary key
-#  name                             :string
-#  description                      :text
-#  amount                           :integer
-#  user_id                          :integer
-#  created_at                       :date
-#  updated_at                       :date
-#  active                           :boolean
-#  completed                        :boolean
+#  id          :integer          not null, primary key
+#  name        :string
+#  description :text
+#  amount      :integer
+#  user_id     :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  active      :boolean
+#  completed   :boolean
 #
 
 # ================================================

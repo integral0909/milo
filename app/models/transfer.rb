@@ -2,16 +2,18 @@
 #
 # Table name: transfers
 #
-#  id                               :integer          not null, primary key
-#  dwolla_url                       :string
-#  user_id                          :string
-#  business_id                      :string
-#  roundup_count                    :string
-#  roundup_amount                   :string
-#  status                           :string
-#  transfer_type                    :string
-#  date                             :string
-#  tech_fee_charged                 :boolean
+#  id               :integer          not null, primary key
+#  dwolla_url       :string
+#  user_id          :string
+#  roundup_count    :string
+#  status           :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  transfer_type    :string
+#  roundup_amount   :string
+#  date             :string
+#  tech_fee_charged :boolean
+#  business_id      :integer
 #
 
 # ================================================

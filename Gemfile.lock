@@ -70,6 +70,9 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
+    annotate (2.6.5)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
     arel (6.0.4)
     autoprefixer-rails (6.7.7.1)
       execjs
@@ -381,6 +384,7 @@ DEPENDENCIES
   active_hash_relation!
   active_model_serializers (= 0.9.2)
   activerecord-session_store
+  annotate
   awesome_print (~> 1.7)
   aws-sdk (~> 2.3)
   better_errors
