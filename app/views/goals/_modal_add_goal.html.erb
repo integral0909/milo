@@ -8,27 +8,35 @@
         <h4 class="modal-title" id="myModalLabel">Create Goal</h4>
       </div>
       <%= form_for(@goal) do |f| %>
-        <div class="modal-body">
-          <%= form_errors @goal %>
-          <fieldset class="form-group">
-            <label>Amount</label>
-            <%= f.number_field :amount, class: "form-control", placeholder: "$", require: true %>
-          </fieldset>
-          <fieldset class="form-group">
-            <label>Name</label>
-            <%= f.text_field :name, class: "form-control", placeholder: "Name", require: true %>
-          </fieldset>
-          <fieldset class="form-group">
-            <label>Description</label>
-            <%= f.text_area :description, class: "form-control", placeholder: "Enter a description..." %>
-          </fieldset>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="button -small -inline" data-dismiss="modal">Close</button>
-          <%= f.hidden_field :completed, value: false%>
-          <%= f.hidden_field :active, value: true%>
-          <%= f.submit "Save Goal", class: "button -blue -small -inline" %>
-        </div>
+        <section>
+          - 1 -
+        </section>
+        <section>
+          <div class="modal-body">
+            <%= form_errors @goal %>
+            <fieldset class="form-group">
+              <label>Amount</label>
+              <%= f.number_field :amount, class: "form-control", placeholder: "$", require: true %>
+            </fieldset>
+            <fieldset class="form-group">
+              <label>Name</label>
+              <%= f.text_field :name, class: "form-control", placeholder: "Name", require: true %>
+            </fieldset>
+            <fieldset class="form-group">
+              <label>Description</label>
+              <%= f.text_area :description, class: "form-control", placeholder: "Enter a description..." %>
+            </fieldset>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="button -small -inline" data-dismiss="modal">Close</button>
+            <%= f.hidden_field :completed, value: false %>
+            <%= f.hidden_field :active, value: true %>
+            <%= f.submit "Save Goal", class: "button -blue -small -inline" %>
+          </div>
+        </section>
+        <section>
+          - 3 -
+        </section>
       <% end %>
     </div>
   </div>
