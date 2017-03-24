@@ -83,7 +83,7 @@ class User < ActiveRecord::Base
   # ----------------------------------------------
   # CALLBACKS ------------------------------------
   # ----------------------------------------------
-  before_create :generate_authentication_token
+  before_create :generate_authentication_token!
 
   # ----------------------------------------------
   # NESTED-ATTRIBUTES ----------------------------
@@ -93,6 +93,7 @@ class User < ActiveRecord::Base
   # ----------------------------------------------
   # VALIDATIONS ----------------------------------
   # ----------------------------------------------
+  validates :auth_token, uniqueness: true
   validates :name, presence: true
   validates :zip, presence: true
   validates :email, presence: true, length: { maximum: 255 },
@@ -115,6 +116,15 @@ class User < ActiveRecord::Base
   # ----------------------------------------------
   has_attached_file :avatar, styles: { large: "512x512", medium: "300x300", thumb: "100x100" }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
+  # ----------------------------------------------
+  # GENERATE-AUTH-TOKEN! -------------------------
+  # ----------------------------------------------
+  def generate_authentication_token!
+  	begin
+  		self.auth_token = Devise.friendly_token
+  	end while self.class.exists?(auth_token: auth_token)
+  end
 
   # ----------------------------------------------
   # SET-FIRST-NAME -------------------------------
@@ -210,6 +220,14 @@ class User < ActiveRecord::Base
     Resque.enqueue_at(5.days.from_now, SendLongtailDripEmail, user.id, funding_account.id, 2)
     Resque.enqueue_at(7.days.from_now, SendLongtailDripEmail, user.id, funding_account.id, 3)
     Resque.enqueue_at(12.days.from_now, SendLongtailDripEmail, user.id, funding_account.id, 4)
+  end
+
+  # ----------------------------------------------
+  # TO-JSON --------------------------------------
+  # ----------------------------------------------
+  def to_json(options={})
+  	options[:except] ||= [:auth_token]
+  	super(options)
   end
 
   # ==============================================

@@ -91,8 +91,14 @@ Rails.application.routes.draw do
   # API
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:index, :create, :show, :update, :destroy]
-      resources :sessions, only: [:new, :create, :destroy]
+      # Users
+      resources :sessions, only: [:create, :destroy]
+      # devise_for :users
+      resources :users, only: [:show, :create, :update, :destroy] do
+        collection do
+          post :forgot_password
+        end
+      end
     end
   end
 

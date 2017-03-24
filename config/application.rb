@@ -27,15 +27,6 @@ module Milo
     # Throttle API requests from abusers
     config.middleware.use Rack::RedisThrottle::Daily, max: 100000
 
-    # Rack Cors, allow API load from another domain using JS
-    config.middleware.insert_before 0, "Rack::Cors" do
-      allow do
-        # TODO :: Set restrictions on which clients are allowed to access the API by specifying the hostnames in origins
-        origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :put, :patch, :delete, :options, :head]
-      end
-    end
-
     # Use dynamic error pages
     config.exceptions_app = self.routes
 

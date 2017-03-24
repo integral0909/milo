@@ -15,21 +15,4 @@ class Api::V1::BaseController < ApplicationController
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
 
-  # ----------------------------------------------
-  # FILTERS --------------------------------------
-  # ----------------------------------------------
-  before_action :destroy_session
-
-  # ----------------------------------------------
-  # RESCUES --------------------------------------
-  # ----------------------------------------------
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
-
-  # ----------------------------------------------
-  # NOT-FOUND ------------------------------------
-  # ----------------------------------------------
-  def not_found
-    return api_error(status: 404, errors: 'Not found')
-  end
-
 end
