@@ -106,7 +106,8 @@ group :development, :test, :staging do
   gem 'byebug'
   # Test mailers in development
   gem 'letter_opener'
-
+  # Annotate
+  gem 'annotate'
   # ENV variables
   gem 'dotenv-rails'
 

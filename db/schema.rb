@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303001215) do
+ActiveRecord::Schema.define(version: 20170324024959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,21 @@ ActiveRecord::Schema.define(version: 20170303001215) do
     t.datetime "updated_at",    null: false
   end
 
+  create_table "debts", force: :cascade do |t|
+    t.string   "account_name"
+    t.string   "account_number"
+    t.string   "debt_type"
+    t.decimal  "begin_balance"
+    t.decimal  "current_balance"
+    t.decimal  "minimum_payment"
+    t.decimal  "credit_limit"
+    t.decimal  "apr"
+    t.date     "due_date"
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "goals", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -65,6 +80,9 @@ ActiveRecord::Schema.define(version: 20170303001215) do
     t.datetime "updated_at"
     t.boolean  "active"
     t.boolean  "completed"
+    t.string   "type"
+    t.decimal  "percentage"
+    t.decimal  "balance"
   end
 
   add_index "goals", ["user_id", "created_at"], name: "index_goals_on_user_id_and_created_at", using: :btree
@@ -136,35 +154,35 @@ ActiveRecord::Schema.define(version: 20170303001215) do
   add_index "transfers", ["business_id"], name: "index_transfers_on_business_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "email",                                          default: "",    null: false
+    t.string   "encrypted_password",                             default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",                                  default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.boolean  "invited",                default: false
-    t.boolean  "admin",                  default: false
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
+    t.boolean  "invited",                                        default: false
+    t.boolean  "admin",                                          default: false
     t.string   "referral_code"
     t.string   "name"
     t.string   "zip"
-    t.string   "dwolla_id"
-    t.string   "dwolla_funding_source"
     t.string   "mobile_number"
     t.string   "verification_code"
     t.boolean  "is_verified"
+    t.string   "dwolla_id"
+    t.string   "dwolla_funding_source"
     t.boolean  "on_demand"
     t.boolean  "agreement"
     t.string   "address"
     t.string   "city"
     t.string   "state"
     t.string   "plaid_access_token"
-    t.integer  "failed_attempts",        default: 0,     null: false
+    t.integer  "failed_attempts",                                default: 0,     null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "avatar_file_name"
@@ -172,10 +190,8 @@ ActiveRecord::Schema.define(version: 20170303001215) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "account_balance"
-    t.boolean  "long_tail"
-    t.boolean  "bank_not_verified"
-    t.boolean  "pause_savings"
     t.integer  "business_id"
+    t.boolean  "long_tail"
     t.string   "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
@@ -183,11 +199,14 @@ ActiveRecord::Schema.define(version: 20170303001215) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
-    t.integer  "invitations_count",      default: 0
+    t.integer  "invitations_count",                              default: 0
+    t.boolean  "bank_not_verified"
+    t.boolean  "pause_savings"
     t.integer  "employer_contribution"
     t.integer  "pending_contribution"
     t.string   "first_name"
     t.string   "last_name"
+    t.decimal  "budget",                 precision: 8, scale: 2
   end
 
   add_index "users", ["business_id"], name: "index_users_on_business_id", using: :btree

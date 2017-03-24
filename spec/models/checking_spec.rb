@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: checkings
+#
+#  id            :integer          not null, primary key
+#  user_id       :integer
+#  plaid_acct_id :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Checking, type: :model do

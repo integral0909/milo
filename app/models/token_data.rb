@@ -2,12 +2,14 @@
 #
 # Table name: token_data
 #
-#  id                               :integer          not null, primary key
-#  expires_in                       :integer
-#  scope                            :string
-#  account_id                       :string
-#  access_token                     :string
-#  refresh_token                    :string
+#  id            :integer          not null, primary key
+#  expires_in    :integer
+#  scope         :string
+#  account_id    :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  access_token  :string
+#  refresh_token :string
 #
 
 # ================================================

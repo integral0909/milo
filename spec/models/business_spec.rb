@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: businesses
+#
+#  id                   :integer          not null, primary key
+#  name                 :string
+#  created_at           :datetime
+#  updated_at           :datetime
+#  frequency            :string
+#  owner                :integer
+#  current_contribution :integer
+#  total_contribution   :integer
+#  max_contribution     :integer
+#  match_percent        :integer
+#
+
 require 'rails_helper'
 
 RSpec.describe Business, type: :model do
