@@ -165,9 +165,9 @@ module Dwolla
           puts e
           # EMAIL: send us an email if a user's roundup task fails
         end
-    rescue ExceptionName
+    rescue => e
       # EMAIL: if all round up task breaks
-      puts ExceptionName
+      puts e
     end
   end
 

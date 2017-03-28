@@ -1,7 +1,5 @@
 class SupportMailer < ApplicationMailer
   
-  include Resque::Mailer
-
   # ----------------------------------------------
   # DEFAULT SETTINGS -----------------------------
   # ----------------------------------------------
