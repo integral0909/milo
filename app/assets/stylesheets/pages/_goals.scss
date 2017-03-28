@@ -7,6 +7,17 @@
 
 // Goals
 
+// Add Goal Modal
+section.goal-section {
+  display: none;
+  min-height: 500px;
+}
+
+#goal_category {
+  display: block;
+}
+
+
 // Goals Card
 .card-goals {
 

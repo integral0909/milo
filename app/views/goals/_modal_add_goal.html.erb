@@ -8,11 +8,15 @@
         <h4 class="modal-title" id="myModalLabel">Create Goal</h4>
       </div>
       <%= form_for(@goal) do |f| %>
-        <section>
-          - 1 -
-        </section>
-        <section>
+        <section id="goal_category" class="goal-section">
           <div class="modal-body">
+            <p>The best way to start saving is by having a goal to work towards. What type of goal do you want to add?</p>
+            <div id="goal_category_click">Next</div>
+          </div>
+        </section>
+        <section id="goal_detail" class="goal-section">
+          <div class="modal-body">
+            <p>Great! Now that we know the type of a goal let's finish by adding important details about the goal.</p>
             <%= form_errors @goal %>
             <fieldset class="form-group">
               <label>Amount</label>
@@ -28,16 +32,40 @@
             </fieldset>
           </div>
           <div class="modal-footer">
-            <button type="button" class="button -small -inline" data-dismiss="modal">Close</button>
             <%= f.hidden_field :completed, value: false %>
             <%= f.hidden_field :active, value: true %>
-            <%= f.submit "Save Goal", class: "button -blue -small -inline" %>
+            <% if current_user.goals.size > 1 %>
+              <button type="button" id="goal_detail_click" class="button -blue -small">Continue</button>
+            <% else %>
+              <%= f.submit "Save", class: "button -blue -small -right" %>
+            <% end %>
           </div>
         </section>
-        <section>
-          - 3 -
+        <section id="goal_split" class="goal-section">
+          <div class="modal-body">
+            <p>Looks like you have multiple goals established, how do you want to split transfers into your goals?</p>
+          </div>
+          <div class="modal-footer">
+            <%= f.submit "Save", class: "button -blue -small -right" %>
+          </div>
         </section>
       <% end %>
     </div>
   </div>
 </div>
+
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    // Section 1
+    $('#goal_category_click').click(function() {
+      $('#goal_category').hide();
+      $('#goal_detail').show();
+    });
+    // Section 2
+    $('#goal_detail_click').click(function() {
+      $('#goal_detail').hide();
+      $('#goal_split').show();
+    });
+  </script>
+<% end %>
