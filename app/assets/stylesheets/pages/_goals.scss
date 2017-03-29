@@ -11,10 +11,47 @@
 section.goal-section {
   display: none;
   min-height: 500px;
+
+  p {
+    color: #606B6F;
+  }
 }
 
 #goal_category {
   display: block;
+}
+
+.goal-types {
+  @extend %clear;
+
+  div {
+    background: #4C3E70;
+    border-radius: 4px;
+    color: #FFF;
+    cursor: pointer;
+    font-family: 'Brandon Black';
+    float: left;
+    margin: 0 2% 2% 0;
+    padding: 32px 24px 24px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 32%;
+
+    &:nth-child(3n) {
+      margin: 0 0 2% 0;
+    }
+
+    &:last-child {
+      background: #352D52;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto 24px;
+      max-height: 64px;
+      max-width: 64px;
+    }
+  }
 }
 
 

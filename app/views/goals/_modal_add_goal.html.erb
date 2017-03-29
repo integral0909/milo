@@ -11,7 +11,15 @@
         <section id="goal_category" class="goal-section">
           <div class="modal-body">
             <p>The best way to start saving is by having a goal to work towards. What type of goal do you want to add?</p>
-            <div id="goal_category_click">Next</div>
+            <div id="goal_categories" class="goal-types">
+              <div><img src="http://placehold.it/64x64"/>vacation</div>
+              <div><img src="http://placehold.it/64x64"/>college</div>
+              <div><img src="http://placehold.it/64x64"/>auto</div>
+              <div><img src="http://placehold.it/64x64"/>wedding</div>
+              <div><img src="http://placehold.it/64x64"/>emergency</div>
+              <div><img src="http://placehold.it/64x64"/>custom</div>
+            </div>
+            <%= f.hidden_field :type %>
           </div>
         </section>
         <section id="goal_detail" class="goal-section">
@@ -35,7 +43,7 @@
             <%= f.hidden_field :completed, value: false %>
             <%= f.hidden_field :active, value: true %>
             <% if current_user.goals.size > 1 %>
-              <button type="button" id="goal_detail_click" class="button -blue -small">Continue</button>
+              <button type="button" id="goal_detail_click" class="button -blue -small -right">Continue</button>
             <% else %>
               <%= f.submit "Save", class: "button -blue -small -right" %>
             <% end %>
@@ -58,9 +66,15 @@
 <% content_for :javascript do %>
   <script type="text/javascript">
     // Section 1
-    $('#goal_category_click').click(function() {
+    $('#goal_categories div').click(function() {
+      // Add goal type
+      var value = $(this).text();
+      var input = $('#goal_type');
+      input.val(value);
+      // Next section
       $('#goal_category').hide();
       $('#goal_detail').show();
+      return false;
     });
     // Section 2
     $('#goal_detail_click').click(function() {
