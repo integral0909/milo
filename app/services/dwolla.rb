@@ -28,6 +28,9 @@ module Dwolla
       user = User.find(user.id)
       user.dwolla_id = dwolla_customer_url.headers[:location]
       user.save!
+
+      # Connnect new user with the funding source
+      Dwolla.connect_funding_source(user)
     rescue => e
       SupportMailer.add_dwolla_user_failed(user, e).deliver_now
       return
