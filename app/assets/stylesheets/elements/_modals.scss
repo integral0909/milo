@@ -10,15 +10,30 @@
   background: rgba(41,34,66,0.8);
 }
 
+.modal-content {
+  border: 0;
+  border-radius: 0;
+  box-shadow: 0 4px 12px 0 #292242;
+}
+
 .modal-header {
   background: #292242;
   border-bottom: 0;
   padding: 12px 16px;
 
   button.close {
-    color: #FFF;
+    color: rgba(0,0,0,0.24);
     text-shadow: initial;
-    opacity: 0.48;
+    opacity: 1;
+
+    &:focus, &:hover {
+      outline: none;
+    }
+
+    i.fa-close {
+      font-size: 0.688em;
+      line-height: 24px;
+    }
   }
 
   .modal-title {
