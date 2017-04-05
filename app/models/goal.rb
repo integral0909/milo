@@ -14,6 +14,7 @@
 #  type        :string
 #  percentage  :decimal(, )
 #  balance     :decimal(, )
+#  preset      :boolean
 #
 
 # ================================================
@@ -37,14 +38,24 @@ class Goal < ActiveRecord::Base
   # FIRST-GOAL -----------------------------------
   # ----------------------------------------------
   # Set the first goal on user creation (First $50)
-  def self.first_goal(user_id)
+  def first_goal(user_id)
     user = User.find_by_id(user_id)
     Goal.create(name: "Get Your Account to $50",
                 description: "Kickstart your savings by shifting your first $50 into your account.",
                 amount: 50,
                 user_id: user_id,
                 active: true,
-                completed: false)
+                completed: false,
+                preset: true)
+  end
+
+  # ----------------------------------------------
+  # FIRST-GOAL-PROGRESS --------------------------
+  # ----------------------------------------------
+  # Track the progress of the first goal
+  def first_goal_progress(user_id)
+    user = User.find_by_id(user_id)
+    goal_percentage = (user.account_balance * 100 / self.amount) / 100.00
   end
 
   # ----------------------------------------------

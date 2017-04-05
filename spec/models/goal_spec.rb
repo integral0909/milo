@@ -14,6 +14,7 @@
 #  type        :string
 #  percentage  :decimal(, )
 #  balance     :decimal(, )
+#  preset      :boolean
 #
 
 require 'rails_helper'

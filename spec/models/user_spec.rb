@@ -55,7 +55,7 @@
 #  pending_contribution   :integer
 #  first_name             :string
 #  last_name              :string
-#  budget                 :decimal(8, 2)
+#  auth_token             :string           default("")
 #
 
 require 'rails_helper'
