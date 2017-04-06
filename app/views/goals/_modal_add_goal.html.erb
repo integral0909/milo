@@ -12,12 +12,12 @@
           <div class="modal-body">
             <p>The best way to start saving is by having a goal to work towards. What type of goal do you want to add?</p>
             <div id="goal_categories" class="goal-types">
-              <div><img src="http://placehold.it/64x64"/>vacation</div>
-              <div><img src="http://placehold.it/64x64"/>college</div>
-              <div><img src="http://placehold.it/64x64"/>auto</div>
-              <div><img src="http://placehold.it/64x64"/>wedding</div>
-              <div><img src="http://placehold.it/64x64"/>emergency</div>
-              <div><img src="http://placehold.it/64x64"/>custom</div>
+              <div><%= image_tag("icon-goal-vacation.svg") %>vacation</div>
+              <div><%= image_tag("icon-goal-college.svg") %>college</div>
+              <div><%= image_tag("icon-goal-car.svg") %>auto</div>
+              <div><%= image_tag("icon-goal-wedding.svg") %>wedding</div>
+              <div><%= image_tag("icon-goal-emergency.svg") %>emergency</div>
+              <div><%= image_tag("icon-goal-custom.svg") %>custom</div>
             </div>
             <%= f.hidden_field :type %>
           </div>
