@@ -9,6 +9,7 @@ module Dwolla
   # INCLUDES -------------------------------------
   # ----------------------------------------------
   include TokenConcern
+  include ActionView::Helpers::NumberHelper
 
   # ----------------------------------------------
   # CREATE-DWOLLA-USER ---------------------------
