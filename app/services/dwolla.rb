@@ -15,7 +15,7 @@ module Dwolla
   # CREATE-DWOLLA-USER ---------------------------
   # ----------------------------------------------
   def self.create_user(user)
-    AddDwollaUserJob.perform(user.id)
+    Resque.enqueue(AddDwollaUserJob, user.id)
   end
 
   # ----------------------------------------------
@@ -23,7 +23,7 @@ module Dwolla
   # ----------------------------------------------
   # Add funding source for user to Dwolla
   def self.connect_funding_source(user)
-    AddDwollaFundingSourceJob.perform(user.id)
+    Resque.enqueue(AddDwollaFundingSourceJob, user.id)
   end
 
   def self.init_micro_deposits(user, user_checking, funding_account)
@@ -326,7 +326,7 @@ module Dwolla
    # ----------------------------------------------
    # send funds the user requested to withdraw
    def self.send_funds_to_user(user, requested_amount)
-     DwollaSendFundsToUserJob.perform(user.id, requested_amount)
+     Resque.enqueue(DwollaSendFundsToUserJob, user.id, requested_amount)
    end
 
   #  def self.transfer_tech_fee_to_corp(fee_amount)
@@ -361,7 +361,7 @@ module Dwolla
   #  end
 
   def self.quick_save(user, amount)
-    DwollaQuickSaveJob.perform(user.id, amount)
+    Resque.enqueue(DwollaQuickSaveJob, user.id, amount)
   end
 
   # reset the dwolla app token
