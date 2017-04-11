@@ -35,6 +35,11 @@ class Goal < ActiveRecord::Base
   validates :user_id, presence: true
 
   # ----------------------------------------------
+  # CALLBACKS ------------------------------------
+  # ----------------------------------------------
+  before_save :set_percentage_100
+
+  # ----------------------------------------------
   # FIRST-GOAL -----------------------------------
   # ----------------------------------------------
   # Set the first goal on user creation (First $50)
@@ -56,6 +61,23 @@ class Goal < ActiveRecord::Base
   def first_goal_progress(user_id)
     user = User.find_by_id(user_id)
     goal_percentage = (user.account_balance * 100 / self.amount) / 100.00
+  end
+
+  # ----------------------------------------------
+  # GOAL-PROGRESS --------------------------------
+  # ----------------------------------------------
+  # Track the progress of the first goal
+  def goal_progress
+    goal_percentage = (self.balance.to_i * 100 / self.amount) / 100.00
+  end
+
+  # ----------------------------------------------
+  # SET-PERCENTAGE-100 ---------------------------
+  # ----------------------------------------------
+  # Set contribution percentage to 100 when a
+  # user creates their first goal
+  def set_percentage_100
+    self.percentage = 100
   end
 
   # ----------------------------------------------

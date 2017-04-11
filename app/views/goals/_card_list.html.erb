@@ -8,11 +8,15 @@
       <div class="goal-item">
         <div class="gi-title">
           <a class="gi-edit" data-toggle="modal" data-target="#editGoal"><i class="fa fa-pencil"></i></a>
-          <span><%= @user.account_balance ? number_to_currency(@user.account_balance / 100.00) : "$0.00" %> / $<%= g.amount %></span>
+          <% if g.preset %>
+            <span><%= @user.account_balance ? number_to_currency(@user.account_balance / 100.00) : "$0.00" %> / $<%= g.amount %></span>
+          <% else %>
+            <span><%= g.balance ? number_to_currency(g.balance.to_i / 100.00) : "$0.00" %> / $<%= g.amount %></span>
+          <% end %>
           <%= g.name %>
         </div>
         <div class="gi-progress-bar">
-          <div class="current-progress" style="width: <%= g.preset ? g.first_goal_progress(current_user.id) : g.goal_progress(current_user.id) %>%"></div>
+          <div class="current-progress" style="width: <%= g.preset ? g.first_goal_progress(current_user.id) : g.goal_progress %>%"></div>
           <div class="bar -b1"></div>
           <div class="bar -b2"></div>
           <div class="bar -b3"></div>
