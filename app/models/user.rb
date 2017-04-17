@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   # ----------------------------------------------
   belongs_to :business
 
-  has_one  :checking
+  has_one :checking, dependent: :destroy
 
   has_many :accounts
   has_many :goals, dependent: :destroy
