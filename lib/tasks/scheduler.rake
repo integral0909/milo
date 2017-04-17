@@ -25,7 +25,7 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
     puts "-"*40
     puts "email sent"
   else
-    if day.saturday?
+    if day.sunday?
       puts "Starting Roundups for all users"
       Checking.all.each do |ck|
         user = User.find(ck.user_id)
@@ -74,7 +74,7 @@ task :create_weekly_transactions, [:user_id] => :environment do |t, args|
     puts "-"*40
     puts "update completed for #{user.email}"
   else
-    if day.saturday?
+    if day.sunday?
       Checking.all.each do |ck|
         user = User.find(ck.user_id)
 
@@ -113,7 +113,7 @@ task :charge_biz_tech_fee, [:biz_id] => :environment do |t, args|
     # Charge biz tech fee for all linked employees
     Dwolla.charge_biz_tech_fee(biz, user, ck)
   else
-    if day.saturday? && (current_date.day <= 7)
+    if day.sunday? && (current_date.day <= 7)
       Business.all.each do |biz|
         user = User.find(biz.owner)
         ck = Checking.find_by_user_id(user.id)

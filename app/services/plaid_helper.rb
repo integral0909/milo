@@ -15,14 +15,14 @@ module PlaidHelper
   # ----------------------------------------------
   # Pull in last weeks transactions from the connected user account
   def self.create_weekly_transactions(user, checking)
-    sunday = set_sunday
+    monday = set_monday
     begin
       # Pull in plaid connect user
       connect_user = Plaid::User.load(:connect, user.plaid_access_token)
       user_transactions = connect_user.transactions()
 
       # filter transactions to the ones that match the users checking and this past week
-      current_transactions = user_transactions.select{|a| (a.account_id == checking.plaid_acct_id) && (a.date.to_date >= sunday)}
+      current_transactions = user_transactions.select{|a| (a.account_id == checking.plaid_acct_id) && (a.date.to_date >= monday)}
 
       # create the transactions
       Transaction.create_transactions(current_transactions, checking.plaid_acct_id, user.id)
@@ -43,7 +43,7 @@ module PlaidHelper
     if user && checking
       begin
       # set date to beginning of the week
-      sunday = set_sunday
+      monday = set_monday
 
       # Pull in plaid connect user
       # upgrade to connect_user = Plaid::User.load(:connect, user.plaid_access_token) when upgrading to the most recent API
@@ -51,14 +51,14 @@ module PlaidHelper
       user_transactions = connect_user.transactions()
 
       # filter transactions to the ones that match the users checking and are only from the current week
-      current_transactions = user_transactions.select{|a| (a.account_id == checking.plaid_acct_id) && (a.date.to_date >= sunday)}
+      current_transactions = user_transactions.select{|a| (a.account_id == checking.plaid_acct_id) && (a.date.to_date >= monday)}
 
       # create transaction objects for the view
       transactions_for_view = current_transactions.map { |tr| {roundup: round_transaction(tr.amount), trans_name: tr.name, amount: tr.amount} }
 
       return transactions_for_view
     rescue
-      
+
     end
     end
   end
@@ -82,12 +82,12 @@ module PlaidHelper
   end
 
   # ----------------------------------------------
-  # SET-SUNDAY -----------------------------------
+  # SET-MONDAY -----------------------------------
   # ----------------------------------------------
-  # Set the previous Sunday's date
-  def self.set_sunday
+  # Set the previous Monday's date
+  def self.set_monday
     current_date = Date.today
-    sunday = current_date.beginning_of_week(start_day = :sunday)
+    monday = current_date.beginning_of_week(start_day = :monday)
   end
 
 end
