@@ -99,6 +99,8 @@ Rails.application.routes.draw do
           post :forgot_password
         end
       end
+      # Alexa
+      resource :alexa, only: [:create]
     end
   end
 
