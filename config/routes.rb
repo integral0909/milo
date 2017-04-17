@@ -100,7 +100,9 @@ Rails.application.routes.draw do
         end
       end
       # Alexa
-      resource :alexa, only: [:create]
+      namespace :alexa do
+        resource :handler, only: [:create]
+      end
     end
   end
 

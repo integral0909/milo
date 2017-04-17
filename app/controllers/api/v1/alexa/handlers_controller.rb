@@ -1,7 +1,7 @@
 # ================================================
 # RUBY->API->V1->ALEXA-CONTROLLER ================
 # ================================================
-class Api::V1::AlexaController < ActionController::Base
+class Api::V1::Alexa::HandlersController < ActionController::Base
 
   # ==============================================
   # ACTIONS ======================================
