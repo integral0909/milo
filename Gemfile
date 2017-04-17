@@ -30,6 +30,7 @@ gem 'social-share-button'
 # gem 'capistrano-rails', group: :development
 
 # API
+gem 'doorkeeper'
 #gem 'rack-cors', :require => 'rack/cors'
 #gem 'active_hash_relation', github: 'kollegorna/active_hash_relation'
 #gem 'pundit', '~> 0.3.0'
