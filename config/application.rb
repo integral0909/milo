@@ -30,5 +30,8 @@ module Milo
     # Use dynamic error pages
     config.exceptions_app = self.routes
 
+    # Set Resque as ActiveJob queue adapter.
+    config.active_job.queue_adapter = :resque
+
   end
 end

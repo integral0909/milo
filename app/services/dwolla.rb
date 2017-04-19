@@ -9,29 +9,13 @@ module Dwolla
   # INCLUDES -------------------------------------
   # ----------------------------------------------
   include TokenConcern
+  include ActionView::Helpers::NumberHelper
 
   # ----------------------------------------------
   # CREATE-DWOLLA-USER ---------------------------
   # ----------------------------------------------
   def self.create_user(user)
-    begin
-      # We don't save name in 2 seperate fields so append -Shift to the name
-      # TODO: add :ip_address => to customer creation with request.remote_ip
-      request_body = {
-        :firstName => user.name,
-        :lastName => '-Shift',
-        :email => user.email
-      }
-      Dwolla.set_dwolla_token
-      dwolla_customer_url = @dwolla_app_token.post "customers", request_body
-      # Add dwolla customer URL to the user
-      user = User.find(user.id)
-      user.dwolla_id = dwolla_customer_url.headers[:location]
-      user.save!
-    rescue => e
-      SupportMailer.add_dwolla_user_failed(user, e).deliver_now
-      return
-    end
+    Resque.enqueue(AddDwollaUserJob, user.id)
   end
 
   # ----------------------------------------------
@@ -39,37 +23,7 @@ module Dwolla
   # ----------------------------------------------
   # Add funding source for user to Dwolla
   def self.connect_funding_source(user)
-    begin
-      # Find the checking account associated with the user
-      user_checking = Checking.find_by_user_id(user.id)
-      # Get the info from the Account to add a funding source to Dwolla
-      funding_account = Account.find_by_plaid_acct_id(user_checking.plaid_acct_id)
-
-      dwolla_customer_url = user.dwolla_id
-      request_body = {
-        routingNumber: funding_account.bank_routing_number,
-        accountNumber: funding_account.bank_account_number,
-        type: funding_account.acct_subtype,
-        name: funding_account.name,
-        verified: (user.long_tail ? false : true)
-      }
-      Dwolla.set_dwolla_token
-      funding_source = @dwolla_app_token.post "#{dwolla_customer_url}/funding-sources", request_body
-
-      # Add the funding source to the user
-      user = User.find(user.id)
-      user.dwolla_funding_source = funding_source.headers[:location]
-      user.save!
-
-      if user.long_tail
-        Dwolla.init_micro_deposits(user, user_checking, funding_account)
-      else
-        BankingMailer.account_added(user, funding_account).deliver_now
-      end
-    rescue => e
-      # EMAIL: send support the error from Dwolla
-      SupportMailer.connect_funding_source_failed(user, user_checking, funding_account, e).deliver_now
-    end
+    Resque.enqueue(AddDwollaFundingSourceJob, user.id)
   end
 
   def self.init_micro_deposits(user, user_checking, funding_account)
@@ -127,7 +81,7 @@ module Dwolla
     begin
       # set beginning of the week
       current_date = Date.today
-      sunday = current_date.beginning_of_week(start_day = :sunday)
+      monday = current_date.beginning_of_week(start_day = :monday)
         puts "-"*40
         puts "User #{user.id} Roundups"
 
@@ -142,7 +96,7 @@ module Dwolla
           # find all transactions where transaction.account_id = ck.plaid_acct_id & pending = false OR transaction.user_id once it's added && within the last week
           transactions = Transaction
             .where(:account_id => checking.plaid_acct_id, :pending => false)
-            .where("date > ?", sunday)
+            .where("date > ?", monday)
             # TODO :: DWOLLA TESTING FOR SUCCESS
 
 
@@ -165,9 +119,9 @@ module Dwolla
           puts e
           # EMAIL: send us an email if a user's roundup task fails
         end
-    rescue ExceptionName
+    rescue => e
       # EMAIL: if all round up task breaks
-      puts ExceptionName
+      puts e
     end
   end
 
@@ -372,49 +326,7 @@ module Dwolla
    # ----------------------------------------------
    # send funds the user requested to withdraw
    def self.send_funds_to_user(user, requested_amount)
-     begin
-       current_date = Date.today
-
-       transfer_request = {
-         :_links => {
-           :source => {
-             :href => "https://api-uat.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_FBO"]}"
-           },
-           :destination => {
-             :href => user.dwolla_id
-           }
-         },
-         :amount => {
-           :currency => "USD",
-           :value => requested_amount
-         },
-         :metadata => {
-           :customerId => user.id
-         }
-       }
-       Dwolla.set_dwolla_token
-       # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
-       transfer = @dwolla_app_token.post "transfers", transfer_request
-
-       current_transfer_url = transfer.headers[:location]
-
-       # Get the status of the current transfer
-       Dwolla.set_dwolla_token
-       transfer_status = @dwolla_app_token.get current_transfer_url
-       current_transfer_status = transfer_status.status
-
-       # Save the withdraw as a transfer. Params are the user, transfer_url, transfer_status, roundup_amount, roundup_count, transfer_type, current_date, tech_fee_charged
-       Transfer.create_transfers(user,"", current_transfer_url, current_transfer_status, requested_amount, "", "withdraw", current_date, false)
-
-       # decrease the requested amount from the user's account balance
-       User.decrease_account_balance(user, requested_amount)
-       # send email to user about funds being transfered to their account.
-       funding_account  = Checking.find_by_user_id(user.id)
-       BankingMailer.withdraw_start(user, requested_amount, funding_account).deliver_now
-     rescue => e
-       # send email to dev team about failed transfer to user
-       SupportMailer.user_withdraw_failed(user, requested_amount, e).deliver_now
-     end
+     Resque.enqueue(DwollaSendFundsToUserJob, user.id, requested_amount)
    end
 
   #  def self.transfer_tech_fee_to_corp(fee_amount)
@@ -449,51 +361,7 @@ module Dwolla
   #  end
 
   def self.quick_save(user, amount)
-    begin
-      current_date = Date.today
-
-      transfer_request = {
-        :_links => {
-          :source => {
-            :href => user.dwolla_funding_source
-          },
-          :destination => {
-            :href => "https://api-uat.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_FBO"]}"
-          }
-        },
-        :amount => {
-          :currency => "USD",
-          :value => amount
-        },
-        :metadata => {
-          :customerId => user.id
-        }
-      }
-
-      Dwolla.set_dwolla_token
-      # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
-      transfer = @dwolla_app_token.post "transfers", transfer_request
-
-      current_transfer_url = transfer.headers[:location]
-
-      # Get the status of the current transfer
-      Dwolla.set_dwolla_token
-      transfer_status = @dwolla_app_token.get current_transfer_url
-      current_transfer_status = transfer_status.status
-
-      # Save the withdraw as a transfer. Params are the user, transfer_url, transfer_status, roundup_amount, roundup_count, transfer_type, current_date, tech_fee_charged
-      Transfer.create_transfers(user,"", current_transfer_url, current_transfer_status, amount, "", "deposit", current_date, false)
-
-      # add the quick save amount from the user's account balance
-      User.add_account_balance(user, amount, true)
-      # send email to user about funds being transfered to their account.
-
-      BankingMailer.quick_save_success(user, amount).deliver_now
-    rescue => e
-      p e
-      # send email to dev team about failed transfer to user
-      SupportMailer.quick_save_failed(user, amount, e).deliver_now
-    end
+    Resque.enqueue(DwollaQuickSaveJob, user.id, amount)
   end
 
   # reset the dwolla app token

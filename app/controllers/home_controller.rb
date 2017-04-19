@@ -50,7 +50,7 @@ class HomeController < ApplicationController
       @goal_percentage = 0
     end
 
-    # Pull in the users transactions from the current week. The week starts on Sunday
+    # Pull in the users transactions from the current week. The week starts on Monday
     set_pending_roundups
 
     # Show the latest 3 transfers

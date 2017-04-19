@@ -131,9 +131,9 @@ class RegistrationsController < Devise::RegistrationsController
   # ----------------------------------------------
   def update
     if params['set_on_demand'] == "true"
-      if @user.dwolla_funding_source.blank?
-        # connect Dwolla funding source and send email
-        Dwolla.connect_funding_source(@user)
+      # Sign up users with Dwolla here since we get charged for all users we add. We only want to get charged if they are attaching a bank account and are completing the signup process.
+      if @user.dwolla_id.blank?
+        Dwolla.create_user(@user)
       end
     end
 
