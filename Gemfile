@@ -38,7 +38,7 @@ gem 'doorkeeper'
 #gem 'pundit', '~> 0.3.0'
 #gem 'active_model_serializers', '0.9.2'
 gem 'kaminari', '~> 0.17.0'
-#gem 'redis-throttle', git: 'git://github.com/andreareginato/redis-throttle.git'
+gem 'redis-throttle', git: 'git://github.com/andreareginato/redis-throttle.git'
 
 # User Accounts with Devise
 gem 'devise', '~> 4.2'
