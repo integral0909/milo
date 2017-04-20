@@ -16,7 +16,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # bootstrap for stylesheets
 gem 'bootstrap', '4.0.0.alpha3'
 # Tooltips and popovers depend on tether
-gem 'rails-assets-tether', '>= 1.1.0'
+gem 'rails-assets-tether', '1.1.1'
 
 # SEO
 gem 'meta-tags'
