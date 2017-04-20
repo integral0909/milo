@@ -88,4 +88,28 @@ Rails.application.routes.draw do
   patch '/users/:id/update_accounts', to: 'plaidapi#update_accounts'
   patch '/users/withdraw_funds', to: 'users#withdraw_funds'
 
+  # Doorkeeper for API Protection
+  use_doorkeeper
+
+  # Dummy Root for Doorkeeper
+  root to: 'static#index'
+
+  # API
+  namespace :api do
+    namespace :v1 do
+      # Users
+      resources :sessions, only: [:create, :destroy]
+      # devise_for :users
+      resources :users, only: [:show, :create, :update, :destroy] do
+        collection do
+          post :forgot_password
+        end
+      end
+      # Alexa
+      namespace :alexa do
+        resource :handler, only: [:create]
+      end
+    end
+  end
+
 end

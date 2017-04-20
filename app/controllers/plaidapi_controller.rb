@@ -43,11 +43,6 @@ class PlaidapiController < ApplicationController
       accounts = Account.where(user_id: @user.id, acct_subtype: "checking")
       # IF, only one checking account connect automatically
 
-      # Sign up users with Dwolla here since we get charged for all users we add. We only want to get charged if they are attaching a bank account.
-      if @user.dwolla_id.blank?
-        Dwolla.create_user(@user)
-      end
-
       if accounts.size == 1
         Checking.create_checking(accounts)
 

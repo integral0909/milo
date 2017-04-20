@@ -1,16 +1,13 @@
 require 'resque/tasks'
 require 'resque/scheduler/tasks'
 
+task "resque:setup" => :environment do
+  ENV['QUEUE'] = '*'
+end
 
 namespace :resque do
   task :setup do
     require 'resque'
-    # require 'resque_scheduler'
-    # require 'resque/scheduler'
-
-    ENV['QUEUE'] = '*'
-
-    Resque.redis = 'localhost:6379' unless Rails.env == 'production'
   end
 
   task :setup_schedule => :setup do
@@ -36,6 +33,7 @@ namespace :resque do
     # require 'jobs'
   end
 
+  task "jobs:work" => "resque:work"
   task :scheduler => :setup_schedule
 end
 

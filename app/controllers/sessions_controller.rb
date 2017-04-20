@@ -3,6 +3,8 @@
 # ================================================
 class SessionsController < Devise::SessionsController
 
+  respond_to :json, :html
+
   # ----------------------------------------------
   # LAYOUT ---------------------------------------
   # ----------------------------------------------
@@ -30,9 +32,12 @@ class SessionsController < Devise::SessionsController
   def create
     @user = User.find_by_email(params[:user][:email])
     if @user != nil
-      # TODO: refresh transactions for the current week to show the user
-
-      super
+      sign_out(:user) if current_user
+      self.resource = warden.authenticate!(auth_options)
+      set_flash_message(:notice, :signed_in) if is_flashing_format?
+      sign_in(resource_name, resource)
+      yield resource if block_given?
+      respond_with resource, location: after_sign_in_path_for(resource)
     else
       # redirect to login page with error if login with wrong credentials
       redirect_to new_user_session_path, :flash => {:alert => "Invalid email or password"}
