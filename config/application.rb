@@ -1,7 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-require 'rack/redis_throttle'
+#require 'rack/redis_throttle'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -25,7 +25,7 @@ module Milo
     config.active_record.raise_in_transactional_callbacks = true
 
     # Throttle API requests from abusers
-    config.middleware.use Rack::RedisThrottle::Daily, max: 100000
+    #config.middleware.use Rack::RedisThrottle::Daily, max: 100000
 
     # Use dynamic error pages
     config.exceptions_app = self.routes
