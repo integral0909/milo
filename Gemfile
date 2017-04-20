@@ -38,7 +38,7 @@ gem 'doorkeeper'
 #gem 'pundit', '~> 0.3.0'
 #gem 'active_model_serializers', '0.9.2'
 gem 'kaminari', '~> 0.17.0'
-gem 'redis-throttle', git: 'git://github.com/andreareginato/redis-throttle.git'
+gem 'redis-throttle', git: 'https://github.com/andreareginato/redis-throttle.git'
 
 # User Accounts with Devise
 gem 'devise', '~> 4.2'
@@ -91,7 +91,7 @@ gem "brakeman", :require => false
 gem 'activerecord-session_store'
 
 # helper to determain the week of the month, specific fork to resolve `beginning_of_week` conflict with gem
-gem 'week_of_month', :git => 'https://github.com/kobaltz/week-of-month.git'
+gem 'week_of_month', git: 'https://github.com/kobaltz/week-of-month.git'
 
 # for background jobs
 gem 'redis'
