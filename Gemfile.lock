@@ -71,13 +71,13 @@ GEM
     autoprefixer-rails (6.7.7.2)
       execjs
     awesome_print (1.7.0)
-    aws-sdk (2.9.8)
-      aws-sdk-resources (= 2.9.8)
-    aws-sdk-core (2.9.8)
+    aws-sdk (2.9.9)
+      aws-sdk-resources (= 2.9.9)
+    aws-sdk-core (2.9.9)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.9.8)
-      aws-sdk-core (= 2.9.8)
+    aws-sdk-resources (2.9.9)
+      aws-sdk-core (= 2.9.9)
     aws-sigv4 (1.0.0)
     bcrypt (3.1.11)
     better_errors (2.1.1)
@@ -126,7 +126,7 @@ GEM
     dotenv-rails (2.2.0)
       dotenv (= 2.2.0)
       railties (>= 3.2, < 5.1)
-    dwolla_v2 (1.2.1)
+    dwolla_v2 (1.2.2)
       faraday (~> 0.9)
       faraday_middleware (~> 0.10)
       hashie (~> 3.4)
@@ -429,4 +429,4 @@ DEPENDENCIES
   week_of_month!
 
 BUNDLED WITH
-   1.13.7
+   1.14.3
