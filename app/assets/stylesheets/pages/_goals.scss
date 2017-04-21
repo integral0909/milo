@@ -151,3 +151,37 @@ section.goal-section {
     }
   }
 }
+
+// Complete Goal Modal
+#completeGoal .modal-dialog {
+  text-align: center;
+  width: 400px;
+}
+
+#completeGoal .modal-body {
+
+  img {
+    height: auto;
+    margin: 0 0 40px;
+    width: 64px;
+  }
+
+  .goal-complete-title {
+    color: #BBC5C7;
+    font-family: 'Brandon Black';
+    font-size: 0.875em;
+    line-height: 1.2;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+  }
+
+  h5 {
+    margin: 0 0 16px;
+  }
+
+  p {
+    color: #606B6F;
+    font-size: 1.25em;
+    margin: 0 0 40px;
+  }
+}

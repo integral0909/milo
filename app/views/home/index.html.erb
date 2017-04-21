@@ -161,5 +161,18 @@
   <% if @current_goal %>
     <%= render 'goals/modal_edit_goal' %>
   <% end %>
+  <% if @goal_complete %>
+    <%= render 'goals/modal_complete_goal' %>
+  <% end %>
   <%= render 'accounts/withdraw_funds' %>
+<% end %>
+
+<% content_for :javascript do %>
+  <% if @goal_complete %>
+    <script type="text/javascript">
+      $(function() {
+        $("#completeGoal").modal();
+      });
+    </script>
+  <% end %>
 <% end %>

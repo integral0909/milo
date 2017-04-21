@@ -1,0 +1,23 @@
+<div class="modal fade" id="completeGoal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i aria-hidden="true" class="fa fa-close"></i>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Goal Achieved!</h4>
+      </div>
+      <%= form_for (@goal_complete), :url => {:controller => "goals", :action => "update", id: @goal_complete.id}, :html => { :method => :put} do |f| %>
+        <div class="modal-body">
+          <%= image_tag("icon-goal-complete.svg") %>
+          <div class="goal-complete-title">Completed</div>
+          <h5><%= @goal_complete.name %></h5>
+          <p>Congrats on achieving your goal it is quite the accomplishment!</p>
+          <%= f.hidden_field :completed, value: true %>
+          <%= f.hidden_field :active, value: false %>
+          <%= f.submit "Mark as Completed", class: "button -blue -small -full" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
