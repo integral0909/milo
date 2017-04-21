@@ -47,7 +47,7 @@ class Goal < ActiveRecord::Base
     user = User.find_by_id(user_id)
     Goal.create(name: "Get Your Account to $50",
                 description: "Kickstart your savings by shifting your first $50 into your account.",
-                amount: 50,
+                amount: 5000,
                 user_id: user_id,
                 active: true,
                 completed: false,
@@ -60,7 +60,7 @@ class Goal < ActiveRecord::Base
   # Track the progress of the first goal
   def first_goal_progress(user_id)
     user = User.find_by_id(user_id)
-    goal_percentage = (user.account_balance * 100 / self.amount) / 100.00
+    goal_percentage = (user.account_balance * 100 / self.amount)
   end
 
   # ----------------------------------------------
@@ -68,7 +68,7 @@ class Goal < ActiveRecord::Base
   # ----------------------------------------------
   # Track the progress of the first goal
   def goal_progress
-    goal_percentage = (self.balance.to_i * 100 / self.amount) / 100.00
+    goal_percentage = (self.balance.to_i * 100 / self.amount)
   end
 
   # ----------------------------------------------
@@ -89,9 +89,9 @@ class Goal < ActiveRecord::Base
   # MARK-AS-COMPLETED ----------------------------
   # ----------------------------------------------
   # Change the goal to completed and inactive once the user's balance reaches the goal amount.
-  def self.mark_as_completed(goal)
-    goal.completed = true
-    goal.active = false
-    goal.save!
+  def mark_as_completed
+    self.completed = true
+    self.active = false
+    self.save!
   end
 end
