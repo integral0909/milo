@@ -60,7 +60,7 @@ class GoalsController < ApplicationController
   # GOAL-PARAMS ----------------------------------
   # ----------------------------------------------
   def goal_params
-    params.require(:goal).permit(:name, :description, :amount, :completed, :active)
+    params.require(:goal).permit(:name, :description, :amount, :completed, :active, :gtype, :percentage, :balance, :preset)
   end
 
 end

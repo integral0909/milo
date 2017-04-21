@@ -37,7 +37,7 @@ class Goal < ActiveRecord::Base
   # ----------------------------------------------
   # CALLBACKS ------------------------------------
   # ----------------------------------------------
-  before_save :set_percentage_100
+  after_create :set_goal_split
 
   # ----------------------------------------------
   # FIRST-GOAL -----------------------------------
@@ -72,12 +72,23 @@ class Goal < ActiveRecord::Base
   end
 
   # ----------------------------------------------
-  # SET-PERCENTAGE-100 ---------------------------
+  # SET-GOAL-SPLIT -------------------------------
   # ----------------------------------------------
-  # Set contribution percentage to 100 when a
-  # user creates their first goal
-  def set_percentage_100
-    self.percentage = 100
+  # When multiple goals, after create automatically
+  # set the contribution split
+  def set_goal_split
+    user = User.find(self.user_id)
+    total_goals = user.goals.where(preset: nil).all
+    puts "========================================"
+    puts total_goals.size
+    puts "========================================"
+    split = (100 / total_goals.size)
+    puts "========================================"
+    puts split
+    puts "========================================"
+    total_goals.each do |g|
+      g.update_attributes(percentage: split)
+    end
   end
 
   # ----------------------------------------------
