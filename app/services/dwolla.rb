@@ -81,7 +81,7 @@ module Dwolla
     begin
       # set beginning of the week
       current_date = Date.today
-      monday = current_date.beginning_of_week(start_day = :monday)
+      tuesday = current_date.beginning_of_week(start_day = :tuesday)
         puts "-"*40
         puts "User #{user.id} Roundups"
 
@@ -96,7 +96,7 @@ module Dwolla
           # find all transactions where transaction.account_id = ck.plaid_acct_id & pending = false OR transaction.user_id once it's added && within the last week
           transactions = Transaction
             .where(:account_id => checking.plaid_acct_id, :pending => false)
-            .where("date > ?", monday)
+            .where("date > ?", tuesday)
             # TODO :: DWOLLA TESTING FOR SUCCESS
 
 
