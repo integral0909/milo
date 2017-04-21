@@ -79,13 +79,7 @@ class Goal < ActiveRecord::Base
   def set_goal_split
     user = User.find(self.user_id)
     total_goals = user.goals.where(preset: nil).all
-    puts "========================================"
-    puts total_goals.size
-    puts "========================================"
     split = (100 / total_goals.size)
-    puts "========================================"
-    puts split
-    puts "========================================"
     total_goals.each do |g|
       g.update_attributes(percentage: split)
     end
