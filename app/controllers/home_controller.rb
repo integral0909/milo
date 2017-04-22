@@ -39,7 +39,7 @@ class HomeController < ApplicationController
 
     # Check if any goals are complete
     @goals.each do |g|
-      if (g.preset && (current_user.account_balance > g.amount)) || (g.balance.to_i > g.amount)
+      if (g.preset && ((@user.account_balance / 100) > g.amount)) || (g.balance.to_i > g.amount)
         @goal_complete = Goal.find(g.id)
       end
     end

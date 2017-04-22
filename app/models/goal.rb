@@ -5,13 +5,13 @@
 #  id          :integer          not null, primary key
 #  name        :string
 #  description :text
-#  amount      :integer
+#  amount      :decimal(, )
 #  user_id     :integer
 #  created_at  :datetime
 #  updated_at  :datetime
 #  active      :boolean
 #  completed   :boolean
-#  type        :string
+#  gtype       :string
 #  percentage  :decimal(, )
 #  balance     :decimal(, )
 #  preset      :boolean
@@ -47,7 +47,7 @@ class Goal < ActiveRecord::Base
     user = User.find_by_id(user_id)
     Goal.create(name: "Get Your Account to $50",
                 description: "Kickstart your savings by shifting your first $50 into your account.",
-                amount: 5000,
+                amount: 50,
                 user_id: user_id,
                 active: true,
                 completed: false,
@@ -60,15 +60,15 @@ class Goal < ActiveRecord::Base
   # Track the progress of the first goal
   def first_goal_progress(user_id)
     user = User.find_by_id(user_id)
-    goal_percentage = (user.account_balance * 100 / self.amount)
+    goal_percentage = (user.account_balance / self.amount.to_i)
   end
 
   # ----------------------------------------------
   # GOAL-PROGRESS --------------------------------
   # ----------------------------------------------
-  # Track the progress of the first goal
+  # Track the progress of goals
   def goal_progress
-    goal_percentage = (self.balance.to_i * 100 / self.amount)
+    goal_percentage = (self.balance.to_i * 100 / self.amount.to_i)
   end
 
   # ----------------------------------------------
@@ -83,15 +83,5 @@ class Goal < ActiveRecord::Base
     total_goals.each do |g|
       g.update_attributes(percentage: split)
     end
-  end
-
-  # ----------------------------------------------
-  # MARK-AS-COMPLETED ----------------------------
-  # ----------------------------------------------
-  # Change the goal to completed and inactive once the user's balance reaches the goal amount.
-  def mark_as_completed
-    self.completed = true
-    self.active = false
-    self.save!
   end
 end

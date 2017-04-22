@@ -5,13 +5,13 @@
 #  id          :integer          not null, primary key
 #  name        :string
 #  description :text
-#  amount      :integer
+#  amount      :decimal(, )
 #  user_id     :integer
 #  created_at  :datetime
 #  updated_at  :datetime
 #  active      :boolean
 #  completed   :boolean
-#  type        :string
+#  gtype       :string
 #  percentage  :decimal(, )
 #  balance     :decimal(, )
 #  preset      :boolean

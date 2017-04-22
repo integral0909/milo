@@ -32,7 +32,11 @@ class GoalsController < ApplicationController
     @goal = Goal.find(params[:id])
     @goal.update(goal_params)
     if @goal.save
-      flash[:success] = "Goal was successfully saved!"
+      if @goal.completed
+        flash[:success] = "Goal was successfully completed!"
+      else
+        flash[:success] = "Goal was successfully saved!"
+      end
       redirect_to authenticated_root_path
     else
       render 'home/index'

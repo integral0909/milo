@@ -9,9 +9,9 @@
         <div class="gi-title">
           <a class="gi-edit" data-toggle="modal" data-target="#editGoal"><i class="fa fa-pencil"></i></a>
           <% if g.preset %>
-            <span><%= @user.account_balance ? number_to_currency(@user.account_balance / 100.00) : "$0.00" %> / $<%= g.amount / 100.00 %></span>
+            <span><%= @user.account_balance ? number_to_currency(@user.account_balance / 100.00) : "$0.00" %> / <%= number_to_currency(g.amount) %></span>
           <% else %>
-            <span><%= g.balance ? number_to_currency(g.balance.to_i / 100.00) : "$0.00" %> / $<%= g.amount / 100.00 %></span>
+            <span><%= g.balance ? number_to_currency(g.balance) : "$0.00" %> / <%= number_to_currency(g.amount) %></span>
           <% end %>
           <%= g.name %>
         </div>
