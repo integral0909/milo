@@ -94,4 +94,5 @@ class Goal < ActiveRecord::Base
     !self.balance.nil? ? self.balance += contribution : self.balance = contribution
     self.save!
   end
+  
 end
