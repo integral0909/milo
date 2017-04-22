@@ -178,6 +178,11 @@ class User < ActiveRecord::Base
     # Add current roundups
     self.add_roundup(user, amount_in_cents)
 
+    # Split contribution amongst goals
+    user.goals.where(preset: nil).each do |goal|
+      goal.add_split_contribution(amount)
+    end
+
     # Check if the user is associated with a business
     if !user.business_id.nil? && quick_save.nil?
       Contribution.run_employer_contribution(user, amount_in_cents)

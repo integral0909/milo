@@ -46,8 +46,10 @@ class GoalsController < ApplicationController
   # ----------------------------------------------
   # DESTROY --------------------------------------
   # ----------------------------------------------
+  # After destroy reset split for remaining goals
   def destroy
     @goal.destroy
+    @goal.set_goal_split
     flash[:success] = "Goal was successfully deleted."
     redirect_to request.referrer || authenticated_root_path
   end

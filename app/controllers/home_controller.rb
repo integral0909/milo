@@ -35,7 +35,7 @@ class HomeController < ApplicationController
     # Build a new goal
     @goal = @user.goals.build
     # Active Goals
-    @goals = Goal.where(user_id: @user.id, active: true)
+    @goals = Goal.where(user_id: @user.id, active: true).order('created_at ASC')
 
     # Check if any goals are complete
     @goals.each do |g|
