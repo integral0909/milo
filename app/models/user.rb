@@ -179,7 +179,7 @@ class User < ActiveRecord::Base
     self.add_roundup(user, amount_in_cents)
 
     # Split contribution amongst goals
-    user.goals.where(preset: nil).each do |goal|
+    user.goals.where(preset: nil, active: true).each do |goal|
       goal.add_split_contribution(amount)
     end
 
