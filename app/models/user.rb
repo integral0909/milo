@@ -201,27 +201,18 @@ class User < ActiveRecord::Base
     # reduce goals balance based on split
     leftover = 0
     user.goals.where(preset: nil, active: true).order("created_at DESC").each do |goal|
-      puts "========== goal ==========="
       withdraw = amount * (goal.percentage * 0.01)
-      puts "withdraw"
-      puts withdraw
       withdraw += leftover
-      puts "withdraw and leftover"
-      puts withdraw
       if !goal.balance.nil?
         if goal.balance > withdraw
           goal.balance -= withdraw
           leftover = 0
-          puts "balance over withdraw"
         else
           leftover = withdraw - goal.balance
           goal.balance = 0
-          puts "withdraw under balance"
-          puts leftover
         end
       else
         leftover += withdraw
-        puts "no balance"
       end
       goal.save!
     end
