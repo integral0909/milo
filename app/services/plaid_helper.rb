@@ -15,14 +15,14 @@ module PlaidHelper
   # ----------------------------------------------
   # Pull in last weeks transactions from the connected user account
   def self.create_weekly_transactions(user, checking)
-    monday = set_monday
+    tuesday = set_tuesday
     begin
       # Pull in plaid connect user
       connect_user = Plaid::User.load(:connect, user.plaid_access_token)
       user_transactions = connect_user.transactions()
 
       # filter transactions to the ones that match the users checking and this past week
-      current_transactions = user_transactions.select{|a| (a.account_id == checking.plaid_acct_id) && (a.date.to_date >= monday)}
+      current_transactions = user_transactions.select{|a| (a.account_id == checking.plaid_acct_id) && (a.date.to_date >= tuesday)}
 
       # create the transactions
       Transaction.create_transactions(current_transactions, checking.plaid_acct_id, user.id)
@@ -42,24 +42,24 @@ module PlaidHelper
   def self.current_week_transactions(user, checking)
     if user && checking
       begin
-      # set date to beginning of the week
-      monday = set_monday
+        # set date to beginning of the week
+        tuesday = set_tuesday
 
-      # Pull in plaid connect user
-      # upgrade to connect_user = Plaid::User.load(:connect, user.plaid_access_token) when upgrading to the most recent API
-      connect_user = Plaid::User.load(:connect, user.plaid_access_token)
-      user_transactions = connect_user.transactions()
+        # Pull in plaid connect user
+        # upgrade to connect_user = Plaid::User.load(:connect, user.plaid_access_token) when upgrading to the most recent API
+        connect_user = Plaid::User.load(:connect, user.plaid_access_token)
+        user_transactions = connect_user.transactions()
 
-      # filter transactions to the ones that match the users checking and are only from the current week
-      current_transactions = user_transactions.select{|a| (a.account_id == checking.plaid_acct_id) && (a.date.to_date >= monday)}
+        # filter transactions to the ones that match the users checking and are only from the current week
+        current_transactions = user_transactions.select{|a| (a.account_id == checking.plaid_acct_id) && (a.date.to_date >= tuesday)}
 
-      # create transaction objects for the view
-      transactions_for_view = current_transactions.map { |tr| {roundup: round_transaction(tr.amount), trans_name: tr.name, amount: tr.amount} }
+        # create transaction objects for the view
+        transactions_for_view = current_transactions.map { |tr| {roundup: round_transaction(tr.amount), trans_name: tr.name, amount: tr.amount} }
 
-      return transactions_for_view
-    rescue
+        return transactions_for_view
+      rescue
 
-    end
+      end
     end
   end
 
@@ -85,9 +85,9 @@ module PlaidHelper
   # SET-MONDAY -----------------------------------
   # ----------------------------------------------
   # Set the previous Monday's date
-  def self.set_monday
+  def self.set_tuesday
     current_date = Date.today
-    monday = current_date.beginning_of_week(start_day = :monday)
+    tuesday = current_date.beginning_of_week(start_day = :tuesday)
   end
 
 end
