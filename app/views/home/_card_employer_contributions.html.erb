@@ -1,0 +1,18 @@
+<% if @user.business_id %>
+  <div class="milo-card account-value">
+    <% if @biz_owner %>
+      <div class="mc-title">Contributions</div>
+      <div class="av-total">$<%= @total_contrib ? @total_contrib : "0.00" %></div>
+    <% else %>
+      <div class="milo-card account-value">
+        <div class="mc-title">Employer Contributions</div>
+        <span>
+          <p>Total Contributions: <span class="pull-right">Pending Contributions:<span></p>
+          <div class="av-total">$<%= @employer_contrib ? @employer_contrib : "0.00" %>
+            <span class="pull-right">$<%= @pending_contrib ? @pending_contrib : "0.00" %></span>
+          </div>
+        </span>
+      </div>
+    <% end %>
+  </div>
+<% end %>

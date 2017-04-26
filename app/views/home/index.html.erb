@@ -10,38 +10,8 @@
           <%= render partial: "goals/card_list" %>
           <%= render partial: "home/card_add_account" %>
           <%= render partial: "home/card_confirm_checking" %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="milo-card account-value">
-            <% if @biz_owner %>
-              <div class="mc-title">Contributions</div>
-              <div class="av-total">$<%= @total_contrib ? @total_contrib : "0.00" %></div>
-            <% else %>
-              <div class="mc-title">Account Value
-                <span class="pull-right">
-                  <% if @account_balance %>
-                      <a class="mc-edit" data-toggle="modal" data-target="#withdrawFunds">Withdraw</a>
-                  <% end %>
-                </span>
-              </div>
-              <div class="av-total">$<%= @account_balance ? @account_balance : "0.00" %></div>
-            <% end %>
-          </div>
-          <% if @user.business_id && !@biz %>
-            <div class="milo-card account-value">
-                <div class="mc-title">Employer Contributions</div>
-                <span>
-                  <p>Total Contributions:
-                    <span class="pull-right">Pending Contributions:<span>
-                    </p>
-                  <div class="av-total">$<%= @employer_contrib ? @employer_contrib : "0.00" %>
-                    <span class="pull-right">$<%= @pending_contrib ? @pending_contrib : "0.00" %></span>
-                  </div>
-                </span>
-            </div>
-          <% end %>
+          <%= render partial: "home/card_account_value" %>
+          <%= render partial: "home/card_employer_contributions" %>
         </div>
       </div>
       <div id="mobile" class="row">
@@ -64,40 +34,9 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
-          <div class="milo-card history">
-            <div class="mc-title">History</div>
-            <% if @transfers.present? %>
-              <ul class="recent-transactions">
-                <% @transfers.each do |tr| %>
-                  <li>$<%= tr.roundup_amount %><span><strong><%= tr.status == '200' ? "Processed" : "Pending" %></strong><%= tr.date.to_date.strftime("%B %d, %Y") %></span></li>
-                <% end %>
-              </ul>
-            <% else %>
-              <p>No transfers currently exist.</p>
-            <% end %>
-            <a href="/history">View History</a>
-          </div>
-        </div>
-        <% if @biz %>
-          <div class="col-md-6">
-            <div class="milo-card quick-save">
-              <div class="mc-title">Employees</div>
-              <div class="amount"><%= @total_employees %></div>
-              <a href="/employees" class="button -blue -full">Manage</a>
-            </div>
-          </div>
-        <% else %>
-          <% if !@user.dwolla_funding_source.nil? %>
-            <div class="col-md-6">
-              <div class="milo-card quick-save">
-                <div class="mc-title">Quick Save</div>
-                <div class="amount">+$20.00</div>
-                <%= link_to "Save", quick_save_path, class:"button -full -green", data: {confirm: "Are you sure you want to save $20?"} %>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
+        <%= render partial: "home/card_history" %>
+        <%= render partial: "home/card_quick_save" %>
+        <%= render partial: "home/card_employee_count" %>
       </div>
     </div>
   </div>
