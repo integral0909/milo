@@ -26,32 +26,8 @@
                 <div class="home-verify-message">Looks like we still need you to verify your account. If you've already recieved the micro-deposits, click <a class="verify-link" href="/settings/accounts">here</a> to get connected!</div>
               <% end %>
               <% if !@biz %>
-                <div class="milo-card progress">
-                  <% if @current_goal %>
-                    <div class="mc-title">
-                      <a class="mc-edit" data-toggle="modal" data-target="#editGoal"><i class="fa fa-pencil"></i></a>
-                      <span><em><%= @user.account_balance ? number_to_currency(@user.account_balance / 100.00) : "0" %></em> / $<%= @current_goal.amount %></span>
-                      <%= @current_goal.name %>
-                    </div>
-                    <div class="progress-bar">
-                      <% unless @goal_percentage == 0 %>
-                        <div class="current-progress" style="width: <%= @goal_percentage %>%"></div>
-                      <% end %>
-                      <div class="bar one"></div>
-                      <div class="bar two"></div>
-                      <div class="bar three"></div>
-                      <div class="bar four"></div>
-                      <div class="bar five"></div>
-                      <div class="bar six"></div>
-                      <div class="bar seven"></div>
-                    </div>
-                  <% else %>
-                    <div class="mc-title">Create a Goal</div>
-                    <p>Make a bigger impact and set a goal to motivate yourself to save for an important financial goal like a college education, new home or vacation.</p>
-                    <button type="button" class="button -blue" data-toggle="modal" data-target="#setGoal">Set Goal</button>
-                  <% end %>
-                <% end %>
-              </div>
+                <%= render partial: "goals/card_list" %>
+              <% end %>
             </div>
           </div>
           <div class="row">
@@ -182,9 +158,18 @@
 
 <% content_for :modal do %>
   <%= render 'goals/modal_add_goal' %>
-  <% if @current_goal %>
-    <%= render 'goals/modal_edit_goal' %>
+  <% if @goal_complete %>
+    <%= render 'goals/modal_complete_goal' %>
   <% end %>
-  <!-- load withdraw funds modal -->
   <%= render 'accounts/withdraw_funds' %>
+<% end %>
+
+<% content_for :javascript do %>
+  <% if @goal_complete %>
+    <script type="text/javascript">
+      $(function() {
+        $("#completeGoal").modal();
+      });
+    </script>
+  <% end %>
 <% end %>

@@ -29,25 +29,19 @@ class HomeController < ApplicationController
   # ----------------------------------------------
   def index
     # Users account balance converted to dollars
-    @account_balance = number_to_currency(@user.account_balance / 100.00, unit:"") if @user.account_balance
-
+    @account_balance = number_to_currency(@user.account_balance / 100.00, unit: "") if @user.account_balance
     # Users unique referral link
     @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
-
-
+    # Build a new goal
     @goal = @user.goals.build
-    @current_goal = Goal.find_by_user_id_and_active(@user.id, true)
+    # Active Goals
+    @goals = Goal.where(user_id: @user.id, active: true).order('created_at ASC')
 
-    if !@user.account_balance.nil? && @current_goal
-      @goal_percentage = (@user.account_balance * 100 / @current_goal.amount) / 100.00
-      if @goal_percentage >= 100
-
-        # If the user has hit 100% of their goal, mark it as completed and remove
-        @goal_complete_message = "Congrats! You've hit your goal of $#{@current_goal.amount}!!"
-        Goal.mark_as_completed(@current_goal)
+    # Check if any goals are complete
+    @goals.each do |g|
+      if (g.preset && ((@user.account_balance / 100) > g.amount)) || (g.balance.to_i > g.amount)
+        @goal_complete = Goal.find(g.id)
       end
-    else
-      @goal_percentage = 0
     end
 
     # Pull in the users transactions from the current week. The week starts on Monday
@@ -56,8 +50,6 @@ class HomeController < ApplicationController
     # Show the latest 3 transfers
     @transfers = Transfer.where(user_id: @user.id).order(date: :desc).limit(3)
 
-
-    flash[:success] = @goal_complete_message if @goal_complete_message
     # Redirect users to proper sign up page if not complete
     if (@user.invited && !@user.is_verified)
       redirect_to signup_phone_path

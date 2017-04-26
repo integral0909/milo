@@ -8,15 +8,15 @@
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
-#  sign_in_count          :integer          default("0"), not null
+#  sign_in_count          :integer          default(0), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  invited                :boolean          default("false")
-#  admin                  :boolean          default("false")
+#  invited                :boolean          default(FALSE)
+#  admin                  :boolean          default(FALSE)
 #  referral_code          :string
 #  name                   :string
 #  zip                    :string
@@ -31,14 +31,14 @@
 #  city                   :string
 #  state                  :string
 #  plaid_access_token     :string
-#  failed_attempts        :integer          default("0"), not null
+#  failed_attempts        :integer          default(0), not null
 #  unlock_token           :string
 #  locked_at              :datetime
 #  avatar_file_name       :string
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
-#  account_balance        :integer
+#  account_balance        :integer          default(0)
 #  business_id            :integer
 #  long_tail              :boolean
 #  invitation_token       :string
@@ -48,7 +48,7 @@
 #  invitation_limit       :integer
 #  invited_by_id          :integer
 #  invited_by_type        :string
-#  invitations_count      :integer          default("0")
+#  invitations_count      :integer          default(0)
 #  bank_not_verified      :boolean
 #  pause_savings          :boolean
 #  employer_contribution  :integer
@@ -56,6 +56,7 @@
 #  first_name             :string
 #  last_name              :string
 #  auth_token             :string           default("")
+#  budget                 :decimal(8, 2)
 #
 
 require 'rails_helper'

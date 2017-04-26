@@ -3,33 +3,73 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <i aria-hidden="true" class="fa fa-close"></i>
         </button>
         <h4 class="modal-title" id="myModalLabel">Create Goal</h4>
       </div>
       <%= form_for(@goal) do |f| %>
-        <div class="modal-body">
-          <%= form_errors @goal %>
-          <fieldset class="form-group">
-            <label>Amount</label>
-            <%= f.number_field :amount, class: "form-control", placeholder: "$", require: true %>
-          </fieldset>
-          <fieldset class="form-group">
-            <label>Name</label>
-            <%= f.text_field :name, class: "form-control", placeholder: "Name", require: true %>
-          </fieldset>
-          <fieldset class="form-group">
-            <label>Description</label>
-            <%= f.text_area :description, class: "form-control", placeholder: "Enter a description..." %>
-          </fieldset>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="button -small -inline" data-dismiss="modal">Close</button>
-          <%= f.hidden_field :completed, value: false%>
-          <%= f.hidden_field :active, value: true%>
-          <%= f.submit "Save Goal", class: "button -blue -small -inline" %>
-        </div>
+        <section id="goal_category" class="goal-section">
+          <div class="modal-body">
+            <p>The best way to start saving is by having a goal to work towards. What type of goal do you want to add?</p>
+            <div id="goal_categories" class="goal-types">
+              <div><%= image_tag("icon-goal-vacation.svg") %>vacation</div>
+              <div><%= image_tag("icon-goal-college.svg") %>college</div>
+              <div><%= image_tag("icon-goal-car.svg") %>auto</div>
+              <div><%= image_tag("icon-goal-wedding.svg") %>wedding</div>
+              <div><%= image_tag("icon-goal-emergency.svg") %>emergency</div>
+              <div><%= image_tag("icon-goal-custom.svg") %>custom</div>
+            </div>
+            <%= f.text_field :gtype, style: "display:none;" %>
+          </div>
+        </section>
+        <section id="goal_detail" class="goal-section">
+          <div class="modal-body">
+            <p>Great! Now that we know the type of a goal let's finish by adding important details about the goal.</p>
+            <%= form_errors @goal %>
+            <div class="row">
+              <div class="col-sm-8">
+                <fieldset class="form-group">
+                  <label>Name</label>
+                  <%= f.text_field :name, id: "current_goal_name", class: "form-control", placeholder: "Name", require: true %>
+                </fieldset>
+              </div>
+              <div class="col-sm-4">
+                <fieldset class="form-group">
+                  <label>Amount</label>
+                  <%= f.number_field :amount, class: "form-control", placeholder: "$", require: true %>
+                </fieldset>
+              </div>
+            </div>
+            <fieldset class="form-group">
+              <label>Description</label>
+              <%= f.text_area :description, class: "form-control", placeholder: "Enter a description..." %>
+            </fieldset>
+          </div>
+          <div class="modal-footer">
+            <%= f.hidden_field :completed, value: false %>
+            <%= f.hidden_field :active, value: true %>
+            <%= f.submit "Save", class: "button -blue -small -right" %>
+          </div>
+        </section>
+
       <% end %>
     </div>
   </div>
 </div>
+
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    // Section 1
+    $('#goal_categories div').click(function() {
+      // Add goal type
+      var value = $(this).text();
+      var input = $('#goal_gtype');
+      input.val(value);
+      // Next section
+      $('#goal_category').hide();
+      $('#goal_detail').show();
+      return false;
+    });
+  </script>
+<% end %>

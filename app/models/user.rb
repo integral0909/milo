@@ -8,15 +8,15 @@
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
-#  sign_in_count          :integer          default("0"), not null
+#  sign_in_count          :integer          default(0), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  invited                :boolean          default("false")
-#  admin                  :boolean          default("false")
+#  invited                :boolean          default(FALSE)
+#  admin                  :boolean          default(FALSE)
 #  referral_code          :string
 #  name                   :string
 #  zip                    :string
@@ -31,14 +31,14 @@
 #  city                   :string
 #  state                  :string
 #  plaid_access_token     :string
-#  failed_attempts        :integer          default("0"), not null
+#  failed_attempts        :integer          default(0), not null
 #  unlock_token           :string
 #  locked_at              :datetime
 #  avatar_file_name       :string
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
-#  account_balance        :integer
+#  account_balance        :integer          default(0)
 #  business_id            :integer
 #  long_tail              :boolean
 #  invitation_token       :string
@@ -48,15 +48,15 @@
 #  invitation_limit       :integer
 #  invited_by_id          :integer
 #  invited_by_type        :string
-#  invitations_count      :integer          default("0")
+#  invitations_count      :integer          default(0)
 #  bank_not_verified      :boolean
 #  pause_savings          :boolean
 #  employer_contribution  :integer
 #  pending_contribution   :integer
 #  first_name             :string
 #  last_name              :string
-#  budget                 :decimal(8, 2)
 #  auth_token             :string           default("")
+#  budget                 :decimal(8, 2)
 #
 
 # ================================================
@@ -177,6 +177,12 @@ class User < ActiveRecord::Base
     amount_in_cents = (amount.to_f * 100).round(0)
     # Add current roundups
     self.add_roundup(user, amount_in_cents)
+
+    # Split contribution amongst goals
+    user.goals.where(preset: nil, active: true).each do |goal|
+      goal.add_split_contribution(amount)
+    end
+
     # Check if the user is associated with a business
     if !user.business_id.nil? && quick_save.nil?
       Contribution.run_employer_contribution(user, amount_in_cents)
@@ -190,6 +196,26 @@ class User < ActiveRecord::Base
   # Decrease withdrawn amount from the users account balance
   def self.decrease_account_balance(user, amount)
     user.account_balance -= (amount.to_f * 100).round(0)
+
+    # reduce goals balance based on split
+    leftover = 0
+    user.goals.where(preset: nil, active: true).order("created_at DESC").each do |goal|
+      withdraw = amount * (goal.percentage * 0.01)
+      withdraw += leftover
+      if !goal.balance.nil?
+        if goal.balance > withdraw
+          goal.balance -= withdraw
+          leftover = 0
+        else
+          leftover = withdraw - goal.balance
+          goal.balance = 0
+        end
+      else
+        leftover += withdraw
+      end
+      goal.save!
+    end
+
     user.save!
   end
 
@@ -229,6 +255,7 @@ class User < ActiveRecord::Base
   def extra_payment
     extra = budget - minimum_payments
   end
+
   # ----------------------------------------------
   # EMAILS ---------------------------------------
   # ----------------------------------------------

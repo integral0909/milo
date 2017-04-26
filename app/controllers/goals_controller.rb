@@ -18,7 +18,7 @@ class GoalsController < ApplicationController
   def create
     @goal = current_user.goals.build(goal_params)
     if @goal.save
-      flash[:success] = "Goal created!"
+      flash[:success] = "Goal was successfully created!"
       redirect_to authenticated_root_path
     else
       render 'home/index'
@@ -26,16 +26,28 @@ class GoalsController < ApplicationController
   end
 
   # ----------------------------------------------
-  # EDIT ---------------------------------------
+  # EDIT -----------------------------------------
+  # ----------------------------------------------
+  def edit
+    @goal = current_user.goals.find_by(id: params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # ----------------------------------------------
+  # UPDATE ---------------------------------------
   # ----------------------------------------------
   def update
     @goal = Goal.find(params[:id])
     @goal.update(goal_params)
     if @goal.save
       if @goal.completed
-        Goal.mark_as_completed(@goal)
+        flash[:success] = "Goal was successfully completed!"
+      else
+        flash[:success] = "Goal was successfully saved!"
       end
-      flash[:success] = "Goal Saved!"
       redirect_to authenticated_root_path
     else
       render 'home/index'
@@ -45,9 +57,11 @@ class GoalsController < ApplicationController
   # ----------------------------------------------
   # DESTROY --------------------------------------
   # ----------------------------------------------
+  # After destroy reset split for remaining goals
   def destroy
     @goal.destroy
-    flash[:success] = "Goal deleted"
+    @goal.set_goal_split
+    flash[:success] = "Goal was successfully deleted."
     redirect_to request.referrer || authenticated_root_path
   end
 
@@ -60,7 +74,7 @@ class GoalsController < ApplicationController
   # GOAL-PARAMS ----------------------------------
   # ----------------------------------------------
   def goal_params
-    params.require(:goal).permit(:name, :description, :amount, :completed, :active)
+    params.require(:goal).permit(:name, :description, :amount, :completed, :active, :gtype, :percentage, :balance, :preset)
   end
 
 end
