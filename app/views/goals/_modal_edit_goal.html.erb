@@ -28,6 +28,12 @@
             <label>Description</label>
             <%= f.text_area :description, class: "form-control", value: @goal.description %>
           </fieldset>
+          <fieldset class="form-check">
+            <label class="form-check-label">
+              <%= f.check_box :active, class: "form-check-input", value: @goal.active %>
+              Active Goal
+            </label>
+          </fieldset>
         </div>
         <div class="modal-footer">
           <%= f.submit "Save", class: "button -blue -small -inline" %>

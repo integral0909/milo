@@ -43,7 +43,7 @@ class Goal < ActiveRecord::Base
   # FIRST-GOAL -----------------------------------
   # ----------------------------------------------
   # Set the first goal on user creation (First $50)
-  def first_goal(user_id)
+  def self.first_goal(user_id)
     user = User.find_by_id(user_id)
     Goal.create(name: "Get Your Account to $50",
                 description: "Kickstart your savings by shifting your first $50 into your account.",
@@ -79,9 +79,11 @@ class Goal < ActiveRecord::Base
   def set_goal_split
     user = User.find(self.user_id)
     total_goals = user.goals.where(preset: nil).all
-    split = (100 / total_goals.size)
-    total_goals.each do |g|
-      g.update_attributes(percentage: split)
+    if total_goals.present?
+      split = (100 / total_goals.size)
+      total_goals.each do |g|
+        g.update_attributes(percentage: split)
+      end
     end
   end
 
@@ -94,5 +96,5 @@ class Goal < ActiveRecord::Base
     !self.balance.nil? ? self.balance += contribution : self.balance = contribution
     self.save!
   end
-  
+
 end
