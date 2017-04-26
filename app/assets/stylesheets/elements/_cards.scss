@@ -29,16 +29,17 @@
     padding: 0 0 7px;
     text-transform: uppercase;
 
-    a.mc-edit {
-      color: #8B999F;
+    a.title-link, .title-link {
+      color: #4A90E2;
       cursor: pointer;
+      display: inline-block;
       float: right;
-      font-size: 0.644em;
-      line-height: 28px;
-      margin: 0 0 0 12px;
+      font-size: 0.7em;
+      line-height: 20px;
+      text-align: right;
 
       &:hover {
-        color: #4A90E2;
+        text-decoration: none;
       }
     }
 
@@ -58,6 +59,10 @@
         margin: 0 0 0 4px;
       }
     }
+  }
+
+  p:last-child {
+    margin: 0;
   }
 }
 

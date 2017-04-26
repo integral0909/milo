@@ -46,7 +46,8 @@ class VerificationsController < ApplicationController
       current_user.is_verified = true
       current_user.verification_code = ''
       current_user.save
-      redirect_to user_accounts_path(current_user)
+      #redirect_to user_accounts_path(current_user)
+      redirect_to authenticated_root_path
       return
     else
       redirect_to signup_phone_confirm_path, :flash => { :alert => "Invalid verification code." }

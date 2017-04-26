@@ -1,160 +1,129 @@
 <% set_meta_tags :site => 'Overview • Shift' %>
 
 <% if current_user.invited %>
-  <% if @accounts.present? || (@transactions && !@transactions.empty?) %>
-    <% if @checking == nil %>
-      <div class="page-content">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="milo-card">
-                <div class="mc-title">Checking Account</div>
-                <p>Now that we have connected with your account/s we need to confirm the checking account that you would like to use with Shift.</p>
-                <a href="/checkings/new" class="button -blue">Confirm</a>
-              </div>
-            </div>
-          </div>
+  <div class="page-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <%= render "layouts/messages" %>
+          <%= render partial: "home/card_verify_bank" %>
+          <%= render partial: "goals/card_list" %>
+          <%= render partial: "home/card_add_account" %>
+          <%= render partial: "home/card_confirm_checking" %>
         </div>
       </div>
-    <% else %>
-      <div class="page-content">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <%= render "layouts/messages" %>
-              <% if @checking.present? && @user.bank_not_verified %>
-                <div class="home-verify-message">Looks like we still need you to verify your account. If you've already recieved the micro-deposits, click <a class="verify-link" href="/settings/accounts">here</a> to get connected!</div>
-              <% end %>
-              <% if !@biz %>
-                <%= render partial: "goals/card_list" %>
-              <% end %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="milo-card account-value">
-                <% if @biz_owner %>
-                  <div class="mc-title">Contributions</div>
-                  <div class="av-total">$<%= @total_contrib ? @total_contrib : "0.00" %></div>
-                <% else %>
-                  <div class="mc-title">Account Value
-                    <span class="pull-right">
-                      <% if @account_balance %>
-                          <a class="mc-edit" data-toggle="modal" data-target="#withdrawFunds">Withdraw</a>
-                      <% end %>
-                    </span>
-                  </div>
-                  <div class="av-total">$<%= @account_balance ? @account_balance : "0.00" %></div>
-                <% end %>
-              </div>
-              <% if @user.business_id && !@biz %>
-                <div class="milo-card account-value">
-                    <div class="mc-title">Employer Contributions</div>
-                    <span>
-                      <p>Total Contributions:
-                        <span class="pull-right">Pending Contributions:<span>
-                        </p>
-                      <div class="av-total">$<%= @employer_contrib ? @employer_contrib : "0.00" %>
-                        <span class="pull-right">$<%= @pending_contrib ? @pending_contrib : "0.00" %></span>
-                      </div>
-                    </span>
-                </div>
-              <% end %>
-            </div>
-          </div>
-          <div id="mobile" class="row">
-            <div class="col-md-12">
-              <div class="milo-card mobile-roundups">
-                <div class="mc-title">Pending Round Ups</div>
-                <% if @transactions.present? %>
-                  <ul class="recent-transactions">
-                    <% @transactions.each do |t| %>
-                      <% if t[:amount] > 0 %>
-                        <li>+<%= number_to_currency(t[:roundup].round(2)) %><span><strong><%= number_to_currency(t[:amount].round(2)) %></strong><%= t[:trans_name] %></span></li>
-                      <% end %>
-                    <% end %>
-                  </ul>
-                  <p class="align-center">Total: <strong><%= number_to_currency(@total_pending.round(2)) %></strong></p>
-                <% else %>
-                  <p>No current roundups available.</p>
-                <% end %>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="milo-card history">
-                <div class="mc-title">History</div>
-                <% if @transfers.present? %>
-                  <ul class="recent-transactions">
-                    <% @transfers.each do |tr| %>
-                      <li>$<%= tr.roundup_amount %><span><strong><%= tr.status == '200' ? "Processed" : "Pending" %></strong><%= tr.date.to_date.strftime("%B %d, %Y") %></span></li>
-                    <% end %>
-                  </ul>
-                <% else %>
-                  <p>No transfers currently exist.</p>
-                <% end %>
-                <a href="/history">View History</a>
-              </div>
-            </div>
-            <% if @biz %>
-              <div class="col-md-6">
-                <div class="milo-card quick-save">
-                  <div class="mc-title">Employees</div>
-                  <div class="amount"><%= @total_employees %></div>
-                  <a href="/employees" class="button -blue -full">Manage</a>
-                </div>
-              </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="milo-card account-value">
+            <% if @biz_owner %>
+              <div class="mc-title">Contributions</div>
+              <div class="av-total">$<%= @total_contrib ? @total_contrib : "0.00" %></div>
             <% else %>
-              <% if !@user.dwolla_funding_source.nil? %>
-                <div class="col-md-6">
-                  <div class="milo-card quick-save">
-                    <div class="mc-title">Quick Save</div>
-                    <div class="amount">+$20.00</div>
-                    <%= link_to "Save", quick_save_path, class:"button -full -green", data: {confirm: "Are you sure you want to save $20?"} %>
-                  </div>
-                </div>
-              <% end %>
+              <div class="mc-title">Account Value
+                <span class="pull-right">
+                  <% if @account_balance %>
+                      <a class="mc-edit" data-toggle="modal" data-target="#withdrawFunds">Withdraw</a>
+                  <% end %>
+                </span>
+              </div>
+              <div class="av-total">$<%= @account_balance ? @account_balance : "0.00" %></div>
             <% end %>
           </div>
+          <% if @user.business_id && !@biz %>
+            <div class="milo-card account-value">
+                <div class="mc-title">Employer Contributions</div>
+                <span>
+                  <p>Total Contributions:
+                    <span class="pull-right">Pending Contributions:<span>
+                    </p>
+                  <div class="av-total">$<%= @employer_contrib ? @employer_contrib : "0.00" %>
+                    <span class="pull-right">$<%= @pending_contrib ? @pending_contrib : "0.00" %></span>
+                  </div>
+                </span>
+            </div>
+          <% end %>
         </div>
       </div>
-      <% if !@biz %>
-        <div class="sidebar">
-          <div class="pending-roundups">
-            <div class="pr-title">Pending Round Ups</div>
+      <div id="mobile" class="row">
+        <div class="col-md-12">
+          <div class="milo-card mobile-roundups">
+            <div class="mc-title">Pending Round Ups</div>
             <% if @transactions.present? %>
-              <ul class="pr-list">
+              <ul class="recent-transactions">
                 <% @transactions.each do |t| %>
                   <% if t[:amount] > 0 %>
-                    <li>+ <%= number_to_currency(t[:roundup].round(2)) %><span><strong><%= number_to_currency(t[:amount].round(2)) %></strong> <%= t[:trans_name] %></span></li>
+                    <li>+<%= number_to_currency(t[:roundup].round(2)) %><span><strong><%= number_to_currency(t[:amount].round(2)) %></strong><%= t[:trans_name] %></span></li>
                   <% end %>
                 <% end %>
               </ul>
-              <small>Total: <strong><%= number_to_currency(@total_pending.round(2)) %></strong></small>
+              <p class="align-center">Total: <strong><%= number_to_currency(@total_pending.round(2)) %></strong></p>
             <% else %>
-              <small>No current roundups available.</small>
+              <p>No current roundups available.</p>
             <% end %>
           </div>
         </div>
-      <% end %>
-    <% end %>
-  <% else %>
-    <div class="page-content">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h6>Connect Bank Account</h6>
-            <p>Before you can begin using Shift we need to connect a bank account that we can track, calculate round ups and transfer funds to and from your Shift savings account.</p>
-            <a href="/users/<%= current_user.id %>/accounts" class="button -blue">Connect Account</a>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="milo-card history">
+            <div class="mc-title">History</div>
+            <% if @transfers.present? %>
+              <ul class="recent-transactions">
+                <% @transfers.each do |tr| %>
+                  <li>$<%= tr.roundup_amount %><span><strong><%= tr.status == '200' ? "Processed" : "Pending" %></strong><%= tr.date.to_date.strftime("%B %d, %Y") %></span></li>
+                <% end %>
+              </ul>
+            <% else %>
+              <p>No transfers currently exist.</p>
+            <% end %>
+            <a href="/history">View History</a>
           </div>
         </div>
+        <% if @biz %>
+          <div class="col-md-6">
+            <div class="milo-card quick-save">
+              <div class="mc-title">Employees</div>
+              <div class="amount"><%= @total_employees %></div>
+              <a href="/employees" class="button -blue -full">Manage</a>
+            </div>
+          </div>
+        <% else %>
+          <% if !@user.dwolla_funding_source.nil? %>
+            <div class="col-md-6">
+              <div class="milo-card quick-save">
+                <div class="mc-title">Quick Save</div>
+                <div class="amount">+$20.00</div>
+                <%= link_to "Save", quick_save_path, class:"button -full -green", data: {confirm: "Are you sure you want to save $20?"} %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% if !@biz %>
+    <div class="sidebar">
+      <div class="pending-roundups">
+        <div class="pr-title">Pending Round Ups</div>
+        <% if @transactions.present? %>
+          <ul class="pr-list">
+            <% @transactions.each do |t| %>
+              <% if t[:amount] > 0 %>
+                <li>+ <%= number_to_currency(t[:roundup].round(2)) %><span><strong><%= number_to_currency(t[:amount].round(2)) %></strong> <%= t[:trans_name] %></span></li>
+              <% end %>
+            <% end %>
+          </ul>
+          <small>Total: <strong><%= number_to_currency(@total_pending.round(2)) %></strong></small>
+        <% else %>
+          <small>No current roundups available.</small>
+        <% end %>
       </div>
     </div>
   <% end %>
 <% else %>
   <%= render partial: "home/waitlist" %>
 <% end %>
+
 
 <% content_for :modal do %>
   <%= render 'goals/modal_add_goal' %>

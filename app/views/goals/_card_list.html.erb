@@ -1,41 +1,43 @@
-<div class="milo-card card-goals">
-  <% if @goals.present? %>
-    <div class="mc-title">
-      <div class="title-add-goal" data-toggle="modal" data-target="#setGoal">Add A Goal</div>
-      Savings Goals
-    </div>
-    <% @goals.each do |g| %>
-      <div class="goal-item">
-        <div class="gi-title">
-          <% unless g.preset %>
-            <%= link_to edit_goal_path(g.id), class: "gi-edit", remote: true do %>
-              <i class="fa fa-pencil"></i>
-            <% end %>
-          <% end %>
-          <% if g.preset %>
-            <span><%= @user.account_balance ? number_to_currency(@user.account_balance / 100.00) : "$0.00" %> / <%= number_to_currency(g.amount) %></span>
-          <% else %>
-            <span><%= g.balance ? number_to_currency(g.balance) : "$0.00" %> / <%= number_to_currency(g.amount) %></span>
-          <% end %>
-          <%= g.name %>
-        </div>
-        <div class="gi-progress-bar">
-          <div class="current-progress" style="width: <%= g.preset ? g.first_goal_progress(current_user.id) : g.goal_progress %>%"></div>
-          <div class="bar -b1"></div>
-          <div class="bar -b2"></div>
-          <div class="bar -b3"></div>
-          <div class="bar -b4"></div>
-          <div class="bar -b5"></div>
-          <div class="bar -b6"></div>
-          <div class="bar -b7"></div>
-          <div class="bar -b8"></div>
-          <div class="bar -b9"></div>
-        </div>
+<% unless @biz %>
+  <div class="milo-card card-goals">
+    <% if @goals.present? %>
+      <div class="mc-title">
+        <div class="title-link" data-toggle="modal" data-target="#setGoal">Add Goal</div>
+        Savings Goals
       </div>
+      <% @goals.each do |g| %>
+        <div class="goal-item">
+          <div class="gi-title">
+            <% unless g.preset %>
+              <%= link_to edit_goal_path(g.id), class: "gi-edit", remote: true do %>
+                <i class="fa fa-pencil"></i>
+              <% end %>
+            <% end %>
+            <% if g.preset %>
+              <span><%= @user.account_balance ? number_to_currency(@user.account_balance / 100.00) : "$0.00" %> / <%= number_to_currency(g.amount) %></span>
+            <% else %>
+              <span><%= g.balance ? number_to_currency(g.balance) : "$0.00" %> / <%= number_to_currency(g.amount) %></span>
+            <% end %>
+            <%= g.name %>
+          </div>
+          <div class="gi-progress-bar">
+            <div class="current-progress" style="width: <%= g.preset ? g.first_goal_progress(current_user.id) : g.goal_progress %>%"></div>
+            <div class="bar -b1"></div>
+            <div class="bar -b2"></div>
+            <div class="bar -b3"></div>
+            <div class="bar -b4"></div>
+            <div class="bar -b5"></div>
+            <div class="bar -b6"></div>
+            <div class="bar -b7"></div>
+            <div class="bar -b8"></div>
+            <div class="bar -b9"></div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="mc-title">Create a Goal</div>
+      <p>Make a bigger impact and set a goal to motivate yourself to save for an important financial goal like a college education, new home or vacation.</p>
+      <button type="button" class="button -blue" data-toggle="modal" data-target="#setGoal">Set Goal</button>
     <% end %>
-  <% else %>
-    <div class="mc-title">Create a Goal</div>
-    <p>Make a bigger impact and set a goal to motivate yourself to save for an important financial goal like a college education, new home or vacation.</p>
-    <button type="button" class="button -blue" data-toggle="modal" data-target="#setGoal">Set Goal</button>
-  <% end %>
-</div>
+  </div>
+<% end %>
