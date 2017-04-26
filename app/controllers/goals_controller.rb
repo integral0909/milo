@@ -26,7 +26,18 @@ class GoalsController < ApplicationController
   end
 
   # ----------------------------------------------
-  # EDIT ---------------------------------------
+  # EDIT -----------------------------------------
+  # ----------------------------------------------
+  def edit
+    @goal = current_user.goals.find_by(id: params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # ----------------------------------------------
+  # UPDATE ---------------------------------------
   # ----------------------------------------------
   def update
     @goal = Goal.find(params[:id])

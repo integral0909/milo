@@ -7,7 +7,9 @@
     <% @goals.each do |g| %>
       <div class="goal-item">
         <div class="gi-title">
-          <a class="gi-edit" data-toggle="modal" data-target="#editGoal"><i class="fa fa-pencil"></i></a>
+          <%= link_to edit_goal_path(g.id), class: "gi-edit", remote: true do %>
+            <i class="fa fa-pencil"></i>
+          <% end %>
           <% if g.preset %>
             <span><%= @user.account_balance ? number_to_currency(@user.account_balance / 100.00) : "$0.00" %> / <%= number_to_currency(g.amount) %></span>
           <% else %>

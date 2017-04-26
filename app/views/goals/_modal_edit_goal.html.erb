@@ -7,30 +7,29 @@
         </button>
         <h4 class="modal-title" id="myModalLabel">Edit Goal</h4>
       </div>
-      <%= form_for (@goal), :url => {:controller => "goals", :action => "update", id: @current_goal.id}, :html => { :method => :put} do |f| %>
+      <%= form_for (@goal), :url => {:controller => "goals", :action => "update", id: @goal.id}, :html => { :method => :put} do |f| %>
         <div class="modal-body">
           <%= form_errors @goal %>
-          <fieldset class="form-group">
-            <label>Amount</label>
-            <%= f.number_field :amount, class: "form-control", value: @current_goal.amount, require: true %>
-          </fieldset>
-          <fieldset class="form-group">
-            <label>Name</label>
-            <%= f.text_field :name, class: "form-control", value: @current_goal.name, require: true %>
-          </fieldset>
+          <div class="row">
+            <div class="col-sm-8">
+              <fieldset class="form-group">
+                <label>Name</label>
+                <%= f.text_field :name, class: "form-control", value: @goal.name, require: true %>
+              </fieldset>
+            </div>
+            <div class="col-sm-4">
+              <fieldset class="form-group">
+                <label>Amount</label>
+                <%= f.number_field :amount, class: "form-control", value: @goal.amount, require: true %>
+              </fieldset>
+            </div>
+          </div>
           <fieldset class="form-group">
             <label>Description</label>
-            <%= f.text_area :description, class: "form-control", value: @current_goal.description %>
-          </fieldset>
-          <fieldset class="form-check">
-            <label class="form-check-label">
-              <%= f.check_box :completed, class: "form-check-input", value: @current_goal.completed %>
-              Goal Completed
-            </label>
+            <%= f.text_area :description, class: "form-control", value: @goal.description %>
           </fieldset>
         </div>
         <div class="modal-footer">
-          <button type="button" class="button -small -inline" data-dismiss="modal">Close</button>
           <%= f.submit "Save", class: "button -blue -small -inline" %>
         </div>
       <% end %>

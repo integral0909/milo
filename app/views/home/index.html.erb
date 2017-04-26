@@ -158,9 +158,6 @@
 
 <% content_for :modal do %>
   <%= render 'goals/modal_add_goal' %>
-  <% if @current_goal %>
-    <%= render 'goals/modal_edit_goal' %>
-  <% end %>
   <% if @goal_complete %>
     <%= render 'goals/modal_complete_goal' %>
   <% end %>
