@@ -57,8 +57,14 @@ class UsersController < ApplicationController
     end
   end
 
+  # ==============================================
+  # PRIVATE ======================================
+  # ==============================================
   private
 
+  # ----------------------------------------------
+  # USER-PARAMS ----------------------------------
+  # ----------------------------------------------
   def user_params
     params.require(:user).permit(:password, :password_confirmation)
   end

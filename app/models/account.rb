@@ -131,36 +131,39 @@ class Account < ActiveRecord::Base
   # ----------------------------------------------
   # ACCOUNTS-UPDATE ------------------------------
   # ----------------------------------------------
-  def self.update_accounts(user_id, public_token, milo_id)
-    user_accounts = Account.where(user_id: user_id).all
-    user_accounts.each do |acct|
-      account = Account.find_by(plaid_acct_id: acct._id)
-      if account
-        account.update(
-          available_balance: acct.balance.available,
-          current_balance: acct.balance.current,
-          name: acct.meta.name
-          )
-      else
-        account = Account.create(
-          plaid_acct_id: acct._id,
-          account_name: acct.meta["name"],
-          account_number: acct.meta["number"],
-          available_balance: acct.balance.available,
-          current_balance: acct.balance.current,
-          institution_type: acct.institution_type,
-          name: acct.meta.name,
-          numbers: acct.meta.number,
-          bank_account_number: acct.numbers[:account],
-          bank_routing_number: acct.numbers[:routing],
-          acct_subtype: acct.subtype,
-          acct_type: acct.type,
-          user_id: milo_id,
-          public_token_id: public_token.id
-          )
-      end
-    end
-  end
+
+  # TODO: Currently unused, see if we need to implement this or just have a user delete and reconnect their account.
+
+  # def self.update_accounts(user_id, public_token, milo_id)
+  #   user_accounts = Account.where(user_id: user_id).all
+  #   user_accounts.each do |acct|
+  #     account = Account.find_by(plaid_acct_id: acct._id)
+  #     if account
+  #       account.update(
+  #         available_balance: acct.balance.available,
+  #         current_balance: acct.balance.current,
+  #         name: acct.meta.name
+  #         )
+  #     else
+  #       account = Account.create(
+  #         plaid_acct_id: acct._id,
+  #         account_name: acct.meta["name"],
+  #         account_number: acct.meta["number"],
+  #         available_balance: acct.balance.available,
+  #         current_balance: acct.balance.current,
+  #         institution_type: acct.institution_type,
+  #         name: acct.meta.name,
+  #         numbers: acct.meta.number,
+  #         bank_account_number: acct.numbers[:account],
+  #         bank_routing_number: acct.numbers[:routing],
+  #         acct_subtype: acct.subtype,
+  #         acct_type: acct.type,
+  #         user_id: milo_id,
+  #         public_token_id: public_token.id
+  #         )
+  #     end
+  #   end
+  # end
 
   # ----------------------------------------------
   # MICRO-DEPOSIT-VERIFICATION-FAILED ------------

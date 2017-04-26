@@ -1,9 +1,9 @@
 class SupportMailer < ApplicationMailer
+  
   # ----------------------------------------------
   # DEFAULT SETTINGS -----------------------------
   # ----------------------------------------------
   default from: 'noreply@shiftsavings.com'
-
 
   # ----------------------------------------------
   # SUPPORT-TRANSFER-FAILED-NOTICE ---------------

@@ -1,7 +1,13 @@
+require 'resque/server'
+require 'resque-scheduler'
+require 'resque/scheduler/server'
+
 Rails.application.routes.draw do
 
   # Rails Admin
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  # Resque admin
+  mount Resque::Server.new, :at => "/resque"
 
   # Devise
   devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords', invitations: 'invitations' }, :skip => [:sessions, :registrations]
@@ -82,5 +88,29 @@ Rails.application.routes.draw do
   post '/users/:id/add_account', to: 'plaidapi#add_account'
   patch '/users/:id/update_accounts', to: 'plaidapi#update_accounts'
   patch '/users/withdraw_funds', to: 'users#withdraw_funds'
+
+  # Doorkeeper for API Protection
+  use_doorkeeper
+
+  # Dummy Root for Doorkeeper
+  root to: 'static#index'
+
+  # API
+  namespace :api do
+    namespace :v1 do
+      # Users
+      resources :sessions, only: [:create, :destroy]
+      # devise_for :users
+      resources :users, only: [:show, :create, :update, :destroy] do
+        collection do
+          post :forgot_password
+        end
+      end
+      # Alexa
+      namespace :alexa do
+        resource :handler, only: [:create]
+      end
+    end
+  end
 
 end
