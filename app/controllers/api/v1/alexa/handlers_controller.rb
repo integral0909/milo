@@ -9,6 +9,11 @@ class Api::V1::Alexa::HandlersController < ActionController::Base
   prepend_before_action :set_access_token_in_params
   before_action :doorkeeper_authorize!
 
+  # ----------------------------------------------
+  # RESPONSE -------------------------------------
+  # ----------------------------------------------
+  respond_to :json
+
   # ==============================================
   # ACTIONS ======================================
   # ==============================================
