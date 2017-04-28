@@ -1,4 +1,4 @@
-<% if !@biz && !@user.dwolla_funding_source.nil? %>
+<% if !@biz && !@user.dwolla_funding_source.nil? && !@user.bank_not_verified && !@accounts.blank? %>
   <div class="col-md-6">
     <div class="milo-card quick-save">
       <div class="mc-title">Quick Save</div>
