@@ -117,7 +117,7 @@ class User < ActiveRecord::Base
   # ----------------------------------------------
   # AVATAR ---------------------------------------
   # ----------------------------------------------
-  has_attached_file :avatar, styles: { large: "512x512", medium: "300x300", thumb: "100x100" }
+  has_attached_file :avatar, styles: { large: "512x512", medium: "300x300", thumb: "100x100" }, default_url: "https://s3-us-west-1.amazonaws.com/shiftsavings-assets/user.png", s3_protocol: :https
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   # ----------------------------------------------

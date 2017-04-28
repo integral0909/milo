@@ -1,0 +1,95 @@
+/*
+* Shift
+* Copyright Shift 2017
+* shiftsavings.com
+*/
+
+
+// Navigation
+.primary-nav {
+  float: left;
+  padding: 8px 0;
+  @extend %clear;
+
+  a {
+    color: #8B999F;
+    float: left;
+    font-family: 'Brandon Black';
+    font-size: 0.875em;
+    line-height: 24px;
+    margin: 0 32px 0 0;
+    text-transform: uppercase;
+
+    &.active {
+      color: #352D52;
+    }
+
+    &:focus, &:hover {
+      color: #4C3E70;
+      text-decoration: none;
+    }
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
+
+.account-nav {
+  float: right;
+  margin: 4px 0;
+
+  a.dropdown-toggle {
+    color: #606B6F;
+  }
+
+  .user-avatar {
+    border-radius: 4px;
+    display: inline-block;
+    height: 32px;
+    margin: 0 12px 0 0;
+    overflow: hidden;
+    vertical-align: top;
+    width: 32px;
+  }
+
+  .user-name {
+    display: inline-block;
+    font-family: 'Brandon';
+    line-height: 32px;
+  }
+}
+
+.subheader-nav {
+  float: left;
+  padding: 2px 0;
+  @extend %clear;
+
+  a {
+    color: #8B999F;
+    float: left;
+    font-family: 'Brandon';
+    line-height: 20px;
+    margin: 0 32px 0 0;
+
+    &.active {
+      color: #352D52;
+    }
+
+    &:focus, &:hover {
+      color: #4C3E70;
+      text-decoration: none;
+    }
+
+    &:last-child {
+      margin: 0;
+    }
+
+    i.fa {
+      display: inline-block;
+      font-size: 1.25em;
+      line-height: 1;
+      margin: 0 8px 0 0;
+    }
+  }
+}

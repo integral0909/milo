@@ -4,9 +4,10 @@
 class HomeController < ApplicationController
 
   # ----------------------------------------------
-  # INCLUDES -------------------------------------
+  # CONCERNS -------------------------------------
   # ----------------------------------------------
   include ActionView::Helpers::NumberHelper
+  include SubheaderHelper
 
   # ----------------------------------------------
   # VARIABLES ------------------------------------
@@ -17,6 +18,7 @@ class HomeController < ApplicationController
   # FILTERS --------------------------------------
   # ----------------------------------------------
   before_action :authenticate_user!
+  before_filter :set_subheader
   before_action :set_user
   before_action :get_referral_rank, only: :index
 
@@ -99,6 +101,13 @@ class HomeController < ApplicationController
   # PRIVATE ======================================
   # ==============================================
   private
+
+  # ----------------------------------------------
+  # SET-SUBHEADER --------------------------------
+  # ----------------------------------------------
+  def set_subheader
+    subheader_set :savings
+  end
 
   # ----------------------------------------------
   # SET-TRANSFER-AVERAGE -------------------------
