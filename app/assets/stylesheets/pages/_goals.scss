@@ -10,10 +10,6 @@
 // Add Goal Modal
 section.goal-section {
   display: none;
-
-  p {
-    color: #606B6F;
-  }
 }
 
 #goal_category {
@@ -68,15 +64,6 @@ section.goal-section {
 
 // Goals Card
 .card-goals {
-
-  .mc-title .title-add-goal {
-    color: #4A90E2;
-    cursor: pointer;
-    float: right;
-    font-size: 0.7em;
-    line-height: 20px;
-    text-align: right;
-  }
 
   .goal-item {
     margin: 0 0 20px;

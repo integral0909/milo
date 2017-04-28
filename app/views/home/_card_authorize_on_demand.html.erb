@@ -1,0 +1,9 @@
+<% if @accounts.present? && @checking.present? && (current_user.on_demand.nil? || current_user.on_demand == false) %>
+  <div class="milo-card">
+    <div class="mc-title">
+      <a href="/signup/on_demand" class="title-link">Authorize</a>
+      On-Demand Transfers
+    </div>
+    <p>One last thing before you can automatically start to save. Shift needs authorization to transfer funds from your bank account into your Shift savings account.</p>
+  </div>
+<% end %>

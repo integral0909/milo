@@ -1,0 +1,9 @@
+<% if @accounts.blank? %>
+  <div class="milo-card">
+    <div class="mc-title">
+      <a href="/users/<%= current_user.id %>/accounts" class="title-link">Add Account</a>
+      Connect Bank Account
+    </div>
+    <p>Before you can begin using Shift we need to connect a bank account that we can track, calculate round ups and transfer funds to and from your Shift savings account.</p>
+  </div>
+<% end %>
