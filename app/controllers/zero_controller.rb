@@ -26,6 +26,8 @@ class ZeroController < ApplicationController
   # PROGRESS -------------------------------------
   # ----------------------------------------------
   def progress
+    @open_debts = Debt.where(user_id: current_user.id).where.not(current_balance: 0).order(apr: :desc)
+    @closed_debts = Debt.where(user_id: current_user.id, current_balance: 0).order(apr: :asc)
   end
 
   # ----------------------------------------------

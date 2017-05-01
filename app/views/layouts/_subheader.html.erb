@@ -8,7 +8,7 @@
         <a href="#"><i class="fa fa-exchange"></i>Transfer</a>
         <a href="/history" class="<%= active_page_class?('/history')%>"><i class="fa fa-clock-o"></i>History</a>
       </nav>
-      <div class="subheader-savings-total">$1,000.88</div>
+      <div class="subheader-savings-total"><%= number_to_currency(@account_balance) %></div>
     <% end %>
 
     <% if subheader_is? :zero %>

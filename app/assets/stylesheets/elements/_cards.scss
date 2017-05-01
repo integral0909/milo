@@ -203,19 +203,21 @@
 .milo-card.quick-save, .milo-card.recurring {
 
   .amount {
-    background: #F8FAFB;
-    border: 1px solid #E5E8E9;
+    background: #F5F7FA;
+    border: 1px solid #DDE1E2;
     border-radius: 4px;
-    color: #282C37;
-    font-size: 2em;
-    font-weight: 600;
+    color: #292242;
+    font-family: 'Brandon Black';
+    font-size: 2.5em;
     line-height: 1;
-    margin: 0 0 24px;
-    padding: 54px 0;
+    margin: 0 0 16px;
+    padding: 48px 0;
     text-align: center;
+
     &.-schedule {
       padding: 36px 0 0;
     }
+
     ul.ac-options {
       border-top: 1px solid #E5E8E9;
       list-style: none;

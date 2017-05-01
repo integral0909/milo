@@ -1,0 +1,24 @@
+<div class="milo-card">
+  <div class="mc-title">Current Goal: <%= @current_debt.account_name %></div>
+  <div class="debt-title">
+    <%= @current_debt.account_name %> (<%= @current_debt.account_number.last(4) %>)
+    <span>Interest <strong><%= number_to_percentage(@current_debt.apr) %></strong></span>
+    <span class="debt-balance">Balance <strong><%= number_to_currency(@current_debt.current_balance) %></strong></span>
+  </div>
+  <div class="debt-progress-bar">
+    <div class="current-progress" style="width: <%= number_to_percentage(@current_debt.progess_to_zero) %>;"></div>
+    <div class="bar -b1"></div>
+    <div class="bar -b2"></div>
+    <div class="bar -b3"></div>
+    <div class="bar -b4"></div>
+    <div class="bar -b5"></div>
+    <div class="bar -b6"></div>
+    <div class="bar -b7"></div>
+    <div class="bar -b8"></div>
+    <div class="bar -b9"></div>
+  </div>
+  <div class="debt-payment-info">
+    <span><%= @current_debt.next_payment_due.strftime("%B") %> Payment: <strong><%= number_to_currency(@current_debt.suggested_payment(current_user.id)) %></strong></span>
+    <span>Paid Off: <strong><%= @current_debt.payoff_date(current_user.id).strftime("%B %-d, %Y") %></strong></span>
+  </div>
+</div>

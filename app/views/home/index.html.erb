@@ -7,59 +7,40 @@
         <div class="col-md-8">
           <%= render "layouts/messages" %>
           <%= render partial: "home/card_verify_bank" %>
-          <%= render partial: "goals/card_list" %>
           <%= render partial: "home/card_add_account" %>
           <%= render partial: "home/card_confirm_checking" %>
           <%= render partial: "home/card_authorize_on_demand" %>
           <%= render partial: "home/card_account_value" %>
+          <%= render partial: "goals/card_list" %>
           <%= render partial: "home/card_employer_contributions" %>
-        </div>
-      </div>
-      <div id="mobile" class="row">
-        <div class="col-md-12">
-          <div class="milo-card mobile-roundups">
-            <div class="mc-title">Pending Round Ups</div>
-            <% if @transactions.present? %>
-              <ul class="recent-transactions">
-                <% @transactions.each do |t| %>
-                  <% if t[:amount] > 0 %>
-                    <li>+<%= number_to_currency(t[:roundup].round(2)) %><span><strong><%= number_to_currency(t[:amount].round(2)) %></strong><%= t[:trans_name] %></span></li>
-                  <% end %>
-                <% end %>
-              </ul>
-              <p class="align-center">Total: <strong><%= number_to_currency(@total_pending.round(2)) %></strong></p>
-            <% else %>
-              <p>No current roundups available.</p>
-            <% end %>
+          <div class="row">
+            <%= render partial: "home/card_history" %>
+            <%= render partial: "home/card_quick_save" %>
+            <%= render partial: "home/card_employee_count" %>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <%= render partial: "home/card_history" %>
-        <%= render partial: "home/card_quick_save" %>
-        <%= render partial: "home/card_employee_count" %>
+        <div class="col-md-4">
+          <% if !@biz %>
+            <div class="pending-roundups">
+              <div class="pr-title">Pending Round Ups</div>
+              <% if @transactions.present? %>
+                <ul class="pr-list">
+                  <% @transactions.each do |t| %>
+                    <% if t[:amount] > 0 %>
+                      <li>+ <%= number_to_currency(t[:roundup].round(2)) %><span><strong><%= number_to_currency(t[:amount].round(2)) %></strong> <%= t[:trans_name] %></span></li>
+                    <% end %>
+                  <% end %>
+                </ul>
+                <small>Total: <strong><%= number_to_currency(@total_pending.round(2)) %></strong></small>
+              <% else %>
+                <small>No current roundups available.</small>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-  <% if !@biz %>
-    <div class="sidebar">
-      <div class="pending-roundups">
-        <div class="pr-title">Pending Round Ups</div>
-        <% if @transactions.present? %>
-          <ul class="pr-list">
-            <% @transactions.each do |t| %>
-              <% if t[:amount] > 0 %>
-                <li>+ <%= number_to_currency(t[:roundup].round(2)) %><span><strong><%= number_to_currency(t[:amount].round(2)) %></strong> <%= t[:trans_name] %></span></li>
-              <% end %>
-            <% end %>
-          </ul>
-          <small>Total: <strong><%= number_to_currency(@total_pending.round(2)) %></strong></small>
-        <% else %>
-          <small>No current roundups available.</small>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
 <% else %>
   <%= render partial: "home/waitlist" %>
 <% end %>
