@@ -2,9 +2,9 @@
 
 <% if current_user.invited %>
   <div class="page-content">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
           <%= render "layouts/messages" %>
           <%= render partial: "home/card_verify_bank" %>
           <%= render partial: "goals/card_list" %>

@@ -3,23 +3,34 @@
     <div class="row">
       <div class="col-md-8">
 
-        <h3>Your Shift Zero Plan</h3>
-        <p>Pay the minimums on all your accounts while paying more to the highest interest account below.</p>
-
-        <div class="spacer -space-24"></div>
+        <div class="zero-content-block">
+          <h5>Your Shift Zero Plan</h5>
+          <p>Pay the minimums on all your accounts while paying more to the highest interest account below.</p>
+        </div>
 
         <div class="milo-card">
           <div class="mc-title">Current Goal: <%= @current_debt.account_name %></div>
-          <p><%= @current_debt.account_name %> (<%= @current_debt.account_number %>)</p>
-          <div style="background: #EDEDED; border-radius: 4px; width: 100%; height: 40px; position: relative; margin: 0 0 24px 0;">
-            <div style="background: #FF0000; border-radius: 4px; height: 40px; position: absolute; top: 0; left: 0; width: <%= number_to_percentage(@current_debt.progess_to_zero) %>;"></div>
+          <div class="debt-title">
+            <%= @current_debt.account_name %> (<%= @current_debt.account_number.last(4) %>)
+            <span>Interest <strong><%= number_to_percentage(@current_debt.apr) %></strong></span>
+            <span class="debt-balance">Balance <strong><%= number_to_currency(@current_debt.current_balance) %></strong></span>
           </div>
-          <ul>
-            <li>Balance: <%= number_to_currency(@current_debt.current_balance) %></li>
-            <li>Interest: <%= number_to_percentage(@current_debt.apr) %></li>
-            <li><%= @current_debt.next_payment_due.strftime("%B") %> Payment: <%= number_to_currency(@current_debt.suggested_payment(current_user.id)) %></li>
-            <li>Paid Off: <%= @current_debt.payoff_date(current_user.id).strftime("%B %-d, %Y") %></li>
-          </ul>
+          <div class="debt-progress-bar">
+            <div class="current-progress" style="width: <%= number_to_percentage(@current_debt.progess_to_zero) %>;"></div>
+            <div class="bar -b1"></div>
+            <div class="bar -b2"></div>
+            <div class="bar -b3"></div>
+            <div class="bar -b4"></div>
+            <div class="bar -b5"></div>
+            <div class="bar -b6"></div>
+            <div class="bar -b7"></div>
+            <div class="bar -b8"></div>
+            <div class="bar -b9"></div>
+          </div>
+          <div class="debt-payment-info">
+            <span><%= @current_debt.next_payment_due.strftime("%B") %> Payment: <strong><%= number_to_currency(@current_debt.suggested_payment(current_user.id)) %></strong></span>
+            <span>Paid Off: <strong><%= @current_debt.payoff_date(current_user.id).strftime("%B %-d, %Y") %></strong></span>
+          </div>
         </div>
 
         <div class="milo-card">
