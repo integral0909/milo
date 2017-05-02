@@ -90,4 +90,19 @@ module PlaidHelper
     tuesday = current_date.beginning_of_week(start_day = :tuesday)
   end
 
+  # check balance of connected account before pulling round ups
+  def self.check_balance(user)
+    checking = Checking.find_by_user_id(26)
+    connect_user = Plaid::User.load(:connect, user.plaid_access_token)
+
+    # pull in updated balance
+    connect_user.balance
+
+    # find index of account in array
+    acct_index = connect_user.balance.index {|a| a.id == check.plaid_acct_id}
+
+    # return account balace of connected account
+    balance = connect_user.balance[acct_index].available_balance
+  end
+
 end
