@@ -45,7 +45,7 @@ class AccountsController < ApplicationController
       Dwolla.confirm_micro_deposits("0.#{params['deposit1']}", "0.#{params['deposit2']}", @user, funding_account)
 
       if funding_account.failed_verification_attempt && funding_account.failed_verification_attempt < 3
-        flash[:alert] = "Looks the deposits did not match. Only #{3 - funding_account.failed_verification_attempt} attempts left."
+        flash[:alert] = "Looks like the deposits did not match. Only #{3 - funding_account.failed_verification_attempt} attempts left."
       elsif funding_account.failed_verification_attempt && funding_account.failed_verification_attempt >= 3
         Account.remove_accounts(@user)
         flash[:alert] = "You have exceeded the amount of tries to verify your account. Your banking account has been temporarily removed. Please reach out to dev@shiftsavings.com for assistance."
