@@ -15,7 +15,7 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
     user = User.find(args.user_id)
     puts "Starting Roundups for #{user.email}"
 
-    ck  = Checking.find_by_user_id(user.id)
+    ck = Checking.find_by_user_id(user.id)
     Dwolla.weekly_roundup(user, ck)
 
     if @charge_tech_fee && !user.admin
