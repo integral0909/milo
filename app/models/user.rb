@@ -198,24 +198,24 @@ class User < ActiveRecord::Base
   def self.decrease_account_balance(user, amount)
     user.account_balance -= (amount.to_f * 100).round(0)
 
-    # reduce goals balance based on split
-    # leftover = 0
-    # user.goals.where(preset: nil, active: true).order("created_at DESC").each do |goal|
-    #   withdraw = amount * (goal.percentage * 0.01)
-    #   withdraw += leftover
-    #   if !goal.balance.nil?
-    #     if goal.balance > withdraw
-    #       goal.balance -= withdraw
-    #       leftover = 0
-    #     else
-    #       leftover = withdraw - goal.balance
-    #       goal.balance = 0
-    #     end
-    #   else
-    #     leftover += withdraw
-    #   end
-    #   goal.save!
-    # end
+    #reduce goals balance based on split
+    leftover = 0
+    user.goals.where(preset: nil, active: true).order("created_at DESC").each do |goal|
+      withdraw = amount.to_f * (goal.percentage * 0.01)
+      withdraw += leftover
+      if !goal.balance.nil?
+        if goal.balance > withdraw
+          goal.balance -= withdraw
+          leftover = 0
+        else
+          leftover = withdraw - goal.balance
+          goal.balance = 0
+        end
+      else
+        leftover += withdraw
+      end
+      goal.save!
+    end
 
     user.save!
   end
