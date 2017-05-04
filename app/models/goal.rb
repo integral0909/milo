@@ -92,9 +92,7 @@ class Goal < ActiveRecord::Base
   # ----------------------------------------------
   # Add amount to goals based on split for transfers
   def add_split_contribution(amount)
-    puts amount
     contribution = amount.to_f * (self.percentage * 0.01)
-    puts contribution
     !self.balance.nil? ? self.balance += contribution : self.balance = contribution
     self.save!
   end
