@@ -8,46 +8,31 @@
           <div class="mc-title">Account Value</div>
           <div class="av-total">$<%= @account_balance ? @account_balance : "0.00" %></div>
         </div>
-
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-sm-4">
             <div class="milo-card round-up-stat"><%= @transfer_total %><span>Transfers</span></div>
           </div>
-          <div class="col-md-4">
+          <div class="col-sm-4">
             <div class="milo-card round-up-stat"><%= @roundup_total %><span>Total Round Ups</span></div>
           </div>
-          <div class="col-md-4">
+          <div class="col-sm-4">
             <div class="milo-card round-up-stat"><%= @roundup_avg %><span>Avg. Round Up</span></div>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-sm-4">
             <div class="milo-card round-up-stat"><%= @completed_goals %><span>Goals Achieved</span></div>
           </div>
-          <div class="col-md-4">
+          <div class="col-sm-4">
             <div class="milo-card round-up-stat"><%= @transfer_avg %><span>Avg. Weekly Savings</span></div>
           </div>
-          <div class="col-md-4">
+          <div class="col-sm-4">
             <div class="milo-card round-up-stat"><%= @spent_avg %><span>Avg. Transaction</span></div>
           </div>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="pending-roundups">
-          <div class="pr-title">Pending Round Ups</div>
-          <% if @transactions.present? %>
-            <ul class="pr-list">
-              <% @transactions.each do |t| %>
-                <% if t[:amount] > 0 %>
-                  <li>+ <%= number_to_currency(t[:roundup].round(2)) %><span><strong><%= number_to_currency(t[:amount].round(2)) %></strong> <%= t[:trans_name] %></span></li>
-                <% end %>
-              <% end %>
-            </ul>
-            <small>Total: <strong><%= number_to_currency(@total_pending.round(2)) %></strong></small>
-          <% else %>
-            <small>No current roundups available.</small>
-          <% end %>
-        </div>
+        <%= render partial: "home/sidebar_round_ups" %>
       </div>
     </div>
   </div>
