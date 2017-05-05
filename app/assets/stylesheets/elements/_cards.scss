@@ -42,6 +42,15 @@
       &:hover {
         text-decoration: none;
       }
+
+      &.-withdraw {
+        color: #BBC5C7;
+        margin: 0 0 0 24px;
+      }
+
+      i.fa {
+        margin: 0 8px 0 0;
+      }
     }
 
     span {
@@ -108,19 +117,12 @@
 }
 
 // Value
-.milo-card.account-value {
-
+.milo-card.account-balance {
   .av-total {
-    color: #292242;
-    font-family: 'Futura Bold';
-    font-size: 3.5em;
+    color: #352D52;
+    font-family: 'Brandon Black';
+    font-size: 3em;
     line-height: 1;
-
-    span {
-      color: #1ABD7D;
-      float: right;
-      font-size: 0.32em;
-    }
   }
 }
 

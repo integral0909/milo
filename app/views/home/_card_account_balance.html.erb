@@ -1,0 +1,12 @@
+<% if @biz_owner.nil? %>
+  <div class="milo-card account-balance">
+    <div class="mc-title">
+      <% if @user.account_balance > 0 %>
+        <a class="title-link -withdraw" data-toggle="modal" data-target="#withdrawFunds"><i class="fa fa-minus"></i>Withdraw</a>
+      <% end %>
+      <a class="title-link" href="/transfers"><i class="fa fa-plus"></i>Deposit</a>
+      Balance
+    </div>
+    <div class="av-total">$<%= @account_balance ? @account_balance : "0.00" %></div>
+  </div>
+<% end %>

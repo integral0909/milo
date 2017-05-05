@@ -4,10 +4,8 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-8">
-        <div class="milo-card account-value">
-          <div class="mc-title">Account Value</div>
-          <div class="av-total">$<%= @account_balance ? @account_balance : "0.00" %></div>
-        </div>
+        <%= render partial: "home/card_account_balance" %>
+        <%= render partial: "home/card_account_value" %>
         <div class="row">
           <div class="col-sm-4">
             <div class="milo-card round-up-stat"><%= @transfer_total %><span>Transfers</span></div>

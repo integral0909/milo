@@ -1,11 +1,6 @@
 <% if @biz_owner.nil? %>
   <div class="milo-card account-value">
-    <div class="mc-title">
-      <% if @user.account_balance > 0 %>
-        <a class="title-link" data-toggle="modal" data-target="#withdrawFunds">Withdraw</a>
-      <% end %>
-      Account Value
-    </div>
-    <div class="av-total">$<%= @account_balance ? @account_balance : "0.00" %></div>
+    <div class="mc-title">Account Value</div>
+    - chart -
   </div>
 <% end %>
