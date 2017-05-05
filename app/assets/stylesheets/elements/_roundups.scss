@@ -7,28 +7,28 @@
 
 // Pending Round-Ups
 .pending-roundups {
-  margin: 0 0 24px;
+  padding: 0 0 0 24px;
 
-  .pr-title {
-    color: #4C3E70;
+  .pr-title, .pr-total, .pr-none {
+    color: #BBC5C7;
+    font-family: 'Brandon Black';
+    font-size: 0.875em;
     margin: 0 0 8px;
-    padding: 0 16px;
+    text-transform: uppercase;
   }
 
-  .pr-growth-hack {
-    font-size: 1.5em;
-    margin: 0 0 16px;
-    padding: 0 16px;
+  small.pr-total, small.pr-none {
+    color: #8B999F;
+    display: block;
+    padding: 16px 0;
+  }
+
+  .pr-total {
+    text-align: right;
 
     strong {
-      color: #4C3E70;
+      margin: 0 0 0 8px;
     }
-  }
-
-  small {
-    display: block;
-    font-size: 0.72em;
-    padding: 16px;
   }
 
   ul.pr-list {
@@ -37,26 +37,45 @@
     padding: 0;
 
     li {
-      border-bottom: 2px solid #EDF1F2;
-      box-sizing: border-box;
-      color: #333A4E;
-      font-size: 1.25em;
-      height: 64px;
-      line-height: 1;
-      padding: 13px 16px;
-      width: 100%;
+      border-bottom: 1px solid #DDE1E2;
+      color: #606B6F;
+      height: 56px;
+      padding: 16px 8px;
+      @extend %clear;
 
-      span {
-        color: #96A3A8;
-        display: block;
-        font-size: 0.56em;
-        margin: 4px 0 0;
+      .pr-roundup {
+        float: left;
+        font-family: 'Brandon Black';
+        font-size: 1.5em;
+        line-height: 1;
+        width: 96px;
+      }
+
+      .pr-desc {
+        float: left;
+        font-family: 'Brandon';
+        font-size: 0.813em;
+        line-height: 24px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        width: calc(100% - 120px);
+      }
 
-        strong {
-          margin: 0 4px 0 0;
+      .pr-check {
+        background: #1ABD7D;
+        border-radius: 24px;
+        float: left;
+        height: 24px;
+        width: 24px;
+
+        i.fa {
+          color: #FFF;
+          display: block;
+          font-size: 0.75em;
+          line-height: 24px;
+          text-align: center;
+          width: 24px;
         }
       }
     }

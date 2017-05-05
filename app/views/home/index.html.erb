@@ -20,20 +20,20 @@
           </div>
         </div>
         <div class="col-md-4">
-          <% if !@biz %>
+          <% if current_user.business.nil? %>
             <div class="pending-roundups">
               <div class="pr-title">Pending Round Ups</div>
               <% if @transactions.present? %>
                 <ul class="pr-list">
                   <% @transactions.each do |t| %>
                     <% if t[:amount] > 0 %>
-                      <li>+ <%= number_to_currency(t[:roundup].round(2)) %><span><strong><%= number_to_currency(t[:amount].round(2)) %></strong> <%= t[:trans_name] %></span></li>
+                      <li><div class="pr-roundup">+ <%= number_to_currency(t[:roundup].round(2)) %></div><div class="pr-desc"><%= number_to_currency(t[:amount].round(2)) %> <%= t[:trans_name] %></div><div class="pr-check"><i class="fa fa-check"></i></div></li>
                     <% end %>
                   <% end %>
                 </ul>
-                <small>Total: <strong><%= number_to_currency(@total_pending.round(2)) %></strong></small>
+                <small class="pr-total">Total: <strong><%= number_to_currency(@total_pending.round(2)) %></strong></small>
               <% else %>
-                <small>No current roundups available.</small>
+                <small class="pr-none">No current round ups available...</small>
               <% end %>
             </div>
           <% end %>
