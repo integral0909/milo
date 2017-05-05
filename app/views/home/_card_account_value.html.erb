@@ -1,6 +1,6 @@
 <% if @biz_owner.nil? %>
   <div class="milo-card account-value">
     <div class="mc-title">Account Value</div>
-    - chart -
+    <%= line_chart @transfer_stats.group_by_day(:date, format: "%B %d, %Y").count, discrete: true %>
   </div>
 <% end %>

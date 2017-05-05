@@ -19,6 +19,9 @@ gem 'bootstrap', '4.0.0.alpha3'
 gem 'rails-assets-tether', '1.1.1'
 # Date/Time Picker
 gem 'pickadate-rails'
+# Chartkick
+gem 'chartkick'
+gem 'groupdate'
 
 # SEO
 gem 'meta-tags'

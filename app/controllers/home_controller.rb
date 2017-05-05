@@ -51,6 +51,7 @@ class HomeController < ApplicationController
 
     # Show the latest 3 transfers
     @transfers = Transfer.where(user_id: @user.id).order(date: :desc).limit(3)
+    @transfer_stats = Transfer.where(user_id: @user.id).all
 
     # Redirect users to proper sign up page if not complete
     if (@user.invited && !@user.is_verified)
