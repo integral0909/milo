@@ -14,7 +14,7 @@ class RegistrationsController < Devise::RegistrationsController
   # FILTERS --------------------------------------
   # ----------------------------------------------
   prepend_before_action :require_no_authentication, only: [:new, :create, :cancel]
-  prepend_before_action :authenticate_scope!, only: [:edit, :security, :update, :destroy]
+  prepend_before_action :authenticate_scope!, only: [:edit, :accounts, :security, :update, :destroy]
   prepend_before_action :set_minimum_password_length, only: [:new, :edit]
 
   before_action :configure_account_update_params, only: [:update]
