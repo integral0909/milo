@@ -112,4 +112,9 @@ Rails.application.routes.draw do
     end
   end
 
+  # webhook routes
+  scope '/webhooks', :controller => :webhooks do
+    post :dwolla_webhook
+  end
+
 end
