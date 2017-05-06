@@ -51,6 +51,8 @@ class HomeController < ApplicationController
 
     # Show the latest 3 transfers
     @transfers = Transfer.where(user_id: @user.id).order(date: :desc).limit(3)
+
+    # Show stats on transfers
     @transfer_stats = Transfer.where(user_id: @user.id).all
 
     # Redirect users to proper sign up page if not complete
@@ -73,7 +75,11 @@ class HomeController < ApplicationController
   # ----------------------------------------------
   # Page to see round up transfer history
   def history
-    @transfers = Transfer.where(user_id: @user.id).order(date: :desc)
+    @transfers = Transfer.where(user_id: @user.id).order(date: :desc).all
+    @transfer_months = @transfers.group_by { |t| t.date.to_date.beginning_of_month }
+
+    # Show stats on transfers
+    @transfer_stats = Transfer.where(user_id: @user.id).all
   end
 
   # ----------------------------------------------
@@ -88,6 +94,8 @@ class HomeController < ApplicationController
     @transfers = Transfer.where(user_id: @user.id).all
     @transfer_total = @transfers.size
     set_transfer_average(@transfers)
+    # Show stats on transfers
+    @transfer_stats = Transfer.where(user_id: @user.id).all
     # Transactions
     set_pending_roundups
     # Round Ups

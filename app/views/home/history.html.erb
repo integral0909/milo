@@ -1,35 +1,31 @@
 <% set_meta_tags :site => 'History • Shift' %>
 
 <div class="page-content">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-12">
-        <div class="milo-card full-history">
-          <% if @transfers.present? %>
-            <div class="mc-title no-marg">History</div>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Status</th>
-                  <th>Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @transfers.each do |tr| %>
-                  <tr>
-                    <td><%= tr.date.to_date.strftime("%B %d, %Y") %></td>
-                    <td><%= tr.status == '200' ? "Processed" : "Pending" %></td>
-                    <td>$<%= tr.roundup_amount %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          <% else %>
-            <div class="mc-title">History</div>
-            <p>No transfers currently exist.</p>
+      <div class="col-md-8">
+
+        <% if @transfers.present? %>
+          <h5 class="transfer-title">Past Transfers</h5>
+          <div class="transfer-header">
+            <div class="th-date">Date</div>
+            <div class="th-status">Status</div>
+            <div class="th-amount">Amount</div>
+          </div>
+          <% @transfer_months.each do |month, transfers| %>
+            <div class="transfer-month"><%= month.strftime("%B %Y") %></div>
+            <% transfers.each do |t| %>
+              <div class="transfer-item">
+                <div class="ti-date"><%= t.date.to_date.strftime("%m/%d/%Y") %></div>
+                <div class="ti-status"><%= t.status == '200' ? "Processed" : "Pending" %></div>
+                <div class="ti-amount"><%= number_to_currency(t.roundup_amount) %></div>
+              </div>
+            <% end %>
           <% end %>
-        </div>
+        <% else %>
+          <p>No transfers currently exist.</p>
+        <% end %>
+
       </div>
     </div>
   </div>
