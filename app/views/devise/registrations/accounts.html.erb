@@ -1,10 +1,9 @@
 <% set_meta_tags :site => 'Bank Account • Settings • Shift' %>
 
 <div class="page-content">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-12">
-        <%= render :partial => 'devise/shared/subheader' %>
+      <div class="col-md-8">
         <%= render "layouts/messages" %>
         <h6>Connected Accounts</h6>
         <% if @checking.present? %>

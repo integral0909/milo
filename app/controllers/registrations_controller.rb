@@ -11,6 +11,11 @@ class RegistrationsController < Devise::RegistrationsController
   layout "signup"
 
   # ----------------------------------------------
+  # CONCERNS -------------------------------------
+  # ----------------------------------------------
+  include SubheaderHelper
+
+  # ----------------------------------------------
   # FILTERS --------------------------------------
   # ----------------------------------------------
   prepend_before_action :require_no_authentication, only: [:new, :create, :cancel]
@@ -18,6 +23,7 @@ class RegistrationsController < Devise::RegistrationsController
   prepend_before_action :set_minimum_password_length, only: [:new, :edit]
 
   before_action :configure_account_update_params, only: [:update]
+  before_action :set_subheader, only: [:edit, :accounts, :security, :employer]
 
   # ==============================================
   # ACTIONS ======================================
@@ -185,6 +191,13 @@ class RegistrationsController < Devise::RegistrationsController
   # PRIVATE ======================================
   # ==============================================
   private
+
+  # ----------------------------------------------
+  # SET-SUBHEADER --------------------------------
+  # ----------------------------------------------
+  def set_subheader
+    subheader_set :settings
+  end
 
   # ----------------------------------------------
   # SIGN-UP-PARAMS -------------------------------

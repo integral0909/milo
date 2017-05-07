@@ -9,7 +9,7 @@ class ZeroController < ApplicationController
   # FILTERS --------------------------------------
   # ----------------------------------------------
   before_action :authenticate_user!
-  before_filter :set_subheader
+  before_action :set_subheader
 
   # ==============================================
   # ACTIONS ======================================

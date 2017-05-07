@@ -1,8 +1,0 @@
-<nav class="setting-subheader">
-  <a href="/settings" class="<%= active_page_class?('/settings')%>">Profile</a>
-  <a href="/settings/accounts" class="<%= active_page_class?('/settings/accounts')%>">Accounts</a>
-  <a href="/settings/security" class="<%= active_page_class?('/settings/security')%>">Security</a>
-  <% if @biz %>
-    <%= link_to 'Contributions', settings_contributions_path, class: active_page_class?("/settings/contributions") %>
-  <% end %>
-</nav>
