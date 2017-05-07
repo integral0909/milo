@@ -1,10 +1,14 @@
-<% set_meta_tags :site => 'History • Shift' %>
+<% set_meta_tags :site => 'History • Savings • Shift' %>
 
 <div class="page-content">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-8">
-
+        <%= render "layouts/messages" %>
+        <%= render partial: "home/card_verify_bank" %>
+        <%= render partial: "home/card_add_account" %>
+        <%= render partial: "home/card_confirm_checking" %>
+        <%= render partial: "home/card_authorize_on_demand" %>
         <% if @transfers.present? %>
           <h5 class="transfer-title">Past Transfers</h5>
           <div class="transfer-header">
@@ -18,14 +22,15 @@
               <div class="transfer-item">
                 <div class="ti-date"><%= t.date.to_date.strftime("%m/%d/%Y") %></div>
                 <div class="ti-status"><%= t.status == '200' ? "Processed" : "Pending" %></div>
-                <div class="ti-amount"><%= number_to_currency(t.roundup_amount) %></div>
+                <div class="ti-amount<% if t.transfer_type == 'withdraw' %> -withdraw<% end %>"><%= number_to_currency(t.roundup_amount) %></div>
               </div>
             <% end %>
           <% end %>
         <% else %>
+          <div class="spacer -space-32"></div>
+          <h5>Past Transfers</h5>
           <p>No transfers currently exist.</p>
         <% end %>
-
       </div>
     </div>
   </div>
