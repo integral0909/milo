@@ -1,7 +1,31 @@
+<% set_meta_tags :site => 'Sign Up • Shift',
+  :author => 'Shift',
+  :copyright => '&copy; 2017 Shift',
+  :description => "Sign up and join Shift today to begin saving towards important financials goals.",
+  :keywords => ['Shift', 'Shift Savings', 'round', 'roundups', 'round-ups', 'savings', 'financial', 'savings account', 'goals', 'financial goal', 'college savings', 'sign up', 'join', 'registrer'],
+  :reverse => true,
+  :og => {
+    :title          => 'Sign Up • Shift',
+    :type           => 'website',
+    :url            => request.original_url,
+    :image          => asset_url('social-banner-milo.png'),
+    :description    => "Sign up and join Shift today to begin saving towards important financials goals.",
+    :site_name      => 'Shift',
+  },
+  :twitter => {
+    :card           => 'summary',
+    :site           => '@shiftsavings',
+    :title          => 'Sign Up • Shift',
+    :description    => "Sign up and join Shift today to begin saving towards important financials goals.",
+    :creator        => '@shiftsavings',
+    :image          => asset_url('social-banner-milo.png'),
+  }
+%>
+
 <div class="row">
-  <div class="col-md-6 col-md-offset-2">
+  <div class="col-md-6 col-md-offset-1">
     <div class="signup">
-      <h1><span>Sign Up</span> Make Change Happen</h1>
+      <h5>Sign Up</h5>
       <%= render "layouts/messages" %>
       <%= form_for resource, as: resource_name, url: invitation_path(resource_name), html: { class: "email-signp", method: :put } do |f| %>
         <%= devise_error_messages! %>
@@ -11,7 +35,7 @@
           <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "Name", required: true %>
         </fieldset>
         <fieldset class="form-group">
-          <label>Postal Code</label>
+          <label>Postal Code (US Only)</label>
           <%= f.text_field :zip, class: "form-control", placeholder: "xxxxx", required: true %>
         </fieldset>
         <fieldset class="form-group">
@@ -21,12 +45,12 @@
         <fieldset class="form-group">
           <%= f.label :password %>
           <%= f.password_field :password, autocomplete: "off", class: "form-control", required: true %>
-          <small class="text-muted">Strong Password <i class="fa fa-question helper" data-toggle="tooltip" data-placement="top" data-html="true" title="<strong>Password Requirements:</strong><ul><li>minimum of 8 characters</li><li>one lowercase</li><li>one uppercase</li><li>one number</li></ul>"></i></small>
+          <small class="text-muted">Strong Password <i class="fa fa-question helper" data-toggle="tooltip" data-placement="top" data-html="true" title="<h6>Password Requirements</h6><ul><li>minimum of 8 characters</li><li>one lowercase</li><li>one uppercase</li><li>one number</li></ul>"></i></small>
         </fieldset>
         <fieldset class="checkbox">
           <label>
             <%= f.check_box :agreement, required: true %>
-            I agree to Shift's <a href="/privacy" target="_blank">Privacy Policy</a> and <a href="/terms" target="_blank">Terms of Service</a>. I also agree to Dwolla's <a href="https://www.dwolla.com/legal/tos?whitelabel" target="_blank">Privacy Policay</a> and <a href="https://www.dwolla.com/legal/privacy?whitelabel" target="_blank">Terms of Service</a>.
+            I agree to Shift's <a href="https://www.shiftsavings.com/privacy" target="_blank">privacy policy</a> and <a href="https://www.shiftsavings.com/terms" target="_blank">terms of service</a>. I also agree to Dwolla's <a href="https://www.dwolla.com/legal/tos?whitelabel" target="_blank">privacy policy</a> and <a href="https://www.dwolla.com/legal/privacy?whitelabel" target="_blank">terms of service</a>.
           </label>
         </fieldset>
         <%= f.hidden_field :invited, value: true %>
@@ -35,10 +59,10 @@
     </div>
   </div>
   <div class="col-md-4">
-    <ul class="signup-steps">
-      <li class="active"><span></span> Basic Info</li>
-      <li><span></span> Mobile Number</li>
-      <li><span></span> Checking Account</li>
-    </ul>
+    <h6 class="help-header">Make Change Happen</h6>
+    <p>We are excited that you are taking the first step to shifting your spending habits to savings.</p>
+    <p>Fill out the form with your basic information to help us verify your identity. Use our <a href="http://support.shiftsavings.com/" target="_blank">support center</a> if you have any questions regarding your sign up.</p>
+    <a href="http://support.shiftsavings.com/signing-up/sign-up-form" target="_blank" class="help-link"><i class="fa fa-question"></i> Support: Sign Up Form</a>
+    <p class="additional-help">Need additional help? Chat with us below or <a href="https://www.shiftsavings.com/contact" target="_blank">send us an email</a> with your question.</p>
   </div>
 </div>

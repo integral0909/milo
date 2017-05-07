@@ -11,7 +11,7 @@
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
           <% end %>
           <section class="form-section">
-            <% if current_user.business %>
+            <% if @biz_owner %>
               <%= f.fields_for :business do |b| %>
                 <div class="row">
                   <div class="col-sm-12">
@@ -26,7 +26,7 @@
             <div class="row">
               <div class="col-sm-12">
                 <fieldset class="form-group">
-                  <label><%= current_user.business ? "Contact Name" : "Name" %></label>
+                  <label>Name</label>
                   <%= f.text_field :name, autofocus: true, class: "form-control" %>
                 </fieldset>
               </div>
@@ -34,13 +34,13 @@
             <div class="row">
               <div class="col-sm-6">
                 <fieldset class="form-group">
-                  <label><%= current_user.business ? "Contact Email" : "Email" %></label>
+                  <label>Email</label>
                   <%= f.email_field :email, class: "form-control" %>
                 </fieldset>
               </div>
               <div class="col-sm-6">
                 <fieldset class="form-group">
-                  <label><%= current_user.business ? "Contact Phone" : "Phone" %></label>
+                  <label>Phone</label>
                   <%= f.text_field :mobile_number, class: "form-control", disabled: true %>
                 </fieldset>
               </div>
