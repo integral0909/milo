@@ -1,20 +1,42 @@
 <% set_meta_tags :site => 'Overview • Works • Shift' %>
 
-<div class="page-content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-8">
-        <%= render "layouts/messages" %>
-        <%= render partial: "home/card_verify_bank" %>
-        <%= render partial: "home/card_add_account" %>
-        <%= render partial: "home/card_confirm_checking" %>
-        <%= render partial: "home/card_authorize_on_demand" %>
-        <%= render partial: "home/card_employer_contributions" %>
-        <div class="row">
-          <%= render partial: "home/card_history" %>
-          <%= render partial: "home/card_employee_count" %>
+<% if @biz_owner %>
+  <div class="page-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8">
+          <%= render "layouts/messages" %>
+          <%= render partial: "home/card_verify_bank" %>
+          <%= render partial: "home/card_add_account" %>
+          <%= render partial: "home/card_confirm_checking" %>
+          <%= render partial: "home/card_authorize_on_demand" %>
+          <%= render partial: "home/card_employer_contributions" %>
+          <div class="row">
+            <%= render partial: "home/card_history" %>
+            <%= render partial: "home/card_employee_count" %>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+<% elsif @biz %>
+  <div class="page-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8">
+          <p>This is your employee page.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="page-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8">
+          <p>Tell your employer to sign up!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
