@@ -1,7 +1,7 @@
 /*
 * Shift
 * Copyright Shift 2017
-* bank.shiftsavings.com
+*shiftsavings.com
 */
 
 
@@ -34,15 +34,6 @@
   font-family: 'Brandon Black Italic';
   src: url(asset_path('b-black-it.woff2')) format('woff2'),
        url(asset_path('b-black-it.woff')) format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-
-@font-face {
-  font-family: 'Futura Light';
-  src: asset-url('futura-light-webfont.woff2') format('woff2'),
-       asset-url('futura-light-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
