@@ -61,6 +61,9 @@ Rails.application.routes.draw do
   get 'roundups', to: 'home#roundups', as: :roundups
   get 'transfers', to: 'home#transfers', as: :transfers
 
+  # Works
+  get '/works', to: 'works#index', as: :works_overview
+
   # Zero
   get '/zero', to: 'zero#index', as: :zero_overview
   get '/zero/progress', to: 'zero#progress', as: :zero_progress

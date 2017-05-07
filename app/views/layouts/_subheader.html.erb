@@ -11,6 +11,14 @@
       <div class="subheader-savings-total"><%= number_to_currency(@account_balance) %></div>
     <% end %>
 
+    <% if subheader_is? :works %>
+      <nav class="nav subheader-nav">
+        <a href="/works" class="<%= active_page_class?('/works')%>"><i class="fa fa-home"></i>Overview</a>
+        <a href="/employees" class="<%= active_page_class?('/employees')%>"><i class="fa fa-profile"></i>Employees</a>
+        <a href="/works/history" class="<%= active_page_class?('/works/history')%>"><i class="fa fa-calendar"></i>History</a>
+      </nav>
+    <% end %>
+
     <% if subheader_is? :zero %>
       <nav class="nav subheader-nav">
         <a href="/zero" class="<%= active_page_class?('/zero')%>"><i class="fa fa-home"></i>Overview</a>
