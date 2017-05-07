@@ -22,7 +22,7 @@
             <% @emp_data.each do |e| %>
               <% if e['id'] != @biz_owner.id %>
                 <tr>
-                  <th><%= e['name'] %> (<%= e['email'] %>)</th>
+                  <th><%= e['name'] %></th>
                   <td>Active</td>
                   <td><%= e['total_contrib'] ? e['total_contrib'] : '-' %></td>
                   <td><%= e['last_contrib'] ? "$#{e['last_contrib']}" : '-' %></td>

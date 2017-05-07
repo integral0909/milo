@@ -44,16 +44,16 @@ class RegistrationsController < Devise::RegistrationsController
           if resource.business_id
             Business.add_business_owner(current_user, resource.business_id)
           end
-          # Slack Notification for Sign Up
+          # Slack notification for sign up
           if Rails.env == "production"
             if current_user.business
-              notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", channel: '#signups', username: 'Milo Works', icon_emoji: ':moneybag:'
+              notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", channel: '#signups', username: 'Shift Works', icon_emoji: ':moneybag:'
               user_count = User.where.not(business_id: nil).count
               notifier.ping "#{current_user.business.name} (#{current_user.email}) just signed up! Shift currently has #{user_count} businesses!"
             else
-              notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", channel: '#signups', username: 'Milo', icon_emoji: ':moneybag:'
+              notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", channel: '#signups', username: 'Shift', icon_emoji: ':moneybag:'
               user_count = User.all.count
-              notifier.ping "#{current_user.email} just signed up! Shift currently has #{user_count} users!"
+              notifier.ping "#{current_user.name} (#{current_user.email}) just signed up! Shift currently has #{user_count} users!"
             end
           end
           # send welcome email
