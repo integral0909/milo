@@ -34,6 +34,14 @@ class WorksController < ApplicationController
     end
   end
 
+  # ----------------------------------------------
+  # HISTORY --------------------------------------
+  # ----------------------------------------------
+  def history
+    @transfers = Transfer.where(user_id: @user.id).order(date: :desc).all
+    @transfer_months = @transfers.group_by { |t| t.date.to_date.beginning_of_month }
+  end
+
   # ==============================================
   # PRIVATE ======================================
   # ==============================================

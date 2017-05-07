@@ -30,10 +30,10 @@
       <a class="logo" href="/">Shift</a>
       <nav class="nav primary-nav">
         <% if !@biz_owner %>
-          <a class="nav-link" href="/">Savings</a>
+          <a href="/" class="nav-link">Savings</a>
         <% end %>
-        <!-- <a class="nav-link" href="/zero">Zero</a> -->
-        <a class="nav-link" href="/works">Works</a>
+        <!-- <a href="/zero" class="nav-link">Zero</a> -->
+        <a href="/works" class="nav-link <%= active_control_class?('works')%>">Works</a>
       </nav>
       <nav class="nav account-nav">
         <div class="nav-item dropdown">

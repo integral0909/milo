@@ -63,6 +63,7 @@ Rails.application.routes.draw do
 
   # Works
   get '/works', to: 'works#index', as: :works_overview
+  get '/works/history', to: 'works#history', as: :works_history
 
   # Zero
   get '/zero', to: 'zero#index', as: :zero_overview
