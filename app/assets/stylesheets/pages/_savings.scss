@@ -7,6 +7,50 @@
 
 // Savings
 
+// Transfers
+.withdraw-funds {
+  padding: 0 0 0 24px;
+
+  .wf-title {
+    color: #8B999F;
+    font-family: 'Brandon Black';
+    font-size: 0.875em;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+  }
+
+  .wf-blurb {
+    border-bottom: 1px solid #DDE1E2;
+    margin: 0 0 20px;
+    padding: 16px 0;
+    @extend %clear;
+
+    .wfb-img {
+      float: left;
+      margin: 0 20px 0 0;
+      width: 80px;
+    }
+
+    .wfb-info {
+      float: left;
+      width: calc(100% - 100px);
+    }
+
+    .wfb-title {
+      color: #352D52;
+      font-family: 'Brandon Black';
+      margin: 0 0 2px;
+      text-transform: uppercase;
+    }
+
+    p {
+      color: #8B999F;
+      font-size: 0.813em;
+      margin: 0;
+    }
+  }
+}
+
 // History
 h5.transfer-title {
   margin: 0 0 24px;

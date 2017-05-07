@@ -21,11 +21,21 @@
           </div>
         </div>
       <% end %>
-      <div class="col-md-4 col-md-offset-4">
-        <% if (@user.account_balance > 0) && !@user.dwolla_funding_source.nil? && !@user.bank_not_verified && !@accounts.blank? %>
-          <a class="title-link -withdraw" data-toggle="modal" data-target="#withdrawFunds"><i class="fa fa-minus"></i>Withdraw</a>
-        <% end %>
-      </div>
+      <% if (@user.account_balance > 0) && !@user.dwolla_funding_source.nil? && !@user.bank_not_verified && !@accounts.blank? %>
+        <div class="col-md-4 col-md-offset-4">
+          <div class="withdraw-funds">
+            <div class="wf-title">Withdraw Funds</div>
+            <div class="wf-blurb">
+              <div class="wfb-img"><%= image_tag("icon-coins.svg") %></div>
+              <div class="wfb-info">
+                <div class="wfb-title">Ready to transfer?</div>
+                <p>Withdrawing funds from your account will equally remove funds from your goals.</p>
+              </div>
+            </div>
+            <a class="button -purple -small" href="#" data-toggle="modal" data-target="#withdrawFunds">Withdraw</a>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
