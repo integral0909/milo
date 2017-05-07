@@ -66,17 +66,28 @@ i.helper {
 }
 
 // Shift Tooltips
-.home-verify-message {
+a.shift-tooltip, .shift-tooltip {
   background: #4A90E2;
   border-radius: 4px;
   color: #FFF;
+  display: block;
   font-size: 0.875em;
   line-height: 1.4;
-  margin: 16px 0 16px 0;
-  padding: 12px;
+  margin: 0 0 20px;
+  padding: 12px 16px;
+  text-decoration: none;
 
-  .verify-link {
-    color: #FFF;
-    font-weight: bold;
+  .st-action {
+    font-family: 'Brandon Black';
+    font-size: 0.875em;
+    padding: 12px 0 0;
+    text-transform: uppercase;
+
+    i.fa {
+      font-size: 0.688em;
+      line-height: 16px;
+      margin: 0 0 0 6px;
+      vertical-align: top;
+    }
   }
 }

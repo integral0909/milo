@@ -1,4 +1,4 @@
-<% set_meta_tags :site => 'Overview • Shift' %>
+<% set_meta_tags :site => 'Overview • Savings • Shift' %>
 
 <% if current_user.invited %>
   <div class="page-content">
@@ -40,9 +40,7 @@
 <% content_for :javascript do %>
   <% if @goal_complete %>
     <script type="text/javascript">
-      $(function() {
-        $("#completeGoal").modal();
-      });
+      $(function() { $("#completeGoal").modal(); });
     </script>
   <% end %>
 <% end %>

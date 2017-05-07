@@ -127,82 +127,53 @@
 }
 
 // History Snapshot
-.milo-card.history, .milo-card.mobile-roundups {
+.milo-card.history {
+  min-height: 312px;
 
-  ul.recent-transactions {
-    list-style: none;
-    margin: 0 0 24px;
-    padding: 0;
+  .mc-title {
+    margin: 0 0 8px;
+  }
 
-    li {
-      border-bottom: 1px solid #DDE1E2;
-      color: #352D52;
+  .recent-transfer-item {
+    border-bottom: 1px solid #F1F3F6;
+    height: 53px;
+    padding: 14px 8px;
+    @extend %clear;
+
+    .rti-amount {
+      color: #1ABD7D;
+      float: left;
+      font-family: 'Brandon Black';
       font-size: 1.25em;
-      height: 54px;
-      line-height: 32px;
-      padding: 11px 16px;
-      width: 100%;
-
-      span {
-        color: #8B999F;
-        float: right;
-        font-size: 0.5em;
-        line-height: 1.6;
-        overflow: hidden;
-        text-align: right;
-        text-overflow: ellipsis;
-        text-transform: uppercase;
-        white-space: nowrap;
-        width: 72%;
-
-        strong {
-          display: block;
-          font-family: 'Futura Bold';
-          font-size: 1.25em;
-          line-height: 1.2;
-        }
-      }
+      line-height: 24px;
+      width: calc(100% - 80px);
     }
-  }
 
-  a {
-    display: block;
-    margin: 0 0 6px;
-    text-align: center;
-  }
-}
+    .rti-info {
+      color: #8B999F;
+      float: right;
+      text-align: right;
+      text-transform: uppercase;
+      width: 80px;
 
-.milo-card.mobile-roundups {
-
-  ul.recent-transactions li {
-    height: auto;
-    line-height: 1.6;
-    padding: 12px 16px;
-
-    span {
-      display: block;
-      float: none;
-      text-align: left;
-      width: 100%;
-
-      strong {
-        display: inline;
-        margin: 0 12px 0 0;
+      .rti-type {
+        font-family: 'Brandon Black';
+        font-size: 0.64em;
+        line-height: 12px;
       }
-    }
-  }
 
-  p {
-    margin: 0;
-
-    &.align-center {
-      text-align: center;
+      .rti-date {
+        font-family: 'Brandon';
+        font-size: 0.56em;
+        line-height: 12px;
+      }
     }
   }
 }
 
 // Savings
 .milo-card.quick-save, .milo-card.recurring {
+  min-height: 312px;
 
   .amount {
     background: #F5F7FA;

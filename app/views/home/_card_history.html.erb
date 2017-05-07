@@ -1,15 +1,21 @@
 <div class="col-md-6">
   <div class="milo-card history">
-    <div class="mc-title">History</div>
+    <div class="mc-title">
+      <a class="title-link" href="/history">View</a>
+      History
+    </div>
     <% if @transfers.present? %>
-      <ul class="recent-transactions">
-        <% @transfers.each do |tr| %>
-          <li>$<%= tr.roundup_amount %><span><strong><%= tr.status == '200' ? "Processed" : "Pending" %></strong><%= tr.date.to_date.strftime("%B %d, %Y") %></span></li>
-        <% end %>
-      </ul>
+      <% @transfers.each do |tr| %>
+        <div class="recent-transfer-item">
+          <div class="rti-amount"><%= number_to_currency(tr.roundup_amount) %></div>
+          <div class="rti-info">
+            <div class="rti-type"><%= tr.transfer_type %></div>
+            <div class="rti-date"><%= tr.date.to_date.strftime("%b %e, %Y") %></div>
+          </div>
+        </div>
+      <% end %>
     <% else %>
       <p>No transfers currently exist.</p>
     <% end %>
-    <a href="/history">View History</a>
   </div>
 </div>
