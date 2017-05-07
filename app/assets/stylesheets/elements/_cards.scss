@@ -226,21 +226,32 @@
 }
 
 // Round Up Stats
-.milo-card.round-up-stat {
-  box-sizing: border-box;
-  color: #292242;
-  font-family: 'Futura Bold';
-  font-size: 2em;
-  height: 160px;
-  margin: 0 0 32px;
-  padding: 40px 0 0;
-  text-align: center;
+.round-up-stats {
+  @extend %clear;
 
-  span {
-    color: #8B999F;
-    display: block;
-    font-family: 'Futura Light';
-    font-size: 0.5em;
+  .milo-card.round-up-stat {
+    box-sizing: border-box;
+    color: #352D52;
+    float: left;
+    font-family: 'Brandon Black';
+    font-size: 3em;
+    height: 160px;
+    margin: 0 2.5% 20px 0;
+    padding: 24px 0 0;
+    text-align: center;
+    width: 31.6666%;
+
+    &:nth-child(3n) {
+      margin: 0 0 20px;
+    }
+
+    span {
+      color: #606B6F;
+      display: block;
+      font-family: 'Brandon';
+      font-size: 0.292em;
+      line-height: 32px;
+    }
   }
 }
 

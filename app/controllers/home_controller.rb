@@ -49,7 +49,7 @@ class HomeController < ApplicationController
     # Pull in the users transactions from the current week. The week starts on Monday
     set_pending_roundups
 
-    # Show the latest 3 transfers
+    # Show the latest 4 transfers
     @transfers = Transfer.where(user_id: @user.id).order(date: :desc).limit(4)
 
     # Redirect users to proper sign up page if not complete

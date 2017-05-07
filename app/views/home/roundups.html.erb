@@ -9,27 +9,13 @@
         <%= render partial: "home/card_add_account" %>
         <%= render partial: "home/card_confirm_checking" %>
         <%= render partial: "home/card_authorize_on_demand" %>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="milo-card round-up-stat"><%= @transfer_total %><span>Transfers</span></div>
-          </div>
-          <div class="col-sm-4">
-            <div class="milo-card round-up-stat"><%= @roundup_total %><span>Total Round Ups</span></div>
-          </div>
-          <div class="col-sm-4">
-            <div class="milo-card round-up-stat"><%= @roundup_avg %><span>Avg. Round Up</span></div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="milo-card round-up-stat"><%= @completed_goals %><span>Goals Achieved</span></div>
-          </div>
-          <div class="col-sm-4">
-            <div class="milo-card round-up-stat"><%= @transfer_avg %><span>Avg. Weekly Savings</span></div>
-          </div>
-          <div class="col-sm-4">
-            <div class="milo-card round-up-stat"><%= @spent_avg %><span>Avg. Transaction</span></div>
-          </div>
+        <div class="round-up-stats">
+          <div class="milo-card round-up-stat"><%= @transfer_total %><span>Transfers</span></div>
+          <div class="milo-card round-up-stat"><%= @roundup_total %><span>Total Round Ups</span></div>
+          <div class="milo-card round-up-stat"><%= @roundup_avg %><span>Avg. Round Up</span></div>
+          <div class="milo-card round-up-stat"><%= @completed_goals %><span>Goals Achieved</span></div>
+          <div class="milo-card round-up-stat"><%= @transfer_avg %><span>Avg. Weekly Savings</span></div>
+          <div class="milo-card round-up-stat"><%= @spent_avg %><span>Avg. Transaction</span></div>
         </div>
       </div>
       <div class="col-md-4">

@@ -12,9 +12,15 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
-        <%= render partial: "home/card_quick_save" %>
-      </div>
+      <% if !@biz && !@user.dwolla_funding_source.nil? && !@user.bank_not_verified && !@accounts.blank? %>
+        <div class="col-md-4">
+          <div class="milo-card quick-save">
+            <div class="mc-title">Quick Save</div>
+            <div class="amount">+$20.00</div>
+            <%= link_to "Save", quick_save_path, class:"button -full -blue", data: { confirm: "Are you sure you want to save $20?" } %>
+          </div>
+        </div>
+      <% end %>
       <div class="col-md-4 col-md-offset-4">
         <% if (@user.account_balance > 0) && !@user.dwolla_funding_source.nil? && !@user.bank_not_verified && !@accounts.blank? %>
           <a class="title-link -withdraw" data-toggle="modal" data-target="#withdrawFunds"><i class="fa fa-minus"></i>Withdraw</a>
@@ -23,3 +29,7 @@
     </div>
   </div>
 </div>
+
+<% content_for :modal do %>
+  <%= render 'accounts/withdraw_funds' %>
+<% end %>
