@@ -1,0 +1,25 @@
+<% set_meta_tags :site => 'Transfers • Savings • Shift' %>
+
+<div class="page-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <%= render "layouts/messages" %>
+        <%= render partial: "home/card_verify_bank" %>
+        <%= render partial: "home/card_add_account" %>
+        <%= render partial: "home/card_confirm_checking" %>
+        <%= render partial: "home/card_authorize_on_demand" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <%= render partial: "home/card_quick_save" %>
+      </div>
+      <div class="col-md-4 col-md-offset-4">
+        <% if (@user.account_balance > 0) && !@user.dwolla_funding_source.nil? && !@user.bank_not_verified && !@accounts.blank? %>
+          <a class="title-link -withdraw" data-toggle="modal" data-target="#withdrawFunds"><i class="fa fa-minus"></i>Withdraw</a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

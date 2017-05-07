@@ -1,11 +1,14 @@
-<% set_meta_tags :site => 'Round Ups • Shift' %>
+<% set_meta_tags :site => 'Round Ups • Savings • Shift' %>
 
 <div class="page-content">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-8">
-        <%= render partial: "home/card_account_balance" %>
-        <%= render partial: "home/card_account_value" %>
+        <%= render "layouts/messages" %>
+        <%= render partial: "home/card_verify_bank" %>
+        <%= render partial: "home/card_add_account" %>
+        <%= render partial: "home/card_confirm_checking" %>
+        <%= render partial: "home/card_authorize_on_demand" %>
         <div class="row">
           <div class="col-sm-4">
             <div class="milo-card round-up-stat"><%= @transfer_total %><span>Transfers</span></div>

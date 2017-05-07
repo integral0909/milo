@@ -5,7 +5,7 @@
       <nav class="nav subheader-nav">
         <a href="/" class="<%= active_page_class?('/')%>"><i class="fa fa-home"></i>Overview</a>
         <a href="/roundups" class="<%= active_page_class?('/roundups')%>"><i class="fa fa-arrow-circle-o-up"></i>Round Ups</a>
-        <a href="#"><i class="fa fa-retweet"></i>Transfer</a>
+        <a href="/transfers" class="<%= active_page_class?('/transfers')%>"><i class="fa fa-retweet"></i>Transfer</a>
         <a href="/history" class="<%= active_page_class?('/history')%>"><i class="fa fa-calendar"></i>History</a>
       </nav>
       <div class="subheader-savings-total"><%= number_to_currency(@account_balance) %></div>

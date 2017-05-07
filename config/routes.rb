@@ -59,6 +59,7 @@ Rails.application.routes.draw do
 
   get 'history', to: 'home#history', as: :history
   get 'roundups', to: 'home#roundups', as: :roundups
+  get 'transfers', to: 'home#transfers', as: :transfers
 
   # Zero
   get '/zero', to: 'zero#index', as: :zero_overview
