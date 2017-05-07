@@ -23,7 +23,7 @@ class RegistrationsController < Devise::RegistrationsController
   prepend_before_action :set_minimum_password_length, only: [:new, :edit]
 
   before_action :configure_account_update_params, only: [:update]
-  before_action :set_subheader, only: [:edit, :accounts, :security, :employer]
+  before_action :set_subheader, only: [:edit, :accounts, :security]
 
   # ==============================================
   # ACTIONS ======================================
