@@ -269,6 +269,12 @@ module Dwolla
     Business.all.each do |biz|
       # only run withdraw if employer has contributions
       if biz.current_contribution
+        
+        # check if owner exists
+        if !User.exists?(biz.owner)
+          next
+        end
+
         biz_owner = User.find(biz.owner)
         ck = Checking.find_by_user_id(biz_owner.id)
         # convert to dollars since we save in cents
