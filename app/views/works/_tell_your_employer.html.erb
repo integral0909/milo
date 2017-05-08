@@ -1,0 +1,65 @@
+<section class="hero-tell-employer">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h2>Employer Contributions</h2>
+        <p>Your employer can cultivate and contribute to your Shift savings account with our employee benefit solution, Shift Works.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="page-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-5 col-md-offset-1">
+        <h5>What is Shift Works?</h5>
+        <p>Shift's employee benefit solution, Shift Works, provides a high impact and low cost benefit offering to employers. Increase the rate of savings for employees through employer contributions in the form of employer-matched round ups.</p>
+        <p>Think your employer should offer Shift Works?</p>
+      </div>
+      <div class="col-md-5">
+        <%= render "layouts/messages" %>
+        <%= form_for @lead do |f| %>
+          <fieldset class="form-group">
+            <label>Company Name</label>
+            <%= f.text_field :company, class: "form-control", required: true %>
+          </fieldset>
+          <div class="row">
+            <div class="col-sm-6">
+              <fieldset class="form-group">
+                <label>Company Contact Name</label>
+                <%= f.text_field :company_contact_name, class: "form-control", required: true %>
+              </fieldset>
+            </div>
+            <div class="col-sm-6">
+              <fieldset class="form-group">
+                <label>Company Contact Email</label>
+                <%= f.text_field :company_contact_email, class: "form-control", required: true %>
+              </fieldset>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <fieldset class="form-group">
+                <label>Your Name</label>
+                <%= f.text_field :lead_name, class: "form-control", value: @user.name, required: true %>
+              </fieldset>
+            </div>
+            <div class="col-sm-6">
+              <fieldset class="form-group">
+                <label>Your Work Email</label>
+                <%= f.text_field :lead_email, class: "form-control", required: true %>
+              </fieldset>
+            </div>
+          </div>
+          <fieldset class="form-group">
+            <label>Notes</label>
+            <%= f.text_area :message, class: "form-control", placeholder: "Add a note or tell us why your company should offer matched savings contributions..." %>
+          </fieldset>
+          <%= f.hidden_field :nickname %>
+          <div class="spacer -space-16"></div>
+          <button type="submit" class="button -blue -full">Submit</button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

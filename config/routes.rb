@@ -53,6 +53,10 @@ Rails.application.routes.draw do
     end
   end
 
+  # Employer Leads
+  get '/tell-your-employer', to: 'leads#new', as: :employer_lead
+  resources "leads", only: [:new, :create]
+
   resources :businesses, only: [:edit, :update]
   resources :debts
   resources :employees, only: [:index, :destroy]

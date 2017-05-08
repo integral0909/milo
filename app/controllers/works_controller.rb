@@ -1,3 +1,6 @@
+# ================================================
+# RUBY->CONTROLLER->WORKS-CONTROLLER =============
+# ================================================
 class WorksController < ApplicationController
 
   # ----------------------------------------------
@@ -29,7 +32,13 @@ class WorksController < ApplicationController
       @total_contrib = number_to_currency(@biz.total_contribution / 100.00, unit:"") if @biz.total_contribution
       # Total Employees
       @total_employees = User.where(business_id: @biz.id).count - 1
+    elsif @user.business.present?
+      subheader_set_nil
+      # Employer Contributions
+      @employer_contrib = number_to_currency(@user.employer_contribution / 100.00, unit:"") if @user.employer_contribution
+      @pending_contrib = number_to_currency(@user.pending_contribution / 100.00, unit:"") if @user.pending_contribution
     else
+      @lead = Lead.new
       subheader_set_nil
     end
   end
