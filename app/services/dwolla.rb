@@ -175,6 +175,7 @@ module Dwolla
       # Save transfer data
       Transfer.create_transfers(user, "", current_transfer_url, current_transfer_status, roundup_amount, total_transactions, "deposit", current_date, @charge_tech_fee)
 
+      # TODO: this needs to happen when we get the customer_transfer_completed webhook response
       # add the roundup amount to the users balance
       User.add_account_balance(user, roundup_amount)
 
@@ -183,6 +184,8 @@ module Dwolla
       # Email the user that the round up was successfully withdrawn
       BankingMailer.transfer_success(user, roundup_amount, funding_account, @charge_tech_fee).deliver_now
     rescue => e
+      # TODO: this needs to happen when we get the customer_transfer_failed webhook response
+
       # Email the user that there was an issue when withdrawing the round up
       BankingMailer.transfer_failed(user, roundup_amount, funding_account).deliver_now
       # Email support that there was an issue when withdrawing the round up
@@ -254,9 +257,12 @@ module Dwolla
 
       puts "$#{fee_amount}"
 
+      # TODO: this needs to happen when we get the customer_transfer_completed webhook response
+
       # Email the user that the tech fee was successfully charged
       BankingMailer.biz_tech_fee_success(user, fee_amount).deliver_now
     rescue => e
+      # TODO: this needs to happen when we get the customer_transfer_failed webhook response
       # Email the user that there was an issue when withdrawing the round up
       BankingMailer.biz_tech_fee_failed(user, fee_amount).deliver_now
       # Email support that there was an issue when withdrawing the round up
@@ -307,11 +313,15 @@ module Dwolla
 
           puts "Employer contribution: $#{contribution}"
 
+          # TODO: this needs to happen when we get the customer_transfer_completed webhook response
+
           # Email the user that the tech fee was successfully charged
           BankingMailer.biz_contributions_successful(biz, biz_owner, contribution).deliver_now
           # reset current_contribution to nil.
           Business.reset_current_contribution(biz.id)
         rescue => e
+          # TODO: this needs to happen when we get the customer_transfer_failed webhook response
+
           # Email the user that there was an issue when withdrawing the round up
           BankingMailer.biz_contributions_failed(biz, biz_owner, contribution).deliver_now
           # Email support that there was an issue when withdrawing the round up

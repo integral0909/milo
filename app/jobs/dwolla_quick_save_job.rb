@@ -41,12 +41,16 @@ class DwollaQuickSaveJob
       # Save the withdraw as a transfer. Params are the user, transfer_url, transfer_status, roundup_amount, roundup_count, transfer_type, current_date, tech_fee_charged
       Transfer.create_transfers(user,"", current_transfer_url, current_transfer_status, amount, "", "deposit", current_date, false)
 
+      # TODO: this needs to happen when we get the customer_transfer_completed webhook response
+
       # add the quick save amount from the user's account balance
       User.add_account_balance(user, amount, true)
       # send email to user about funds being transfered to their account.
 
       BankingMailer.quick_save_success(user, amount).deliver_now
     rescue => e
+      # TODO: this needs to happen when we get the customer_transfer_failed webhook response
+
       # send email to dev team about failed transfer to user
       SupportMailer.quick_save_failed(user, amount, e).deliver_now
     end
