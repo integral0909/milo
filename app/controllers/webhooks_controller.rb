@@ -44,11 +44,19 @@ class WebhooksController < ApplicationController
   end
 
   def create_event(params, service)
+    # Check if it's a customer related webhook event
+    if params['_links']['customer']
+      hook_user_id = User.find_by_dwolla_id(params['_links']['customer']['href']).id
+    else
+      # maybe do something else here but essentially this means it's a business related webhook
+      hook_user_id = nil
+    end
 
     data = {
         service: service,
-        response_id: params['_links']['resource']['href'],
-        topic: params['topic']
+        response_id: params['_links']['self']['href'],
+        topic: params['topic'],
+        user_id: hook_user_id
     }
 
     # create webhook event object
