@@ -14,8 +14,9 @@
   margin: 0 0 20px;
   padding: 24px;
 
-  @include breakpoint(l-three) {
-    margin: 0 0 16px;
+  @include breakpoint(l-one) {
+    margin: 0 0 12px;
+    padding: 16px;
   }
 
   .mc-title {
@@ -29,6 +30,10 @@
     margin: 0 0 24px;
     padding: 0 0 7px;
     text-transform: uppercase;
+
+    @include breakpoint(l-one) {
+      margin: 0 0 16px;
+    }
 
     a.title-link, .title-link {
       color: #4A90E2;
@@ -245,12 +250,33 @@
       margin: 0 0 20px;
     }
 
+    @include breakpoint(l-one) {
+      font-size: 2em;
+      height: 120px;
+      margin: 0 4% 12px 0;
+      padding: 20px 0 0;
+      width: 48%;
+
+      &:nth-child(3n) {
+        margin: 0 4% 12px 0;
+      }
+
+      &:nth-child(even) {
+        margin: 0 0 12px;
+      }
+    }
+
     span {
       color: #606B6F;
       display: block;
       font-family: 'Brandon';
       font-size: 0.292em;
       line-height: 32px;
+
+      @include breakpoint(l-one) {
+        font-size: 0.4em;
+        line-height: 2;
+      }
     }
   }
 }

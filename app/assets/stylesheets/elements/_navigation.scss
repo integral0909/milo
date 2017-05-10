@@ -20,6 +20,11 @@
     margin: 0 32px 0 0;
     text-transform: uppercase;
 
+    @include breakpoint(l-one) {
+      color: #FFF;
+      margin: 0 16px 0 0;
+    }
+
     &.active {
       color: #352D52;
     }
@@ -57,6 +62,11 @@
     display: inline-block;
     font-family: 'Brandon';
     line-height: 32px;
+
+    @include breakpoint(l-one) {
+      display: none;
+      visibility: hidden;
+    }
   }
 }
 

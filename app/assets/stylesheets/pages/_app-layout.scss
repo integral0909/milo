@@ -9,13 +9,22 @@
 body.milo-app {
   background: #F5F7FA;
 
-  .container-fluid {
-    padding-right: 1.6em;
-    padding-left: 1.6em;
-  }
+  // .container-fluid {
+  //   padding-right: 1.6em;
+  //   padding-left: 1.6em;
+  //
+  //   @include breakpoint(l-one) {
+  //     padding-right: 0.64em;
+  //     padding-left: 0.64em;
+  //   }
+  // }
 
   .page-content {
     padding: 48px 0;
+
+    @include breakpoint(l-one) {
+      padding: 72px 0;
+    }
   }
 
   header {
@@ -24,10 +33,16 @@ body.milo-app {
     height: 73px;
     padding: 16px 0;
 
-    @include breakpoint(l-three) {
+    @include breakpoint(l-one) {
+      background: #352D52;
+      border-bottom: 0;
+      box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.24);
       height: 56px;
-      padding: 8px 0.9375rem;
+      padding: 8px 0;
+      position: fixed;
+      top: 0;
       width: 100%;
+      z-index: 100;
     }
 
     a.logo {
@@ -40,14 +55,9 @@ body.milo-app {
       line-height: 1;
       margin: 0 48px 0 0;
 
-      @include breakpoint(l-three) {
-        display: block;
-        float: left;
-        font-size: 1.625em;
-        line-height: 40px;
-        margin: 0;
-        text-align: left;
-        width: auto;
+      @include breakpoint(l-one) {
+        display: none;
+        visibility: hidden;
       }
 
       &:focus, &:hover {
@@ -65,12 +75,47 @@ body.milo-app {
   padding: 18px 0;
   @extend %clear;
 
+  @include breakpoint(l-one) {
+    border-bottom: 0;
+    bottom: 0;
+    box-shadow: 0px -2px 6px 0px rgba(0,0,0,0.24);
+    height: 56px;
+    padding: 8px 0;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+
+    nav {
+      float: none;
+
+      a {
+        font-size: 0.64em;
+        line-height: 1;
+        margin: 0;
+        text-align: center;
+        text-transform: uppercase;
+        width: 25%;
+
+        i.fa {
+          display: block;
+          font-size: 2em;
+          margin: 0 0 8px;
+        }
+      }
+    }
+  }
+
   .subheader-savings-total {
     color: #352D52;
     float: right;
     font-family: 'Brandon Black';
     font-size: 1.5em;
     line-height: 24px;
+
+    @include breakpoint(l-one) {
+      display: none;
+      visibility: hidden;
+    }
   }
 
   .subheader-debt-total {
@@ -79,6 +124,11 @@ body.milo-app {
     font-family: 'Brandon Black';
     font-size: 1.5em;
     line-height: 24px;
+
+    @include breakpoint(l-one) {
+      display: none;
+      visibility: hidden;
+    }
   }
 }
 

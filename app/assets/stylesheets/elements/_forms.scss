@@ -9,6 +9,10 @@
 .form-group {
   margin: 0 0 16px;
 
+  @include breakpoint(l-one) {
+    margin: 0 0 8px;
+  }
+
   label {
     color: #BBC5C7;
     font-family: 'Brandon Black';
