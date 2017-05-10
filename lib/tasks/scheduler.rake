@@ -44,11 +44,17 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
         user = User.find(ck.user_id)
 
         # skip user if their account balance is under $100
-        acct_balance = PlaidHelper.check_balance(user, ck)
-        if acct_balance != 'null' && acct_balance <= 100
-          puts "ALERT::::::User #{user.id} does not have enough funds to pull round ups.::::::ALERT"
-          next
+        begin
+          acct_balance = PlaidHelper.check_balance(user, ck)
+
+          if acct_balance != 'null' && acct_balance <= 100
+            puts "ALERT::::::User #{user.id} does not have enough funds to pull round ups.::::::ALERT"
+            next
+          end
+        rescue => e
+          p e 
         end
+
 
         # check if the checking account is associated with a business
         biz_owner = biz_account(user)
