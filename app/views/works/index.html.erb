@@ -1,0 +1,57 @@
+<% set_meta_tags :site => 'Overview • Works • Shift' %>
+
+<% if @biz_owner %>
+  <div class="page-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8">
+          <%= render "layouts/messages" %>
+          <%= render partial: "home/card_verify_bank" %>
+          <%= render partial: "home/card_add_account" %>
+          <%= render partial: "home/card_confirm_checking" %>
+          <%= render partial: "home/card_authorize_on_demand" %>
+          <%= render partial: "home/card_employer_contributions" %>
+          <div class="row">
+            <%= render partial: "works/card_history" %>
+            <%= render partial: "works/card_employee_count" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% elsif @user.business.present? %>
+  <div class="page-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="milo-card account-value">
+            <div class="mc-title">Employer Contributions</div>
+            <span>
+              <p>Total Contributions: <span class="pull-right">Pending Contributions:<span></p>
+              <div class="av-total">$<%= @employer_contrib ? @employer_contrib : "0.00" %>
+                <span class="pull-right">$<%= @pending_contrib ? @pending_contrib : "0.00" %></span>
+              </div>
+            </span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="business-info">
+            <div class="bi-blurb">
+              <% business_contact = User.find(@user.business.owner) %>
+              <div class="bib-img"><%= image_tag business_contact.avatar.url(:medium) %></div>
+              <div class="bib-info">
+                <div class="bib-title"><%= @user.business.name %></div>
+                <ul>
+                  <li><%= business_contact.name if business_contact.name %></li>
+                  <li><%= business_contact.email if business_contact.email %></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <%= render partial: "works/tell_your_employer" %>
+<% end %>

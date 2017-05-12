@@ -1,12 +1,11 @@
 <% set_meta_tags :site => 'Contributions • Settings • Shift' %>
 
 <div class="page-content">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-12">
-        <%= render :partial => '/devise/shared/subheader' %>
+      <div class="col-md-8">
         <%= render "layouts/messages" %>
-        <h6>Set Contributions</h6>
+        <h5>Set Contributions</h5>
         <p>Match 100% of employee savings or set a max contribution limit. Setting a max contribution will limit an employer contribution per employee to the amount set below.</p>
         <%= form_for (@biz), :url => {:controller => "businesses", :action => "update", id: @biz.id}, :html => { :method => :put} do |f| %>
           <%= form_errors @biz %>

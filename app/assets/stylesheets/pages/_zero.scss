@@ -1,0 +1,95 @@
+/*
+* Shift
+* Copyright Shift 2017
+* shiftsavings.com
+*/
+
+
+// Zero
+
+// Content Block
+.zero-content-block {
+  margin: 0 0 40px;
+
+  h5 {
+    margin: 0 0 4px;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+// Current Debt Goal
+.debt-title, .debt-payment-info {
+  color: #4A90E2;
+  font-family: 'Brandon Black';
+  font-size: 0.875em;
+  margin: 0 0 4px;
+  text-transform: uppercase;
+
+  span {
+    color: #606B6F;
+    float: right;
+    font-family: 'Brandon';
+    font-size: 0.929em;
+    text-transform: none;
+
+    &:last-child {
+      margin: 0 12px 0 0;
+    }
+  }
+}
+
+.debt-payment-info {
+  padding: 8px 0 0;
+
+  span {
+    float: none;
+
+    &:last-child {
+      margin: 0 0 0 12px;
+    }
+  }
+}
+
+.debt-progress-bar {
+  background: #F5F7FA;
+  border: 1px solid #DDE1E2;
+  border-radius: 4px;
+  height: 40px;
+  position: relative;
+  z-index: 1;
+  @extend %clear;
+
+  .current-progress {
+    background: rgba(74,144,226,0.48);
+    border: 1px solid #4A90E2;
+    border-radius: 4px;
+    height: 40px;
+    left: -1px;
+    max-width: 100%;
+    position: absolute;
+    top: -1px;
+    z-index: 2;
+  }
+
+  .bar {
+    background: rgba(0,0,0,0.12);
+    height: 38px;
+    position: absolute;
+    top: 0;
+    width: 1px;
+    z-index: 3;
+
+    &.-b1 { left: 10%; }
+    &.-b2 { left: 20%; }
+    &.-b3 { left: 30%; }
+    &.-b4 { left: 40%; }
+    &.-b5 { left: 50%; }
+    &.-b6 { left: 60%; }
+    &.-b7 { left: 70%; }
+    &.-b8 { left: 80%; }
+    &.-b9 { left: 90%; }
+  }
+}

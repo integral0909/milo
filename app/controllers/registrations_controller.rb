@@ -11,6 +11,11 @@ class RegistrationsController < Devise::RegistrationsController
   layout "signup"
 
   # ----------------------------------------------
+  # CONCERNS -------------------------------------
+  # ----------------------------------------------
+  include SubheaderHelper
+
+  # ----------------------------------------------
   # FILTERS --------------------------------------
   # ----------------------------------------------
   prepend_before_action :require_no_authentication, only: [:new, :create, :cancel]
@@ -18,6 +23,7 @@ class RegistrationsController < Devise::RegistrationsController
   prepend_before_action :set_minimum_password_length, only: [:new, :edit]
 
   before_action :configure_account_update_params, only: [:update]
+  before_action :set_subheader, only: [:edit, :accounts, :security]
 
   # ==============================================
   # ACTIONS ======================================
@@ -38,16 +44,16 @@ class RegistrationsController < Devise::RegistrationsController
           if resource.business_id
             Business.add_business_owner(current_user, resource.business_id)
           end
-          # Slack Notification for Sign Up
+          # Slack notification for sign up
           if Rails.env == "production"
             if current_user.business
-              notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", channel: '#signups', username: 'Milo Works', icon_emoji: ':moneybag:'
+              notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", channel: '#signups', username: 'Shift Works', icon_emoji: ':moneybag:'
               user_count = User.where.not(business_id: nil).count
               notifier.ping "#{current_user.business.name} (#{current_user.email}) just signed up! Shift currently has #{user_count} businesses!"
             else
-              notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", channel: '#signups', username: 'Milo', icon_emoji: ':moneybag:'
+              notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", channel: '#signups', username: 'Shift', icon_emoji: ':moneybag:'
               user_count = User.all.count
-              notifier.ping "#{current_user.email} just signed up! Shift currently has #{user_count} users!"
+              notifier.ping "#{current_user.name} (#{current_user.email}) just signed up! Shift currently has #{user_count} users!"
             end
           end
           # send welcome email
@@ -187,17 +193,24 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   # ----------------------------------------------
+  # SET-SUBHEADER --------------------------------
+  # ----------------------------------------------
+  def set_subheader
+    subheader_set :settings
+  end
+
+  # ----------------------------------------------
   # SIGN-UP-PARAMS -------------------------------
   # ----------------------------------------------
   def sign_up_params
-    params.require(:user).permit(:referral_code, :name, :first_name, :last_name, :zip, :email, :password, :invited, :agreement, :mobile_number, :is_verified, :on_demand, business_attributes: [:name, :address, :city, :state, :zip])
+    params.require(:user).permit(:referral_code, :name, :first_name, :last_name, :zip, :email, :password, :invited, :agreement, :mobile_number, :is_verified, :on_demand, :budget, business_attributes: [:name, :address, :city, :state, :zip])
   end
 
   # ----------------------------------------------
   # ACCOUNT-UPDATE-PARAMS ------------------------
   # ----------------------------------------------
   def account_update_params
-    params.require(:user).permit(:referral_code, :name, :first_name, :last_name, :address, :city, :state, :zip, :email, :password, :password_confirmation, :current_password, :invited, :agreement, :mobile_number, :is_verified, :on_demand, :avatar, business_attributes: [:id, :name, :address, :city, :state, :zip])
+    params.require(:user).permit(:referral_code, :name, :first_name, :last_name, :address, :city, :state, :zip, :email, :password, :password_confirmation, :current_password, :invited, :agreement, :mobile_number, :is_verified, :on_demand, :budget, :avatar, business_attributes: [:id, :name, :address, :city, :state, :zip])
   end
 
 end

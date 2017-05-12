@@ -1,13 +1,17 @@
 /*
 * Shift
 * Copyright Shift 2017
-* bank.shiftsavings.com
+* shiftsavings.com
 */
 
 
 // Forms
 .form-group {
   margin: 0 0 16px;
+
+  @include breakpoint(l-one) {
+    margin: 0 0 8px;
+  }
 
   label {
     color: #BBC5C7;
@@ -71,7 +75,9 @@ p label {
 }
 
 .form-section {
+  border-bottom: 1px solid #DDE1E2;
   margin: 0 0 24px;
+  padding: 0 0 24px;
 
   fieldset.form-group {
     text-align: left;

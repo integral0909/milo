@@ -1,0 +1,77 @@
+/*
+* Shift
+* Copyright Shift 2017
+* shiftsavings.com
+*/
+
+
+// Works
+
+// Business Info
+.business-info {
+  padding: 0 0 0 24px;
+
+  .bi-blurb {
+    margin: 0 0 20px;
+    padding: 16px 0 0;
+    @extend %clear;
+
+    .bib-img {
+      border-radius: 80px;
+      float: left;
+      margin: 0 20px 0 0;
+      overflow: hidden;
+      width: 80px;
+    }
+
+    .bib-info {
+      float: left;
+      width: calc(100% - 100px);
+    }
+
+    .bib-title {
+      color: #352D52;
+      font-family: 'Brandon Black';
+      margin: 0 0 2px;
+      text-transform: uppercase;
+    }
+
+    ul {
+      color: #8B999F;
+      font-size: 0.813em;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        line-height: 1.6;
+      }
+    }
+  }
+}
+
+// Tell Your Employer
+section.hero-tell-employer {
+  background: #292242;
+  padding: 120px 0;
+  text-align: center;
+
+  @include breakpoint(l-one) {
+    font-size: 0.875em;
+    padding: 96px 0 40px;
+    text-align: left;
+  }
+
+  h2 {
+    color: #FFF;
+
+    @include breakpoint(l-one) {
+      margin: 0 0 8px;
+    }
+  }
+
+  p {
+    color: #FFF;
+    font-size: 1.25em;
+  }
+}

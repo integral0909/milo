@@ -72,6 +72,16 @@ class InvitationsController < Devise::InvitationsController
         flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
         set_flash_message :notice, flash_message if is_flashing_format?
         sign_in(resource_name, resource)
+
+        # Slack notification for sign up
+        if Rails.env == "production"
+          notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", channel: '#signups', username: 'Shift Works', icon_emoji: ':moneybag:'
+          notifier.ping "#{current_user.name} (#{current_user.email}) just signed up as an employee with #{current_user.business.name}!"
+        end
+
+        # Create first goal
+        Goal.first_goal(current_user.id)
+
         respond_with resource, :location => after_accept_path_for(resource)
       else
         set_flash_message :notice, :updated_not_active if is_flashing_format?

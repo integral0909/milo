@@ -1,0 +1,44 @@
+<div class="page-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+
+        <div class="zero-content-block">
+          <h5>Your Shift Zero Plan</h5>
+          <p>Pay the minimums on all your accounts while paying more to the highest interest account below.</p>
+        </div>
+
+        <%= render partial: "zero/card_current_goal" %>
+
+        <div class="milo-card">
+          <div class="mc-title">Debt Overview</div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Plan <a href="#"><i class="fa fa-pencil"></i></a></th>
+                <th>Finances <a href="#">View</a></th>
+                <th>Credit Score <a href="#">Details</a></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Monthly Payment: <%= number_to_currency(current_user.budget) %></td>
+                <td>Total Debt: -</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>Debt Free: -</td>
+                <td>Total Cash: -</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>Total Paid Off: -</td>
+                <td>Daily Interest Owed: -</td>
+                <td>&nbsp;</td>
+              </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

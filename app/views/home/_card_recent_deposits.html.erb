@@ -1,0 +1,6 @@
+<% if @biz_owner.nil? %>
+  <div class="milo-card account-value">
+    <div class="mc-title">Recent Deposits</div>
+    <%= line_chart @transfer_stats.group_by_week(:date).maximum(:roundup_amount) %>
+  </div>
+<% end %>

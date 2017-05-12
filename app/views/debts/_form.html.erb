@@ -1,0 +1,71 @@
+<%= form_for(@debt) do |f| %>
+  <% if @debt.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@debt.errors.count, "error") %> prohibited this debt from being saved:</h2>
+
+      <ul>
+      <% @debt.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset class="form-group">
+    <label>Account Name</label>
+    <%= f.text_field :account_name, autofocus: true, class: "form-control", placeholder: "Account Name", required: true %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label>Account #</label>
+    <%= f.text_field :account_number, class: "form-control", placeholder: "Account #" %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label>Type of Debt</label>
+    <%= f.text_field :debt_type, class: "form-control", placeholder: "Select type of debt..." %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label>Begin Balance</label>
+    <%= f.number_field :begin_balance, class: "form-control", placeholder: "$", step: 2 %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label>Current Balance</label>
+    <%= f.number_field :current_balance, class: "form-control", placeholder: "$", step: 2 %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label>Minimum Payment</label>
+    <%= f.number_field :minimum_payment, class: "form-control", placeholder: "$", step: 2 %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label>Credit Limit</label>
+    <%= f.number_field :credit_limit, class: "form-control", placeholder: "$", step: 2 %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label>Interest Rate</label>
+    <%= f.number_field :apr, class: "form-control", placeholder: "%" %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label>Next Due Date</label>
+    <%= f.text_field :due_date, class: "form-control", id: "date_payment_due", placeholder: "Due Date", required: true %>
+  </fieldset>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<% content_for :javascripts do %>
+  <script type="text/javascript">
+    $("#date_payment_due").pickadate();
+  </script>
+<% end %>

@@ -1,72 +1,26 @@
-<% set_meta_tags :site => 'Round Ups • Shift' %>
+<% set_meta_tags :site => 'Round Ups • Savings • Shift' %>
 
 <div class="page-content">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-12">
-        <div class="milo-card account-value">
-          <div class="mc-title">Account Value</div>
-          <div class="av-total">$<%= @account_balance ? @account_balance : "0.00" %></div>
+      <div class="col-md-8">
+        <%= render "layouts/messages" %>
+        <%= render partial: "home/card_verify_bank" %>
+        <%= render partial: "home/card_add_account" %>
+        <%= render partial: "home/card_confirm_checking" %>
+        <%= render partial: "home/card_authorize_on_demand" %>
+        <div class="round-up-stats">
+          <div class="milo-card round-up-stat"><%= @transfer_total %><span>Transfers</span></div>
+          <div class="milo-card round-up-stat"><%= @roundup_total %><span>Total Round Ups</span></div>
+          <div class="milo-card round-up-stat"><%= @roundup_avg %><span>Avg. Round Up</span></div>
+          <div class="milo-card round-up-stat"><%= @completed_goals %><span>Goals Achieved</span></div>
+          <div class="milo-card round-up-stat"><%= @transfer_avg %><span>Avg. Weekly Savings</span></div>
+          <div class="milo-card round-up-stat"><%= @spent_avg %><span>Avg. Transaction</span></div>
         </div>
       </div>
-    </div>
-    <div id="mobile" class="row">
-      <div class="col-md-12">
-        <div class="milo-card mobile-roundups">
-          <div class="mc-title">Pending Round Ups</div>
-          <% if @transactions.present? %>
-            <ul class="recent-transactions">
-              <% @transactions.each do |t| %>
-                <% if t[:amount] > 0 %>
-                  <li>+<%= number_to_currency(t[:roundup].round(2)) %><span><strong><%= number_to_currency(t[:amount].round(2)) %></strong><%= t[:trans_name] %></span></li>
-                <% end %>
-              <% end %>
-            </ul>
-            <p class="align-center">Total: <strong><%= number_to_currency(@total_pending.round(2)) %></strong></p>
-          <% else %>
-            <p>No current roundups available.</p>
-          <% end %>
-        </div>
+      <div class="col-md-4">
+        <%= render partial: "home/sidebar_round_ups" %>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="milo-card round-up-stat"><%= @transfer_total %><span>Transfers</span></div>
-      </div>
-      <div class="col-md-4">
-        <div class="milo-card round-up-stat"><%= @roundup_total %><span>Total Round Ups</span></div>
-      </div>
-      <div class="col-md-4">
-        <div class="milo-card round-up-stat"><%= @roundup_avg %><span>Avg. Round Up</span></div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="milo-card round-up-stat"><%= @completed_goals %><span>Goals Achieved</span></div>
-      </div>
-      <div class="col-md-4">
-        <div class="milo-card round-up-stat"><%= @transfer_avg %><span>Avg. Weekly Savings</span></div>
-      </div>
-      <div class="col-md-4">
-        <div class="milo-card round-up-stat"><%= @spent_avg %><span>Avg. Transaction</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="sidebar">
-  <div class="pending-roundups">
-    <div class="pr-title">Pending Round Ups</div>
-    <% if @transactions.present? %>
-      <ul class="pr-list">
-        <% @transactions.each do |t| %>
-          <% if t[:amount] > 0 %>
-            <li>+ <%= number_to_currency(t[:roundup].round(2)) %><span><strong><%= number_to_currency(t[:amount].round(2)) %></strong> <%= t[:trans_name] %></span></li>
-          <% end %>
-        <% end %>
-      </ul>
-      <small>Total: <strong><%= number_to_currency(@total_pending.round(2)) %></strong></small>
-    <% else %>
-      <small>No current roundups available.</small>
-    <% end %>
   </div>
 </div>

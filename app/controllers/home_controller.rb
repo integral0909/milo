@@ -4,9 +4,10 @@
 class HomeController < ApplicationController
 
   # ----------------------------------------------
-  # INCLUDES -------------------------------------
+  # CONCERNS -------------------------------------
   # ----------------------------------------------
   include ActionView::Helpers::NumberHelper
+  include SubheaderHelper
 
   # ----------------------------------------------
   # VARIABLES ------------------------------------
@@ -17,6 +18,7 @@ class HomeController < ApplicationController
   # FILTERS --------------------------------------
   # ----------------------------------------------
   before_action :authenticate_user!
+  before_action :set_subheader
   before_action :set_user
   before_action :get_referral_rank, only: :index
 
@@ -28,41 +30,42 @@ class HomeController < ApplicationController
   # INDEX ----------------------------------------
   # ----------------------------------------------
   def index
-    # Users account balance converted to dollars
-    @account_balance = number_to_currency(@user.account_balance / 100.00, unit: "") if @user.account_balance
-    # Users unique referral link
-    @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
-    # Build a new goal
-    @goal = @user.goals.build
-    # Active Goals
-    @goals = Goal.where(user_id: @user.id, active: true).order('created_at ASC')
 
-    # Check if any goals are complete
-    @goals.each do |g|
-      if (g.preset && ((@user.account_balance / 100) > g.amount)) || (g.balance.to_i > g.amount)
-        @goal_complete = Goal.find(g.id)
+    # Check if user is a business owner
+    if @user.business.present? && (@user.business.owner == @user.id)
+      redirect_to works_overview_path
+    else
+      # Users account balance converted to dollars
+      @account_balance = number_to_currency(@user.account_balance / 100.00, unit: "") if @user.account_balance
+      # Users unique referral link
+      @referral_link = Bitly.client.shorten(BASE_URL + current_user.id.to_s).short_url
+      # Build a new goal
+      @goal = @user.goals.build
+      # Active Goals
+      @goals = Goal.where(user_id: @user.id, active: true).order('created_at ASC')
+
+      # Check if any goals are complete
+      @goals.each do |g|
+        if (g.preset && ((@user.account_balance / 100) > g.amount)) || (g.balance.to_i > g.amount)
+          @goal_complete = Goal.find(g.id)
+        end
       end
+
+      # Pull in the users transactions from the current week. The week starts on Monday
+      set_pending_roundups
+
+      # Show the latest 4 transfers
+      @transfers = Transfer.where(user_id: @user.id).order(date: :desc).limit(4)
+
+      # Redirect users to proper sign up page if not complete
+      if (@user.invited && !@user.is_verified)
+        redirect_to signup_phone_path
+      end
+
+      # Employer Contributions
+      @employer_contrib = number_to_currency(@user.employer_contribution / 100.00, unit:"") if @user.employer_contribution
+      @pending_contrib = number_to_currency(@user.pending_contribution / 100.00, unit:"") if @user.pending_contribution
     end
-
-    # Pull in the users transactions from the current week. The week starts on Monday
-    set_pending_roundups
-
-    # Show the latest 3 transfers
-    @transfers = Transfer.where(user_id: @user.id).order(date: :desc).limit(3)
-
-    # Redirect users to proper sign up page if not complete
-    if (@user.invited && !@user.is_verified)
-      redirect_to signup_phone_path
-    end
-
-    # emplyer home page info
-    if @biz
-      @total_contrib = number_to_currency(@biz.total_contribution / 100.00, unit:"") if @biz.total_contribution
-      @total_employees = User.where(business_id: @biz.id).count - 1
-    end
-
-    @employer_contrib = number_to_currency(@user.employer_contribution / 100.00, unit:"") if @user.employer_contribution
-    @pending_contrib = number_to_currency(@user.pending_contribution / 100.00, unit:"") if @user.pending_contribution
   end
 
   # ----------------------------------------------
@@ -70,7 +73,8 @@ class HomeController < ApplicationController
   # ----------------------------------------------
   # Page to see round up transfer history
   def history
-    @transfers = Transfer.where(user_id: @user.id).order(date: :desc)
+    @transfers = Transfer.where(user_id: @user.id).order(date: :desc).all
+    @transfer_months = @transfers.group_by { |t| t.date.to_date.beginning_of_month }
   end
 
   # ----------------------------------------------
@@ -95,10 +99,23 @@ class HomeController < ApplicationController
     @spent_avg = !@trans.blank? ? number_to_currency(@trans.average(:amount)) : "$0.00"
   end
 
+  # ----------------------------------------------
+  # TRANSFERS ------------------------------------
+  # ----------------------------------------------
+  def transfers
+  end
+
   # ==============================================
   # PRIVATE ======================================
   # ==============================================
   private
+
+  # ----------------------------------------------
+  # SET-SUBHEADER --------------------------------
+  # ----------------------------------------------
+  def set_subheader
+    subheader_set :savings
+  end
 
   # ----------------------------------------------
   # SET-TRANSFER-AVERAGE -------------------------

@@ -1,0 +1,36 @@
+<div class="page-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+
+        <div class="milo-card">
+          <div class="mc-title">Progress on Each Account</div>
+          <% @open_debts.each do |debt| %>
+            <div class="debt-title">
+              <%= debt.account_name %> (<%= debt.account_number.last(4) %>)
+              <span>Interest <strong><%= number_to_percentage(debt.apr) %></strong></span>
+              <span class="debt-balance">Balance <strong><%= number_to_currency(debt.current_balance) %></strong></span>
+            </div>
+            <div class="debt-progress-bar">
+              <div class="current-progress" style="width: <%= number_to_percentage(debt.progess_to_zero) %>;"></div>
+              <div class="bar -b1"></div>
+              <div class="bar -b2"></div>
+              <div class="bar -b3"></div>
+              <div class="bar -b4"></div>
+              <div class="bar -b5"></div>
+              <div class="bar -b6"></div>
+              <div class="bar -b7"></div>
+              <div class="bar -b8"></div>
+              <div class="bar -b9"></div>
+            </div>
+            <div class="debt-payment-info">
+              <span><%= debt.next_payment_due.strftime("%B") %> Payment: <strong><%= number_to_currency(debt.suggested_payment(current_user.id)) %></strong></span>
+              <span>Paid Off: <strong><%= debt.payoff_date(current_user.id).strftime("%B %-d, %Y") %></strong></span>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

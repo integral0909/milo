@@ -1,7 +1,7 @@
 /*
-* Milo
-* Copyright Milo 2016
-* milosavings.com
+* Shift
+* Copyright Shift 2017
+* shiftsavings.com
 */
 
 
@@ -11,17 +11,33 @@
 
   &.-space-8 {
     height: 8px;
+
+    @include breakpoint(l-one) {
+      height: 4px;
+    }
   }
 
   &.-space-16 {
     height: 16px;
+
+    @include breakpoint(l-one) {
+      height: 8px;
+    }
   }
 
   &.-space-24 {
     height: 24px;
+
+    @include breakpoint(l-one) {
+      height: 12px;
+    }
   }
 
   &.-space-32 {
     height: 32px;
+
+    @include breakpoint(l-one) {
+      height: 16px;
+    }
   }
 }

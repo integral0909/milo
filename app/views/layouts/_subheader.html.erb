@@ -1,0 +1,55 @@
+<% if subheader_is? :savings %>
+  <div class="subheader">
+    <div class="container-fluid">
+      <nav class="nav subheader-nav">
+        <a href="/" class="<%= active_page_class?('/')%>"><i class="fa fa-home"></i>Overview</a>
+        <a href="/roundups" class="<%= active_page_class?('/roundups')%>"><i class="fa fa-arrow-circle-o-up"></i>Round Ups</a>
+        <a href="/transfers" class="<%= active_page_class?('/transfers')%>"><i class="fa fa-retweet"></i>Transfer</a>
+        <a href="/history" class="<%= active_page_class?('/history')%>"><i class="fa fa-calendar"></i>History</a>
+      </nav>
+      <div class="subheader-savings-total"><%= number_to_currency(@account_balance) %></div>
+    </div>
+  </div>
+<% end %>
+
+<% if subheader_is? :works %>
+  <div class="subheader">
+    <div class="container-fluid">
+      <nav class="nav subheader-nav">
+        <a href="/works" class="<%= active_page_class?('/works')%>"><i class="fa fa-home"></i>Overview</a>
+        <a href="/employees" class="<%= active_page_class?('/employees')%>"><i class="fa fa-users"></i>Employees</a>
+        <a href="/works/history" class="<%= active_page_class?('/works/history')%>"><i class="fa fa-calendar"></i>History</a>
+      </nav>
+    </div>
+  </div>
+<% end %>
+
+<% if subheader_is? :zero %>
+  <div class="subheader">
+    <div class="container-fluid">
+      <nav class="nav subheader-nav">
+        <a href="/zero" class="<%= active_page_class?('/zero')%>"><i class="fa fa-home"></i>Overview</a>
+        <a href="/zero/progress" class="<%= active_page_class?('/zero/progress')%>"><i class="fa fa-home"></i>Progress</a>
+        <a href="/zero/payments" class="<%= active_page_class?('/zero/payments')%>"><i class="fa fa-home"></i>Payments</a>
+        <a href="/debts" class="<%= active_page_class?('/debts')%>"><i class="fa fa-home"></i>Accounts</a>
+        <a class="nav-link" href="#"><i class="fa fa-home"></i>Credit Score</a>
+      </nav>
+      <div class="subheader-debt-total">-$9,999.99</div>
+    </div>
+  </div>
+<% end %>
+
+<% if subheader_is? :settings %>
+  <div class="subheader">
+    <div class="container-fluid">
+      <nav class="nav subheader-nav">
+        <a href="/settings" class="<%= active_page_class?('/settings')%>">Profile</a>
+        <a href="/settings/accounts" class="<%= active_page_class?('/settings/accounts')%>">Accounts</a>
+        <a href="/settings/security" class="<%= active_page_class?('/settings/security')%>">Security</a>
+        <% if @biz %>
+          <%= link_to 'Contributions', settings_contributions_path, class: active_page_class?("/settings/contributions") %>
+        <% end %>
+      </nav>
+    </div>
+  </div>
+<% end %>

@@ -71,13 +71,13 @@ GEM
     autoprefixer-rails (6.7.7.2)
       execjs
     awesome_print (1.7.0)
-    aws-sdk (2.9.9)
-      aws-sdk-resources (= 2.9.9)
-    aws-sdk-core (2.9.9)
+    aws-sdk (2.9.11)
+      aws-sdk-resources (= 2.9.11)
+    aws-sdk-core (2.9.11)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.9.9)
-      aws-sdk-core (= 2.9.9)
+    aws-sdk-resources (2.9.11)
+      aws-sdk-core (= 2.9.11)
     aws-sigv4 (1.0.0)
     bcrypt (3.1.11)
     better_errors (2.1.1)
@@ -96,6 +96,7 @@ GEM
     brakeman (3.6.1)
     builder (3.2.3)
     byebug (9.0.6)
+    chartkick (2.2.3)
     climate_control (0.1.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
@@ -148,6 +149,8 @@ GEM
       multi_json (>= 1.11.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
+    groupdate (3.2.0)
+      activesupport (>= 3)
     haml (4.0.7)
       tilt
     hashie (3.5.5)
@@ -214,6 +217,8 @@ GEM
       mimemagic (~> 0.3.0)
     pg (0.20.0)
     phonelib (0.6.11)
+    pickadate-rails (3.5.6.0)
+      railties (>= 3.1.0)
     plaid (3.0.0)
       multi_json (~> 1.0)
     pry (0.10.4)
@@ -384,6 +389,7 @@ DEPENDENCIES
   bootstrap (= 4.0.0.alpha3)
   brakeman
   byebug
+  chartkick
   coffee-rails (~> 4.1.0)
   devise (~> 4.2)
   devise_invitable (~> 1.7.0)
@@ -392,6 +398,7 @@ DEPENDENCIES
   dwolla_v2 (~> 1.1)
   foreman
   gibbon
+  groupdate
   hashie
   httparty
   intercom-rails
@@ -405,6 +412,7 @@ DEPENDENCIES
   paperclip
   pg
   phonelib
+  pickadate-rails
   plaid (= 3.0.0)
   pry-rails
   rails (= 4.2.7.1)

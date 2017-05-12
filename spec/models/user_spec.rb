@@ -38,7 +38,7 @@
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
-#  account_balance        :integer
+#  account_balance        :integer          default(0)
 #  business_id            :integer
 #  long_tail              :boolean
 #  invitation_token       :string
@@ -56,6 +56,7 @@
 #  first_name             :string
 #  last_name              :string
 #  auth_token             :string           default("")
+#  budget                 :decimal(8, 2)
 #
 
 require 'rails_helper'

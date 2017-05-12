@@ -10,9 +10,7 @@ Rails.application.routes.draw do
   mount Resque::Server.new, :at => "/resque"
 
   # Devise
-
   devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords', invitations: 'invitations' }, :skip => [:sessions, :registrations]
-
     resources :users, :only => [:show] do
     resources :transactions, only: [:index, :show, :edit, :update]
     resources :accounts, only: [:index, :new, :update]
@@ -35,12 +33,10 @@ Rails.application.routes.draw do
     get 'signup/phone', to: 'registrations#phone', as: :signup_phone
     get 'signup/phone_confirm', to: 'registrations#phone_confirm', as: :signup_phone_confirm
     get 'signup/on_demand', to: 'registrations#on_demand', as: :signup_on_demand
-
     # Employer Sign Up
     get 'signup/employer', to: 'registrations#employer', as: :new_employer
     # Employer Contributions Settings
     get 'settings/contributions', to: 'businesses#edit', as: :settings_contributions
-
     # Root, User Logged In
     authenticated :user do
       root 'home#index', as: :authenticated_root
@@ -49,7 +45,6 @@ Rails.application.routes.draw do
     unauthenticated do
       root 'sessions#new', as: :unauthenticated_root
     end
-
   end
 
   resource :user, only: [:edit] do
@@ -58,11 +53,26 @@ Rails.application.routes.draw do
     end
   end
 
+  # Employer Leads
+  get '/tell-your-employer', to: 'leads#new', as: :employer_lead
+  resources "leads", only: [:new, :create]
+
   resources :businesses, only: [:edit, :update]
+  resources :debts
   resources :employees, only: [:index, :destroy]
 
   get 'history', to: 'home#history', as: :history
   get 'roundups', to: 'home#roundups', as: :roundups
+  get 'transfers', to: 'home#transfers', as: :transfers
+
+  # Works
+  get '/works', to: 'works#index', as: :works_overview
+  get '/works/history', to: 'works#history', as: :works_history
+
+  # Zero
+  get '/zero', to: 'zero#index', as: :zero_overview
+  get '/zero/progress', to: 'zero#progress', as: :zero_progress
+  get '/zero/payments', to: 'zero#payments', as: :zero_payments
 
   # Mobile Phone Verification
   post 'verifications' => 'verifications#create'

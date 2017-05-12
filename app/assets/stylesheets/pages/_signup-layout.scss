@@ -1,10 +1,11 @@
 /*
-* Milo
-* Copyright Milo 2016
-* milosavings.com
+* Shift
+* Copyright Shift 2017
+* shiftsavings.com
 */
 
 
+// Sign Up Layout
 body.milo-signup {
   background: #F8FAFB;
 
@@ -22,6 +23,7 @@ body.milo-signup {
     }
 
     @include breakpoint(l-one) {
+      display: block;
       margin: 16px auto;
       text-align: center;
     }
@@ -38,6 +40,10 @@ body.milo-signup {
   @include breakpoint(l-one) {
     margin: 0 0 20px;
     padding: 24px 12px;
+
+    h5 {
+      text-align: center;
+    }
   }
 
   form.new_checking {
@@ -61,6 +67,13 @@ body.milo-signup {
         font-style: normal;
       }
     }
+  }
+}
+
+.signup-help {
+  @include breakpoint(l-one) {
+    display: none;
+    visibility: hidden;
   }
 }
 

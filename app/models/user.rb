@@ -38,7 +38,7 @@
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
-#  account_balance        :integer
+#  account_balance        :integer          default(0)
 #  business_id            :integer
 #  long_tail              :boolean
 #  invitation_token       :string
@@ -56,6 +56,7 @@
 #  first_name             :string
 #  last_name              :string
 #  auth_token             :string           default("")
+#  budget                 :decimal(8, 2)
 #
 
 # ================================================
@@ -116,7 +117,7 @@ class User < ActiveRecord::Base
   # ----------------------------------------------
   # AVATAR ---------------------------------------
   # ----------------------------------------------
-  has_attached_file :avatar, styles: { large: "512x512", medium: "300x300", thumb: "100x100" }
+  has_attached_file :avatar, styles: { large: "512x512", medium: "300x300", thumb: "100x100" }, default_url: "https://s3-us-west-1.amazonaws.com/shiftsavings-assets/user.png", s3_protocol: :https
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   # ----------------------------------------------
@@ -174,7 +175,6 @@ class User < ActiveRecord::Base
   def self.add_account_balance(user, amount, quick_save=nil)
     # roundup amount converted to cents
     amount_in_cents = (amount.to_f * 100).round(0)
-
     # Add current roundups
     self.add_roundup(user, amount_in_cents)
 
@@ -187,7 +187,6 @@ class User < ActiveRecord::Base
     if !user.business_id.nil? && quick_save.nil?
       Contribution.run_employer_contribution(user, amount_in_cents)
     end
-
     user.save!
   end
 
@@ -221,7 +220,7 @@ class User < ActiveRecord::Base
   end
 
   # ----------------------------------------------
-  # LONG-TAIL-ACCOUNT ----------------------------
+  # ADD-LONG-TAIL --------------------------------
   # ----------------------------------------------
   # Set user as long-tail user
   def self.add_long_tail(user)
@@ -231,12 +230,30 @@ class User < ActiveRecord::Base
   end
 
   # ----------------------------------------------
-  # LONG-TAIL-ACCOUNT ----------------------------
+  # BANK-VERIFIED --------------------------------
   # ----------------------------------------------
   # Set user as long-tail user
   def self.bank_verified(user)
     user.bank_not_verified = false
     user.save!
+  end
+
+  # ----------------------------------------------
+  # MINIMUM-PAYMENTS -----------------------------
+  # ----------------------------------------------
+  def minimum_payments
+    minimum = 0.00
+    debts = Debt.where(user_id: self.id).each do |d|
+      minimum += d.minimum_payment
+    end
+    minimum
+  end
+
+  # ----------------------------------------------
+  # SNOWBALL-AMOUNT ------------------------------
+  # ----------------------------------------------
+  def extra_payment
+    extra = budget - minimum_payments
   end
 
   # ----------------------------------------------

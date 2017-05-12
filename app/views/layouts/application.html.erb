@@ -17,8 +17,6 @@
 
   <script type="text/javascript">
     $(function() {
-      // Sidebar Equal Height to Page Content
-      $(".sidebar").css("height", $(".page-content").height() + 80);
       // Tooltip
       $('[data-toggle="tooltip"]').tooltip();
     });
@@ -28,40 +26,43 @@
 <body class="milo-app">
 
   <header>
-    <a class="logo" href="/">Shift</a>
-    <div class="milo-user">
-      <div class="mu-img">
-        <% if current_user.avatar? %>
-          <%= image_tag current_user.avatar.url(:medium) %>
-        <% else %>
-          <%= link_to settings_path, class: "add-avatar" do %>
-            <%= image_tag("img-add-avatar.png", alt: "Add avatar") %>
-          <% end %>
+    <div class="container-fluid">
+      <a class="logo" href="/">Shift</a>
+      <nav class="nav primary-nav">
+        <% if !@biz_owner %>
+          <a href="/" class="nav-link">Savings</a>
         <% end %>
-      </div>
-      <h5><%= current_user.business && current_user.business.name ? current_user.business.name : current_user.name %></h5>
-      <span><%= current_user.city if current_user.city %><% if current_user.city? && current_user.state? %>, <% end %><%= current_user.state if current_user.state %></span>
+        <!-- <a href="/zero" class="nav-link">Zero</a> -->
+        <a href="/works" class="nav-link <%= active_control_class?('works')%>">Works</a>
+      </nav>
+      <nav class="nav account-nav">
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <div class="user-avatar"><%= image_tag current_user.avatar.url(:medium) %></div>
+            <% if @biz_owner %>
+              <div class="user-name"><%= @biz.name %></div>
+            <% else %>
+              <div class="user-name"><%= current_user.name %></div>
+            <% end %>
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/settings">Settings</a>
+            <% if current_user.admin %>
+              <a class="dropdown-item" href="/admin">Admin</a>
+            <% end %>
+            <div class="dropdown-divider"></div>
+            <%= link_to('Log Out', destroy_user_session_path, :method => :delete, class: "dropdown-item") %>
+          </div>
+        </div>
+      </nav>
     </div>
-    <nav>
-      <a href="/" class="<%= active_page_class?('/')%>"><i class="fa fa-home"></i> Overview</a>
-      <% if @biz_owner %>
-        <a href="/employees" class="<%= active_page_class?('/employees')%>"><i class="fa fa-user"></i> Employees</a>
-      <% else %>
-        <a href="/roundups" class="<%= active_page_class?('/roundups')%>"><i class="fa fa-circle-o"></i> Round Ups <!--<span>8</span>--></a>
-      <% end %>
-      <!--<a href="#"><i class="fa fa-exchange"></i> Transfer</a>-->
-      <a href="/history" class="<%= active_page_class?('/history')%>"><i class="fa fa-clock-o"></i> History</a>
-      <a href="/settings" class="<%= active_control_class?('registrations') %>"><i class="fa fa-gear"></i> Settings</a>
-      <% if current_user.admin %>
-        <a href="/admin">Admin</a>
-      <% end %>
-    </nav>
-    <%= link_to('Log Out', destroy_user_session_path, :method => :delete, class: "sign-out") %>
   </header>
+  <%= render :partial => 'layouts/subheader' %>
 
   <%= yield %>
 
   <%= content_for :modal %>
+  <%= content_for :javascripts %>
 
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-578d8d001a062943"></script>
 

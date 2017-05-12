@@ -2,7 +2,18 @@
 # RUBY->CONTROLLER->EMPLOYEES-CONTROLLER =========
 # ================================================
 class EmployeesController < ApplicationController
+
+  # ----------------------------------------------
+  # CONCERNS -------------------------------------
+  # ----------------------------------------------
   include ActionView::Helpers::NumberHelper
+  include SubheaderHelper
+
+  # ----------------------------------------------
+  # FILTERS --------------------------------------
+  # ----------------------------------------------
+  before_action :authenticate_user!
+  before_action :set_subheader
 
   # ==============================================
   # ACTIONS ======================================
@@ -31,8 +42,21 @@ class EmployeesController < ApplicationController
     end
   end
 
+  # ==============================================
+  # PRIVATE ======================================
+  # ==============================================
   private
 
+  # ----------------------------------------------
+  # SET-SUBHEADER --------------------------------
+  # ----------------------------------------------
+  def set_subheader
+    subheader_set :works
+  end
+
+  # ----------------------------------------------
+  # SET-EMPLOYEE-DATA ----------------------------
+  # ----------------------------------------------
   def set_employee_data
     @emp_data = []
     @employees.each do |e|
@@ -51,7 +75,6 @@ class EmployeesController < ApplicationController
     end
   end
 
-
   # ----------------------------------------------
   # SET-TRANSFER-AVERAGE -------------------------
   # ----------------------------------------------
@@ -63,6 +86,9 @@ class EmployeesController < ApplicationController
     @transfer_avg = (all_transfer_average > 0) ? number_to_currency(all_transfer_average) : "$0.00"
   end
 
+  # ----------------------------------------------
+  # SET-TOTAL-CONTRIBUTION -----------------------
+  # ----------------------------------------------
   def set_total_contribution(e)
     if e.employer_contribution
       number_to_currency(e.employer_contribution.round(2) / 100)

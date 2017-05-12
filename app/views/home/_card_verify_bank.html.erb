@@ -1,3 +1,6 @@
 <% if @checking.present? && @user.bank_not_verified %>
-  <div class="home-verify-message">Looks like we still need you to verify your account. If you've already recieved the micro-deposits, click <a class="verify-link" href="/settings/accounts">here</a> to get connected!</div>
+  <a href="/settings/accounts" class="shift-tooltip -verify-bank">
+    Looks like you need to verify your account. If you have recieved the micro-deposits in your bank account please verify your account now.
+    <div class="st-action">Verify Account<i class="fa fa-arrow-right"></i></div>
+  </a>
 <% end %>

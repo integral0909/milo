@@ -1,12 +1,11 @@
 <% set_meta_tags :site => 'Bank Account • Settings • Shift' %>
 
 <div class="page-content">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-12">
-        <%= render :partial => 'devise/shared/subheader' %>
+      <div class="col-md-8">
         <%= render "layouts/messages" %>
-        <h6>Connected Accounts</h6>
+        <h5>Connected Accounts</h5>
         <% if @checking.present? %>
           <div class="connected-account">
             <%= link_to accounts_remove_path, data: { confirm: "Are you sure you want to remove this bank account?" }, remote: true, class: "ca-remove" do %>
@@ -41,6 +40,12 @@
               <%= f.check_box :on_demand %>
               On-Demand Transfer Authorization
             </label>
+          </fieldset>
+          <div class="spacer -space-16"></div>
+          <h6>Monthly Budget</h6>
+          <fieldset class="form-group">
+            <label>Budget</label>
+            <%= f.number_field :budget, class: "form-control", placeholder: "$", step: 2 %>
           </fieldset>
           <%= f.submit "Update Account", class: "button -blue" %>
         <% end %>

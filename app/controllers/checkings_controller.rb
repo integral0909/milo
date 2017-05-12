@@ -2,8 +2,8 @@
 # RUBY->CONTROLLER->CHECKINGS-CONTROLLER =========
 # ================================================
 class CheckingsController < ApplicationController
+  
   include ActionView::Helpers::NumberHelper
-
 
   # ==============================================
   # ACTIONS ======================================

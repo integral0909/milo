@@ -1,20 +1,22 @@
 /*
-* Milo
-* Copyright Milo 2016
-* milosavings.com
+* Shift
+* Copyright Shift 2017
+* shiftsavings.com
 */
 
 
 // Cards
 .milo-card {
+  background: #FFF;
   border: 1px solid #DDE1E2;
   border-bottom-width: 2px;
   border-radius: 0;
-  margin: 0 0 24px;
+  margin: 0 0 20px;
   padding: 24px;
 
-  @include breakpoint(l-three) {
-    margin: 0 0 16px;
+  @include breakpoint(l-one) {
+    margin: 0 0 12px;
+    padding: 16px;
   }
 
   .mc-title {
@@ -29,6 +31,10 @@
     padding: 0 0 7px;
     text-transform: uppercase;
 
+    @include breakpoint(l-one) {
+      margin: 0 0 16px;
+    }
+
     a.title-link, .title-link {
       color: #4A90E2;
       cursor: pointer;
@@ -41,22 +47,19 @@
       &:hover {
         text-decoration: none;
       }
-    }
 
-    span {
-      color: #8B999F;
-      float: right;
-      font-family: 'Futura Bold';
-      font-size: 0.56em;
-      line-height: 28px;
+      &.-withdraw {
+        color: #BBC5C7;
+        margin: 0 0 0 24px;
 
-      em {
-        color: #1ABD7D;
-        font-style: normal;
+        @include breakpoint(l-one) {
+          display: none;
+          visibility: hidden;
+        }
       }
 
       i.fa {
-        margin: 0 0 0 4px;
+        margin: 0 8px 0 0;
       }
     }
   }
@@ -69,6 +72,7 @@
 // Progress
 .milo-card.progress {
   height: auto;
+
   .progress-bar {
     background: #F8FAFB;
     border: 1px solid #E5E8E9;
@@ -77,6 +81,7 @@
     position: relative;
     z-index: 1;
     @extend %clear;
+
     .current-progress {
       background: #2BC38A;
       border: 1px solid #2B906C;
@@ -88,6 +93,7 @@
       z-index: 2;
       max-width: 100%;
     }
+
     .bar {
       background: rgba(0,0,0,0.12);
       height: 38px;
@@ -107,114 +113,88 @@
 }
 
 // Value
-.milo-card.account-value {
-
+.milo-card.account-balance {
   .av-total {
-    color: #292242;
-    font-family: 'Futura Bold';
-    font-size: 3.5em;
+    color: #352D52;
+    font-family: 'Brandon Black';
+    font-size: 3em;
     line-height: 1;
-
-    span {
-      color: #1ABD7D;
-      float: right;
-      font-size: 0.32em;
-    }
   }
 }
 
 // History Snapshot
-.milo-card.history, .milo-card.mobile-roundups {
+.milo-card.history {
+  min-height: 312px;
 
-  ul.recent-transactions {
-    list-style: none;
-    margin: 0 0 24px;
-    padding: 0;
+  @include breakpoint(l-one) {
+    min-height: auto;
+  }
 
-    li {
-      border-bottom: 1px solid #DDE1E2;
-      color: #352D52;
+  .mc-title {
+    margin: 0 0 8px;
+  }
+
+  .recent-transfer-item {
+    border-bottom: 1px solid #F1F3F6;
+    height: 53px;
+    padding: 14px 8px;
+    @extend %clear;
+
+    .rti-amount {
+      color: #1ABD7D;
+      float: left;
+      font-family: 'Brandon Black';
       font-size: 1.25em;
-      height: 54px;
-      line-height: 32px;
-      padding: 11px 16px;
-      width: 100%;
-
-      span {
-        color: #8B999F;
-        float: right;
-        font-size: 0.5em;
-        line-height: 1.6;
-        overflow: hidden;
-        text-align: right;
-        text-overflow: ellipsis;
-        text-transform: uppercase;
-        white-space: nowrap;
-        width: 72%;
-
-        strong {
-          display: block;
-          font-family: 'Futura Bold';
-          font-size: 1.25em;
-          line-height: 1.2;
-        }
-      }
+      line-height: 24px;
+      width: calc(100% - 80px);
     }
-  }
 
-  a {
-    display: block;
-    margin: 0 0 6px;
-    text-align: center;
-  }
-}
+    .rti-info {
+      color: #8B999F;
+      float: right;
+      text-align: right;
+      text-transform: uppercase;
+      width: 80px;
 
-.milo-card.mobile-roundups {
-
-  ul.recent-transactions li {
-    height: auto;
-    line-height: 1.6;
-    padding: 12px 16px;
-
-    span {
-      display: block;
-      float: none;
-      text-align: left;
-      width: 100%;
-
-      strong {
-        display: inline;
-        margin: 0 12px 0 0;
+      .rti-type {
+        font-family: 'Brandon Black';
+        font-size: 0.64em;
+        line-height: 12px;
       }
-    }
-  }
 
-  p {
-    margin: 0;
-
-    &.align-center {
-      text-align: center;
+      .rti-date {
+        font-family: 'Brandon';
+        font-size: 0.56em;
+        line-height: 12px;
+      }
     }
   }
 }
 
 // Savings
 .milo-card.quick-save, .milo-card.recurring {
+  min-height: 312px;
+
+  @include breakpoint(l-one) {
+    min-height: auto;
+  }
 
   .amount {
-    background: #F8FAFB;
-    border: 1px solid #E5E8E9;
+    background: #F5F7FA;
+    border: 1px solid #DDE1E2;
     border-radius: 4px;
-    color: #282C37;
-    font-size: 2em;
-    font-weight: 600;
+    color: #292242;
+    font-family: 'Brandon Black';
+    font-size: 2.5em;
     line-height: 1;
-    margin: 0 0 24px;
-    padding: 54px 0;
+    margin: 0 0 16px;
+    padding: 48px 0;
     text-align: center;
+
     &.-schedule {
       padding: 36px 0 0;
     }
+
     ul.ac-options {
       border-top: 1px solid #E5E8E9;
       list-style: none;
@@ -250,21 +230,53 @@
 }
 
 // Round Up Stats
-.milo-card.round-up-stat {
-  box-sizing: border-box;
-  color: #292242;
-  font-family: 'Futura Bold';
-  font-size: 2em;
-  height: 160px;
-  margin: 0 0 32px;
-  padding: 40px 0 0;
-  text-align: center;
+.round-up-stats {
+  @extend %clear;
 
-  span {
-    color: #8B999F;
-    display: block;
-    font-family: 'Futura Light';
-    font-size: 0.5em;
+  .milo-card.round-up-stat {
+    box-sizing: border-box;
+    color: #352D52;
+    float: left;
+    font-family: 'Brandon Black';
+    font-size: 3em;
+    height: 160px;
+    margin: 0 2.5% 20px 0;
+    padding: 24px 0 0;
+    text-align: center;
+    width: 31.6666%;
+
+    &:nth-child(3n) {
+      margin: 0 0 20px;
+    }
+
+    @include breakpoint(l-one) {
+      font-size: 2em;
+      height: 120px;
+      margin: 0 4% 12px 0;
+      padding: 20px 0 0;
+      width: 48%;
+
+      &:nth-child(3n) {
+        margin: 0 4% 12px 0;
+      }
+
+      &:nth-child(even) {
+        margin: 0 0 12px;
+      }
+    }
+
+    span {
+      color: #606B6F;
+      display: block;
+      font-family: 'Brandon';
+      font-size: 0.292em;
+      line-height: 32px;
+
+      @include breakpoint(l-one) {
+        font-size: 0.4em;
+        line-height: 2;
+      }
+    }
   }
 }
 

@@ -16,6 +16,14 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
     puts "Starting Roundups for #{user.email}"
 
     ck = Checking.find_by_user_id(user.id)
+
+    # skip user if their account balance is under $100
+    acct_balance = PlaidHelper.check_balance(user, ck)
+
+    if acct_balance != 'null' && acct_balance <= 100
+      puts "ALERT::::::User #{user.id} does not have enough funds to pull round ups.::::::ALERT"
+      break
+    end
     Dwolla.weekly_roundup(user, ck)
 
     if @charge_tech_fee && !user.admin
@@ -28,7 +36,25 @@ task :weekly_roundup, [:user_id] => :environment do |t, args|
     if day.monday?
       puts "Starting Roundups for all users"
       Checking.all.each do |ck|
+        # skip if user does not exist.
+        if !User.exists?(ck.user_id)
+          next
+        end
+
         user = User.find(ck.user_id)
+
+        # skip user if their account balance is under $100
+        begin
+          acct_balance = PlaidHelper.check_balance(user, ck)
+
+          if acct_balance != 'null' && acct_balance <= 100
+            puts "ALERT::::::User #{user.id} does not have enough funds to pull round ups.::::::ALERT"
+            next
+          end
+        rescue => e
+          p e 
+        end
+
 
         # check if the checking account is associated with a business
         biz_owner = biz_account(user)

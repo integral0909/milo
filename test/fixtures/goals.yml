@@ -1,0 +1,25 @@
+# == Schema Information
+#
+# Table name: goals
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  description :text
+#  amount      :decimal(, )
+#  user_id     :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  active      :boolean
+#  completed   :boolean
+#  gtype       :string
+#  percentage  :decimal(, )
+#  balance     :decimal(, )
+#  preset      :boolean
+#
+
+goal:
+  name: "Wedding"
+  description: "Saving up for the wedding expenses."
+  amount: 25000
+  created_at: <%= 3.years.ago %>
+  user: orville
