@@ -11,6 +11,10 @@
 .pending-roundups {
   padding: 0 0 0 24px;
 
+  @include breakpoint(l-one) {
+    padding: 16px 0 0;
+  }
+
   .pr-title, .pr-total, .pr-none {
     color: #8B999F;
     font-family: 'Brandon Black';

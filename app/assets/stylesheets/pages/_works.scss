@@ -56,8 +56,18 @@ section.hero-tell-employer {
   padding: 120px 0;
   text-align: center;
 
+  @include breakpoint(l-one) {
+    font-size: 0.875em;
+    padding: 96px 0 40px;
+    text-align: left;
+  }
+
   h2 {
     color: #FFF;
+
+    @include breakpoint(l-one) {
+      margin: 0 0 8px;
+    }
   }
 
   p {

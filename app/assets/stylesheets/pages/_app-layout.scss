@@ -24,6 +24,14 @@ body.milo-app {
 
     @include breakpoint(l-one) {
       padding: 72px 0;
+
+      &.-no-header {
+        padding-top: 32px;
+      }
+
+      &.-no-subheader {
+        padding-bottom: 32px;
+      }
     }
   }
 
