@@ -51,27 +51,15 @@
       &.-withdraw {
         color: #BBC5C7;
         margin: 0 0 0 24px;
+
+        @include breakpoint(l-one) {
+          display: none;
+          visibility: hidden;
+        }
       }
 
       i.fa {
         margin: 0 8px 0 0;
-      }
-    }
-
-    span {
-      color: #8B999F;
-      float: right;
-      font-family: 'Futura Bold';
-      font-size: 0.56em;
-      line-height: 28px;
-
-      em {
-        color: #1ABD7D;
-        font-style: normal;
-      }
-
-      i.fa {
-        margin: 0 0 0 4px;
       }
     }
   }
@@ -84,6 +72,7 @@
 // Progress
 .milo-card.progress {
   height: auto;
+
   .progress-bar {
     background: #F8FAFB;
     border: 1px solid #E5E8E9;
@@ -92,6 +81,7 @@
     position: relative;
     z-index: 1;
     @extend %clear;
+
     .current-progress {
       background: #2BC38A;
       border: 1px solid #2B906C;
@@ -103,6 +93,7 @@
       z-index: 2;
       max-width: 100%;
     }
+    
     .bar {
       background: rgba(0,0,0,0.12);
       height: 38px;

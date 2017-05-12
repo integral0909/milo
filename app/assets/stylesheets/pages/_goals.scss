@@ -93,6 +93,11 @@ section.goal-section {
 
     span {
       font-family: 'Brandon';
+
+      @include breakpoint(l-one) {
+        display: none;
+        visibility: hidden;
+      }
     }
   }
 
@@ -134,6 +139,19 @@ section.goal-section {
       &.-b7 { left: 70%; }
       &.-b8 { left: 80%; }
       &.-b9 { left: 90%; }
+    }
+  }
+
+  .gi-goal-amount {
+    color: #606B6F;
+    display: none;
+    font-family: 'Brandon';
+    font-size: 0.875em;
+    visibility: hidden;
+
+    @include breakpoint(l-one) {
+      display: block;
+      visibility: visible;
     }
   }
 }

@@ -32,6 +32,11 @@
             <div class="bar -b8"></div>
             <div class="bar -b9"></div>
           </div>
+          <% if g.preset %>
+            <div class="gi-goal-amount"><%= @user.account_balance ? number_to_currency(@user.account_balance / 100.00) : "$0.00" %> / <%= number_to_currency(g.amount) %></div>
+          <% else %>
+            <div class="gi-goal-amount"><%= g.balance ? number_to_currency(g.balance) : "$0.00" %> / <%= number_to_currency(g.amount) %></div>
+          <% end %>
         </div>
       <% end %>
     <% else %>
