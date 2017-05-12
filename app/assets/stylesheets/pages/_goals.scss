@@ -151,6 +151,7 @@ section.goal-section {
 
     @include breakpoint(l-one) {
       display: block;
+      margin: 8px 0 0;
       visibility: visible;
     }
   }

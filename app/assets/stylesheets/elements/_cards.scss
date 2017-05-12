@@ -93,7 +93,7 @@
       z-index: 2;
       max-width: 100%;
     }
-    
+
     .bar {
       background: rgba(0,0,0,0.12);
       height: 38px;
@@ -125,6 +125,10 @@
 // History Snapshot
 .milo-card.history {
   min-height: 312px;
+
+  @include breakpoint(l-one) {
+    min-height: auto;
+  }
 
   .mc-title {
     margin: 0 0 8px;
@@ -170,6 +174,10 @@
 // Savings
 .milo-card.quick-save, .milo-card.recurring {
   min-height: 312px;
+
+  @include breakpoint(l-one) {
+    min-height: auto;
+  }
 
   .amount {
     background: #F5F7FA;
