@@ -1,4 +1,4 @@
-<% if current_user.business.nil? %>
+<% if !@biz_owner %>
   <div class="pending-roundups">
     <div class="pr-title">Pending Round Ups</div>
     <% if @transactions.present? %>
