@@ -78,7 +78,7 @@ class Goal < ActiveRecord::Base
   # set the contribution split
   def set_goal_split
     user = User.find(self.user_id)
-    total_goals = user.goals.where(preset: nil).all
+    total_goals = user.goals.where(preset: nil, active: true).all
     if total_goals.present?
       split = (100 / total_goals.size)
       total_goals.each do |g|
