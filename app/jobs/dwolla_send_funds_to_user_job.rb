@@ -23,6 +23,7 @@ class DwollaSendFundsToUserJob
         },
         :metadata => {
           :customerId => user.id
+          :transfer_type => "withdraw"
         }
       }
       @dwolla_app_token = Dwolla.set_dwolla_token

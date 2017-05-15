@@ -25,10 +25,11 @@ class WebhooksController < ApplicationController
     p "::::::::::::::::::::::DWOLLA WEBHOOK CALLED::::::::::::::::::::::::::::"
 
     # check if the webhook was already captured before processing.
-    if WebhookEvent.find_by_response_id(params['_links']['resource']['href']).nil?
-      create_event(params, 'Dwolla')
+    if WebhookEvent.find_by_response_id(params['_links']['self']['href']).nil?
+      p "::::::::::::::::::DUPLICATE:::::::::::::::::::::::::"
+      new_event = create_event(params, 'Dwolla')
 
-      DwollaWebhooks.process_webhook_event(params)
+      DwollaWebhooks.process_webhook_event(params, new_event)
     end
 
     render :nothing => true
@@ -44,12 +45,14 @@ class WebhooksController < ApplicationController
   end
 
   def create_event(params, service)
+    # set as nil which means is a Shift webhook
+    hook_user_id = nil
     # Check if it's a customer related webhook event
     if params['_links']['customer']
-      hook_user_id = User.find_by_dwolla_id(params['_links']['customer']['href']).id
-    else
-      # maybe do something else here but essentially this means it's a business related webhook
-      hook_user_id = nil
+      begin
+        hook_user_id = User.find_by_dwolla_id(params['_links']['customer']['href']).id
+      rescue => e
+      end
     end
 
     data = {

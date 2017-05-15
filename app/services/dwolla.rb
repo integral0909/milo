@@ -159,6 +159,7 @@ module Dwolla
           :total_transactions => total_transactions,
           :date => current_date,
           :tech_fee_charged => @charge_tech_fee
+          :transfer_type => "roundup-withdraw"
         }
       }
 
@@ -239,6 +240,7 @@ module Dwolla
         },
         :metadata => {
           :biz_id => biz.id,
+          :transfer_type => "biz tech fee"
         }
       }
 
@@ -275,7 +277,7 @@ module Dwolla
     Business.all.each do |biz|
       # only run withdraw if employer has contributions
       if biz.current_contribution
-        
+
         # check if owner exists
         if !User.exists?(biz.owner)
           next
@@ -301,6 +303,7 @@ module Dwolla
             },
             :metadata => {
               :biz_id => biz.id,
+              :transfer_type => "Employer Contribution"
             }
           }
 
