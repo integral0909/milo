@@ -7,7 +7,7 @@ module DwollaWebhooks
       # send email about transfer start
 
     when 'customer_transfer_completed' #when the users funds are successfully transfered to Shift FBO
-      # send email about transfer completed, update users account balance at this point
+
       user = User.find(event.user_id)
 
       # set app token for Dwolla
@@ -24,7 +24,15 @@ module DwollaWebhooks
       if transfer_type == "withdaw"
         User.decrease_account_balance(user, amount)
       else
-        User.add_account_balance(user, amount)
+        if transfer_type == "quick-save"
+        # add the quick save amount from the user's account balance
+          User.add_account_balance(user, amount, true)
+        else
+          User.add_account_balance(user, amount)
+        end
+
+        # send email to user about funds being transfered to their account.
+        BankingMailer.quick_save_success(user, amount).deliver_now
       end
 
     when 'customer_transfer_failed' #when the users funds fail to transfer to Shift FBO
