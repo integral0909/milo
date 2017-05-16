@@ -26,7 +26,6 @@ class WebhooksController < ApplicationController
 
     # check if the webhook was already captured before processing.
     if WebhookEvent.find_by_response_id(params['_links']['self']['href']).nil?
-      p "::::::::::::::::::DUPLICATE:::::::::::::::::::::::::"
       new_event = create_event(params, 'Dwolla')
 
       DwollaWebhooks.process_webhook_event(params, new_event)
@@ -52,6 +51,7 @@ class WebhooksController < ApplicationController
       begin
         hook_user_id = User.find_by_dwolla_id(params['_links']['customer']['href']).id
       rescue => e
+        p e
       end
     end
 

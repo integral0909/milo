@@ -22,7 +22,7 @@ class DwollaSendFundsToUserJob
           :value => requested_amount
         },
         :metadata => {
-          :customerId => user.id
+          :customerId => user.id,
           :transfer_type => "withdraw"
         }
       }

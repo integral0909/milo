@@ -158,8 +158,8 @@ module Dwolla
           :user_id => user.id,
           :total_transactions => total_transactions,
           :date => current_date,
-          :tech_fee_charged => @charge_tech_fee
-          :transfer_type => "roundup-withdraw"
+          :tech_fee_charged => @charge_tech_fee,
+          :transfer_type => "roundup withdraw"
         }
       }
 
@@ -303,7 +303,7 @@ module Dwolla
             },
             :metadata => {
               :biz_id => biz.id,
-              :transfer_type => "Employer Contribution"
+              :transfer_type => "employer contribution"
             }
           }
 

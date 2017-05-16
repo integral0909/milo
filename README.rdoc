@@ -46,7 +46,10 @@ To view Brakeman security report, run `$ brakeman -o brakeman_output.html`, then
   Testing Webhooks:
     - start app with foreman
     - Use ngrok to start public localhost url
-    - 
+    - Register webhook with service using https ngrok url and DWOLLA_WEBHOOK_SECRET
+        $ app_token = $dwolla.auths.client
+        $ request_body ={url: "NGROK_URL/webhooks/dwolla_webhook", secret: ENV['DWOLLA_WEBHOOK_SECRET']}
+        $ app_token.post "webhook-subscriptions" request_body
 
 
 ##Plaid

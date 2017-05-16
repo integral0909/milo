@@ -23,7 +23,7 @@ class DwollaQuickSaveJob
           :value => amount
         },
         :metadata => {
-          :customerId => user.id
+          :customerId => user.id,
           :transfer_type => "quick-save"
         }
       }
@@ -45,15 +45,15 @@ class DwollaQuickSaveJob
       # TODO: this needs to happen when we get the customer_transfer_completed webhook response
 
       # add the quick save amount from the user's account balance
-      User.add_account_balance(user, amount, true)
+      # User.add_account_balance(user, amount, true)
       # send email to user about funds being transfered to their account.
 
-      BankingMailer.quick_save_success(user, amount).deliver_now
+      # BankingMailer.quick_save_success(user, amount).deliver_now
     rescue => e
       # TODO: this needs to happen when we get the customer_transfer_failed webhook response
 
       # send email to dev team about failed transfer to user
-      SupportMailer.quick_save_failed(user, amount, e).deliver_now
+      # SupportMailer.quick_save_failed(user, amount, e).deliver_now
     end
   end
 end
