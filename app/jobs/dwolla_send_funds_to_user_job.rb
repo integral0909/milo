@@ -23,7 +23,7 @@ class DwollaSendFundsToUserJob
         },
         :metadata => {
           :customerId => user.id,
-          :transfer_type => "withdraw"
+          :transfer_type => ENV['DWOLLA_WITHDRAW']
         }
       }
       @dwolla_app_token = Dwolla.set_dwolla_token
@@ -40,13 +40,6 @@ class DwollaSendFundsToUserJob
       # Save the withdraw as a transfer. Params are the user, transfer_url, transfer_status, roundup_amount, roundup_count, transfer_type, current_date, tech_fee_charged
       Transfer.create_transfers(user,"", current_transfer_url, current_transfer_status, requested_amount, "", "withdraw", current_date, false)
 
-      # TODO: this needs to happen when we get the customer_transfer_completed webhook response
-
-      # decrease the requested amount from the user's account balance
-      User.decrease_account_balance(user, requested_amount)
-      # send email to user about funds being transfered to their account.
-      funding_account  = Checking.find_by_user_id(user.id)
-      BankingMailer.withdraw_start(user, requested_amount, funding_account).deliver_now
     rescue => e
       # TODO: this needs to happen when we get the customer_transfer_failed webhook response
 

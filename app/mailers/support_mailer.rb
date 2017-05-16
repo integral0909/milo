@@ -71,4 +71,14 @@ class SupportMailer < ApplicationMailer
     @user = user
     mail(to: 'dev@shiftsavings.com', subject: "Quick Save failed for #{@user.email}")
   end
+
+  # ----------------------------------------------
+  # Quick save failed ----------------------------
+  # ----------------------------------------------
+  # email to send support when adding a user to Dwolla fails
+  def dwolla_webhook_failed(event, error)
+    @error = error
+    @event_id = event.id
+    mail(to: 'dev@shiftsavings.com', subject: "Dwolla Webhook Failed")
+  end
 end
