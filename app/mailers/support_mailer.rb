@@ -73,12 +73,31 @@ class SupportMailer < ApplicationMailer
   end
 
   # ----------------------------------------------
-  # Quick save failed ----------------------------
+  # Dwolla webhook failed ----------------------------
   # ----------------------------------------------
-  # email to send support when adding a user to Dwolla fails
+  # email to send support when dwolla webhook process fails
   def dwolla_webhook_failed(event, error)
     @error = error
     @event_id = event.id
     mail(to: 'dev@shiftsavings.com', subject: "Dwolla Webhook Failed")
+  end
+
+  # ----------------------------------------------
+  # Dwolla webhook failed ----------------------------
+  # ----------------------------------------------
+  # email to send support when dwolla webhook process fails
+  def bank_transfer_failed(event, error)
+    @error = error
+    @event_id = event.id
+    mail(to: 'dev@shiftsavings.com', subject: "Bank Transfer Failed")
+  end
+
+  # ----------------------------------------------
+  # Dwolla webhook failed ----------------------------
+  # ----------------------------------------------
+  # email to send support when there is a basic error in the application
+  def basic_error(error)
+    @error = error
+    mail(to: 'dev@shiftsavings.com', subject: "Application Error")
   end
 end

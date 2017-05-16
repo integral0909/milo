@@ -29,8 +29,11 @@ module Dwolla
   def self.init_micro_deposits(user, user_checking, funding_account)
     begin
       Dwolla.set_dwolla_token
+
       @dwolla_app_token.post "#{user.dwolla_funding_source}/micro-deposits"
+
       BankingMailer.longtail_account_added(user, funding_account).deliver_now
+
       user.queue_longtail_drip_emails(user, funding_account)
     rescue => e
       # EMAIL: send support the error from Dwolla
@@ -159,10 +162,9 @@ module Dwolla
           :total_transactions => total_transactions,
           :date => current_date,
           :tech_fee_charged => @charge_tech_fee,
-          :transfer_type => "roundup withdraw"
+          :transfer_type => ENV['DWOLLA_ROUNDUP']
         }
       }
-
 
       Dwolla.set_dwolla_token
       transfer = @dwolla_app_token.post "transfers", request_body
@@ -176,17 +178,7 @@ module Dwolla
       # Save transfer data
       Transfer.create_transfers(user, "", current_transfer_url, current_transfer_status, roundup_amount, total_transactions, "deposit", current_date, @charge_tech_fee)
 
-      # TODO: this needs to happen when we get the customer_transfer_completed webhook response
-      # add the roundup amount to the users balance
-      User.add_account_balance(user, roundup_amount)
-
-      puts "$#{roundup_amount}"
-
-      # Email the user that the round up was successfully withdrawn
-      BankingMailer.transfer_success(user, roundup_amount, funding_account, @charge_tech_fee).deliver_now
     rescue => e
-      # TODO: this needs to happen when we get the customer_transfer_failed webhook response
-
       # Email the user that there was an issue when withdrawing the round up
       BankingMailer.transfer_failed(user, roundup_amount, funding_account).deliver_now
       # Email support that there was an issue when withdrawing the round up
