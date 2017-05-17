@@ -42,10 +42,15 @@ class UsersController < ApplicationController
     # Check if user has the amount requested_amount
     if @withdraw_amount <= @user.account_balance
       begin
-        # initiate transfer of funds to user
-        Dwolla.send_funds_to_user(@user, number_to_currency(params[:user][:requested_amount], unit:""))
 
-        flash[:success] = "Your savings are on the way!"
+        if Dwolla.last_transfer_processed(@user)
+          # initiate transfer of funds to user
+          Dwolla.send_funds_to_user(@user, number_to_currency(params[:user][:requested_amount], unit:""))
+
+          flash[:success] = "Your savings are on the way!"
+        else
+          flash[:alert] = "Looks like your last transaction is still processing. Please wait until it is processed before withdrawing your funds"
+        end
         redirect_to authenticated_root_path
       rescue => e
         flash[:alert] = e

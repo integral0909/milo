@@ -16,6 +16,10 @@ module DwollaWebhooks
       when 'bank_transfer_failed' #when the user withdraw fails
         # send failed transfer email to support
         SupportMailer.transfer_failed(event, topic)
+        
+      when 'customer_microdeposits_failed' #when the user withdraw fails
+        # send failed transfer email to support
+        SupportMailer.transfer_failed(event, topic)
       end
     rescue => e
       SupportMailer.dwolla_webhook_failed(event, e)
@@ -26,18 +30,15 @@ module DwollaWebhooks
 
     user = User.find(event.user_id)
 
-    # set app token for Dwolla
-    @app_token = Dwolla.set_dwolla_token
-
     DwollaWebhooks.pull_event_info(event)
 
-    if transfer_type == ENV['DWOLLA_WITHDRAW']
+    if @transfer_type == ENV['DWOLLA_WITHDRAW']
 
       # decrease the requested amount from the user's account balance
       User.decrease_account_balance(user, @amount)
 
     else
-      if transfer_type == ENV['DWOLLA_QUICK_SAVE']
+      if @transfer_type == ENV['DWOLLA_QUICK_SAVE']
 
         p "::::TRANSFER #{ENV['DWOLLA_QUICK_SAVE']}::::::::"
 
@@ -50,7 +51,7 @@ module DwollaWebhooks
           SupportMailer.quick_save_failed(user, @amount, e).deliver_now
         end
 
-      elsif transfer_type == ENV['DWOLLA_ROUNDUP']
+      elsif @transfer_type == ENV['DWOLLA_ROUNDUP']
         begin
           # add the roundup amount to the users balance
           User.add_account_balance(user, @amount)
@@ -74,8 +75,12 @@ module DwollaWebhooks
 
   def self.pull_event_info(event)
 
+    p ":::PULLING EVENT INFO:::"
+    # set app token for Dwolla
+    @app_token = Dwolla.set_dwolla_token
+
     # Pull in transfer info from the webhook
-    @event_info = @app_token.get event.response_id
+    event_info = @app_token.get event.response_id
 
     transfer_info = @app_token.get event_info['_links']['resource']['href']
 

@@ -38,7 +38,7 @@ Beta branch initialized
 
 ###Brakeman Security
 
-To view Brakeman security report, run `$ brakeman -o brakeman_output.html`, then open brakeman_output.html  in your browser
+To view Brakeman security report, run `brakeman -o brakeman_output.html`, then open brakeman_output.html  in your browser
 
 ##Dwolla
   For testing micro-deposit accounts. Use 222222226 as the routing number and any number over 4 digits for the bank account number
@@ -47,9 +47,9 @@ To view Brakeman security report, run `$ brakeman -o brakeman_output.html`, then
     - start app with foreman
     - Use ngrok to start public localhost url
     - Register webhook with service using https ngrok url and DWOLLA_WEBHOOK_SECRET
-        $ app_token = $dwolla.auths.client
-        $ request_body ={url: "NGROK_URL/webhooks/dwolla_webhook", secret: ENV['DWOLLA_WEBHOOK_SECRET']}
-        $ app_token.post "webhook-subscriptions" request_body
+        app_token = $dwolla.auths.client
+        request_body ={url: "https://9472fcff.ngrok.io/webhooks/dwolla_webhook", secret: ENV['DWOLLA_WEBHOOK_SECRET']}
+        app_token.post "webhook-subscriptions", request_body
 
 
 ##Plaid
