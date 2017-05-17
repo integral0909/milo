@@ -1,5 +1,5 @@
 class SupportMailer < ApplicationMailer
-  
+
   # ----------------------------------------------
   # DEFAULT SETTINGS -----------------------------
   # ----------------------------------------------
@@ -86,10 +86,10 @@ class SupportMailer < ApplicationMailer
   # Dwolla webhook failed ----------------------------
   # ----------------------------------------------
   # email to send support when dwolla webhook process fails
-  def bank_transfer_failed(event, error)
-    @error = error
+  def transfer_failed(event, topic)
     @event_id = event.id
-    mail(to: 'dev@shiftsavings.com', subject: "Bank Transfer Failed")
+    @topic = topic
+    mail(to: 'dev@shiftsavings.com', subject: "Transfer Failed")
   end
 
   # ----------------------------------------------
