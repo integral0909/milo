@@ -18,7 +18,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="button -small -inline" data-dismiss="modal">Close</button>
-          <%= f.submit "Withdraw", class: "button -blue -small -inline" %>
+          <%= f.submit "Withdraw", class: "button -blue -small -inline", :data => {:disable_with => 'Submitting...'} %>
         </div>
       <% end %>
     </div>

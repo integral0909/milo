@@ -83,10 +83,17 @@ class AccountsController < ApplicationController
   # REMOVE ----------------------------------------
   # ----------------------------------------------
   def remove
-    # TODO: Dont let user remove account if there are pending transactions
-    # pend_trans = Transaction.where(user_id: @user.id, status: "pending").count
+    pend_trans = Transfer.where(user_id: @user.id, status: "pending")
 
-    Account.remove_accounts(@user)
+    if pend_trans.empty?
+      p "::::::::::::NO PENDING TRANSACTIONS::::::::::"
+      Account.remove_accounts(@user)
+    else
+      flash[:alert] = "Looks like there are still pending transactions on your account. Please wait for them to process before removing."
+
+      redirect_to :back
+    end
+
   end
 
   # ==============================================
