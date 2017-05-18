@@ -83,6 +83,9 @@ class AccountsController < ApplicationController
   # REMOVE ----------------------------------------
   # ----------------------------------------------
   def remove
+    # TODO: Dont let user remove account if there are pending transactions
+    # pend_trans = Transaction.where(user_id: @user.id, status: "pending").count
+
     Account.remove_accounts(@user)
   end
 

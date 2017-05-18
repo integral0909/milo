@@ -51,4 +51,10 @@ class Transfer < ActiveRecord::Base
     tr.save!
   end
 
+  def self.last_transfer_processed(user)
+    last_transfer = Transfer.where(user_id: user.id).last
+
+    return true if last_transfer.status == "processed"
+  end
+
 end

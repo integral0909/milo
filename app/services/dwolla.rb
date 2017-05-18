@@ -338,18 +338,6 @@ module Dwolla
        Resque.enqueue(DwollaSendFundsToUserJob, user.id, requested_amount)
    end
 
-   def self.last_transfer_processed(user)
-     last_transfer = Transfer.where(user_id: user.id).last
-
-     #find last transfer to make sure it's not pending. All transfers need to be processed before they can take out their funds.
-     Dwolla.set_dwolla_token
-
-     transfer = @dwolla_app_token.get "#{ENV['DWOLLA_BASE_URL']}#{last_transfer.dwolla_url}"
-
-     transfer_status = transfer['status']
-     return true if transfer_status == "processed"
-   end
-
   #  def self.transfer_tech_fee_to_corp(fee_amount)
   #    begin
   #      current_date = Date.today

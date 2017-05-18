@@ -37,13 +37,14 @@ class UsersController < ApplicationController
   end
 
   def withdraw_funds
+    
     # convert amount requested to cents
     @withdraw_amount = (params[:user][:requested_amount].to_f * 100).round(0)
     # Check if user has the amount requested_amount
     if @withdraw_amount <= @user.account_balance
       begin
 
-        if Dwolla.last_transfer_processed(@user)
+        if Transfer.last_transfer_processed(@user)
           # initiate transfer of funds to user
           Dwolla.send_funds_to_user(@user, number_to_currency(params[:user][:requested_amount], unit:""))
 
