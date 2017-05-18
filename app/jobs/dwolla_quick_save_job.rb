@@ -24,7 +24,7 @@ class DwollaQuickSaveJob
         },
         :metadata => {
           :customerId => user.id,
-          :transfer_type => ENV['DWOLLA_QUICK_SAVE']
+          :transferType => ENV['DWOLLA_QUICK_SAVE']
         }
       }
 

@@ -158,11 +158,9 @@ module Dwolla
           :value => (@charge_tech_fee ? roundup_with_fee : roundup_amount)
         },
         :metadata => {
-          :user_id => user.id,
-          :total_transactions => total_transactions,
-          :date => current_date,
-          :tech_fee_charged => @charge_tech_fee,
-          :transfer_type => ENV['DWOLLA_ROUNDUP']
+          :customerId => user.id,
+          :transferType => ENV['DWOLLA_ROUNDUP'],
+          :techFeeCharged => "#{@charge_tech_fee}"
         }
       }
 
@@ -231,8 +229,8 @@ module Dwolla
           :value => fee_amount
         },
         :metadata => {
-          :biz_id => biz.id,
-          :transfer_type => "biz tech fee"
+          :bizId => biz.id,
+          :transferType => "biz tech fee"
         }
       }
 
@@ -294,8 +292,8 @@ module Dwolla
               :value => contribution
             },
             :metadata => {
-              :biz_id => biz.id,
-              :transfer_type => "employer contribution"
+              :bizId => biz.id,
+              :transferType => "employer contribution"
             }
           }
 

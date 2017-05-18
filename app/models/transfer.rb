@@ -44,4 +44,11 @@ class Transfer < ActiveRecord::Base
     )
   end
 
+  def self.update_status(transfer_id, status)
+    tr = Transfer.find(transfer_id)
+    tr.status = status
+
+    tr.save!
+  end
+
 end

@@ -102,6 +102,11 @@ task :create_weekly_transactions, [:user_id] => :environment do |t, args|
   else
     if day.monday?
       Checking.all.each do |ck|
+
+        if !User.exists?(ck.user_id)
+          next
+        end
+
         user = User.find(ck.user_id)
 
         # check if the checking account is associated with a business

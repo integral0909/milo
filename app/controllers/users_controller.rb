@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
           flash[:success] = "Your savings are on the way!"
         else
-          flash[:alert] = "Looks like your last transaction is still processing. Please wait until it is processed before withdrawing your funds"
+          flash[:alert] = "It looks like a transaction is still processing. Please wait until it is processed before withdrawing your funds."
         end
         redirect_to authenticated_root_path
       rescue => e

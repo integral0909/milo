@@ -23,7 +23,7 @@ class DwollaSendFundsToUserJob
         },
         :metadata => {
           :customerId => user.id,
-          :transfer_type => ENV['DWOLLA_WITHDRAW']
+          :transferType => ENV['DWOLLA_WITHDRAW']
         }
       }
       @dwolla_app_token = Dwolla.set_dwolla_token
