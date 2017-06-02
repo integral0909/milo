@@ -15,7 +15,7 @@ class DwollaQuickSaveJob
             :href => user.dwolla_funding_source
           },
           :destination => {
-            :href => "https://api-uat.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_FBO"]}"
+            :href => "https://api-sandbox.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_FBO"]}"
           }
         },
         :amount => {

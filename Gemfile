@@ -85,7 +85,7 @@ gem 'rails_admin'
 gem 'awesome_print', '~> 1.7'
 
 # Dwolla v2 api wrapper for accepting money from users
-gem 'dwolla_v2', '~> 1.1'
+gem 'dwolla_v2', '~> 1.2'
 
 # gem "attr_encrypted"
 

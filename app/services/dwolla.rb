@@ -150,7 +150,7 @@ module Dwolla
             :href => user.dwolla_funding_source
           },
           :destination => {
-            :href => "https://api-uat.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_FBO"]}"
+            :href => "https://api-sandbox.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_FBO"]}"
           }
         },
         :amount => {
@@ -221,7 +221,7 @@ module Dwolla
             :href => user.dwolla_funding_source
           },
           :destination => {
-            :href => "https://api-uat.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_CORP"]}"
+            :href => "https://api-sandbox.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_CORP"]}"
           }
         },
         :amount => {
@@ -284,7 +284,7 @@ module Dwolla
                 :href => biz_owner.dwolla_funding_source
               },
               :destination => {
-                :href => "https://api-uat.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_FBO"]}"
+                :href => "https://api-sandbox.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_FBO"]}"
               }
             },
             :amount => {
@@ -344,10 +344,10 @@ module Dwolla
   #      transfer_request = {
   #        :_links => {
   #          :source => {
-  #            :href => "https://api-uat.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_FBO"]}"
+  #            :href => "https://api-sandbox.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_FBO"]}"
   #          },
   #          :destination => {
-  #            :href => "https://api-uat.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_CORP"]}"
+  #            :href => "https://api-sandbox.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_CORP"]}"
   #          }
   #        },
   #        :amount => {

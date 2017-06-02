@@ -11,7 +11,7 @@ class DwollaSendFundsToUserJob
       transfer_request = {
         :_links => {
           :source => {
-            :href => "https://api-uat.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_FBO"]}"
+            :href => "https://api-sandbox.dwolla.com/funding-sources/#{ENV["DWOLLA_FUNDING_SOURCE_FBO"]}"
           },
           :destination => {
             :href => user.dwolla_id
