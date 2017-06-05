@@ -51,10 +51,11 @@ class Transfer < ActiveRecord::Base
     tr.save!
   end
 
-  def self.last_transfer_processed(user)
-    last_transfer = Transfer.where(user_id: user.id).last
+  def self.no_pending_withdraw(user)
+    # Check if user
+    pend_withdraw = Transfer.where(user_id: user.id, status: "pending", transfer_type: "withdraw")
 
-    return true if last_transfer.status == "processed"
+    return true if pend_withdraw.empty?
   end
 
 end

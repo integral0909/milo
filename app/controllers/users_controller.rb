@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     if @withdraw_amount <= @user.account_balance
       begin
 
-        if Transfer.last_transfer_processed(@user)
+        if Transfer.no_pending_withdraw(@user)
           # initiate transfer of funds to user
           Dwolla.send_funds_to_user(@user, number_to_currency(params[:user][:requested_amount], unit:""))
 
