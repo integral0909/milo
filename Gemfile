@@ -104,6 +104,7 @@ gem 'resque'
 gem 'resque-scheduler'
 gem 'resque_mailer'
 gem "figaro"
+gem 'rack-cors', :require => 'rack/cors'
 group :production, :staging do
   gem 'rails_12factor'
 end

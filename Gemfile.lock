@@ -232,6 +232,7 @@ GEM
       pry (>= 0.10.4)
     public_suffix (1.4.6)
     rack (1.6.8)
+    rack-cors (0.4.1)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
       rack (>= 1.1)
@@ -421,6 +422,7 @@ DEPENDENCIES
   pickadate-rails
   plaid (= 3.0.0)
   pry-rails
+  rack-cors
   rails (= 4.2.7.1)
   rails-assets-tether (= 1.1.1)
   rails_12factor
