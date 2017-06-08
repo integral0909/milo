@@ -103,7 +103,7 @@ gem 'redis'
 gem 'resque'
 gem 'resque-scheduler'
 gem 'resque_mailer'
-
+gem "figaro"
 group :production, :staging do
   gem 'rails_12factor'
 end

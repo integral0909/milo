@@ -13,15 +13,14 @@ class Api::V1::SessionsController < Api::V1::BaseController
   # CREATE ---------------------------------------
   # ----------------------------------------------
   def create
-	  user_password = params["session"]["session[password]"]
-	  user_email	= params["session"]["session[email]"].presence
-	  user = user_email && User.find_by(email: user_email)
-
+	  user_password = params["session"]["password"]
+	  user_email	= params["session"]["email"]
+    user = user_email && User.find_by(email: user_email)
 	  if user && user.valid_password?(user_password)
 	  	sign_in user, store: false
 	  	user.generate_authentication_token!
 	  	user.save
-	  	render json: { auth_token: user.auth_token, id: user.id, email: user.email, name: user.name, avatar_url: user.avatar_url }, status: 200, location: [:api, user]
+	  	render json: { auth_token: user.auth_token, id: user.id, email: user.email, name: user.name, avatar_url: user.avatar.present? ? user.avatar_url : "" }, status: 200, location: [:api, :v1, user]
 	  else
 	  	render json: { errors: "Invalid email or password" }, status: 422
 	  end

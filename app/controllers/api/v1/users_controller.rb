@@ -35,7 +35,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   def create
     user = User.new(user_params)
     if user.save
-      render json: { id: user.id, email: user.email, name: user.name, auth_token: user.auth_token }, status: 201, location: [:api, user]
+      render json: { id: user.id, email: user.email, name: user.name, auth_token: user.auth_token }, status: 201, location: [:api, :v1, user]
     else
       render json: { errors: user.errors }, status: 422
     end
@@ -82,7 +82,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   # USER-PARAMS ----------------------------------
   # ----------------------------------------------
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :name, :avatar)
+    params.require(:user).permit(:email, :password, :password_confirmation, :name, :avatar, :zip)
   end
 
 end
